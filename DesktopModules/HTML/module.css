@@ -1,0 +1,155 @@
+﻿.dnnHTMLSettings, .dnnEditHtml, .dnnMyWork{width:95%;margin:2em auto;}
+	.dnnFormItem input[type=checkbox], .dnnPageSettings .dnnFormItem input[type=radio]{width:auto;}
+	.dnnFormItem .dnnHTMLSRadioButtons label, .dnnFormItem .dnnPSRadioButtons input, .dnnFormItem .dnnHTMLSRadioButtons label, .dnnFormItem .dnnHTMLSRadioButtons input{float:left;padding:0;width:2%;text-align:left;}
+	.dnnFormItem .dnnHTMLSRadioButtons label{width:auto;padding:0 15px 0 6px;font-weight:normal}
+	.dnnHTMLSRadioButtons br{display:none !important;font-size:0;line-height:0;border-collapse:collapse;}
+	.ehcContent textarea{width:50%;height:180px;margin-top:1em;}
+	.dnnFormItem .dnnPublish label{width:auto;margin-right:10px;}
+	.dnnFormItem .dnnPublish input[type="checkbox"]{margin-right:30px;}
+	.dnnPublish {float: left;}
+table.DnnGridNestedTable{ margin: 0 !important;}
+div a.toggleMore{font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight: bold;margin:0;padding:5px 25px;color: #fff;text-decoration: none;
+	background: #1f81a8; /* Old browsers */
+	background: -moz-linear-gradient(top, #248aba 0%, #1f81a8 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#248aba), color-stop(100%,#1f81a8)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #248aba 0%,#1f81a8 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #248aba 0%,#1f81a8 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #248aba 0%,#1f81a8 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#248aba', endColorstr='#1f81a8',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #248aba 0%,#1f81a8 100%); /* W3C */
+	-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;
+	-webkit-box-shadow: 0px 1px 0px 1px #1f81a8;
+	-moz-box-shadow: 0px 1px 0px 1px #1f81a8;
+	box-shadow: 0px 1px 0px 1px #1f81a8;
+	text-shadow: 0px 1px 1px black;}
+	
+.ehContent{ margin-top: 20px;}
+#dnnPanel-Summary{ display: block;}
+.summaryHelp{margin: 0 30px 5px;}
+.RadGrid{ overflow: auto;}
+.previewC{ width: 100%;}
+.autoSaveStatusError{font-weight: bold}
+#divSavingMessageSummary {
+    margin-top: 5px;
+}
+#divSavingMessageErrorSummary {
+    margin-top: 5px;
+}
+
+.previewPanelContainer {
+    border: #E6EBEA solid 5px;    
+    margin-top: 5px;
+    /*min-width: 750px;*/
+}
+.previewPanel {
+    border: #a9a9a9 solid 1px;
+    padding: 10px 10px 10px 10px;
+    height: 260px;
+    overflow: auto;
+}
+.previewContent {
+    padding-bottom: 10px;
+}
+.comparisonPanel {
+    float: left;
+    width: 50%;
+}
+.comparisonPanel del {
+	background-color:#FEC8C8;
+	text-decoration:inherit;
+	display: inline-block;
+}
+.comparisonPanel ins {
+    background-color: #cfc;
+	text-decoration:inherit;
+	display: inline-block;
+}
+.comparisonPanel ins.mod {
+    background-color: #FFE1AC;
+}
+.comparisonPanel del > img {
+    opacity: .5;
+	filter:Alpha(Opacity=50);
+}
+.comparisonPanel ins > img {
+    opacity: .5;
+	filter:Alpha(Opacity=50);
+}
+.comparisonButtons {
+    background-color: #E6EBEA;
+    margin: 0;
+    float: left;
+    padding-bottom: 5px;
+    padding-right: 20px;
+}
+.comparisonButtons li {
+    display: inline;
+    margin: 10px;    
+}
+.comparisonButtons a {
+    color: #A2A1A1;
+    text-decoration: none;
+    margin-left: 18px;
+}
+.comparisonButtons .comparisonButtonSelected {
+    font-weight: bold;
+    color: #000000;
+}
+.dnnwfPermissions .dnnGrid.dnnPermissionsGrid {
+    float: left;
+	width: 45%;
+	max-width: 445px;
+}
+div.DnnModule.reviewContent {
+    background: #fff;
+	padding: 2px;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+	opacity: 1;
+}
+
+.dnnHTMLSettings .dnnFormGroup {
+    width: 45%  
+}
+
+.dnnHTMLSettings .dnnFormGroup span {
+    display: inline-block;
+}
+
+body .redactor_box_fullscreen {
+    left: auto;
+}
+body.dnnEditState .redactor_box_fullscreen {
+    left: 85px;
+}
+.redactor_toolbar li a.re-formatting:before {
+    content: "T";
+    font-weight: bold;
+}
+.redactor_toolbar li a.re-formatting {
+    padding: 7px 10px 11px;
+}
+
+.re-formatting:before {
+  content: "";
+}
+
+/* Css to override redactor.css for inline text editor scroll bar and full screen */
+.dnnEditState .redactor_box .redactor_editor {min-height: 400px;height: 400px;max-height: 400px;}
+.dnnEditState .redactor_box.redactor_box_fullscreen .redactor_editor {min-height: 100%;height: auto;max-height: 100%;}
+/* Fixed full screen edit mode disappear issue */
+.dnnEditState .redactor_box.redactor_box_fullscreen{ width: 100% !important;height: 100% !important;position: relative !important;}
+.dnnEditState .redactor_box.redactor_box_fullscreen > ul.redactor_toolbar{ position: fixed;width: 100%;left: 85px;}
+.dnnEditState .redactor_box.redactor_box_fullscreen > .redactor_editor{position: fixed;top: 10px;}
+
+.dnnEditState .redactor_box.redactor_box_fullscreen > textarea{ position: fixed;top: 33px;width: 100%;max-width: 100%;}
+
+.dnnEditState .redactor-edit,.dnnEditState .redactor-unlike,.dnnEditState .redactor-divider{ display: none;}
+
+.redactor_box .redactor_toolbar > div.right-buttons, .dnnTextPanelView  > div.right-buttons{ float: right;margin: 0 22px 0 0;height: 32px;line-height: 32px;}
+.redactor_box .redactor_toolbar > div.right-buttons > a, .dnnTextPanelView  > div.right-buttons > a{color: #8e8e8e;}
+.redactor_box .redactor_toolbar > div.right-buttons > a{font-family: proxima_nova_semibold !important;}
+.dnnTextPanelView  > div.right-buttons{height: 25px;line-height: 25px;}
+.dnnEditState div[id$="HtmlModule_lblContent"]:hover{ cursor: pointer;}
+.dnnEditState .redactor_box div[id$="HtmlModule_lblContent"]:hover{ cursor: default;}
+.dnnEditState .redactor_box .re-advancedmode:before { content: "\e610"; }

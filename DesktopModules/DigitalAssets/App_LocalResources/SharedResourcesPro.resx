@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActiveXDoesNotExistError.Text" xml:space="preserve">
+    <value>The action cannot be performed as the Microsoft Office ActiveX is not available. Please install it and then try again</value>
+  </data>
+  <data name="ActiveXNotAllowedError.Text" xml:space="preserve">
+    <value>The action cannot be performed. Please check that the Microsoft Office ActiveX is installed and enabled and then try again</value>
+  </data>
+  <data name="ApproveChangesToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>Approve Changes</value>
+  </data>
+  <data name="ApproveChangesToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>Approve Changes</value>
+  </data>
+  <data name="DiscardChangesToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>Reject Changes</value>
+  </data>
+  <data name="DiscardChangesToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>Reject Changes</value>
+  </data>
+  <data name="DiscardDraftToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>Discard Draft</value>
+  </data>
+  <data name="DiscardDraftToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>Discard Draft</value>
+  </data>
+  <data name="DocumentApproved.Action" xml:space="preserve">
+    <value>Document Approved</value>
+  </data>
+  <data name="DocumentApproved.Comment" xml:space="preserve">
+    <value>The document [FILE] has been Approved</value>
+  </data>
+  <data name="EditDocumentAction.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="FieldWorkflow.DisplayName" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="GetFolderUrlLabel.Text" xml:space="preserve">
+    <value>Folder URL Is:</value>
+  </data>
+  <data name="GetUrlMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>Get Url</value>
+  </data>
+  <data name="GroupUpdatesMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>Group Updates</value>
+  </data>
+  <data name="IsSubscribed.Text" xml:space="preserve">
+    <value>Is subscribed?</value>
+  </data>
+  <data name="LockReasonOutOfPublishPeriod.Text" xml:space="preserve">
+    <value>File is locked because it is not within a valid start and end date for publication.</value>
+  </data>
+  <data name="LockReasonRunningWorkflow.Text" xml:space="preserve">
+    <value>File is locked because it has been modified but not published yet.</value>
+  </data>
+  <data name="NOTIFY_BodyFileAdded.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILE]&lt;/b&gt; has been added to the folder &lt;b&gt;[FOLDERPATH]&lt;/b&gt;. Click the following link to download the file [URL]</value>
+  </data>
+  <data name="NOTIFY_BodyFileContentChanged.Text" xml:space="preserve">
+    <value>The content of the file &lt;b&gt;[FILEPATH]&lt;/b&gt; has changed. Click the following link to download the file [URL]</value>
+  </data>
+  <data name="NOTIFY_BodyFileDeleted.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILEPATH]&lt;/b&gt; has been deleted</value>
+  </data>
+  <data name="NOTIFY_BodyFileDeletedOnFolder.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILE]&lt;/b&gt; has been deleted from the folder &lt;b&gt;[OLDPATH]&lt;/b&gt;</value>
+  </data>
+  <data name="NOTIFY_BodyFileExpired.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILE]&lt;/b&gt; is close to expire on &lt;b&gt;[FOLDERPATH]&lt;/b&gt;. The End Date is &lt;b&gt;[ENDDATE]&lt;/b&gt;. Click the following link to download the file [URL]</value>
+  </data>
+  <data name="NOTIFY_BodyFileMoved.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILE]&lt;/b&gt; has been moved from &lt;b&gt;[OLDPATH]&lt;/b&gt; to &lt;b&gt;[FOLDERPATH]&lt;/b&gt; folder. Click the following link to download the file [URL]</value>
+  </data>
+  <data name="NOTIFY_BodyFileRenamed.Text" xml:space="preserve">
+    <value>The file &lt;b&gt;[FILE]&lt;/b&gt; has been renamed to &lt;b&gt;[NEWFILE]&lt;/b&gt;. Click the following link to download the file [URL]</value>
+  </data>
+  <data name="NOTIFY_BodyFolderAdded.Text" xml:space="preserve">
+    <value>A folder called &lt;b&gt;[SUBFOLDER]&lt;/b&gt; has been added into the folder &lt;b&gt;[FOLDERPATH]&lt;/b&gt;</value>
+  </data>
+  <data name="NOTIFY_BodyFolderDeleted.Text" xml:space="preserve">
+    <value>The folder &lt;b&gt;[FOLDERPATH]&lt;/b&gt; has been deleted</value>
+  </data>
+  <data name="NOTIFY_BodyFolderMoved.Text" xml:space="preserve">
+    <value>The folder &lt;b&gt;[FOLDER]&lt;/b&gt; has been moved at the following location &lt;b&gt;[FOLDERPATH]&lt;/b&gt;</value>
+  </data>
+  <data name="NOTIFY_BodyFolderRenamed.Text" xml:space="preserve">
+    <value>The folder &lt;b&gt;[FOLDER]&lt;/b&gt; has been rename to &lt;b&gt;[NEWFOLDER]&lt;/b&gt;.</value>
+  </data>
+  <data name="NOTIFY_BodySubFolderDeleted.Text" xml:space="preserve">
+    <value>The folder &lt;b&gt;[SUBFOLDER]&lt;/b&gt; has been deleted from &lt;b&gt;[FOLDERPATH]&lt;/b&gt;</value>
+  </data>
+  <data name="NOTIFY_FileManagementReference.Text" xml:space="preserve">
+    <value>Click {0} to go to File Management</value>
+  </data>
+  <data name="NOTIFY_FileManagementReferenceLink.Text" xml:space="preserve">
+    <value>here</value>
+  </data>
+  <data name="NOTIFY_SubjectFileAdded.Text" xml:space="preserve">
+    <value>A new file has been added to the folder [FOLDER]</value>
+  </data>
+  <data name="NOTIFY_SubjectFileContentChanged.Text" xml:space="preserve">
+    <value>The content of the file [FILE] has changed</value>
+  </data>
+  <data name="NOTIFY_SubjectFileDeleted.Text" xml:space="preserve">
+    <value>The file [FILE] has been deleted</value>
+  </data>
+  <data name="NOTIFY_SubjectFileDeletedOnFolder.Text" xml:space="preserve">
+    <value>A contained file has been deleted from folder [FOLDER]</value>
+  </data>
+  <data name="NOTIFY_SubjectFileExpired.Text" xml:space="preserve">
+    <value>The file [FILE] is close to expire</value>
+  </data>
+  <data name="NOTIFY_SubjectFileExpiredOnFolder.Text" xml:space="preserve">
+    <value>A file is close to expire on folder [FOLDER]</value>
+  </data>
+  <data name="NOTIFY_SubjectFileMoved.Text" xml:space="preserve">
+    <value>The file [FILE] has been moved</value>
+  </data>
+  <data name="NOTIFY_SubjectFileRenamed.Text" xml:space="preserve">
+    <value>The file [FILE] has been renamed</value>
+  </data>
+  <data name="NOTIFY_SubjectFileRenamedOnFolder.Text" xml:space="preserve">
+    <value>A file has been renamed on folder [FOLDER]</value>
+  </data>
+  <data name="NOTIFY_SubjectFolderAdded.Text" xml:space="preserve">
+    <value>A new folder has been added into [FOLDER]</value>
+  </data>
+  <data name="NOTIFY_SubjectFolderDeleted.Text" xml:space="preserve">
+    <value>The folder [FOLDER] has been deleted</value>
+  </data>
+  <data name="NOTIFY_SubjectFolderMoved.Text" xml:space="preserve">
+    <value>The folder [FOLDER] has been moved</value>
+  </data>
+  <data name="NOTIFY_SubjectFolderRenamed.Text" xml:space="preserve">
+    <value>The folder [FOLDER] has been renamed</value>
+  </data>
+  <data name="NOTIFY_SubjectSubFolderDeleted.Text" xml:space="preserve">
+    <value>A contained folder has been deleted from folder [FOLDER]</value>
+  </data>
+  <data name="OpenningDocumentError.Text" xml:space="preserve">
+    <value>Openning document error</value>
+  </data>
+  <data name="OpenOnServerDialogBody.Text" xml:space="preserve">
+    <value>You are going to open a document from server. Do you want to edit or only read it?</value>
+  </data>
+  <data name="OpenOnServerDialogTitle.Text" xml:space="preserve">
+    <value>Open from server</value>
+  </data>
+  <data name="OpenOnServerMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>Open from Server</value>
+  </data>
+  <data name="PluginDoesNotExistError.Text" xml:space="preserve">
+    <value>The action cannot be performed as the Microsoft Office plugin is not available. Please install it and then try again</value>
+  </data>
+  <data name="PluginNotAllowedError.Text" xml:space="preserve">
+    <value>The action cannot be performed. Please check that the Microsoft Office plugin is installed and enabled and then try again</value>
+  </data>
+  <data name="PublishChangesToolBarButtonExtensionPoint.AltText" xml:space="preserve">
+    <value>Publish Changes</value>
+  </data>
+  <data name="PublishChangesToolBarButtonExtensionPoint.Text" xml:space="preserve">
+    <value>Publish Changes</value>
+  </data>
+  <data name="ReadOnlyAction.Text" xml:space="preserve">
+    <value>Read only</value>
+  </data>
+  <data name="StatisticsTab.Text" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="SubscribeMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="TagsTabName.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="UnsubscribeMenuItemExtensionPoint.Text" xml:space="preserve">
+    <value>Unsubscribe</value>
+  </data>
+  <data name="VersionTab.Text" xml:space="preserve">
+    <value>Versions</value>
+  </data>
+  <data name="WorkflowTab.Text" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="WORKFLOW_DocumentApprovedNotificationBody.Text" xml:space="preserve">
+    <value>The document [FILE] has been approved. Click &lt;a target="_blank" href="[FILEURL]"&gt;here&lt;/a&gt; to open the document.</value>
+  </data>
+  <data name="WORKFLOW_DocumentApprovedNotificationSubject.Text" xml:space="preserve">
+    <value>Document changes approved</value>
+  </data>
+  <data name="WORKFLOW_DocumentDiscartedNotificationBody.Text" xml:space="preserve">
+    <value>The document [FILE] has been discarted.</value>
+  </data>
+  <data name="WORKFLOW_DocumentDiscartedNotificationSubject.Text" xml:space="preserve">
+    <value>Document Discarted</value>
+  </data>
+  <data name="WORKFLOW_DocumentPendingToBeApprovedNotificationBody.Text" xml:space="preserve">
+    <value>The document '{0}' is in '{1}' and requires your review and approval. View the changes &lt;a href="{2}"&gt;here&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;{3}</value>
+  </data>
+  <data name="WORKFLOW_DocumentPendingToBeApprovedNotificationSubject.Text" xml:space="preserve">
+    <value>Document awaiting approval</value>
+  </data>
+  <data name="WORKFLOW_DocumentRejectedNotificationBody.Text" xml:space="preserve">
+    <value>Changes for the document '{0}' has been rejected. It is now in state '{1}'. View the content &lt;a href="{2}"&gt;here&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;{3}</value>
+  </data>
+  <data name="WORKFLOW_DocumentRejectedNotificationSubject.Text" xml:space="preserve">
+    <value>Document changes rejected</value>
+  </data>
+  <data name="WORKFLOW_DocumentPendingToBeSubmitedNotificationBody.Text" xml:space="preserve">
+    <value>The document '{0}' is in '{1}' and requires your review and submission. View the changes &lt;a href="{2}"&gt;here&lt;/a&gt;.&lt;br/&gt;</value>
+  </data>
+  <data name="WORKFLOW_DocumentPendingToBeSubmitedNotificationSubject.Text" xml:space="preserve">
+    <value>Document awaiting submission</value>
+  </data>
+</root>

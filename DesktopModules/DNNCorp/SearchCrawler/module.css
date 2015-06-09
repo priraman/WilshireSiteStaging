@@ -1,0 +1,107 @@
+
+span.displayError {
+    display: inline !important;
+}
+
+span.hideError {
+    display: none !important;
+}
+
+tr.includedFileExtensionEditRow,
+tr.directoryEditRow{
+    background-color: #4169e1;
+    display: none;
+}
+
+tr.excludedFileExtensionEditRow {
+    background-color: #4169e1;
+}
+
+tr.excludedFileExtensionEditRow input[type="text"]
+tr.includedFileExtensionEditRow input[type="text"]{
+    margin: 0; width: 90%;
+}
+
+tr.directoryEditRow .dnnDropDownList {
+    margin: 0;    
+}
+
+a.btnDeleteExcludedFileExtension,
+a.btnSaveExcludedFileExtension,
+a.btnCancelExcludedFileExtension,
+a.btnDeleteIncludedFileExtension,
+a.btnSaveIncludedFileExtension,
+a.btnCancelIncludedFileExtension,
+a.btnDeleteDirectory,
+a.btnSaveDirectory,
+a.btnCancelDirectory{
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-right: 7px;
+}
+
+a.btnDeleteExcludedFileExtension,
+a.btnDeleteIncludedFileExtension,
+a.btnDeleteDirectory{
+    background: url('../../../icons/sigma/Delete_16X16_Standard.png') no-repeat;
+    margin-right: 0;
+}
+
+a.btnSaveExcludedFileExtension,
+a.btnSaveIncludedFileExtension,
+a.btnSaveDirectory {
+    margin-top: 2px;
+    background: url('../../../icons/sigma/Save_16X16_Standard.png') no-repeat;
+}
+
+a.btnCancelExcludedFileExtension,
+a.btnCancelIncludedFileExtension,
+a.btnCancelDirectory {
+    background: url('../../../icons/sigma/Cancel_16X16_Standard.png') no-repeat;
+    margin-right: 0;
+}
+
+a.indexAvailable {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../../../icons/sigma/Checked_16x16_Standard.png') no-repeat;
+}
+
+a.indexUnavailable {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../../../icons/sigma/ErrorWarning_16x16_Standard.png') no-repeat;
+}
+
+#excludedFileExtensionsTable td div.editExcludedFileExtensionContainer,
+#includedFileExtensionsTable td div.editIncludedFileExtensionContainer,
+#directoriesTable td div.editDirectoryContainer {
+    position: relative;
+}
+
+#excludedFileExtensionsTable td span.dnnFormMessage.dnnFormError,
+#includedFileExtensionsTable td span.dnnFormMessage.dnnFormError,
+#directoriesTable td span.dnnFormMessage.dnnFormError {
+    right: auto;
+    left: 10%;
+    display: none;
+}
+
+.dnnSearchAdmin .RadGrid input[type="image"] {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.dnnSearchAdmin .RadGrid input[type="image"].btnEditDuplicate,
+.dnnSearchAdmin .RadGrid input[type="image"].btnEditUrl {
+    margin: 2px 7px 0 0;
+}
+
+#dnnSearch-FileCrawlerSettings .dnnTableDisplay {
+    border-collapse: collapse;
+}
+

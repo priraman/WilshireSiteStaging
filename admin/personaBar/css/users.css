@@ -1,0 +1,12 @@
+div.userroles {
+    margin: 0 10px 10px 25px;
+}
+div.userroles .dnnCheckbox {
+}
+div.userroles > span {
+    vertical-align: middle;
+    margin-left: 15px;
+}
+.cmxtbl tr.edit-row > td > div > div.user-buttons{ clear: both;margin: 30px 0 6px 0;border-top: 2px solid #ebebeb;width: 100%;padding-top: 21px;text-align: center;}
+.cmxtbl tr#users-editrow > td > div > div.user-buttons > a.plainbtn{ margin: 0 0 0 9px;}
+.cmxtbl tr.edit-row > td > div > div.clear{ margin: 0;}

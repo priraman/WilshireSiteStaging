@@ -1,0 +1,248 @@
+﻿#pages-panel {
+    overflow: hidden;
+    background-color: #fff;
+}
+#pages-panel .socialpanelheader {
+    position: relative; /* Fix OSX Safari scroll */
+}
+
+#pages-panel .socialpanelheader .panel-actions {
+    display: inline-block;
+    float: right;
+    transform: translate(0, -50%);
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    letter-spacing: 0;
+}
+.ie #pages-panel .socialpanelheader .panel-actions {
+    top: 50px;
+}
+.socialpanelheader .panel-actions a.action-button {
+    color: #0087c6;
+    text-transform: none;
+    display: inline-block;
+    height: 20px;
+    line-height: 24px;
+    text-decoration: none;
+    margin-left: 8px;
+}
+.socialpanelheader .panel-actions a.action-button:hover {
+    color: #2fa6eb;
+}
+#pages-panel .socialpanelheader .panel-actions a.action-button.btn-recyclebin {
+    background: url('../images/icon-pages-recyclebin.png') no-repeat 0 center;
+
+    padding-left: 20px;
+}
+#pages-panel .socialpanelheader .panel-actions a.action-button.btn-pagehierarchy {
+    background: url('../images/icon-back-blue.png') no-repeat 0 center;
+
+    padding-left: 20px;
+}
+#pages-panel .socialpanelbody {
+    margin-top: 0;
+}
+#pages-panel .socialpanelbody > div.scroll-fix {
+    padding: 0;
+}
+#pages-panel a.simple-button {
+    display: inline-block;
+    padding: 9px 24px;
+    border: 1px solid #bfbfbf;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #000;
+    text-decoration: none;
+}
+#pages-panel .title-container {
+    overflow: auto;
+}
+#pages-panel .title-container .toggle-view-container {
+    display: inline-block;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    float: right;
+    padding: 1px;
+    margin-right: 20px;
+}
+#pages-panel .title-container .toggle-view-container > span {
+    display: inline-block;
+    width: 37px;
+    height: 32px;
+    vertical-align: top;
+    cursor: pointer;
+    border-left: 1px solid #ececec;
+}
+#pages-panel .title-container .toggle-view-container > span:first-child {
+    border-left: none;
+}
+#pages-panel .title-container .toggle-view-container > span.view-detail {
+    background: url('../images/icon-pages-toggleview.png') no-repeat 0 0;
+}
+#pages-panel .title-container .toggle-view-container > span.view-detail.selected {
+    background-position: 0 -32px;
+}
+#pages-panel .title-container .toggle-view-container > span.view-drag {
+    background: url('../images/icon-pages-toggleview.png') no-repeat -37px 0;
+}
+#pages-panel .title-container .toggle-view-container > span.view-drag.selected {
+    background-position: -37px -32px;
+}
+#pages-panel .title-container .simple-button {
+    float: right;
+}
+#pages-panel .title-container .search-container {
+    float: left;
+}
+#pages-panel .title-container .search-container input {
+    width: 400px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    height: 36px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    padding: 0 36px 0 4px;
+    outline: none;
+}
+#pages-panel .title-container .search-container a.btn-search {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-left: -36px;
+    background: url('../images/icon-pages-search.png') no-repeat center center;
+}
+
+.dnnFormItem input[type="text"],
+.dnnFormItem select,
+.dnnFormItem textarea,
+.dnnFormItem input[type="email"],
+.dnnFormItem input[type="search"],
+.dnnFormItem input[type="password"] {
+    margin-bottom: 18px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 12px;
+}
+
+.jspContainer .jspPane {
+    width: 100% !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+.jspVerticalBar, .jspHorizontalBar {
+    background: none !important;
+}
+.jspVerticalBar .jspTrack {
+    width: 7px !important;
+}
+.jspHorizontalBar .jspTrack .jspDrag {
+    height: 7px !important;
+}
+.jspVerticalBar .jspTrack .jspDrag, .jspHorizontalBar .jspTrack .jspDrag {
+    filter: alpha(opacity=50) !important;
+    opacity: 0.5 !important;
+}
+
+/* SCROLL BAR Style */
+
+.jspContainer {
+    overflow: hidden;
+    position: relative;
+}
+
+.jspPane {
+    position: absolute;
+}
+
+.jspVerticalBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 11px;
+    height: 100%;
+    background: #ccc;
+}
+
+.jspHorizontalBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 11px;
+    background: #ccc;
+}
+
+    .jspVerticalBar *,
+    .jspHorizontalBar * {
+        margin: 0;
+        padding: 0;
+    }
+
+.jspCap {
+    display: none;
+}
+
+.jspHorizontalBar .jspCap {
+    float: left;
+}
+
+.jspTrack {
+    background: transparent;
+    position: relative;
+}
+
+.jspVerticalBar .jspTrack {
+    width: 10px;
+    margin: 0 0 0 3px;
+}
+
+.jspHorizontalBar .jspTrack {
+    height: 5px;
+    margin: 3px 0 3px 0;
+}
+
+.jspVerticalBar .jspCap {
+    display: block;
+    height: 3px;
+    width: 11px;
+}
+
+.jspHorizontalBar .jspCap {
+    display: block;
+    width: 3px;
+    height: 11px;
+}
+
+.jspDrag {
+    position: relative;
+    top: 0;
+    left: 0;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    opacity: .75;
+    background: #000;
+    cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+    float: left;
+    height: 5px;
+}
+/* SCROLL BAR Style END */

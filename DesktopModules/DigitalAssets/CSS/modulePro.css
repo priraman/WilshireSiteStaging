@@ -1,0 +1,446 @@
+#dnnModuleDigitalAssetsLeftPaneTagsTab {
+    height: 100%;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags {
+    padding: 10px 10px 10px 5px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.tags {
+    list-style: none outside none;
+    color: #666666;
+    margin: 0 15px 0 0;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.tags li {
+    margin: 6px 0;
+    padding: 1px 10px 1px 15px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.tags li:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.tags li a {
+    color: inherit;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.tags li span {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px 5px 5px 5px;
+    float: right;
+    font-size: smaller;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .toolbar {
+    height: 32px;
+    margin-bottom: 15px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.buttonGroup {
+    list-style: none outside none;
+    margin: 0;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.buttonGroup li {
+    float: left;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.sorting.buttonGroup li:last-child {
+    width: 50px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags ul.pager {
+    float: right;
+    margin-right: 3px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .buttonGroup > a {
+    border: 1px solid #C2C2C2;
+    color: #555;
+    display: block;
+    float: left;
+    height: 26px;
+    margin-top: 0;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .buttonGroup > a:active {
+    opacity: 0.7;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .buttonGroup a span {
+    text-indent: -10000000px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    margin-right: 2px;
+    margin-left: 6px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .pager.buttonGroup a span {
+    margin-left: 2px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting span.sort {
+    background-position: center center;
+    width: 12px;
+    margin-right: 4px;
+    margin-left: 0;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting span.asc {
+    background-image: url("../images/up.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting span.desc {
+    background-image: url("../images/down.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting a.sorting-alpha span.icon {
+    background-image: url("../images/order_alpha.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting li.ui-tabs-active a.sorting-alpha span.icon {
+    background-image: url("../images/order_alpha_active.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting a.sorting-count span.icon {
+    background-image: url("../images/order_count.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .sorting li.ui-tabs-active a.sorting-count span.icon {
+    background-image: url("../images/order_count_active.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .pager a.pager-next span {
+    background-image: url("../images/right.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .pager a.pager-prev span {
+    background-image: url("../images/left.png");
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags a.disabled {
+    opacity: 0.65;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags a.enabled {
+    cursor: pointer;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags .selected {
+    background: none repeat scroll 0 0 #CCCCCC;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTags div.loading {
+    background: url('../Images/horizontal-loading.gif') center center no-repeat;
+    float: right;
+    height: 20px;
+    position: relative;
+    width: 32px;
+}
+
+#dnnModuleDigitalAssetsLeftPaneFilesTabTagsPager {
+    border-top: 1px solid #999999;
+    bottom: 0;
+    box-shadow: 0 0px, 0 1px #DDDDDD inset;
+    color: #666666;
+    height: 38px;
+    left: 0;
+    padding-top: 18px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+.dnnModuleDigitalAssetsPreviewInfoTag .dnnTagsInput{
+    margin-left: 8px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 1px 2px 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+.dnnModuleDigitalAssetsPreviewInfoTagDisabled {
+    background:#ebebeb;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    border-color:#a7a7a7;
+    border-width:1px;
+}
+
+.dnnModuleDigitalAssetsAvailableStates {
+    display: inline-block;
+    margin-bottom: 18px;
+    width: 570px;
+    background-color: #F7F7F7;
+}
+
+.dnnModuleDigitalAssetsAvailableStates .RadGrid_Default {
+    display: inline-block;
+    margin: 8px;
+}
+
+.dnnModuleDigitalAssetsEditWorkflowState {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, transparent 100%) no-repeat scroll center top / 100% 20px transparent;
+    padding: 20px 8px 8px;
+    width: auto;
+}
+
+.dnnModuleDigitalAssetsNotifyByGroupedFields {
+    display: inline-block;
+    padding-right: 8px;
+    padding-left: 8px;
+    background-color: #f0f0f0;
+    width: 249px;
+    height: 32px;
+}
+
+#dnnModuleDigitalAssetsReviewers table.dnnPermissionsGrid {
+    text-align: center;
+    background-color: white;
+    float: left;
+    clear: both;
+}
+
+#dnnModuleDigitalAssetsReviewers table.dnnPermissionsGrid td:first-child {
+    text-align: left;
+    padding: 6px 12px;
+}
+
+/* File Properties Grids */
+.dnnModuleDigitalAssetsFilePropertiesContent .RadGrid {
+    width: 99%;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesVersionColumn {
+    width: 10%;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesDateColumn {
+    width: 20%;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesStateColumn {
+    width: 15%;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesActionsColumn {
+    width: 10%;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesWorkflowGridColumn {
+    width: 15%;
+}
+
+.dnnModuleDigitalAssetsFilePropertiesWorkflowGridColumn.DateColumn {
+    width: 17%;
+}
+
+.dnnModuleDigitalAssetsWorkflowLabel {
+    background-color: #C7C7C7;
+    background-image: url("/DesktopModules/DigitalAssets/Images/workflow.png");
+    background-repeat: no-repeat;
+    background-position: 7px 7px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px 3px 3px 3px;
+
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.4);
+    color: #666666;
+    float: right;
+    line-height: 28px;
+    margin-right: 10px;
+    padding: 0 8px 0 30px;
+}
+
+.dnnModuleDigitalAssetsWorkflowLabel a.help {
+    background-image: url("../images/workflow_help.png");
+    height: 17px;
+    text-indent: -10000px;
+    width: 17px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 6px 0 -6px 8px;
+}
+
+tr.rgRow.rgSelectedRow td.dnnModuleDigitalAssetsGrid-LockColumn,
+tr.rgAltRow.rgSelectedRow td.dnnModuleDigitalAssetsGrid-LockColumn {
+    background-image: url('../Images/locked-white.png');
+}
+
+tr.rgRow td.dnnModuleDigitalAssetsGrid-LockColumn,
+tr.rgAltRow td.dnnModuleDigitalAssetsGrid-LockColumn {
+    background-image: url('../Images/locked.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+tr.rgRow.rgSelectedRow td.dnnModuleDigitalAssetsGrid-SubscribedColumn,
+tr.rgAltRow.rgSelectedRow td.dnnModuleDigitalAssetsGrid-SubscribedColumn {
+    background-image: url('../Images/envelope_white.png');
+}
+
+.dnnModuleDigitalAssetsGrid thead tr th.dnnModuleDigitalAssetsGrid-SubscribedColumn,
+tr.rgRow td.dnnModuleDigitalAssetsGrid-SubscribedColumn,
+tr.rgAltRow td.dnnModuleDigitalAssetsGrid-SubscribedColumn {
+    background-image: url('../Images/envelope_grey.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields .subField {
+    padding-left: 40px;
+    position: relative;
+    border-top: 1px solid #bebebe;
+    left: -8px;
+    width: 298px;
+}
+
+.dnnFormItem > div.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields .RadPicker {
+    margin-bottom: 6px;
+}
+
+.dnnFormItem > div.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields textarea {
+    width: 94%;
+    margin-bottom: 6px;
+}
+
+.dnnFormItem > div.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields select {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Workflow Tab Content Header */
+.dnnModuleDigitalAssetsTabHeader {
+    width: 95%;
+    background-color: #e8f1fa;    
+    padding: 20px 20px 20px 20px;
+}
+
+.dnnModuleDigitalAssetsPreviewWorkflowDataPanel {
+    position: absolute;
+    left: 275px;
+    top: 20px;
+    width: 200px;
+}
+
+.dnnModuleDigitalAssetsPanelHeader {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.dnnModuleDigitalAssetsPreviewWorkflowUserActionPanel {
+    position: absolute;
+    left: 500px;
+    top: 20px;
+    width: 41%;
+}
+
+.dnnModuleDigitalAssetsPreviewWorkflowUserActionPanel textarea{
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > input.searchInput {
+    position: absolute;
+}
+
+.dnnModuleDigitalAssetsSearchBox > input.searchInput::-ms-clear {
+    display: none;
+}
+
+.dnnModuleDigitalAssetsSearchBox > a.dnnSearchBoxClearText {
+    background: url("../../../images/search/clearText.png") no-repeat scroll center center transparent;
+    cursor: pointer;
+    float: right;
+    height: 16px;
+    position: relative;
+    right: 9px;
+    top: 6px;
+    width: 16px;
+    margin-left: 224px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced {
+    float: right;
+    margin: 0 0 0 10px;
+    position: relative;
+    right: 9px;
+    top: 2px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced > .dnnSearchBox_advanced_label {
+    background: url("../../../images/dnnSpinnerDownArrow.png") no-repeat scroll right center transparent;
+    border-left: 1px solid #CCCCCC;
+    color: #999999;
+    cursor: pointer;
+    display: block;
+    height: 22px;
+    margin-right: 8px;
+    padding: 3px 15px 0 10px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced > .dnnSearchBox_advanced_label.dnnExpanded {
+    background: url("../../../images/dnnSpinnerUpArrow.png") no-repeat scroll right center transparent;
+    color: #666666;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced > .dnnSearchBox_advanced_dropdown {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C9C9C9;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 2px 0 0 #BBBBBB;
+    display: none;
+    margin: 0;
+    padding: 8px;
+    position: absolute;
+    right: 0;
+    top: 28px;
+    z-index: 215;
+    min-width: 300px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced > .dnnSearchBox_advanced_dropdown .dnnFormItem {
+    margin-bottom: 5px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced > .dnnSearchBox_advanced_dropdown .dnnFormItem > .RadComboBox_Default {
+    margin-bottom: 0;   
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced_query {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    color: #AAAAAA;
+    display: none;
+    float: right;
+    font-size: 12px;
+    padding: 1px 20px 2px 8px;
+    position: relative;
+    right: 2px;
+    top: 3px;
+}
+
+.dnnModuleDigitalAssetsSearchBox > .dnnSearchBox_advanced_query b {
+    color: #666666;
+}
+
+.dnnModuleDigitalAssetsSearchBox  > .dnnSearchBox_advanced_query > a.dnnSearchBoxClearAdvanced {
+    background: url("../../../images/dnnTagClose.png") no-repeat scroll center center transparent;
+    cursor: pointer;
+    height: 8px;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    width: 8px;
+}
+
+ul#dnnModuleDigitalAssetsLeftPaneActions li#dnnModuleDigitalAssetsSubscriptions {
+    background-image: url("../images/envelope_Grey.png");
+}
+

@@ -1,0 +1,59 @@
+﻿<!-- tasks mobile panel -->
+<div>	
+	<div class="right">
+		<span data-bind="html: totalTasks"></span>
+	</div>
+	<h2 data-bind="html: $root.resx.title_Tasks"></h2>
+	
+	<!-- leave it to next release
+	<select id="select-socialtask-filter">
+		<option>All</option>
+		<option>Report</option>
+		<option>Moderate</option>
+	</select>	
+	-->	
+	<div class="clear"></div>
+	
+	<div class="socialtasksbody">
+		<ul data-bind="foreach: results">
+			<li data-bind="click: expand">
+				<div class="right" data-bind="html: count, visible: showFooter"></div>
+				<div class="task-titlebar">							
+					<span data-bind="html: subject"></span>
+				</div>
+				<div class="task-brief" data-bind="html: summary"></div>
+				<a class="expand" data-bind="click: collapse"></a>
+			</li>
+			
+			<li class="in-detail-view" data-bind="with: currentView">
+				<div class="notification-from">
+					<div class="useravatar">
+						<span><em><img data-bind="attr: { src: avatar }"/></em></span>
+					</div>
+					<div class="username">
+						<label data-bind="html: displayName"></label>
+						<span data-bind="html: when"></span>
+					</div>				
+				</div>
+				
+				<div class="notification-body" data-bind="html: body"></div>
+			
+				<div class="notification-actions" data-bind="foreach: actions">
+					<a data-bind="attr: { 'class' : css }, html: name, click: call"></a>
+				</div>
+				
+				<div class="notification-footer" data-bind="visible: $parent.showFooter">
+					<div class="right">
+						<a class="prev" data-bind="click: $parent.navPrev"></a>
+						<a class="next" data-bind="click: $parent.navNext"></a>
+					</div>
+					<span data-bind="html: $parent.navigateViewDesc"></span>
+				</div>
+			</li>
+		</ul>
+		
+		<div class="tasks-loadmore" data-bind="visible: hasMoreTasks() || hasNewTasks()">
+			<a class="primarybtn" data-bind="click: loadMore, html: $root.resx.btn_LoadMore"></a>
+		</div>
+	</div>
+</div>

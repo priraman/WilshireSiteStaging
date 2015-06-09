@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="download.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="add_head.Text" xml:space="preserve">
+    <value>Add Head</value>
+  </data>
+  <data name="align_center.Text" xml:space="preserve">
+    <value>Center text</value>
+  </data>
+  <data name="align_justify.Text" xml:space="preserve">
+    <value>Justify text</value>
+  </data>
+  <data name="align_left.Text" xml:space="preserve">
+    <value>Align text to the left</value>
+  </data>
+  <data name="alignment.Text" xml:space="preserve">
+    <value>Alignment</value>
+  </data>
+  <data name="align_right.Text" xml:space="preserve">
+    <value>Align text to the right</value>
+  </data>
+  <data name="anchor.Text" xml:space="preserve">
+    <value>Anchor</value>
+  </data>
+  <data name="backcolor.Text" xml:space="preserve">
+    <value>Back Color</value>
+  </data>
+  <data name="bold.Text" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="center.Text" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="choose.Text" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="code.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="columns.Text" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="delete_column.Text" xml:space="preserve">
+    <value>Delete Column</value>
+  </data>
+  <data name="deleted.Text" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="deleteHead.Text" xml:space="preserve">
+    <value>Delete Head</value>
+  </data>
+  <data name="deleteRow.Text" xml:space="preserve">
+    <value>Delete Row</value>
+  </data>
+  <data name="delete_table.Text" xml:space="preserve">
+    <value>Delete Table</value>
+  </data>
+  <data name="dropFileHere.Text" xml:space="preserve">
+    <value>Drop file here</value>
+  </data>
+  <data name="edit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="exceedLimit.Text" xml:space="preserve">
+    <value>File size bigger than {0} Mb</value>
+  </data>
+  <data name="file.Text" xml:space="preserve">
+    <value>Insert File</value>
+  </data>
+  <data name="filename.Text" xml:space="preserve">
+    <value>Name (optional)</value>
+  </data>
+  <data name="fontcolor.Text" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="formatting.Text" xml:space="preserve">
+    <value>Formatting</value>
+  </data>
+  <data name="fromUrl.Text" xml:space="preserve">
+    <value>From URL</value>
+  </data>
+  <data name="header1.Text" xml:space="preserve">
+    <value>Header 1</value>
+  </data>
+  <data name="header2.Text" xml:space="preserve">
+    <value>Header 2</value>
+  </data>
+  <data name="header3.Text" xml:space="preserve">
+    <value>Header 3</value>
+  </data>
+  <data name="header4.Text" xml:space="preserve">
+    <value>Header 4</value>
+  </data>
+  <data name="header5.Text" xml:space="preserve">
+    <value>Header 5</value>
+  </data>
+  <data name="horizontalrule.Text" xml:space="preserve">
+    <value>Insert Horizontal Rule</value>
+  </data>
+  <data name="html.Text" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="image.Text" xml:space="preserve">
+    <value>Insert Image</value>
+  </data>
+  <data name="image_position.Text" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="image_web_link.Text" xml:space="preserve">
+    <value>Image Web Link</value>
+  </data>
+  <data name="indent.Text" xml:space="preserve">
+    <value>Indent</value>
+  </data>
+  <data name="insert.Text" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="insert_column_left.Text" xml:space="preserve">
+    <value>Add Column Left</value>
+  </data>
+  <data name="insert_column_right.Text" xml:space="preserve">
+    <value>Add Column Right</value>
+  </data>
+  <data name="insertImage.Text" xml:space="preserve">
+    <value>Insert Image</value>
+  </data>
+  <data name="insert_row_above.Text" xml:space="preserve">
+    <value>Add Row Above</value>
+  </data>
+  <data name="insert_row_below.Text" xml:space="preserve">
+    <value>Add Row Below</value>
+  </data>
+  <data name="insert_table.Text" xml:space="preserve">
+    <value>Insert Table</value>
+  </data>
+  <data name="invalidFileMessage.Text" xml:space="preserve">
+    <value>You can only upload one of these types of image files: jpg,jpe,bmp,gif,png,jpeg,ico.</value>
+  </data>
+  <data name="italic.Text" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="left.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="link.Text" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="link_edit.Text" xml:space="preserve">
+    <value>Edit link</value>
+  </data>
+  <data name="link_insert.Text" xml:space="preserve">
+    <value>Insert link</value>
+  </data>
+  <data name="link_new_tab.Text" xml:space="preserve">
+    <value>Open link in new tab</value>
+  </data>
+  <data name="mailto.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="none.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="or_choose.Text" xml:space="preserve">
+    <value>Or choose</value>
+  </data>
+  <data name="orderedlist.Text" xml:space="preserve">
+    <value>Ordered List</value>
+  </data>
+  <data name="outdent.Text" xml:space="preserve">
+    <value>Outdent</value>
+  </data>
+  <data name="paragraph.Text" xml:space="preserve">
+    <value>Normal Text</value>
+  </data>
+  <data name="quote.Text" xml:space="preserve">
+    <value>Quote</value>
+  </data>
+  <data name="right.Text" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="rows.Text" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="storedLocation.Text" xml:space="preserve">
+    <value>Stored Location</value>
+  </data>
+  <data name="table.Text" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="title.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="underline.Text" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="unlink.Text" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
+  <data name="unorderedlist.Text" xml:space="preserve">
+    <value>Unordered List</value>
+  </data>
+  <data name="upload.Text" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="uploadFile.Text" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="uploadStatusTitle.Text" xml:space="preserve">
+    <value>You selected the following image to upload</value>
+  </data>
+  <data name="video.Text" xml:space="preserve">
+    <value>Insert Video</value>
+  </data>
+  <data name="video_html_code.Text" xml:space="preserve">
+    <value>Video Embed Code</value>
+  </data>
+  <data name="web.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="enterResourceUrl.Text" xml:space="preserve">
+    <value>Enter Resource URL&lt;span class="example_url"&gt;(http://example.com/imagename.jpg)&lt;/span&gt;</value>
+  </data>
+  <data name="recentUploads.Text" xml:space="preserve">
+    <value>Recent Uploads</value>
+  </data>
+  <data name="browseToUploadText.Text" xml:space="preserve">
+    <value>Browse to Upload</value>
+  </data>
+  <data name="dragDropText.Text" xml:space="preserve">
+    <value>Drag and Drop Your Image Here</value>
+  </data>
+  <data name="orText.Text" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="advancedEditor.Text" xml:space="preserve">
+    <value>Advanced Editor</value>
+  </data>
+</root>

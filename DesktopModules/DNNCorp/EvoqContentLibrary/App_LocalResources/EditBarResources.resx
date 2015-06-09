@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="a_DeleteVersion.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="a_RestoreVersion.Text" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="a_ShowVersion.Text" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="button_AddModule.Text" xml:space="preserve">
+    <value>Add Module</value>
+  </data>
+  <data name="button_Close.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="button_CloseHistory.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="button_ClosePreviewMode.Text" xml:space="preserve">
+    <value>Close Preview Mode</value>
+  </data>
+  <data name="button_CompareVersions.Text" xml:space="preserve">
+    <value>Compare</value>
+  </data>
+  <data name="button_DesktopMode.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="button_Discard.Text" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="button_Landscape.Text" xml:space="preserve">
+    <value>Landscape</value>
+  </data>
+  <data name="button_PageHistory.Text" xml:space="preserve">
+    <value>Page History</value>
+  </data>
+  <data name="button_PageSettings.Text" xml:space="preserve">
+    <value>Page Settings</value>
+  </data>
+  <data name="button_PhoneMode.Text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="button_Portrait.Text" xml:space="preserve">
+    <value>Portrait</value>
+  </data>
+  <data name="button_Preview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="button_Publish.Text" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="button_TabletMode.Text" xml:space="preserve">
+    <value>Tablet</value>
+  </data>
+  <data name="ConfirmCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfirmDelete.Text" xml:space="preserve">
+    <value>Do you wish to delete version {0}? This will remove the changes associated with this page version. It does not delete the page itself. This action is permanent and cannot be undone.</value>
+  </data>
+  <data name="ConfirmTitle.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmYesDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="h2_TittleHistoryTab.Text" xml:space="preserve">
+    <value>Page Version History</value>
+  </data>
+  <data name="header_Actions.Text" xml:space="preserve">
+    <value>ACTIONS</value>
+  </data>
+  <data name="header_Compare.Text" xml:space="preserve">
+    <value>COMPARE</value>
+  </data>
+  <data name="header_Date.Text" xml:space="preserve">
+    <value>DATE</value>
+  </data>
+  <data name="header_State.Text" xml:space="preserve">
+    <value>STATE</value>
+  </data>
+  <data name="header_User.Text" xml:space="preserve">
+    <value>USER</value>
+  </data>
+  <data name="header_Version.Text" xml:space="preserve">
+    <value>VERSION</value>
+  </data>
+  <data name="header_ViewSite.Text" xml:space="preserve">
+    <value>VIEW SITE:</value>
+  </data>
+  <data name="history_NumberOfVersionsMessage.Text" xml:space="preserve">
+    <value>Maximum Number of Versions:</value>
+  </data>
+  <data name="message_ChangesNotPublished.Text" xml:space="preserve">
+    <value>Changes shown are not published</value>
+  </data>
+  <data name="ConfirmRestore.Text" xml:space="preserve">
+    <value>Do you wish to restore version {0}? This will replace the current version {1}</value>
+  </data>
+  <data name="ConfirmYesRestore.Text" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="label_CompareDeleted.Text" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="label_CompareInserted.Text" xml:space="preserve">
+    <value>Inserted</value>
+  </data>
+  <data name="label_CompareVersion.Text" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="label_PreviewMode.Text" xml:space="preserve">
+    <value>Preview mode</value>
+  </data>
+  <data name="button_ComparingVersions.Text" xml:space="preserve">
+    <value>Comparing...</value>
+  </data>
+  <data name="TabCompareFailedText.Text" xml:space="preserve">
+    <value>An error has occurred. The operation cannot be completed.</value>
+  </data>
+  <data name="TabCompareFailedTitle.Text" xml:space="preserve">
+    <value>Page Compare has failed</value>
+  </data>
+  <data name="VersionHistory_RestoreOrDeleteNotAllowed.Text" xml:space="preserve">
+    <value>Another user has taken action on the page and its state has been changed. Please, refresh the page to see the current state.</value>
+  </data>
+  <data name="button_Submit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="workflow_submit_innerTitle.Text" xml:space="preserve">
+    <value>Enter any comments relating to the change</value>
+  </data>
+  <data name="workflow_submit_title.Text" xml:space="preserve">
+    <value>Add Comment to Changes</value>
+  </data>
+  <data name="WorkFlowApprovePageNotificationComment.Text" xml:space="preserve">
+    <value>'{0}' is in '{1}' and requires your review and approval. View the changes &lt;a class="mobile" href="{2}"&gt;here&lt;/a&gt;.</value>
+  </data>
+  <data name="WorkFlowApprovePageNotificationSubject.Text" xml:space="preserve">
+    <value>Content Approval</value>
+  </data>
+  <data name="workflow_approval_innerTitle.Text" xml:space="preserve">
+    <value>Approval Message</value>
+  </data>
+  <data name="workflow_approval_reject_image_label.Text" xml:space="preserve">
+    <value>Drop an image to attach here or &lt;span class="{0}" {1}&gt;Browse&lt;/span&gt;</value>
+  </data>
+  <data name="workflow_approval_title.Text" xml:space="preserve">
+    <value>Approve Changes</value>
+  </data>
+  <data name="WorkFlowRejectPageNotificationComment.Text" xml:space="preserve">
+    <value>Changes for the page '{0}' has been rejected. It is now in state '{1}'. View the changes &lt;a class="mobile" href="{2}"&gt;here&lt;/a&gt;.</value>
+  </data>
+  <data name="WorkFlowRejectPageNotificationSubject.Text" xml:space="preserve">
+    <value>Page Changes Rejected</value>
+  </data>
+  <data name="workflow_rejection_innerTitle.Text" xml:space="preserve">
+    <value>Add a comment to explain the rejection of the changes for</value>
+  </data>
+  <data name="workflow_rejection_title.Text" xml:space="preserve">
+    <value>Reject Change</value>
+  </data>
+  <data name="workflows_resources_info.Text" xml:space="preserve">
+    <value>This workflow is currently in use</value>
+  </data>
+  <data name="workflows_resources_info_link" xml:space="preserve">
+    <value>View Usage</value>
+  </data>
+  <data name="WorkFlowNotificationAuditComment.Text" xml:space="preserve">
+    <value>&lt;b&gt;Created:&lt;/b&gt; {0} by {1}.</value>
+  </data>
+  <data name="workflow_hasStateReviewerPermission_errorMessage.Text" xml:space="preserve">
+    <value>This page version is awaiting to be approved.</value>
+  </data>
+  <data name="workflows_approve_accept_btn.Text" xml:space="preserve">
+    <value>Approve Changes</value>
+  </data>
+  <data name="workflows_reject_accept_btn.Text" xml:space="preserve">
+    <value>Reject Changes</value>
+  </data>
+  <data name="workflows_submit_accept_btn.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="button_Reject.Text" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="WorkFlowDiscardConfirmCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="WorkFlowDiscardConfirmText.Text" xml:space="preserve">
+    <value>Are you sure you want to discard the changes?</value>
+  </data>
+  <data name="WorkFlowDiscardConfirmYes.Text" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="WorkFlowDiscardTitle.Text" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="WorkFlowChangeResquestWrongParameters.Text" xml:space="preserve">
+    <value>Inconsistent state of the page sent. Please, refresh the page to see the current state of the page.</value>
+  </data>
+  <data name="WorkFlowErrorContentAlreadyPublished.Text" xml:space="preserve">
+    <value>The content is already published. Please refresh the page.</value>
+  </data>
+  <data name="WorkFlowErrorContentNotReadyToBePublished.Text" xml:space="preserve">
+    <value>The content can't be published yet. It has an incompatible state, please refresh the page.</value>
+  </data>
+  <data name="WorkFlowDiscardPageWithCommentNotificationComment.Text" xml:space="preserve">
+    <value>The page '{0}' submitted by you has been discarded.</value>
+  </data>
+  <data name="WorkFlowDiscardPageWithCommentNotificationSubject.Text" xml:space="preserve">
+    <value>Page Discarded</value>
+  </data>
+  <data name="workflow_discard_innerTitle.Text" xml:space="preserve">
+    <value>Discard Message</value>
+  </data>
+  <data name="WorkFlowPublishPageNotificationBody.Text" xml:space="preserve">
+    <value>The page '{0}' has been approved. Click &lt;a class="mobile" href="{1}"&gt;here&lt;/a&gt; to open the page.</value>
+  </data>
+  <data name="WorkFlowPublishPageNotificationSubject.Text" xml:space="preserve">
+    <value>Your page has been published.</value>
+  </data>
+  <data name="button_Approve.Text" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="WorkFlowErrorContentInconsistentState.Text" xml:space="preserve">
+    <value>Another user has taken action on the page and its state has been changed. Please, refresh the page to see the current state.</value>
+  </data>
+  <data name="WorkFlowErrorTitle.Text" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="page_published_successfully.Text" xml:space="preserve">
+    <value>Page Published successfully</value>
+  </data>
+  <data name="page_discarded_successfully.Text" xml:space="preserve">
+    <value>Page Discarded Successfully</value>
+  </data>
+  <data name="WorkFlowSubmitPageNotificationComment.Text" xml:space="preserve">
+    <value>'{0}' is in '{1}' status waiting submission. View the changes &lt;a class="mobile" href="{2}"&gt;here&lt;/a&gt;.</value>
+  </data>
+  <data name="WorkFlowSubmitPageNotificationSubject.Text" xml:space="preserve">
+    <value>Content Submission</value>
+  </data>
+  <data name="button_Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="WorkflowLinksActionFileDamModuleNotFound.Text" xml:space="preserve">
+    <value>Sorry, DAM module not found</value>
+  </data>
+  <data name="WorkflowLinksActionFileNotFound.Text" xml:space="preserve">
+    <value>Sorry, file Not found</value>
+  </data>
+  <data name="PrivatePageTooltip.Text" xml:space="preserve">
+    <value>Private Page</value>
+  </data>
+</root>

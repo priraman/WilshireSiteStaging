@@ -1,0 +1,89 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPublishedFileTags]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPublishedFileTags]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPublishedFileTagsOrderedByFolderId]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPublishedFileTagsOrderedByFolderId]
+GO
+
+CREATE PROCEDURE  {databaseOwner}[{objectQualifier}GetPublishedFileTagsOrderedByFolderId]	
+	@PortalId int
+AS
+BEGIN
+	SELECT t.TermID, t.Name, f.FileId, f.FolderId
+	FROM  {databaseOwner}{objectQualifier}vw_PublishedFiles f
+		JOIN {databaseOwner}{objectQualifier}ContentItems c ON f.ContentItemID = c.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}ContentTypes ty ON c.ContentTypeID = ty.ContentTypeID
+		JOIN {databaseOwner}{objectQualifier}ContentItems_Tags ct ON f.ContentItemID = ct.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+	WHERE (( @PortalId is null and f.PortalId is null) or (f.PortalId = @PortalId)) AND ty.ContentType = 'File'
+	ORDER BY f.FolderId
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}GetPublishedFilesByTags') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetPublishedFilesByTags
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}GetPublishedFilesByTagsOrderedByFolderId') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetPublishedFilesByTagsOrderedByFolderId
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPublishedFilesByTagsOrderedByFolderId
+	@PortalID int,			
+	@Terms nvarchar(4000)					
+AS
+BEGIN
+	
+	DECLARE @TermsList table
+	(
+		Term nvarchar(250)
+	)
+
+	DECLARE @Term varchar(250), @Pos int
+
+	SET @Terms = LTRIM(RTRIM(@Terms))+ ','
+	SET @Pos = CHARINDEX(',', @Terms, 1)
+
+	IF REPLACE(@Terms, ',', '') <> ''
+	BEGIN
+		WHILE @Pos > 0
+		BEGIN
+			SET @Term = LTRIM(RTRIM(LEFT(@Terms, @Pos - 1)))
+			IF @Term <> ''
+			BEGIN
+				INSERT INTO @TermsList (Term) VALUES (CAST(@Term AS nvarchar(250))) --Use Appropriate conversion
+			END
+			SET @Terms = RIGHT(@Terms, LEN(@Terms) - @Pos)
+			SET @Pos = CHARINDEX(',', @Terms, 1)
+
+		END
+	END	
+	
+	DECLARE @NumOfTerms int
+	SELECT @NumOfTerms = count(*) FROM @TermsList
+		
+	SELECT f.*
+	FROM {databaseOwner}{objectQualifier}vw_PublishedFiles f
+	WHERE (( @PortalId is null and f.PortalId is null) or (f.PortalId = @PortalId))
+		AND f.ContentItemID in (
+			SELECT ct.ContentItemID
+			FROM {databaseOwner}{objectQualifier}ContentItems_Tags ct
+			JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+			JOIN @TermsList tl ON tl.Term = t.Name
+			GROUP BY ct.ContentItemID
+			HAVING count(ct.ContentItemID) = @NumOfTerms
+		)
+	ORDER BY f.FolderId
+END
+GO

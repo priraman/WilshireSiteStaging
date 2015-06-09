@@ -1,0 +1,185 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/***** Story CONTENT-2859 - Workflow > Migrate DAM's workflow to the workflows page *****/
+/***** Remove the Module Control to Edit Workflow *****/
+
+DECLARE @damModuleDefinition INT
+DECLARE @wfModuleControl INT
+
+SELECT @damModuleDefinition = MD.[ModuleDefID]
+FROM {databaseOwner}{objectQualifier}ModuleDefinitions MD
+WHERE MD.DefinitionName = 'Digital Asset Management'
+
+SELECT @wfModuleControl = ModuleControlId  
+FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'EditWorkflow'
+
+SELECT @wfModuleControl
+
+IF @wfModuleControl IS NOT NULL
+BEGIN
+	EXEC {databaseOwner}{objectQualifier}DeleteModuleControl
+		@ModuleControlId = @wfModuleControl	
+END
+GO
+
+/** Get File by ContentItem Id **/
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileByContentItemId]', N'P') IS NOT NULL
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileByContentItemId]
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFileByContentItemId]
+	@ContentItemId int
+AS
+BEGIN
+	SELECT FileId,
+			PortalId,
+			[FileName],
+			Extension,
+			Size,
+			Width,
+			Height,
+			ContentType,
+			FolderID,
+			Folder,
+			StorageLocation,
+			IsCached,
+			[UniqueId],
+			[VersionGuid],
+			SHA1Hash,
+			FolderMappingID,
+			LastModificationTime,
+			Title,
+			EnablePublishPeriod,
+			StartDate,
+			EndDate,
+			CreatedByUserID,
+			CreatedOnDate,
+			LastModifiedByUserID,
+			LastModifiedOnDate,
+			PublishedVersion,
+			ContentItemID
+	FROM {databaseOwner}[{objectQualifier}vw_Files] 
+	WHERE ContentItemId = @ContentItemId
+END
+GO
+
+/* Add Complete and Discard Workflow File Actions */
+DECLARE @ContentTypeId INT
+SELECT @ContentTypeId = ContentTypeId
+    FROM    {databaseOwner}{objectQualifier}ContentTypes
+    WHERE   ContentType = 'File'
+
+IF @ContentTypeId IS NOT NULL
+BEGIN
+	DECLARE @ActionId INT
+
+	/* Add Complete Workflow File Action */ 
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'CompleteWorkflow' AND ActionSource = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowCompleteFileAction, DotNetNuke.Professional.DigitalAssets'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'CompleteWorkflow'
+			   ,'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowCompleteFileAction, DotNetNuke.Professional.DigitalAssets')
+	END
+	
+	/* Add Discard Workflow File Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'DiscardWorkflow' AND ActionSource = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowDiscardFileAction, DotNetNuke.Professional.DigitalAssets'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'DiscardWorkflow'
+			   ,'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowDiscardFileAction, DotNetNuke.Professional.DigitalAssets')
+	END
+
+	/* Add Discard State File Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'DiscardState' AND ActionSource = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.StateDiscardFileAction, DotNetNuke.Professional.DigitalAssets'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'DiscardState'
+			   ,'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.StateDiscardFileAction, DotNetNuke.Professional.DigitalAssets')
+	END
+
+	/* Add Complete State File Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'CompleteState' AND ActionSource = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.StateCompleteFileAction, DotNetNuke.Professional.DigitalAssets'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'CompleteState'
+			   ,'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.StateCompleteFileAction, DotNetNuke.Professional.DigitalAssets')
+	END
+
+	/* Add Start Workflow File Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'StartWorkflow' AND ActionSource = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowStartFileAction, DotNetNuke.Professional.DigitalAssets'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'StartWorkflow'
+			   ,'DotNetNuke.Professional.DigitalAssets.Components.Controllers.WorkflowActions.WorkflowStartFileAction, DotNetNuke.Professional.DigitalAssets')
+	END
+END
+GO
+
+/* Remove Review action and add Approve, Reject */
+DECLARE @NotificationTypeId INT
+SELECT @NotificationTypeId = NotificationTypeId
+    FROM    {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes
+    WHERE   Name = 'ContentWorkflowNotification'
+IF @NotificationTypeId IS NOT NULL
+BEGIN
+	/* Delete Review notification action added int 7.3.0 */
+	DELETE FROM {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypeActions WHERE NotificationTypeId = @NotificationTypeId AND NameResourceKey = 'Review'
+END

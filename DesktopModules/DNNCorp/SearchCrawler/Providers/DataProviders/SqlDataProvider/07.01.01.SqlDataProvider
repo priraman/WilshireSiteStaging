@@ -1,0 +1,5 @@
+/***** Fix bug 27258: add the primary key. *****/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'PK_{objectQualifier}SearchPreviousFileCrawlerRunItems') AND  xtype = 'PK')
+BEGIN
+	ALTER TABLE {databaseOwner}[{objectQualifier}SearchPreviousFileCrawlerRunItems] ADD CONSTRAINT [PK_{objectQualifier}SearchPreviousFileCrawlerRunItems] PRIMARY KEY NONCLUSTERED  ([FileId], [SearchTypeId], [ScheduleId])END
+GO

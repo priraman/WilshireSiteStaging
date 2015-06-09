@@ -1,0 +1,216 @@
+﻿<!-- users panel -->
+<div class="socialpanelheader">
+    <h3 data-bind="html: $root.resx.nav_Users"></h3>
+</div>
+<div class="socialpanelbody">
+    <div>
+        <h3 data-bind="html: $root.resx.title_FindUser"></h3>
+        <div class="normalPanel">
+            <div class="searchpanel">
+                <input type="text" class="searchbox" data-bind="value: searchText, valueUpdate: 'afterkeydown', attr: { 'placeholder': $root.resx.placeholder_Search }" />
+                <a class="plainbtn right" data-bind="click: create, html: $root.resx.btn_CreateUser"></a>
+            </div>
+            <table class="cmxtbl" id="createusertbl" data-bind="with: userEditing">
+                <tbody>
+                    <tr class="edit-row" style="display: none">
+                        <td>
+                            <div>
+                                <h5><span data-bind="html: $root.resx.title_CreateUser"></span></h5>
+
+                                <div>
+                                    <label data-bind="html: $root.resx.label_FirstName" class="formRequired"></label>
+                                    <input type="text" class="required" maxlength="30" data-bind="value: firstName" />
+                                </div>
+
+                                <div>
+                                    <label data-bind="html: $root.resx.label_LastName" class="formRequired"></label>
+                                    <input type="text" class="required" maxlength="30" data-bind="value: lastName" />
+                                </div>
+
+
+                                <div>
+                                    <label data-bind="html: $root.resx.label_UserName" class="formRequired"></label>
+                                    <input type="text" class="required" maxlength="30" data-bind="value: userName" id="createuser-username" />
+                                </div>
+
+                                <div>
+                                    <label data-bind="html: $root.resx.label_Email" class="formRequired"></label>
+                                    <input type="text" class="required email" maxlength="60" data-bind="value: email" />
+                                </div>
+
+                                <div>
+                                    <a class="secondarybtn" data-bind="click: cancel, html: $root.resx.btn_Cancel"></a>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div>
+                                    <a class="primarybtn" data-bind="click: save, html: $root.resx.btn_Save"></a>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="cmxtbl" id="userstbl">
+                <colgroup>
+                    <col class="users-col-name" />
+                    <col class="users-col-email" />
+                    <col class="users-col-joined" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><a data-column="DisplayName" data-bind="click: sort, attr: { 'class': sortColumnClass('DisplayName') }, html: $root.resx.col_Name"></a></th>
+                        <th><a data-column="Email" data-bind="click: sort, attr: { 'class': sortColumnClass('Email') }, html: $root.resx.col_Email"></a></th>
+                        <th><a data-column="Joined" data-bind="click: sort, attr: { 'class': sortColumnClass('Joined') }, html: $root.resx.col_Joined"></a></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <div>
+                                <div class="left" data-bind="html: pagerItemsDescription"></div>
+                                <ul class="right pager" data-bind="visible: pagerVisible">
+                                    <li><a data-bind="click: prev, attr: { 'class': pagerPrevClass }"></a></li>
+                                    <li><a data-bind="click: next, attr: { 'class': pagerNextClass }"></a></li>
+                                </ul>
+                                <div class="right" data-bind="html: pagerDescription"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+
+                <tbody data-bind="foreach: results">
+                    <tr data-bind="click: expand">
+                        <td>
+                            <div class="useravatar">
+                                <span><em>
+                                    <img data-bind="attr: { src: avatar }" /></em></span>
+                            </div>
+                            <div class="username">
+                                <label data-bind="html: displayName"></label>
+                                <span data-bind="html: userName"></span>
+                            </div>
+                        </td>
+                        <td><a class="email-link" data-bind="html: email, attr: { 'href': 'mailto:' + email() }"></a></td>
+                        <td><a class='expand'></a><span data-bind="html: joined"></span></td>
+                    </tr>
+                </tbody>
+
+                <tbody id='users-editbody' class="edit-body">
+                    <tr class="edit-row" id="users-editrow">
+                        <td colspan="3" data-bind="with: detailUser">
+                            <div>
+                                <div>
+                                    <span class="displayname" data-bind="html: displayName"></span>
+                                    <span class="name" data-bind="html: userName"></span>
+                                    <span class="userremoved" data-bind="visible: isDeleted, html: $root.resx.label_UserRemoved"></span>
+
+                                    <div data-bind="visible: $root.showSocial">
+                                        <ul class="user-statistics">
+                                            <li>
+                                                <span data-bind="html: $root.resx.label_Rank"></span>
+                                                <span data-bind="html: rank" class="user-statistics-data"></span>
+                                            </li>
+
+                                            <li>
+                                                <span data-bind="html: $root.resx.label_ReputationAbbreviation"></span>
+                                                <span data-bind="html: reputation" class="user-statistics-data"></span>
+                                                <input type="text" data-bind="value: tempReputation" class="user-statistics-input required number nonDecimalNumber customValidate nolargerthanexp" />
+                                            </li>
+
+                                            <li>
+                                                <span data-bind="html: $root.resx.label_ExperienceAbbreviation"></span>
+                                                <span data-bind="html: experience" class="user-statistics-data"></span>
+                                                <input type="text" data-bind="value: tempExperience" class="user-statistics-input required number nonDecimalNumber nonnegativenumber" />
+                                            </li>
+                                        </ul>
+                                        <a class="left" data-bind="click: editPoint, html: $root.resx.btn_EditPoints, visible: $root.isCommunityManager" id="user-editpointbtn"></a>
+                                        <div class="user-statistics-edit-notes" data-bind="visible: $root.isCommunityManager">
+                                            <span>Notes</span>
+                                            <div>
+                                                <textarea data-bind="value: tempNotes"></textarea>
+                                                <a class="user-statistics-savebtn" data-bind="html: $root.resx.btn_Save, click: saveEditPoint"></a>
+                                                <a data-bind="html: $root.resx.btn_Cancel, click: cancelEditPoint"></a>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="progressdata" data-bind="visible: $root.showSocial">
+                                        <span data-bind="html: $root.resx.label_Engagement"></span>
+                                        <div class="progressbar">
+                                            <div class="blue" data-bind="style: { width: engagement() + '%' }"></div>
+                                        </div>
+                                        <div data-bind="html: engagement"></div>
+                                    </div>
+
+                                    <div class="progressdata" data-bind="visible: $root.showSocial">
+                                        <span data-bind="html: $root.resx.label_Influence"></span>
+                                        <div class="progressbar">
+                                            <div class="darkblue" data-bind="style: { width: influence() + '%' }"></div>
+                                        </div>
+                                        <div data-bind="html: influence"></div>
+                                    </div>
+                                    
+                                    <div class="contributiondata">
+                                        <span class="data" data-bind="html: totalContribution"></span>
+                                        <span data-bind="html: $root.resx.label_TotalContributions"></span>
+                                    </div>
+                                    
+                                    <div class="userroles" data-bind="visible: $root.showSocial() && canToggleModerator()">
+                                        <input type="checkbox" data-bind="checked: isModerator" />
+                                        <span data-bind="html: $root.resx.users_Moderator"></span>
+                                    </div>
+                                    
+                                    <div class="userroles" data-bind="visible: canToggleEditor">
+                                        <input type="checkbox" data-bind="checked: isEditor" />
+                                        <span data-bind="html: $root.resx.users_Editor"></span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span class="title-activity" data-bind="html: $root.resx.label_RecentActivity"></span>
+
+                                    <ul class="user-activity" data-bind="visible: recentActivities().length > 0, foreach: recentActivities">
+                                        <li>
+                                            <a data-bind="html: title"></a>
+                                            <span class="date" data-bind="html: created"></span>
+                                            <span class="modulename" data-bind="html: area"></span>
+                                        </li>
+                                    </ul>
+
+                                    <div style="margin-bottom: 40px" data-bind="visible: recentActivities().length == 0">
+                                        <span data-bind="html: $root.resx.label_NoActivities"></span>
+                                    </div>
+
+                                    <div class="user-activitydata">
+                                        <span data-bind="html: $root.resx.label_LastActive"></span>
+                                        <b data-bind="html: lastActive"></b>
+                                    </div>
+
+                                    <div class="user-activitydata">
+                                        <span data-bind="html: $root.resx.label_TimeOnSite"></span>
+                                        <b data-bind="html: timeOnSite"></b>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="user-buttons">
+                                    <a class="plainbtn" data-bind="click: navigateProfile, html: $root.resx.btn_ViewProfile"></a>
+                                    <a class="plainbtn" data-bind="click: navigateFiles, html: $root.resx.btn_ViewFiles"></a>
+                                </div>
+
+                                <div class="clear"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

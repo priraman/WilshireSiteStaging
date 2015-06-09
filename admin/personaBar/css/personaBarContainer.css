@@ -1,0 +1,18 @@
+﻿/* Person Bar iFrame */
+.dnnEditState iframe#personaBar-iframe{
+	width: 85px;
+}
+iframe#personaBar-iframe{
+	width: 0; 
+	position: fixed; 
+	left: 0; top: 0; 
+	height: 100%; 
+	z-index: 9999999;
+}
+iframe#personaBar-mobi-iframe{
+	width: 100%; 
+	position: absolute; 
+	left: 0; top: 0; 
+	height: 66px; 
+	z-index: 9999999;
+}

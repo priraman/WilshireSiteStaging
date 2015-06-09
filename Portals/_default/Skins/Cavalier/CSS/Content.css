@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/* Anova: Content.css */
+
+/* Footer 
+-------------------------------------*/
+ul.footerlinks {
+	margin: 0;
+}
+.footerlinks li {
+	list-style: none;
+	margin-bottom: 0;
+}
+.footerlinks li a:link,
+.footerlinks li a:visited {
+	color: #41AFA7;
+}
+
+.footerlinks li a:hover {
+	color:#ff8015; 
+}
+
+ul.socialConnect {
+	display: inline-block;
+	margin: 0 0 30px 0;
+}
+
+ul.socialConnect li {
+	display: inline-block;
+	float: left;
+	color: #999;
+	font-weight: bold;
+	list-style-type: none;
+	margin-left: 10px;
+}
+
+

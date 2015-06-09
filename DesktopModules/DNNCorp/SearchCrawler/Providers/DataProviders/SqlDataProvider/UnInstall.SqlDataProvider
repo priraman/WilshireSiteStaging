@@ -1,0 +1,81 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_AddScheduleItemSettings') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_AddScheduleItemSettings
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_AddUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_AddUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_DeleteUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_DeleteUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_SelectUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_SelectUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_SelectUrlById') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_SelectUrlById
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_UpdateUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_UpdateUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_UpdateUrlActive') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_UpdateUrlActive
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_Url') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}sc_Url
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_UpgradeModule') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_UpgradeModule
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_SelectPreviousFileCrawlerRunItems]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_SelectPreviousFileCrawlerRunItems]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_DeletePreviousFileCrawlerRunItems]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_DeletePreviousFileCrawlerRunItems]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_InsertPreviousFileCrawlerRunItem]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_InsertPreviousFileCrawlerRunItem]
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+DROP TABLE {databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems
+GO
+
+declare @UrlScheduleID int
+set @UrlScheduleID = null
+
+select @UrlScheduleID = ScheduleID
+from {databaseOwner}{objectQualifier}Schedule
+where TypeFullName = 'DotNetNuke.Professional.SearchCrawler.SearchSpider.SearchSpider, DotNetNuke.Professional.SearchCrawler'
+
+if @UrlScheduleID is not null begin
+	delete from {databaseOwner}{objectQualifier}ScheduleItemSettings where ScheduleID = @UrlScheduleID
+	delete from {databaseOwner}{objectQualifier}Schedule where ScheduleID = @UrlScheduleID
+end
+GO
+
+declare @FileScheduleID int
+set @FileScheduleID = null
+
+select @FileScheduleID = ScheduleID
+from {databaseOwner}{objectQualifier}Schedule
+where TypeFullName = 'DotNetNuke.Professional.SearchCrawler.FileCrawler.FileCrawler, DotNetNuke.Professional.SearchCrawler'
+
+if @FileScheduleID is not null begin
+	delete from {databaseOwner}{objectQualifier}ScheduleItemSettings where ScheduleID = @FileScheduleID
+	delete from {databaseOwner}{objectQualifier}Schedule where ScheduleID = @FileScheduleID
+end
+GO
+
+delete from {databaseOwner}{objectQualifier}Tabs
+where TabName = 'SearchCrawler Admin'
+GO

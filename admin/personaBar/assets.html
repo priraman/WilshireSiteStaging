@@ -1,0 +1,254 @@
+﻿<div class="socialpanelheader assets">
+    <h3 data-bind="html: $root.resx.nav_Assets"></h3>
+    <div data-bind="visible: $root.available()">
+        <div>
+            <input type="text" class="assets-input search" data-bind="value: inputSearchText, valueUpdate: 'afterkeydown', attr: { placeholder: $root.resx.assets_SearchBoxPlaceholder }" />
+            <a class="assets-input primary" data-bind="click: addAsset, text: $root.resx.assets_AddAsset"></a>
+        </div>
+        <div>
+            <div class="folder-picker-container"></div>
+            <a class="assets-input add-folder" data-bind="click: addFolder"></a>            
+        </div>        
+    </div>
+</div>
+<div class="socialpanelbody assets" data-bind="visible: available()">
+
+    <div class="top-panel add-folder" style="display:none;">
+
+        <div data-bind="with: folderAdding">
+            <div>
+                <label data-bind="text:  $root.resx.assets_FolderParent"></label>
+                <!-- ko if: $root.currentFolder() -->
+                <span data-bind="text: $root.currentFolder().FolderName"></span>
+                <!-- /ko -->
+            </div>
+            <div class="field">
+                <label for="folderName" data-bind="text: $root.resx.assets_FolderName" class="formRequired"></label>
+                <input id="folderName" type="text" class="required" data-bind="value: folderName, hasFocus: folderNameFocused, attr: { placeholder: $root.resx.assets_FolderNamePlaceholder }" />
+            </div>
+            <div class="field">
+                <label for="folderType" data-bind="text: $root.resx.assets_FolderType"></label>
+                <select id="folderType" data-bind="options: folderTypes, optionsText: 'MappingName', value: selectedFolderType, disable: folderTypeDisabled"></select>
+            </div>
+            <div class="field" data-bind="css: { hide: mappedNameHidden }">
+                <label for="mappedName" data-bind="text: $root.resx.assets_MappedName"></label>
+                <input id="mappedName" type="text" data-bind="value: mappedName" />
+            </div>
+        </div>
+
+        <div class="cancel">
+            <a class="secondarybtn" data-bind="click: cancelFolder, text: $root.resx.btn_Cancel"></a>
+        </div>
+
+        <div class="save">
+            <a class="primarybtn" data-bind="click: saveFolder, text: $root.resx.btn_Save"></a>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div class="top-panel add-asset" style="display:none;">
+        <div class="file-upload-panel"></div>
+
+        <div class="close">
+            <a class="secondarybtn" data-bind="click: closeAddAsset, text: $root.resx.btn_Close"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="breadcrumbs-container">
+
+        <!-- ko foreach: breadcrumb -->
+        <div data-bind="click: $root.breadcrumbNavigate, style: { maxWidth: 80 / $root.breadcrumb().length + '%' }">
+            <span data-bind="text: FolderName"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $root.searchText() != '' -->
+        <div>
+            <span>
+                <span class="breadcrumb-search" data-bind="text: $root.resx.assets_Search"></span> '<span data-bind="text: $root.searchText()"></span>'
+            </span>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="item-container" data-bind="foreach: folderContent">
+
+        <div class="item card" data-bind="click: $parent.itemClick, css: { selected: selected, saved: saved() || $root.folderAdding.folderName() == ItemName() }">
+            <div class="text-card">
+                <div><p data-bind="html: $root.highlightItemName(ItemName())"></p></div>
+            </div>
+            <div class="image-center">
+                <div data-bind="style: { backgroundImage: 'url(\'' + $root.iconUrl($data, $element) + '\')' }, css: { folder: IsFolder }" class="circular"></div>
+            </div>
+            <div class="overlay-disabled"></div>
+            <div class="actions">
+                <div class="edit" data-bind="click: $parent.showDetails, clickBubble: false"></div>
+                <div class="delete" data-bind="click: $parent.delete, clickBubble: false"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="item-details-container" style="display: none">
+
+        <div class="item-details">
+
+            <div class="details-selector">
+                <div></div>
+            </div>
+
+            <div class="file-details" data-bind="visible: !itemEditing.isFolder()">
+                <div data-bind="with: itemEditing">
+                    <div class="details-icon" data-bind="style: { backgroundImage: 'url(\'' + iconUrl() + '\')' }"></div>
+
+                    <div class="details-info">
+                        <div class="details-field">
+                            <span class="details-label" data-bind="text: $root.resx.label_Created"></span>
+                            <span data-bind="text: createdOnDate"></span>
+                            <!-- ko if: createdBy() != '' -->
+                            <span data-bind="text: $root.resx.label_By"></span>
+                            <span data-bind="text: createdBy"></span>
+                            <!-- /ko -->
+                        </div>
+                        <div class="vertical-separator"></div>
+                        <div class="details-field">
+                            <span class="details-label" data-bind="text: $root.resx.label_LastModified"></span>
+                            <span data-bind="text: lastModifiedOnDate"></span>
+                            <!-- ko if: lastModifiedBy() != '' -->
+                            <span data-bind="text: $root.resx.label_By"></span>
+                            <span data-bind="text: lastModifiedBy"></span>
+                            <!-- /ko -->
+                        </div>
+                        <div class="vertical-separator"></div>
+                        <div class="details-field">
+                            <span class="details-label" data-bind="text: $root.resx.label_Size"></span>
+                            <span data-bind="text: size"></span>
+                        </div>
+                        <div class="details-field right">
+                            <span class="details-label checkbox" data-bind="text: $root.resx.label_Subscribe"></span>
+                            <input type="checkbox" class="switch" data-bind="checked: subscribed" />
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="details-field">
+                            <span class="details-label" data-bind="text: $root.resx.label_Url"></span>
+                            <a data-bind="text: url, attr: { href: url }" href="" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div>
+                        <div class="field">
+                            <label for="fileName" data-bind="text: $root.resx.label_Name" class="formRequired"></label>
+                            <input id="fileName" type="text" class="required" maxlength="246" data-bind="value: itemName" />
+                        </div>
+                        <div class="field">
+                            <label for="title" data-bind="text: $root.resx.label_Title"></label>
+                            <input id="title" type="text" maxlength="256" data-bind="value: title, attr: { placeholder: $root.resx.placeholder_AddTitle }" />
+                        </div>
+                        <div class="field">
+                            <label for="tags" data-bind="text: $root.resx.label_Tags"></label>
+                            <input id="tags" type="text" class="tags-input" data-bind="tagsInput: tags" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cancel">
+                    <a class="secondarybtn" data-bind="click: $root.hideDetails, text: $root.resx.btn_Cancel"></a>
+                </div>
+
+                <div class="save">
+                    <a class="primarybtn" data-bind="click: saveFileDetails, text: $root.resx.btn_Save"></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="folder-details" data-bind="visible: itemEditing.isFolder()">
+                <ul class="tabControl" data-bind="with: panel">
+                    <li data-panel-id="detailspanel" data-bind="click: activate, html: $root.resx.assets_Details"></li>
+                    <li data-panel-id="folderPermissionsPanel" data-bind="click: activate, html: $root.resx.assets_Permissions"></li>
+                </ul>
+                <div id="detailspanel" class="tabPanel details-panel">
+                    <div data-bind="with: itemEditing">
+                        <div class="details-icon folder" data-bind="style: { backgroundImage: 'url(\'' + iconUrl() + '\')' }"></div>
+
+                        <div class="details-info">
+                            <div class="details-field">
+                                <span class="details-label" data-bind="text: $root.resx.label_Created"></span>
+                                <span data-bind="text: createdOnDate"></span>
+                                <!-- ko if: createdBy() != '' -->
+                                <span data-bind="text: $root.resx.label_By"></span>
+                                <span data-bind="text: createdBy"></span>
+                                <!-- /ko -->
+                            </div>
+                            <div class="vertical-separator"></div>
+                            <div class="details-field">
+                                <span class="details-label" data-bind="text: $root.resx.label_LastModified"></span>
+                                <span data-bind="text: lastModifiedOnDate"></span>
+                                <!-- ko if: lastModifiedBy() != '' -->
+                                <span data-bind="text: $root.resx.label_By"></span>
+                                <span data-bind="text: lastModifiedBy"></span>
+                                <!-- /ko -->
+                            </div>
+                            <div class="details-field right">
+                                <span class="details-label checkbox" data-bind="text: $root.resx.label_Subscribe"></span>
+                                <input type="checkbox" class="switch" data-bind="checked: subscribed" />
+                            </div>
+                            <div class="line-break"></div>
+                            <div class="details-field">
+                                <span class="details-label" data-bind="text: $root.resx.label_FolderType"></span>
+                                <span data-bind="text: folderType"></span>
+                            </div>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="field">
+                            <label for="folderName" data-bind="text: $root.resx.label_Name" class="formRequired"></label>
+                            <input id="folderName" type="text" class="required" maxlength="248" data-bind="value: itemName" />
+                        </div>
+                        <div class="field workflow">
+                            <label for="workflow" data-bind="text: $root.resx.label_Workflow"></label>
+                            <select id="workflow" data-bind="options: workflows, optionsText: 'WorkflowName', optionsValue: 'WorkflowID', value: workflowId"></select>
+                        </div>
+                        <div class="field pendingWorkflow" data-bind="visible: workflowId() != originalWorkflowId()">
+                            <label data-bind="text: $root.resx.label_PendingItems"></label>
+                            <input type="radio" value="publishAll" name="pendingWorkflow" id="publishAll" data-bind="checked: workflowAction" />
+                            <label class="radioLabel" for="publishAll" data-bind="text: $root.resx.label_PublishAll"></label>
+                            <div class='clear'></div>
+                            <input type="radio" value="discardAll" name="pendingWorkflow" id="discardAll" data-bind="checked: workflowAction" />
+                            <label class="radioLabel" for="discardAll" data-bind="text: $root.resx.label_DiscardAll"></label>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="versioning">
+                            <input id="versioning" type="checkbox" data-bind="checked: versioning" />
+                            <label for="versioning" data-bind="text: $root.resx.label_Versioning"></label>
+                        </div>
+                    </div>
+
+                    <div class="cancel">
+                        <a class="secondarybtn" data-bind="click: $root.hideDetails, text: $root.resx.btn_Cancel"></a>
+                    </div>
+
+                    <div class="save">
+                        <a class="primarybtn" data-bind="click: $root.saveFolderDetails, text: $root.resx.btn_Save"></a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="folderPermissionsPanel" class="tabPanel">
+
+                    <div class="folderPermissionsContainer"></div>
+
+                    <div class="cancel">
+                        <a class="secondarybtn" data-bind="click: $root.hideDetails, text: $root.resx.btn_Cancel"></a>
+                    </div>
+
+                    <div class="save">
+                        <a class="primarybtn" data-bind="click: $root.saveFolderDetails, text: $root.resx.btn_Save"></a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="socialpanelbody assets notavailable" data-bind="visible: !available()">
+    <div class="dnnFormMessage dnnFormError" data-bind="html: $root.resx.assets_NotAvailable"></div>
+</div>

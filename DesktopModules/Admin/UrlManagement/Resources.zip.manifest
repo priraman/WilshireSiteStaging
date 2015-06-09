@@ -1,0 +1,72 @@
+﻿<dotnetnuke type="ResourceFile" version="5.0">
+  <files>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>FriendlyUrlsPro.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>PageSettings.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>PortalAliasesPro.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>TestUrl.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>UrlManagement.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>UrlSettings.ascx.resx</name>
+    </file>
+    <file>
+      <path />
+      <name>FriendlyUrlsPro.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>PageSettings.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>PortalAliasesPro.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>TestUrl.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>UrlManagement.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>UrlSettings.ascx</name>
+    </file>
+    <file>
+      <path>Images/</path>
+      <name>star_16x16.png</name>
+    </file>
+    <file>
+      <path />
+      <name>module.css</name>
+    </file>
+    <file>
+      <path />
+      <name>PageSettings.css</name>
+    </file>
+    <file>
+      <path>ClientScripts/</path>
+      <name>dnn.PageSettings.View.js</name>
+    </file>
+    <file>
+      <path>ClientScripts/</path>
+      <name>dnn.UrlManagement.js</name>
+    </file>
+  </files>
+</dotnetnuke>

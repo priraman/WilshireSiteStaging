@@ -1,0 +1,40 @@
+﻿-- Add the Schedule
+IF NOT EXISTS (SELECT ScheduleID FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.WebServerManager.Components.ServerMonitorSchedule, DotNetNuke.Professional.WebServerManager')
+BEGIN
+    INSERT INTO {databaseOwner}{objectQualifier}Schedule (
+        TypeFullName ,
+        TimeLapse ,
+        TimeLapseMeasurement ,
+        RetryTimeLapse ,
+        RetryTimeLapseMeasurement ,
+        RetainHistoryNum ,
+        AttachToEvent ,
+        CatchUpEnabled ,
+        Enabled,
+        ObjectDependencies ,
+        Servers ,
+        CreatedByUserID ,
+        CreatedOnDate ,
+        LastModifiedByUserID ,
+        LastModifiedOnDate ,
+        FriendlyName)
+
+        VALUES (
+        'DotNetNuke.Professional.WebServerManager.Components.ServerMonitorSchedule, DotNetNuke.Professional.WebServerManager', 
+        1, 
+        'm', 
+        30, 
+        's', 
+        10, 
+        '', 
+        0, 
+        1,
+        '',
+        NULL,
+        -1,
+        GETDATE(),
+        -1,
+        GETDATE(),
+        'Web Server Monitor')
+END
+GO

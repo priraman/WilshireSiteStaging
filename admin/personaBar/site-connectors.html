@@ -1,0 +1,55 @@
+﻿<!-- connections panel -->
+<div class="socialpanelheader">
+    <h3 data-bind="html: $root.resx.nav_Settings"></h3>
+</div>
+<div class="socialpanelbody">
+    <div>
+        <h3 data-bind="html: $root.resx.title_Connections"></h3>
+        <div class="dnnFormMessage dnnFormError" data-bind="visible: errorMessage().length > 0, html: errorMessage"></div>
+        <div class="normalPanel">
+            <div class="searchpanel">
+                <p data-bind="html: $root.resx.txt_SetupConnections"></p>
+            </div>
+            <table class="cmxtbl" id="connectionstbl">
+                <colgroup>
+                    <col class="connections-col-checkmark" />
+                    <col class="connections-col-favicon" />
+                    <col class="connections-col-name" />
+                    <col class="connections-col-actions" />
+                </colgroup>
+                <tbody data-bind="foreach: connections">
+                    <tr data-bind="css: {'last-row':$index() == $parent.connections().length - 1}">
+                        <td><span class="socialnetwork-connection" data-bind="css: { verified: connected }"></span></td>
+                        <td>
+                            <span data-bind="attr: { 'class': faviconCss, 'style': 'background-image: url(' + icon + ');' }, css: { connected: connected() }"></span>
+                        </td>
+                        <td><span class="socialnetwork-name" data-bind="html: displayName"></span></td>
+                        <td><a class='primarybtn' data-bind="click: edit, html: $root.resx.btn_Edit, visible: connected() && !inEdit()"></a>
+                            <a class='plainbtn' data-bind="click: edit, html: $root.resx.btn_Connect, visible: !connected() && !inEdit()"></a>
+                        </td>
+                    </tr>
+                    <tr class="edit-row">
+                        <td colspan="4">
+                            <div class="edit-form" data-bind="attr: {id: 'connector-' + name}">
+                                <div class="edit-items edit-fields" data-bind="html: editLayout"></div>
+                                <div class="edit-items edit-buttons">
+                                    <div>
+                                        <a class="secondarybtn" data-bind="click: cancel, html: $root.resx.btn_Cancel"></a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- ko foreach: buttons -->
+                                    <div>
+                                        <a data-bind="click: function (item, e) { action.apply(this, [$parent, e]); }, html: text, attr: {'class': className}"></a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

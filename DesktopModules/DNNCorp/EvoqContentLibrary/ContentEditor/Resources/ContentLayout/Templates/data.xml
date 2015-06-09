@@ -1,0 +1,41 @@
+<ArrayOfLayoutTemplate><LayoutTemplate Id="1" Name="25% + 75%" Icon="Images/content-layout-25_75.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-9 col-md-9 col-sm-9 col-xs-9"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate><LayoutTemplate Id="2" Name="75% + 25%" Icon="Images/content-layout-75_25.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-9 col-md-9 col-sm-9 col-xs-9"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate><LayoutTemplate Id="3" Name="50% + 50%" Icon="Images/content-layout-50_50.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-6 col-md-6 col-sm-6 col-xs-6"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-6 col-md-6 col-sm-6 col-xs-6"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate><LayoutTemplate Id="4" Name="25% + 50% + 25%" Icon="Images/content-layout-25_50_25.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-6 col-md-6 col-sm-6 col-xs-6"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane3" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate><LayoutTemplate Id="5" Name="33% + 33% + 33%" Icon="Images/content-layout-33_33_33.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-4 col-md-4 col-sm-4 col-xs-4"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-4 col-md-4 col-sm-4 col-xs-4"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane3" runat="server" class="pane col-lg-4 col-md-4 col-sm-4 col-xs-4"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate><LayoutTemplate Id="6" Name="4 X 25%" Icon="Images/content-layout-25_25_25_25.png"><Layout>
+&lt;div id="LayoutContainer" runat="server" class="layoutContainer container-fluid"&gt;
+    &lt;div class="row"&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane1" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane2" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane3" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+        &lt;dnn:LayoutPane id="[$PREFIX$]Pane4" runat="server" class="pane col-lg-3 col-md-3 col-sm-3 col-xs-3"&gt;&lt;/dnn:LayoutPane&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</Layout></LayoutTemplate></ArrayOfLayoutTemplate>

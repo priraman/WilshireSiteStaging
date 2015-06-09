@@ -1,0 +1,67 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileTags]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileTags]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileTagsOrderedByFolderId]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileTagsOrderedByFolderId]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFileTagsOrderedByFolderId]	
+	@PortalId int
+AS
+BEGIN
+	SELECT t.TermID, t.Name, f.FileId, f.FolderId
+	FROM  {databaseOwner}{objectQualifier}vw_Files f
+		JOIN {databaseOwner}{objectQualifier}ContentItems c ON f.ContentItemID = c.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}ContentTypes ty ON c.ContentTypeID = ty.ContentTypeID
+		JOIN {databaseOwner}{objectQualifier}ContentItems_Tags ct ON f.ContentItemID = ct.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+	WHERE (( @PortalId is null and f.PortalId is null) or (f.PortalId = @PortalId))
+	  AND ty.ContentType = 'File'
+	ORDER BY f.FolderId
+END
+GO
+
+/** Issue CONTENT-2233 **/
+DECLARE @damModuleDefinition INT
+
+SELECT @damModuleDefinition = MD.[ModuleDefID]
+FROM {databaseOwner}{objectQualifier}ModuleDefinitions MD
+WHERE MD.DefinitionName = 'Digital Asset Management'
+
+IF  EXISTS (SELECT *  FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'GroupUpdates')
+BEGIN
+
+	DECLARE @groupUpdatesControlId INT
+	SELECT  @groupUpdatesControlId = ModuleControlId FROM {databaseOwner}{objectQualifier}ModuleControls 
+	WHERE ModuleDefID = @damModuleDefinition
+		AND ControlKey = N'GroupUpdates'
+
+	EXEC	{databaseOwner}{objectQualifier}UpdateModuleControl
+		@ModuleControlId = @groupUpdatesControlId,
+		@ModuleDefID = @damModuleDefinition,
+		@ControlKey = N'GroupUpdates',
+		@ControlTitle = N'GroupUpdates',
+		@ControlSrc = N'DesktopModules/DigitalAssets/GroupUpdates.ascx',
+		@IconFile = NULL,
+		@ControlType = 0,
+		@ViewOrder = 0,
+		@HelpUrl = NULL,
+		@SupportsPartialRendering = 0,
+		@SupportsPopUps = 1,
+		@LastModifiedByUserID = -1
+END
+
+GO

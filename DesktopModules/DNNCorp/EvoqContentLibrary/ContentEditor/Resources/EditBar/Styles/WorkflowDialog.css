@@ -1,0 +1,71 @@
+.personaBarDialog .workflowManagerDropZone {
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #d4d4d4;
+    background-color: #f7f7f7;
+    width: 365px;
+    height: 140px;
+}
+
+.personaBarDialog .workflowManagerDropZone.dragover {
+    border-color: #1688c4;
+}
+
+.personaBarDialog .workflowManagerDropZone .paintImageZone {
+    background-image: url('../images/DropImageUpload.png');
+    background-repeat: no-repeat;
+    width: 130px;
+    height: 130px;
+    margin: 4px;
+    border: solid 1px transparent;
+}
+
+.personaBarDialog .workflowManagerDropZone .paintImageZone.uploading,
+.personaBarDialog .workflowManagerDropZone .paintImageZone.withImage.uploading {
+    background-image: url('../../../../SharedAssets/Images/loader.gif') !important;
+    background-position: center;
+    background-size: 32px 32px;
+}
+
+.personaBarDialog .workflowManagerDropZone .fileUploadZone .uploadFileInput {
+    position: absolute;
+    top: -10000px;
+}
+
+.personaBarDialog .workflowManagerDropZone .paintImageZone.withImage {
+    border: solid 1px #ddd;
+    background-size: contain;
+    background-position: center;
+}
+
+.personaBarDialog .workflowManagerDropZone div {
+    float: left;
+}
+
+.personaBarDialog .workflowManagerDropZone .fileUploadZone {
+    width: 365px;
+}
+
+.personaBarDialog .workflowManagerDropZone .dropMessage {
+    margin-left: 20px;
+	margin-top: 58px;
+	font-weight: bold;
+    color: #a5a5a5;
+    max-width: 150px;
+}
+
+.personaBarDialog .workflowManagerDropZone .dropMessage span {
+    font-weight: bold;
+    color: #282828;
+    border-bottom: 1px solid #c5c5c5;
+    cursor: pointer;
+}
+
+.personaBarDialog .fileUploadZone.withImage {
+    background-size: contain;
+    background-position: 50% 50%;
+}
+
+.personaBarDialog .message {
+	width: 350px;
+}

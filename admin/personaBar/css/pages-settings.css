@@ -1,0 +1,624 @@
+﻿/* pageSettingsContainer Style*/
+.pageSettingsContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1120 !important;
+}
+.pageSettingsContainer * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.pageSettingsContainer .page-settings {
+    background-color: #fafafa;
+    height: 100%;
+    overflow: auto;
+}
+.pageSettingsContainer .page-settings div.title {
+    margin: 28px 30px 0 30px;
+}
+.pageSettingsContainer .page-settings div.title:after {
+    content: "\a0";
+    display: block;
+    border-bottom: 1px solid #eee;
+    height: 0;
+    margin-top: -1px;
+}
+.pageSettingsContainer .page-settings div.title span.caption {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 14px 0 16px 0;
+}
+.pageSettingsContainer .page-settings div.title span.page-name {
+    color: #494949;
+    font-size: 14px;
+    margin-left: 16px;
+    font-weight: bold;
+}
+.pageSettingsContainer .page-settings  div.title > a {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    color: #0386c4;
+    padding-left: 16px;
+    margin: 0 30px;
+    float: right;
+    text-decoration: none;
+}
+.pageSettingsContainer .page-settings div.body {
+    margin: 30px 30px 0 30px;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #e9e9ec;
+
+}
+.pageSettingsContainer .page-settings div.body .content-container {
+    overflow: hidden;
+    outline: none;
+}
+.pageSettingsContainer .page-settings div.body .dnnFormMessage {
+    max-width: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 10px 25px 0 25px;
+}
+.pageSettingsContainer .page-settings div.body ul.tabs-nav {
+    border-bottom: 1px solid #e4e4e8;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    clear: both;
+    background-color: #eee;
+}
+.pageSettingsContainer .page-settings div.body ul.tabs-nav li {
+    padding: 0;
+    line-height: 42px;
+    font-weight: bold;
+    float: left;
+    border: 1px solid #eeeeee;
+    border-bottom: none;
+    list-style: none;
+    background: none;
+}
+.pageSettingsContainer .page-settings div.body ul.tabs-nav li a {
+    color: #000;
+    display: block;
+    padding: 0 34px;
+    text-decoration: none;
+    outline: none;
+}
+.pageSettingsContainer .page-settings div.body ul.tabs-nav li.ui-tabs-active,
+.pageSettingsContainer .page-settings div.body ul.tabs-nav li.ui-state-active {
+    border: 1px solid #e4e4e8;
+    border-bottom: none;
+    -webkit-border-top-left-radius: 3px;
+    -moz-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #fff;
+}
+.pageSettingsContainer .page-settings div.body div.ui-tabs-panel {
+    background-color: #fff;
+    padding: 25px;
+}
+
+.pageSettingsContainer .page-settings.add-page .actions.bottom {
+    position: fixed;
+    width: 859px;
+    margin-top: 0;
+}
+
+.pageSettingsForm {
+
+}
+.pageSettingsForm > div.subtitle, .pageSettingsForm .edit-form .form-item > span.subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+.pageSettingsForm #page-details > div.subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 78px;
+    border-bottom: 1px solid #bfbfbf;
+    margin-bottom: 42px;
+}
+
+.pageSettingsForm .summary {
+    margin-bottom: 20px;
+}
+.pageSettingsForm .summary .thumbnail {
+    width: 120px;
+    height: 105px;
+    float: left;
+}
+.pageSettingsForm .summary .thumbnail img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e9e9e9;
+}
+.pageSettingsForm .summary .properties {
+    margin-left: 140px;
+    height: 105px;
+    border-bottom: 1px solid #e9e9e9;
+}
+.pageSettingsForm .summary .properties .page-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 36px;
+}
+.pageSettingsForm .summary .properties .subtitle {
+    float: left;
+    color: #4b4d4f;
+    line-height: 20px;
+}
+.pageSettingsForm .summary .properties .subtitle span.caption {
+    font-weight: bold;
+}
+.pageSettingsForm .summary .properties .subtitle span.caption + span {
+    margin-left: 4px;
+}
+.pageSettingsForm .summary .properties .page-hierarchy:before {
+    content: "|";
+    padding: 0 12px;
+    color: #e6e6e6;
+}
+.pageSettingsForm .edit-form {
+    color: #4b4d4f;
+    overflow: auto;
+    clear: both;
+}
+.pageSettingsForm .edit-form.short-left {
+    width: 45%;
+    float: left;
+    clear: left;
+}
+.pageSettingsForm .edit-form.short-right {
+    width: 45%;
+    float: right;
+    clear: right;
+    padding-left: 5%;
+    border-left: 1px solid #ccc;
+}
+.pageSettingsForm .edit-form.short-right::before {
+    content: ".";
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: -5%;
+
+}
+.pageSettingsForm .edit-form .form-item {
+    line-height: 24px;
+    width: 100%;
+    clear: both;
+    margin-bottom: 20px;
+}
+.pageSettingsForm .edit-form .form-item.last {
+    margin-bottom: 0;
+}
+.pageSettingsForm .edit-form .form-item.short-left {
+    width: 45%;
+    float: left;
+    clear: left;
+}
+.pageSettingsForm .edit-form .form-item.short-right {
+    width: 45%;
+    float: right;
+    clear: right;
+}
+.pageSettingsForm .edit-form .form-item span.caption {
+    display: block;
+    font-weight: bold;
+}
+.pageSettingsForm .edit-form .form-item span.caption.inline {
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+}
+.pageSettingsForm .edit-form .form-item > span.caption.middle {
+    margin-bottom: 10px;
+}
+.pageSettingsForm .edit-form .form-item span.caption.required:after {
+    content: "*";
+    color: red;
+    margin-left: 4px;
+}
+.pageSettingsForm .edit-form .form-item span.caption + input,
+.pageSettingsForm .edit-form .form-item span.caption + textarea,
+.pageSettingsForm .edit-form .form-item span.caption + select {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #bfbfbf;
+    outline: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 9px;
+}
+.pageSettingsForm .edit-form .form-item span.caption + input[type="checkbox"] {
+    width: auto;
+}
+.pageSettingsForm .edit-form .form-item span.caption + textarea.tall {
+    height: 120px;
+}
+.pageSettingsForm .edit-form .form-item span.caption + input.error,
+.pageSettingsForm .edit-form .form-item span.caption + textarea.error {
+    border-color: #f00;
+    color: #f00;
+}
+.pageSettingsForm .edit-form .form-item span.caption + select {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+}
+.pageSettingsForm .edit-form .form-item .um-page-url-container {
+    display: table;
+    width: 100%;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #bfbfbf;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+}
+.pageSettingsForm .edit-form .form-item .um-page-url-container span.um-alias-caption {
+    display: table-cell;
+    border: none;
+    outline: none;
+    height: 35px;
+    padding: 0 0 0 9px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: #666;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.pageSettingsForm .edit-form .form-item .um-page-url-container span.um-page-url-textbox {
+    display: table-cell;
+    width: 100%;
+}
+.pageSettingsForm .edit-form .form-item .um-page-url-container span.um-page-url-textbox input {
+    width: 100%;
+    color: #666;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 9px 9px 9px 2px;
+    margin: 0px;
+}
+.pageSettingsForm .edit-form .form-item .um-page-url-container.error {
+    border-color: #f00;
+}
+.pageSettingsForm .edit-form .form-item .um-page-url-container.error span.um-page-url-textbox input {
+    color: #f00;
+}
+.pageSettingsForm .edit-form .form-item span.caption + span {
+    vertical-align: top;
+}
+.pageSettingsForm .edit-form .form-item .dnnCheckbox {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.pageSettingsForm .edit-form .form-item .validationMessage {
+    color: #f00;
+}
+.pageSettingsForm a.simple-button {
+    display: inline-block;
+    border: 1px solid #c9c9c9;
+    padding: 8px 13px 7px 13px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #000;
+    vertical-align: top;
+    font-weight: bold;
+}
+.pageSettingsForm .actions {
+    height: 80px;
+    background-color: #0f0f0f;
+    width: 100%;
+    margin-top: 45px;
+    position: relative;
+    bottom: 0;
+    text-align: right;
+    padding-left: 32px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.pageSettingsForm .actions a.button {
+    margin: 22px 12px 0 0;
+}
+.pageSettingsForm .actions a.button:last-child {
+    margin-right: 38px;
+}
+.pageSettingsForm .actions a.button.create-page {
+    text-transform: uppercase;
+}
+.pageSettingsForm .actions .iconbutton-wrapper {
+    float: left;
+    margin-left: 8px;
+    position: relative;
+    height: 33px;
+    width: 47px;
+}
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left {
+    margin-left: 7px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: 0 none;
+    height: 33px;
+    width: 47px;
+    color: #727272;
+    cursor: pointer;
+}
+
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.saveastpl,
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.copypage {
+    background-image: url('../Images/icon-pages-tpl.png');
+}
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.saveastpl {
+    background-position: 0 0;
+}
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.saveastpl:hover {
+    background-position: 0 -33px;
+}
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.copypage {
+    background-position: -47px 0;
+}
+.pageSettingsForm .actions .iconbutton-wrapper a.button.left.copypage:hover {
+    background-position: -47px -33px;
+}
+.pageSettingsForm .actions .iconbutton-wrapper .submenuEditBar {
+    position: absolute;
+    display:none;
+    background-color: #0F0F0F;
+    padding: 20px;
+    border-radius: 3px;
+    left: -30px;
+    bottom: 48px;
+    min-width: 95px;
+    white-space: nowrap;
+    color: #727272;
+    text-align: center;
+}
+.pageSettingsForm .actions .iconbutton-wrapper:hover .submenuEditBar {
+    display:block;
+}
+.pageSettingsForm .actions .iconbutton-wrapper .submenuEditBar:after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border: 16px solid;
+    border-color: #0F0F0F transparent transparent transparent;
+    position: absolute;
+    left: 33%;
+    bottom: -26px;
+}
+.pageSettingsForm .actions .content-changed-tip {
+    display: inline-block;
+    color: #fff;
+    margin-right: 8px;
+}
+.pageSettingsForm .dnnTagsInput {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 5px;
+}
+.pageSettingsForm .dnnTagsInput span.tag {
+    margin-bottom: 0;
+}
+
+#page-permissions .copypermission-container {
+    margin-top: 35px;
+}
+#page-permissions .copypermission-container label {
+    line-height: 35px;
+}
+#page-permissions .copypermission-container .simple-button {
+    margin-left: 40px;
+}
+/* pageSettingsContainer Style END*/
+
+/* New Template Dialog Style */
+.pageSettingsContainer .dialog-newtpl {
+    display: none;
+}
+.dialog-newtpl .edit-form {
+    padding: 35px 25px 10px 25px;
+}
+.dialog-newtpl .actions {
+    background-color: #f4f4f4;
+    margin-top: 0;
+}
+.dialog-newtpl .actions a.button {
+    margin-right: 10px;
+}
+.dialog-newtpl .actions a.button:last-child {
+    margin-right: 25px;
+}
+/* New Template Dialog Style END */
+
+/* Add Pages Form Style */
+div.pagetemplate-list-scroller {
+    overflow: hidden;
+    position: relative;
+    height: 240px;
+    padding: 0 0 30px 0;
+    outline: none;
+}
+div.pagetemplate-list-scroller .pagetemplate-list-container {
+    width: 20000px;
+    height: 10px;
+}
+div.pagetemplate-list-item {
+    border: 1px solid #e1e1e6;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    padding: 15px 12px 12px 12px;
+    margin: 3px 3px 3px 15px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 5px;
+    width: 220px;
+    float: left;
+    position: relative;
+    cursor:pointer;
+}
+div.pagetemplate-list-container div.pagetemplate-list-item:first-child {
+    margin-left: 3px;
+}
+div.pagetemplate-list-container div.pagetemplate-list-item:last-child {
+    margin-right: 3px;
+}
+div.pagetemplate-list-item:hover, div.pagetemplate-list-item.selected {
+    position: relative;
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(187,235,254,1);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(187,235,254,1);
+    box-shadow: 0px 0px 3px 1px rgba(187,235,254,1);
+}
+div.pagetemplate-list-item.selected:after {
+    content: ".";
+    text-indent: -2000px;
+    display: block;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: url('../images/icon-pages-template-selected.png') no-repeat;
+    right: 6px;
+    top: 6px;
+}
+div.pagetemplate-list-item span.thumbnail {
+    display: block;
+}
+div.pagetemplate-list-item span.thumbnail.loading:before {
+    content: ".";
+    text-indent: -200px;
+    width: 32px;
+    height: 32px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url('../images/loading.gif') no-repeat;
+}
+div.pagetemplate-list-item span.thumbnail img {
+    width: 194px;
+    height: 125px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    vertical-align: top;
+}
+div.pagetemplate-list-item span.name {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 12px;
+}
+/* Add Pages Form Style END */
+
+/* Add Templates Form Style */
+.add-template #page-details > div.subtitle {
+    border-bottom: 1px solid #e9e9e9;
+    height: 55px;
+    line-height: 55px;
+}
+/* Add Templates Form Style END */
+
+.dnnGridHeader td, thead.dnnGridHeader th,  tr.dnnGridHeader th{
+    padding: 6px 12px 6px 12px;
+    border-bottom: 1px solid #c9c9c9;
+    border-right: 1px solid #c9c9c9;
+    background: #f0f2f1;
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); /* W3C */
+}
+
+.dnnGridItem td, .dnnGridAltItem td {
+    padding: 6px;
+    border-right: 1px solid #c9c9c9;
+}
+
+    .dnnGridItem td input, .dnnGridAltItem td input {
+        margin-bottom: none;
+    }
+
+.dnnGridAltItem {
+    background: #F2F2F2;
+}
+
+    .dnnGridItem:hover, .dnnGridAltItem:hover {
+        background-color: #e8f1fa;
+    }
+
+.token-input-dropdown-facebook ul li img {
+    margin-right: 4px;
+}
+.token-input-dropdown-facebook ul li span{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 25px;
+}
+/* Permission Grid Style END */
+
+
+/* Custom styles */
+
+.form-subFields {
+    padding-top: 7px;
+}
+.form-subFields > span#workflowApplyOnSubpagesMessage {
+    position: relative;
+    top: -7px;
+}
+
+.pageSettingsContainer .page-settings div.body .form-subFields .dnnFormMessage
+{
+    margin-left: 0px;
+}
+

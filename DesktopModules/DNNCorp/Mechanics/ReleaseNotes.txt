@@ -1,0 +1,20 @@
+﻿<h3>DotNetNuke Mechanics Module</h3>
+<p class="Contributor">
+	DotNetNuke&reg; <br />
+	<a href="mailto:support@dotnetnuke.com">support@dotnetnuke.com</a><br />
+	<a href=http://www.dotnetnuke.com>http://www.dotnetnuke.com</a><br />
+</p>
+<hr/>
+<div class="License">
+	<p class="Owner">
+		<strong>Verion 1.0.1</strong>
+        <p>
+		  Known issues:
+        </p>
+        <div>
+  		  <ul>
+            <li>None</li>
+  		  </ul>
+        </div>
+	</p>
+</div>

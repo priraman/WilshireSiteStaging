@@ -1,0 +1,223 @@
+﻿.dnnModuleDialog .dnnDialogTitle .dnnButton {
+    border: 2px solid #fff;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    vertical-align: top;
+    margin: 16px 0 0 18px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.dnnModuleDialog .dnnDialogTitle .dnnButton.back {
+    background: url('../Images/Arrow.png') no-repeat center center;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+.dnnModuleDialog .dnnDialogTitle .dnnButton.back:hover {
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.dnnModuleDialog .dnnModuleList .listContainer ul li span.icon.content-layout {
+    background-image: url('../Images/icon-contentlayout.png');
+    margin-left: 36px;
+}
+
+.dnnModuleDialog .dnnLayoutList .listContainer ul li {
+    float: left;
+    margin: 0 0 20px 20px;
+    text-align: center;
+    list-style: none;
+}
+.dnnModuleDialog .dnnLayoutList .listContainer ul li a {
+    display: block;
+    width: 157px;
+    padding: 10px;
+    position: relative;
+}
+.dnnModuleDialog .dnnLayoutList .listContainer ul li a img {
+    width: 157px;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+.dnnModuleDialog .dnnLayoutList .listContainer ul li a span.button {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+    background: url('../../ContentEditorManager/Images/icon-add-module.png') no-repeat center 30px;
+}
+
+.dnnModuleDialog .dnnLayoutList .listContainer ul li a:hover img {
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+.dnnModuleDialog .dnnLayoutList .listContainer ul li a:hover span.button {
+    padding: 0;
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.container-fluid.layoutContainer {
+    position: relative;
+    min-height: 110px;
+}
+.container-fluid.layoutContainer .dnnDragHint {
+    position: relative;
+}
+.container-fluid.layoutContainer.dragging {
+    overflow: hidden;
+    border: 1px dashed #bdbdbd;
+}
+.container-fluid.layoutContainer.dragging .pane {
+    margin-left: -10000px !important;
+}
+.container-fluid.layoutContainer.dragging .layout-toolbar {
+    display: none;
+}
+.container-fluid.layoutContainer.floating {
+    position: fixed;
+    width: 80%;
+    background-color: #fff;
+    z-index: 100;
+}
+.container-fluid.layoutContainer.floating.drift {
+    -webkit-animation: driftContainer 4s linear infinite;
+    -moz-animation:    driftContainer 4s linear infinite;
+    -o-animation:      driftContainer 4s linear infinite;
+    animation:         driftContainer 4s linear infinite;
+}
+.container-fluid.layoutContainer.forDrag {
+    position: absolute;
+    -webkit-animation: none !important;
+    -moz-animation:    none !important;
+    -o-animation:      none !important;
+    animation:         none !important;
+    width: 270px !important;
+    height: 50px !important;
+}
+@-webkit-keyframes driftContainer {
+    0% { transform: translate(0, 0); }
+    12.5% { transform: translate(5px, 5px); }
+    25% { transform: translate(10px, 0px); }
+    37.5% { transform: translate(5px, -5px); }
+    50% { transform: translate(0px, 0px); }
+    62.5% { transform: translate(-5px, 5px); }
+    75% { transform: translate(-10px, 0px); }
+    87.5% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+@-moz-keyframes driftContainer {
+    0% { transform: translate(0, 0); }
+    12.5% { transform: translate(5px, 5px); }
+    25% { transform: translate(10px, 0px); }
+    37.5% { transform: translate(5px, -5px); }
+    50% { transform: translate(0px, 0px); }
+    62.5% { transform: translate(-5px, 5px); }
+    75% { transform: translate(-10px, 0px); }
+    87.5% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+@-o-keyframes driftContainer {
+    0% { transform: translate(0, 0); }
+    12.5% { transform: translate(5px, 5px); }
+    25% { transform: translate(10px, 0px); }
+    37.5% { transform: translate(5px, -5px); }
+    50% { transform: translate(0px, 0px); }
+    62.5% { transform: translate(-5px, 5px); }
+    75% { transform: translate(-10px, 0px); }
+    87.5% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+@keyframes driftContainer {
+    0% { transform: translate(0, 0); }
+    12.5% { transform: translate(5px, 5px); }
+    25% { transform: translate(10px, 0px); }
+    37.5% { transform: translate(5px, -5px); }
+    50% { transform: translate(0px, 0px); }
+    62.5% { transform: translate(-5px, 5px); }
+    75% { transform: translate(-10px, 0px); }
+    87.5% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+.container-fluid.layoutContainer [class~="pane"] {
+    border: 1px dashed #bdbdbd !important;
+    border-left-width: 0 !important;
+    position: relative;
+    display: block;
+}
+.container-fluid.layoutContainer [class~="pane"]:first-child {
+    border-left-width: 1px !important;
+}
+.container-fluid.layoutContainer [class~="pane"] .ui-resizable-handle.ui-resizable-e {
+    position: absolute;
+    display: block;
+    border: 5px solid #7a7a7a;
+    -moz-border-radius: 5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+}
+.container-fluid.layoutContainer [class~="pane"] .ui-resizable-handle.ui-resizable-e:hover {
+    cursor: e-resize;
+}
+.container-fluid.layoutContainer .layout-toolbar {
+    border: 1px solid #bdbdbd;
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 38px;
+    -moz-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-left-radius:3px;
+    border-bottom-left-radius: 3px;
+    -moz-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-right-radius:3px;
+    border-bottom-right-radius: 3px;
+    padding: 0 2px;
+    background-color: #fff;
+}
+.container-fluid.layoutContainer .layout-toolbar:hover {
+
+}
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button {
+    width: 36px !important;
+    height: 36px !important;
+    display: inline-block !important;
+    border: none !important;
+    outline: none !important;
+}
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button:hover,
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button:active {
+    background-color: #d7d7d7;
+}
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button span {
+    display: block;
+    height: 100%;
+}
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button.btn-delete span {
+    background: url('../Images/icon-delete-layout.png') no-repeat center center;
+}
+.container-fluid.layoutContainer .layout-toolbar .toolbar-button.btn-move span {
+    background: url('../Images/icon-move-layout.png') no-repeat center center;
+}
+.container-fluid.layoutContainer.floating .handlerContainer {
+    display: none;
+}
+.dnnDropEmptyPanes {
+    outline: none !important;
+    min-width: 0 !important;
+}
+
+.dnnFormMessage.dnnFormInfo.dnnFormInfoAdminErrMssg{ display: none;}

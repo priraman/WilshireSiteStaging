@@ -1,0 +1,13 @@
+﻿DECLARE @ScheduleID INT
+DECLARE @SettingName varchar(50)
+SELECT @ScheduleID = ScheduleID FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.SearchCrawler.SearchSpider.SearchSpider, DotNetNuke.Professional.SearchCrawler'
+SELECT @SettingName = 'IndexExcludedExtensions'
+UPDATE  {databaseOwner}{objectQualifier}ScheduleItemSettings
+SET     SettingValue = CASE WHEN ISNULL(SettingValue, '') = ''
+                            THEN '.resources'
+                            WHEN CHARINDEX('.resources', SettingValue) = 0
+                            THEN SettingValue + ',.resources'
+                            ELSE SettingValue
+                       END
+WHERE   ScheduleID = @ScheduleID
+        AND SettingName = @SettingName

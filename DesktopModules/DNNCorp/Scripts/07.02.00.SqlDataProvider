@@ -1,0 +1,155 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/* Add FileStats Table       */
+/*****************************/
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}FileStatistics]') AND type in (N'U'))
+	BEGIN
+		CREATE TABLE {databaseOwner}[{objectQualifier}FileStatistics]
+		(
+			[StatId] [int] IDENTITY(1,1) NOT NULL,
+			[FileId] [int] NOT NULL,
+			[StatDate] [datetime] NOT NULL,
+			CONSTRAINT [PK_{objectQualifier}FileStatistics] PRIMARY KEY CLUSTERED ([StatId] ASC),
+			CONSTRAINT [FK_{objectQualifier}FileStatistics_{objectQualifier}Files] FOREIGN KEY([FileId]) REFERENCES {databaseOwner}[{objectQualifier}Files] ([FileId]) ON DELETE CASCADE
+		)
+	END
+GO
+
+/* Add FileStats        */
+/************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddFileStatistic') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddFileStatistic
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddFileStatistic
+@FileId int,
+@StatDate datetime
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}FileStatistics (
+  [FileId],
+  [StatDate]
+)
+VALUES (
+  @FileId,
+  @StatDate
+)
+
+SELECT SCOPE_IDENTITY()
+
+GO
+
+/* Get FileStats        */
+/************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}GetAggregatedFileStatistics') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}GetAggregatedFileStatistics
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetAggregatedFileStatistics
+	@FileId int,
+	@StartDate date,
+	@EndDate date,
+	@PeriodAggregation nvarchar(10)
+AS
+BEGIN
+	set @EndDate = DATEADD(dd, 1, @EndDate);
+
+	-- Week
+	;with cteWeek as
+	(
+	  select 
+		DATEADD(dd, DATEDIFF(dd, 0, @StartDate) -(DATEPART(dw, @StartDate)-1), 0) as StartDate, 
+		DATEADD(wk, DATEDIFF(wk, 0, @StartDate), 5) as EndDate
+	  union all
+	  select DATEADD(ww, 1, StartDate), DATEADD(ww, 1, EndDate)
+	  from cteWeek
+	  where DATEADD(ww, 1, StartDate) <  @EndDate
+	)
+
+	-- Month
+	, cteMonth as
+	(
+	  select DateAdd(yy, year(@StartDate) - 1900, DateAdd(m, month(@StartDate) - 1, 0))  StartDate, 
+		DATEADD(dd, -1, DATEADD(yy, year(@StartDate) - 1900, DATEADD(m, month(@StartDate), 0))) EndDate
+	  union all
+	  select 
+		DATEADD(mm, 1, StartDate), 
+		DATEADD(dd, -1, DATEADD(yy, year(StartDate) - 1900, DATEADD(m, month(StartDate) + 1, 0)))
+	  from cteMonth
+	  where DATEADD(mm, 1, StartDate) <  @EndDate
+	)
+
+	-- Year
+	, cteYear as
+	(
+	  select 
+		DATEADD(year, year(@StartDate) - 1900, 0) StartDate,
+		DATEADD(dd, -1, DATEADD(yy, year(@StartDate) - 1900 + 1, 0)) EndDate
+	  union all
+	  select DATEADD(yy, 1, StartDate), DATEADD(yy, 1, EndDate)
+	  from cteYear
+	  where DATEADD(yy, 1, StartDate) <  @EndDate
+	)
+
+	-- Day
+	, cteDay as
+	(
+	  select 
+		DATEADD(dd, DATEDIFF(dd, 0, @StartDate), 0) StartDate,
+		DATEADD(dd, DATEDIFF(dd, 0, @StartDate), 0) EndDate
+	  union all
+	  select DATEADD(dd, 1, StartDate), DATEADD(dd, 1, EndDate)
+	  from cteDay
+	  where DATEADD(dd, 1, StartDate) <  @EndDate
+	)
+
+	SELECT 
+		CASE WHEN StartDate < @StartDate THEN @StartDate ELSE StartDate END as StartDate, 
+		CASE WHEN EndDate > @EndDate THEN @EndDate ELSE EndDate END as EndDate, 
+	(
+		SELECT COUNT(*) from {databaseOwner}[{objectQualifier}FileStatistics] 
+		WHERE [FileId] = @FileId AND  [StatDate] >= @StartDate AND [StatDate] < @EndDate AND
+		[StatDate] >= StartDate and [StatDate] < DATEADD(dd, 1, EndDate)
+	) as Hits
+	FROM
+	(
+	 SELECT *
+	 FROM cteWeek
+	 WHERE @PeriodAggregation = 'Week'
+	 
+	 UNION ALL
+	 
+	 SELECT *
+	 FROM cteMonth
+	 WHERE @PeriodAggregation = 'Month'
+	 
+	 UNION ALL
+	 
+	 SELECT *
+	 FROM cteYear
+	 WHERE @PeriodAggregation = 'Year'
+	 
+	 UNION ALL
+	 
+	 SELECT *
+	 FROM cteDay
+	 WHERE @PeriodAggregation = 'Day'
+	) cte
+	OPTION ( MAXRECURSION 0);
+END
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

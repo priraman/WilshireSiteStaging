@@ -1,0 +1,259 @@
+﻿/* pageSettingsContainer Style*/
+.recycleBinContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1120 !important;
+}
+.recycleBinContainer * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.recycleBinContainer {
+    background-color: #fff;
+    height: 100%;
+    overflow: auto;
+}
+.recycleBinContainer div.title {
+    background-color: #FFF;
+    height: 70px;
+    line-height: 70px;
+}
+.recycleBinContainer div.title span.caption {
+    font-size: 28px;
+    margin-left: 30px;
+    font-weight: bold;
+}
+.recycleBinContainer div.title span.page-name {
+    color: #494949;
+    font-size: 14px;
+    margin-left: 16px;
+    font-weight: bold;
+}
+.recycleBinContainer div.title > a {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    color: #0386c4;
+    padding-left: 16px;
+    margin: 0 30px;
+    background: url('../Images/icon-back-blue.png') no-repeat left center;
+    float: right;
+    text-decoration: none;
+}
+.recycleBinContainer div.body {
+    margin: 30px 30px 0 30px;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #e9e9ec;
+
+}
+.recycleBinContainer div.body .content-container {
+    overflow: hidden;
+    outline: none;
+    background-color: #f2f2f2 !important;
+}
+.recycleBinContainer div.body .dnnFormMessage {
+    max-width: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 10px 25px 0 25px;
+}
+.recycleBinContainer div.body ul.tabs-nav {
+    border-bottom: 1px solid #e4e4e8;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    clear: both;
+    background-color: #eee;
+}
+.recycleBinContainer div.body ul.tabs-nav li {
+    padding: 0;
+    line-height: 42px;
+    font-weight: bold;
+    float: left;
+    border: 1px solid #eeeeee;
+    border-bottom: none;
+    list-style: none;
+    background: none;
+}
+.recycleBinContainer div.body ul.tabs-nav li a {
+    color: #000;
+    display: block;
+    padding: 0 34px;
+    text-decoration: none;
+    outline: none;
+}
+.recycleBinContainer div.body ul.tabs-nav li.ui-tabs-active,
+.recycleBinContainer div.body ul.tabs-nav li.ui-state-active {
+    border: 1px solid #e4e4e8;
+    border-bottom: none;
+    -webkit-border-top-left-radius: 3px;
+    -moz-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #fff;
+}
+.recycleBinContainer div.body div.ui-tabs-panel {
+    background-color: #fff;
+    padding: 25px;
+}
+.recycleBinContainer div.actions {
+    height: 80px;
+    background-color: #0f0f0f;
+    width: 100%;
+    margin-top: 45px;
+    position: relative;
+    bottom: 0;
+    text-align: right;
+}
+.recycleBinContainer div.actions a.button {
+    margin: 22px 38px 0 0;
+}
+.recycleBinContainer div.actions a.button.create-page {
+    text-transform: uppercase;
+}
+.recyclbin-header {
+    width: 100%;
+    text-transform: uppercase;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+.recyclbin-header .page{
+    width: 70%!important;
+    border-right: 1px solid lightgrey;
+}
+.recyclbin-header .deleteddate{
+    width: 20%!important;
+    border-right: 1px solid lightgrey;
+}
+.recyclbin-header .acctions{
+    width: 10%!important;
+}
+/*Recycle Bin Grid*/
+table.dnnRBGrid {
+    width: 100% !important;
+    margin-bottom: 20px;
+    border: 1px solid #c9c9c9; 
+    border-collapse: collapse;
+    color: #777; 
+}
+table.dnnRBGrid tr.dnnRBGridHeader td {
+    padding: 10px;
+    vertical-align: middle;
+    line-height: 120%;
+    text-align: left; 
+    text-transform: uppercase;
+    font-weight: bold;  
+    font-family: proxima_nova, Arial;
+    font-size: 11px;
+    border-bottom:1px solid #c9c9c9;
+    background: white !important;
+}
+table.dnnRBGrid tr.dnnRBGridHeader td.page {
+    text-align: left;
+    width: 65% !important;
+}
+table.dnnRBGrid td {
+    padding: 6px;
+    text-align: left;
+}
+table.dnnRBGrid td.thumbnail {
+    text-align: left;
+    width: 25% !important;
+}
+table.dnnRBGrid td.pagename {
+    text-align: left;
+    width: 40% !important;
+}
+div.rbactions {
+    text-align: right;
+    font-weight: bold;
+    padding: 25px;
+}
+td.actions span.restore {
+    background: url('../Images/Icons-RecycleBin.png') no-repeat 0 0;
+    background-position: -24px 0px; 
+    text-decoration: none;  
+    display: inline-block;
+    width: 10px;
+    height: 15px;
+    padding-right: 10px;
+    cursor: pointer;  
+}
+ td.actions .action-disabled {
+     cursor:not-allowed !important;  
+ }
+td.actions span.remove {
+    background: url('../Images/Icons-RecycleBin.png') no-repeat 0 0;
+    background-position: -54px 0px; 
+    text-decoration: none;
+    display: inline-block;
+    width: 10px;
+    height: 15px;
+    padding-right: 10px;
+    cursor: pointer; 
+}
+table.dnnRBGrid tr:nth-child(odd){
+  background: #F2F2F2;
+}
+
+table.dnnRBGrid tr:nth-child(even){
+  background: #FAFAFA;
+}
+/*Recycle Bin Grid END*/
+.NoItems {
+    background-color: #f2f2f2 !important; 
+}
+div.NoPages {
+    background: url('../Images/Icon-Empty-Pages-white.png') no-repeat center;
+    width: 100%;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    padding: 0px!important;
+
+}
+div.NoModules {
+    background: url('../Images/Icon-Empty-Modules-white.png') no-repeat center;
+    width: 100%;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    padding: 0px!important;
+}
+div.NoTemplates {
+    background: url('../Images/Icon-Empty-Templates-white.png') no-repeat center;
+    width: 100%;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    padding: 0px!important;
+}
+.content-container .jspContainer {
+
+}
+.content-container .jspContainer .jspPane {
+    width: 100% !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+.content-container .jspVerticalBar {
+    background-color: #f2f2f2 !important;
+    border-left: 1px solid #d4d4d4;
+    width: 10px;
+}
+.content-container .jspVerticalBar .jspTrack {
+    width: 5px !important;
+    margin-left: 2px !important;
+}
+.content-container .jspVerticalBar .jspTrack .jspDrag {
+    filter: alpha(opacity=50) !important;
+    opacity: 0.5 !important;
+}

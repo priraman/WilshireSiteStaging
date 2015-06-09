@@ -1,0 +1,14 @@
+﻿<div>
+    <!-- ko foreach: configurations -->
+        <div>
+            <label data-bind="html: localizedName"></label>
+            <input data-bind="value: value" type="text"/>
+        </div>
+    <!-- /ko -->
+
+    <!-- ko if: configurations.length % 2 !== 0 -->
+        <div style="height: 36px"></div><!-- a placeholder -->
+    <!-- /ko -->
+
+    <div class="clear"></div>
+</div>

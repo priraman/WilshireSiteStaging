@@ -1,0 +1,9 @@
+﻿-- Switch UserScoringLog primary index to CLUSTERED for Azure support; or create one if no such index exists.
+
+IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}Mechanics_UserScoringLog_UserIdPortalId' AND type_desc = 'NONCLUSTERED')
+    DROP INDEX IX_{objectQualifier}Mechanics_UserScoringLog_UserIdPortalId ON {databaseOwner}{objectQualifier}Mechanics_UserScoringLog
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}Mechanics_UserScoringLog_UserIdPortalId' AND type_desc = 'CLUSTERED')
+    CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoringLog_UserIdPortalId] ON {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] ([UserId] ASC, [PortalId] ASC)		
+GO

@@ -1,0 +1,51 @@
+/* Content Pane */
+.topPane{
+	margin: 0 0 20px 0;
+}
+.contentPane {
+	width: 100%;
+}
+
+.leftPaneNarrow {
+	float: left;
+	width: 240px;
+}
+.rightPaneWide {
+    float:right;
+    width:725px;
+}
+
+@media only screen and (min-width: 48em) and (max-width: 64em) {  
+	.rightPaneWide{
+		width: calc(100% - 255px);
+	}
+}
+
+@media only screen and (max-width: 47.9em) {
+	.topPane{
+		float: none;
+        width: 95%;
+        margin: 0 auto 0 auto;
+	}
+	.contentPane {
+		float: none;
+        width: 95%;
+        margin: 15px auto 0 auto;
+	}
+	.leftPaneNarrow{
+		float: none;
+        width: 95%;
+        margin: 15px auto 0 auto;
+	}	
+	.rightPaneWide{
+		float: none;
+        width: 95%;
+        margin: 15px auto 15px auto;
+	}
+}
+
+	/* temp adjustment */
+	.dnnFormMessage.dnnFormWarning {
+		  margin: auto;
+		  text-align: center;
+	}

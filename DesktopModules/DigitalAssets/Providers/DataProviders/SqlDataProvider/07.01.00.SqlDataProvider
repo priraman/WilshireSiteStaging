@@ -1,0 +1,146 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileTags]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileTags]
+GO
+
+CREATE PROCEDURE  {databaseOwner}[{objectQualifier}GetFileTags]	
+	@PortalId int,
+	@UserId int
+AS
+BEGIN
+
+	WITH VisibleFolders AS (
+		(
+			-- Folders visible to all registered users (RoleID -1)
+			SELECT FolderID
+			FROM {databaseOwner}{objectQualifier}vw_FolderPermissions
+			WHERE RoleID = -1 
+			 AND PermissionKey = 'READ'
+
+			UNION	-- Union with folders visible to the user (from the UserID or Role)
+				
+			SELECT DISTINCT FolderID
+			FROM {databaseOwner}{objectQualifier}vw_FolderPermissions f
+				LEFT JOIN {databaseOwner}{objectQualifier}vw_UserRoles r ON f.RoleID = r.RoleID
+			WHERE (f.UserID IS NULL OR f.UserID = @UserID) -- Permission set to the user
+			  AND (r.UserID IS NULL OR r.UserID = @UserID) -- Permission set to the role
+			  AND f.PermissionKey = 'READ'
+			  AND f.AllowAccess = 1
+		)
+
+		EXCEPT -- Except the forbidden foldrers (from the UserID or Role)
+
+		SELECT DISTINCT FolderID
+		FROM {databaseOwner}{objectQualifier}vw_FolderPermissions f
+			LEFT JOIN {databaseOwner}{objectQualifier}vw_UserRoles r ON f.RoleID = r.RoleID
+		WHERE (f.UserID IS NULL OR f.UserID = @UserID) -- Permission set to the user
+		  AND (r.UserID IS NULL OR r.UserID = @UserID) -- Permission set to the role
+		  AND f.PermissionKey = 'READ'
+		  AND f.AllowAccess = 0
+	)
+
+	SELECT t.TermID, t.Name, COUNT(*) Count
+	FROM  {databaseOwner}{objectQualifier}vw_Files f
+		JOIN VisibleFolders v ON f.FolderID = v.FolderID
+		JOIN {databaseOwner}{objectQualifier}ContentItems c ON f.ContentItemID = c.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}ContentTypes ty ON c.ContentTypeID = ty.ContentTypeID
+		JOIN {databaseOwner}{objectQualifier}ContentItems_Tags ct ON f.ContentItemID = ct.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+	WHERE (@PortalId = 0 AND f.PortalId IS NULL OR f.PortalId = @PortalId)
+	  AND ty.ContentType = 'File'
+	GROUP BY t.TermID, t.Name
+	ORDER BY COUNT(*) Desc
+
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}GetContentByTag') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetContentByTag
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetContentByTag
+	@PortalID int,					-- portal
+	@PageSize int,					-- page size
+	@PageIndex int,					-- 0 based page index
+	@SortBy nvarchar(100),			-- sort field
+	@SortAscending bit,				-- sort flag indicating whether sort is asc or desc
+	@TermID int,					
+	@Pattern nvarchar(100)			
+AS
+BEGIN
+
+	IF @Pattern IS NOT NULL AND CHARINDEX('*', @Pattern) = 0 AND CHARINDEX('?', @Pattern) = 0
+		SET @Pattern = @Pattern + '%'
+	ELSE
+		SET @Pattern = REPLACE(REPLACE(@Pattern, '*', '%'), '?', '_')
+
+--DECLARE @StartIndex INT 
+
+--SET @StartIndex = @PageIndex * @PageSize;
+
+--WITH [Page] AS (
+
+	SELECT f.*
+		--,ROW_NUMBER() OVER (ORDER BY FileName) AS RowNumber
+	FROM {databaseOwner}{objectQualifier}vw_Files f
+		JOIN {databaseOwner}{objectQualifier}ContentItems_Tags ct ON f.ContentItemID = ct.ContentItemID
+	WHERE (@PortalID = 0 AND f.PortalId IS NULL OR @PortalID = f.PortalId)
+		AND ct.TermID = @TermID
+		AND (@Pattern IS NULL OR f.FileName LIKE @Pattern)
+
+--) 
+--SELECT * FROM [Page]
+--WHERE RowNumber > @StartIndex AND RowNumber <= @StartIndex + @PageSize
+--ORDER BY [FileName]
+
+END
+GO
+
+/* GetTermsByContent */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}GetTermsByContent]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+  DROP PROCEDURE {databaseOwner}{objectQualifier}GetTermsByContent
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTermsByContent] 
+	@ContentItemID			int
+AS
+	SELECT TT.*
+	FROM {databaseOwner}{objectQualifier}ContentItems_Tags TG
+		INNER JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms TT ON TG.TermID = TT.TermID
+	WHERE TG.ContentItemID = @ContentItemID
+	ORDER BY TT.Name
+GO
+
+DECLARE @damModuleDefinition INT
+
+SELECT @damModuleDefinition = MD.[ModuleDefID]
+FROM {databaseOwner}{objectQualifier}ModuleDefinitions MD
+WHERE MD.DefinitionName = 'Digital Asset Management'
+
+IF NOT EXISTS (SELECT *  FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'EditWorkflow')
+	EXEC	{databaseOwner}{objectQualifier}AddModuleControl
+		@ModuleDefID = @damModuleDefinition,
+		@ControlKey = N'EditWorkflow',
+		@ControlTitle = N'Edit Workflow',
+		@ControlSrc = N'DesktopModules/DigitalAssets/EditWorkflow.ascx',
+		@IconFile = NULL,
+		@ControlType = 1,
+		@ViewOrder = 0,
+		@HelpUrl = NULL,
+		@SupportsPartialRendering = 0,
+		@SupportsPopUps = 1,
+		@CreatedByUserID = -1
+
+GO

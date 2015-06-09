@@ -1,0 +1,26 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF NOT EXISTS (SELECT name FROM sys.indexes WHERE name = 'IX_{objectQualifier}FileStatistics' AND object_id = OBJECT_ID(N'{objectQualifier}FileStatistics'))
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}FileStatistics] ON {databaseOwner}[{objectQualifier}FileStatistics]
+		(
+			[FileId] ASC,
+			[StatDate] ASC
+		)WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)
+GO
+
+IF NOT EXISTS (SELECT name FROM sys.stats WHERE name = N'{objectQualifier}FileStats' AND object_id = OBJECT_ID(N'{objectQualifier}FileStatistics'))
+	CREATE STATISTICS [{objectQualifier}FileStats] 
+		ON {databaseOwner}[{objectQualifier}FileStatistics]([StatDate], [FileId])
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

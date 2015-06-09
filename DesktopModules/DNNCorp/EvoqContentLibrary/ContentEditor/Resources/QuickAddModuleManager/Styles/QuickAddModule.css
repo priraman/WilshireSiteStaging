@@ -1,0 +1,121 @@
+﻿.dnnQuickAddModuleManager, .body .dnnSortable.dnnQuickAddModuleManager {
+    position: relative;
+    border-color: #5EB8D7 !important;
+    min-height: 110px !important;
+}
+.dnnQuickAddModuleManager .QuickAddModuleHandler {
+    background: url('../Images/Icon-QuickAdd-Module.png') no-repeat;
+}
+
+.dnnQuickAddModuleManager .QuickAddImageHandler {
+    background: url('../Images/Icon-QuickAdd-Module-Image.png') no-repeat;
+
+}
+
+.dnnQuickAddModuleManager .QuickAddTextHandler {
+
+    background: url('../Images/Icon-QuickAdd-Module-Text.png') no-repeat;
+
+}
+.dnnQuickAddModuleManager .handlerContainer {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    max-width: 200px;
+    min-width: 96px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.dnnQuickAddModuleManager .handlerContainer .QuickAddHandler {
+    width: 30%;
+    padding-top: 30%;
+    margin-left: 4%;
+    cursor: pointer;
+    display: block;
+    background-size: auto 100%;
+    background-position: center center;
+    opacity: 0.5;
+    float: left;
+        box-shadow: inset 0 1px 0 #c1c1c1,
+                    inset -1px 0 0 #c1c1c1,
+                    inset 0px -1px 0 #c1c1c1,
+                    inset 1px 0 0 #c1c1c1;
+
+    zoom: 1;
+}
+.dnnQuickAddModuleManager .handlerContainer .QuickAddHandler:first-child {
+    margin-left: 0;
+}
+/*Content Module Action Menu Styles Override*/
+form .dnn_mact > li {
+	width:21px !important;
+	height:21px !important;
+	float:left !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    border:1px solid transparent !important;
+    background:transparent !important;
+}
+form .dnn_mact > li > a {
+    display: inline-block !important;
+    width: 22px !important;
+    height: 22px !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+form .dnn_mact > li.actionMenuEdit > a {
+    background-image: url(../Images/Icon-Edit-Pencil.png) !important;
+}
+
+form .dnn_mact > li.actionMenuAdmin > a {
+  background-image: url(../Images/Icon-Edit-Cog.png) !important;
+}
+
+form .dnn_mact > li.actionMenuMove > a {
+   background-image: url(../Images/Icon-Edit-Cross.png) !important;
+}
+form .dnn_mact > li.actionMenuEdit > a {
+    background-position: 0px 0px !important;
+}
+
+form .dnn_mact > li.actionMenuAdmin > a {
+    background-position: 0px 0px !important;
+}
+
+form .dnn_mact > li.actionMenuMove > a {
+    background-position: 0px 0px !important;
+}
+
+form .dnn_mact > li.actionMenuEdit:hover > a {
+    background-color: #fff !important;
+    background-position: 0px -22px !important;
+}
+
+form .dnn_mact > li.actionMenuAdmin:hover > a {
+    background-color: #fff !important;
+    background-position: 0px -22px !important;
+}
+
+form .dnn_mact > li.actionMenuMove:hover > a {
+    background-color: #fff !important;
+    background-position: 0px -22px !important;
+}
+form .dnn_mact > li.actionMenuEdit:active > a {
+    background-color: #fff !important;
+    background-position: 0px -44px !important;
+}
+
+form .dnn_mact > li.actionMenuAdmin:active > a {
+    background-color: #fff !important;
+    background-position: 0px -44px !important;
+}
+
+form .dnn_mact > li.actionMenuMove:active > a {
+    background-color: #fff !important;
+    background-position: 0px -44px !important;
+}

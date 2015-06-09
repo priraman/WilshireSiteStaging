@@ -1,0 +1,249 @@
+﻿.personaBarDialog input[type="text"],
+.personaBarDialog select,
+.personaBarDialog textarea,
+.personaBarDialog input[type="email"],
+.personaBarDialog input[type="search"],
+.personaBarDialog input[type="password"] {
+    margin-bottom: 18px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 12px;
+}
+
+.personaBarDialogMask {
+    top: 0;
+    position: absolute;
+    z-index: 99999 !important;
+    width: 100%;
+    height: 100%;
+	background: #000;
+    opacity: 0.75;
+}
+
+.personaBarDialog {
+    position: absolute;
+    left: 50%;
+    width: 650px;
+    font-family: proxima_nova_semibold, arial;
+    z-index: 999999 !important;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+/* Top right buttons */
+.personaBarDialog .dnnModalCtrl{
+    display: block;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 69px;
+    height: 26px;
+    border-radius: 10px;
+    background-color: #fff;
+    -webkit-border-radius: 10px;
+    box-shadow: 0px 0px 5px #666;
+}
+
+.personaBarDialog .dnnToggleMax {
+    float: left;
+    display: block;
+    height: 18px;
+    width: 30px;
+    margin: 4px 0 0 4px;
+    overflow: hidden;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: #585858 url(../Images/resizeBtn.png) no-repeat;
+    background-position: 10px 2px;
+    text-indent: -9999em;
+}
+
+.personaBarDialog .dnnToggleMax:hover,
+.personaBarDialog .dnnModalCtrl .ui-dialog-titlebar-close:hover {
+    background-color: #358EEA;
+}
+
+.personaBarDialog .dnnModalCtrl .ui-dialog-titlebar-close {
+    float: right;
+    display: block;
+    height: 18px;
+    width: 30px;
+    margin: 4px 4px 0 1px;
+    overflow: hidden;
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    border: none;
+    outline: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: #585858 url(../Images/closeBtn.png) no-repeat;
+    background-position: 8px 4px;
+    text-indent: -9999em;
+    min-width: 0 !important;
+}
+
+/* Title of dialog */
+.personaBarDialog .container .dialogTitle {
+    cursor: move;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.personaBarDialog hr.bottomTitleHR {
+    height: 0 !important;
+    margin: 0 15px 0 15px;
+}
+
+/* Close button */
+.personaBarDialog .title span.btn-close {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background: url('../images/PersonaBarDialog-icons.png') no-repeat;
+    float: right;
+    margin: 28px 36px 0 0;
+    cursor: pointer;
+}
+
+.personaBarDialog .title span.btn-close:hover {
+    background-position-x: -17px;
+}
+
+.personaBarDialog .title span.btn-close:active {
+    background-position-x: -34px;
+}
+
+/* All dialog */
+.personaBarDialog .container {
+    width: 100% !important;
+    min-height: 100px;
+    position: relative;
+}
+
+/* Inner Title dialog */
+.personaBarDialog .container .title {
+    font-size: 16px;
+    line-height: 36px;
+    background-color: #fff;
+    color: #333;
+}
+
+.personaBarDialog .container .title b {
+    font-size: 16px;
+}
+
+.personaBarDialog .container .title h1 {
+    font-size: 20px;
+}
+
+/* Where all data go */
+.personaBarDialog .container .superContent {
+    background-color: #fff;
+    padding: 10px 15px 15px 15px;
+}
+.personaBarDialog .container .content {
+    background-color: #fff;
+    padding-top: 20px;
+}
+
+/* Title of data */
+.personaBarDialog .container .content .title {
+    background: none;
+}
+
+.personaBarDialog .container .content ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.personaBarDialog .container .content .panels .panel {
+    /*background-color: #f0f0f0;*/
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+    margin-bottom: 4px;
+}
+
+/* Actions area for dialog buttons */
+.personaBarDialog .actions {
+    margin-top: 30px;
+}
+
+/* Buttons */
+.personaBarDialog .actions span.btn {
+    display: inline-block;
+    text-align: center;
+    float: left;
+    width: auto !important;
+    height: auto !important;
+    line-height: inherit !important;
+    margin-right: 5px;
+    margin-top: 10px;
+    background-color: #ddd;
+    cursor: pointer;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
+}
+
+.personaBarDialog .actions span.btn-cancel {
+    background-color: #ddd;
+    color: #777;
+}
+
+.personaBarDialog .actions span.btn-accept {
+    background-color: #1688c4;
+    color: #FFF;
+}
+
+.personaBarDialog .actions span.btn-accept.disabled {
+    background-color: #86D0F2;
+}
+
+.personaBarDialog .actions span.btn-cancel:hover {
+    background-color: #e8e8e8;
+}
+
+.personaBarDialog .actions span.btn-accept:hover {
+    background-color: #6cb6f3;
+}
+
+/* Errors in ul li */
+.personaBarDialog ul.errors {
+    border: none;
+    color: red;
+    margin-top: 5px;
+}
+
+ul.errors li span.backError {
+    font-size: 11px;
+}
+
+/* Resize */
+.personaBarDialog .resizeCorner {
+    width: 100%;
+    height: 20px;
+}
+
+.personaBarDialog .resizeCorner .resizeHandler {
+    width: 20px;
+    height: 20px;
+    background: url(../Images/modal-resize-icn.png);
+    float: right;
+}

@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="pagesettings_AddPage.Text" xml:space="preserve">
+    <value>Add Page</value>
+  </data>
+  <data name="pages_ReturnToMain.Text" xml:space="preserve">
+    <value>Page Management</value>
+  </data>
+  <data name="pages_Cancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="pagesettings_Caption.Text" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="pagesettings_CopyPermission.Text" xml:space="preserve">
+    <value>Copy Permissions to Descendant Pages</value>
+  </data>
+  <data name="pagesettings_Created.Text" xml:space="preserve">
+    <value>Created:</value>
+  </data>
+  <data name="pagesettings_CreatePage.Text" xml:space="preserve">
+    <value>Create Page</value>
+  </data>
+  <data name="pagesettings_Errors_EmptyTabName.Text" xml:space="preserve">
+    <value>The page name can't be empty.</value>
+  </data>
+  <data name="pagesettings_Errors_PathDuplicateWithAlias.Text" xml:space="preserve">
+    <value>There is a site domain identical to your page path.</value>
+  </data>
+  <data name="pagesettings_Errors_TabExists.Text" xml:space="preserve">
+    <value>The Page Name you chose is already being used for another page at the same level of the page hierarchy.</value>
+  </data>
+  <data name="pagesettings_Errors_TabRecycled.Text" xml:space="preserve">
+    <value>A page with this name exists in the Recycle Bin.  To restore this page use the Recycle Bin.</value>
+  </data>
+  <data name="pagesettings_Errors_UrlPathCleaned.Text" xml:space="preserve">
+    <value>The Page URL entered contains characters which cannot be used in a URL or are illegal characters for a URL.&amp;lt;br&amp;gt;[NOTE: The illegal characters list is the following: &amp;lt;&amp;gt;\?:&amp;amp;=+|%# ]</value>
+  </data>
+  <data name="pagesettings_Errors_UrlPathNotUnique.Text" xml:space="preserve">
+    <value>The submitted URL is not available as there is another page already use this URL. </value>
+  </data>
+  <data name="pagesettings_Fields_AddInMenu.Text" xml:space="preserve">
+    <value>Add Page to Site Menu</value>
+  </data>
+  <data name="pagesettings_Fields_Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="pagesettings_Fields_Keywords.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="pagesettings_Fields_Layout.Text" xml:space="preserve">
+    <value>Page Template</value>
+  </data>
+  <data name="pagesettings_Fields_Menu.Text" xml:space="preserve">
+    <value>Display in Menu</value>
+  </data>
+  <data name="pagesettings_Fields_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="pagesettings_Fields_Tags.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="pagesettings_Fields_Title.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="pagesettings_Fields_Type.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="pagesettings_Fields_Type_ContentPage.Text" xml:space="preserve">
+    <value>Content Page</value>
+  </data>
+  <data name="pagesettings_Fields_URL.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="pagesettings_Parent.Text" xml:space="preserve">
+    <value>Page Parent:</value>
+  </data>
+  <data name="pagesettings_Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="pagesettings_Tabs_Details.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="pagesettings_Tabs_Permissions.Text" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="pagesettings_TopLevel.Text" xml:space="preserve">
+    <value>Top Level</value>
+  </data>
+  <data name="pagesettings_Update.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="pages_DragPageTooltip.Text" xml:space="preserve">
+    <value>Drag Page into Location</value>
+  </data>
+  <data name="pb_Edition.Text" xml:space="preserve">
+    <value>Content Manager Edition</value>
+  </data>
+  <data name="permissiongrid.Actions.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="permissiongrid.Add Content.Text" xml:space="preserve">
+    <value>Add Content</value>
+  </data>
+  <data name="permissiongrid.Add User.Text" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="permissiongrid.Add.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="permissiongrid.AllRoles.Text" xml:space="preserve">
+    <value>&lt;All Roles&gt;</value>
+  </data>
+  <data name="permissiongrid.Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="permissiongrid.Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="permissiongrid.Display Name.Text" xml:space="preserve">
+    <value>Display Name:</value>
+  </data>
+  <data name="permissiongrid.Edit Content.Text" xml:space="preserve">
+    <value>Edit Content</value>
+  </data>
+  <data name="permissiongrid.Edit Tab.Text" xml:space="preserve">
+    <value>Full Control</value>
+  </data>
+  <data name="permissiongrid.Edit.Text" xml:space="preserve">
+    <value>Full Control</value>
+  </data>
+  <data name="permissiongrid.Export.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="permissiongrid.Filter By Group.Text" xml:space="preserve">
+    <value>Filter By Group</value>
+  </data>
+  <data name="permissiongrid.GlobalRoles.Text" xml:space="preserve">
+    <value>&lt;Global Roles&gt;</value>
+  </data>
+  <data name="permissiongrid.Import.Text" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="permissiongrid.Manage Settings.Text" xml:space="preserve">
+    <value>Manage Settings</value>
+  </data>
+  <data name="permissiongrid.Navigate.Text" xml:space="preserve">
+    <value>Navigate</value>
+  </data>
+  <data name="permissiongrid.Select Role.Text" xml:space="preserve">
+    <value>Select Role</value>
+  </data>
+  <data name="permissiongrid.Type-roles.Text" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="permissiongrid.Type-users.Text" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="permissiongrid.View Tab.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="permissiongrid.View.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="pages_AddPage.Text" xml:space="preserve">
+    <value>Add Page</value>
+  </data>
+  <data name="workflows_page_description.Text" xml:space="preserve">
+    <value>Workflows allow you to easily manage the document approval process, create a new workflow or use one of the available workflow types below.</value>
+  </data>
+  <data name="workflows_page_inner_derscription.Text" xml:space="preserve">
+    <value>Content approval workflow allos authors to publish content, which will not be visible until reiewed and published.</value>
+  </data>
+  <data name="workflows_page_title.Text" xml:space="preserve">
+    <value>Workflow Management</value>
+  </data>
+  <data name="workflows_states_description.Text" xml:space="preserve">
+    <value>Once a workflow is in use you cannot delete any of the workflow states associated width the workflow. The first and last workflow states of a workflow cannot be deleted.</value>
+  </data>
+  <data name="workflows_states_title.Text" xml:space="preserve">
+    <value>Workflow States</value>
+  </data>
+  <data name="pages_Published.Text" xml:space="preserve">
+    <value>Published:</value>
+  </data>
+  <data name="pages_Status.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="pages_Hidden.Text" xml:space="preserve">
+    <value>Page is hidden in menu</value>
+  </data>
+  <data name="workflows_state_active.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="workflows_state_inactive.Text" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="workflows_common_accept_btn.Text" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="workflows_common_cancel_btn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="workflows_edit_states_inner_title.Text" xml:space="preserve">
+    <value>You are editing the &lt;b&gt;{0}&lt;/b&gt; workflow state</value>
+  </data>
+  <data name="workflows_edit_states_name_lbl.Text" xml:space="preserve">
+    <value>State Name</value>
+  </data>
+  <data name="workflows_edit_states_notify_admin.Text" xml:space="preserve">
+    <value>Notify Administrators of state changes</value>
+  </data>
+  <data name="workflows_edit_states_notify_author.Text" xml:space="preserve">
+    <value>Notify Author and Reviewers of state changes</value>
+  </data>
+  <data name="workflows_edit_states_reviewers.Text" xml:space="preserve">
+    <value>Reviewers</value>
+  </data>
+  <data name="workflows_edit_states_title_edit.Text" xml:space="preserve">
+    <value>Workflow State Edit</value>
+  </data>
+  <data name="validation_minLength.Text" xml:space="preserve">
+    <value>Please enter at least {0} characters.</value>
+  </data>
+  <data name="validation_digit.Text" xml:space="preserve">
+    <value>Please enter a number</value>
+  </data>
+  <data name="validation_max.Text" xml:space="preserve">
+    <value>Please enter a value less than or equal to {0}.</value>
+  </data>
+  <data name="validation_maxLength.Text" xml:space="preserve">
+    <value>Please enter no more than {0} characters.</value>
+  </data>
+  <data name="validation_min.Text" xml:space="preserve">
+    <value>Please enter a value greater than or equal to {0}.</value>
+  </data>
+  <data name="validation_required.Text" xml:space="preserve">
+    <value>This field is required.</value>
+  </data>
+  <data name="workflows_add_state_btn.Text" xml:space="preserve">
+    <value>Add a State</value>
+  </data>
+  <data name="workflows_common_close_btn.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="workflows_common_description_lbl.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="workflows_common_error.Text" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="workflows_common_error_resource_busy.Text" xml:space="preserve">
+    <value>Worklow is currently used</value>
+  </data>
+  <data name="workflows_common_name_lbl.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="workflows_common_save_btn.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="workflows_common_title_lbl.Text" xml:space="preserve">
+    <value>Workflow Name</value>
+  </data>
+  <data name="workflows_edit_states_title_new.Text" xml:space="preserve">
+    <value>Workflow State New</value>
+  </data>
+  <data name="workflows_in_use.Text" xml:space="preserve">
+    <value>In Use</value>
+  </data>
+  <data name="workflows_new_btn.Text" xml:space="preserve">
+    <value>Create New Workflow</value>
+  </data>
+  <data name="workflows_notify_deleted.Text" xml:space="preserve">
+    <value>Workflow deleted</value>
+  </data>
+  <data name="workflows_not_in_use.Text" xml:space="preserve">
+    <value>Not Used</value>
+  </data>
+  <data name="workflows_states_table_actions.Text" xml:space="preserve">
+    <value>ACTIONS</value>
+  </data>
+  <data name="workflows_states_table_active.Text" xml:space="preserve">
+    <value>ACTIVE</value>
+  </data>
+  <data name="workflows_states_table_move.Text" xml:space="preserve">
+    <value>MOVE</value>
+  </data>
+  <data name="workflows_states_table_order.Text" xml:space="preserve">
+    <value>ORDER</value>
+  </data>
+  <data name="workflows_states_table_state.Text" xml:space="preserve">
+    <value>STATE</value>
+  </data>
+  <data name="workflows_unknown_error.Text" xml:space="preserve">
+    <value>Unknown Error</value>
+  </data>
+  <data name="settings_title.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="site_settings_title.Text" xml:space="preserve">
+    <value>Site Settings</value>
+  </data>
+  <data name="workflows_common_errors_title.Text" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="workflows_confirm_delete_state.Text" xml:space="preserve">
+    <value>Are you sure you want to delete the {0} State?</value>
+  </data>
+  <data name="workflows_confirm_delete_workflow.Text" xml:space="preserve">
+    <value>Are you sure you want to delete the {0} Workflow?</value>
+  </data>
+  <data name="workflows_title.Text" xml:space="preserve">
+    <value>Workflows</value>
+  </data>
+  <data name="workflow_common_alert.Text" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="settings_common_cancel_btn.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="settings_common_confirm_btn.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="settings_common_no_btn.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="settings_common_yes_btn.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="workflows_new_workflow.Text" xml:space="preserve">
+    <value>New Workflow</value>
+  </data>
+  <data name="workflows_new_state_inner_title.Text" xml:space="preserve">
+    <value>New State for {0}</value>
+  </data>
+  <data name="pages_DragInvalid.Text" xml:space="preserve">
+    <value>You can't drag a page as a child of itself.</value>
+  </data>
+  <data name="pages_Title.Text" xml:space="preserve">
+    <value>Page Management</value>
+  </data>
+  <data name="pages_ViewRecycleBin.Text" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="recyclebin_EmptyRecycleBin.Text" xml:space="preserve">
+    <value>Empty Recycle Bin</value>
+  </data>
+  <data name="recyclebin_Modules.Text" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="recyclebin_Pages.Text" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="recyclebin_Title.Text" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
+  <data name="pages_DeletePageConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete this page.&lt;/p&gt;</value>
+  </data>
+  <data name="pages_No.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="pages_Yes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="pages_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="pages_DetailView.Text" xml:space="preserve">
+    <value>Detail View</value>
+  </data>
+  <data name="pages_Edit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="pages_Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="pages_SmallView.Text" xml:space="preserve">
+    <value>Small View</value>
+  </data>
+  <data name="pages_View.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="workflows_resources_info.Text" xml:space="preserve">
+    <value>This workflow is currently in use</value>
+  </data>
+  <data name="workflows_resources_link.Text" xml:space="preserve">
+    <value>View Usage</value>
+  </data>
+  <data name="workflows_states_reviewers.Text" xml:space="preserve">
+    <value>Reviewers</value>
+  </data>
+  <data name="workflows_states_reviewers_description.Text" xml:space="preserve">
+    <value>Specify who can review content for this state</value>
+  </data>
+  <data name="pagesettings_Fields_Workflow.Text" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="worflow_usages_dialog_inner_title.Text" xml:space="preserve">
+    <value>You are viewing usage for the &lt;b&gt;{0}&lt;/b&gt; workflow</value>
+  </data>
+  <data name="worflow_usages_dialog_table_name.Text" xml:space="preserve">
+    <value>NAME</value>
+  </data>
+  <data name="worflow_usages_dialog_title.Text" xml:space="preserve">
+    <value>Workflow Usage Information</value>
+  </data>
+  <data name="worflow_usages_dialog_table_contentType.Text" xml:space="preserve">
+    <value>CONTENT TYPE</value>
+  </data>
+  <data name="pagesettings_ShowInPageManagement.Text" xml:space="preserve">
+    <value>Page Management</value>
+  </data>
+  <data name="analytics_Apply.Text" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="analytics_AverageTime.Text" xml:space="preserve">
+    <value>Time On Page</value>
+  </data>
+  <data name="analytics_BounceRate.Text" xml:space="preserve">
+    <value>Bounce Rate</value>
+  </data>
+  <data name="analytics_ComparativeTerm.Text" xml:space="preserve">
+    <value>Comparative Term</value>
+  </data>
+  <data name="analytics_Custom.Text" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="analytics_Day.Text" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="analytics_From.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="analytics_Month.Text" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="analytics_PageViews.Text" xml:space="preserve">
+    <value>Page Views</value>
+  </data>
+  <data name="analytics_PageViewActivity.Text" xml:space="preserve">
+    <value>Page Activity</value>
+  </data>
+  <data name="analytics_Sessions.Text" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="analytics_Dashboard.Text" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="analytics_To.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="analytics_UniqueSessions.Text" xml:space="preserve">
+    <value>Unique Sessions</value>
+  </data>
+  <data name="analytics_UniqueVisitors.Text" xml:space="preserve">
+    <value>Unique Visitors</value>
+  </data>
+  <data name="analytics_Visitors.Text" xml:space="preserve">
+    <value>Visitors</value>
+  </data>
+  <data name="analytics_Week.Text" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="analytics_Year.Text" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="pages_ViewPageTemplate.Text" xml:space="preserve">
+    <value>Page Templates</value>
+  </data>
+  <data name="pages_DeleteTemplateConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete this template.&lt;/p&gt;</value>
+  </data>
+  <data name="pagesettings_Errors_NoTemplate.Text" xml:space="preserve">
+    <value>Please select a page template to create new page.</value>
+  </data>
+  <data name="recyclebin_Actions.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="recyclebin_DeletedDate.Text" xml:space="preserve">
+    <value>Deleted Date</value>
+  </data>
+  <data name="recyclebin_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="recyclebin_Restore.Text" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="recyclebin_Page.Text" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="recyclebin_EmptyRecycleBinConfirm.Text" xml:space="preserve">
+    <value>Do you want to empty all files in the recycle bin?</value>
+  </data>
+  <data name="pagesettings_AddTemplate.Text" xml:space="preserve">
+    <value>New Template</value>
+  </data>
+  <data name="pagesettings_CreateTemplate.Text" xml:space="preserve">
+    <value>Create Template</value>
+  </data>
+  <data name="pagesettings_Fields_PageTemplates.Text" xml:space="preserve">
+    <value>Page Templates</value>
+  </data>
+  <data name="pagesettings_Fields_TemplateName.Text" xml:space="preserve">
+    <value>Template Name</value>
+  </data>
+  <data name="pages_AddTemplate.Text" xml:space="preserve">
+    <value>Add Template</value>
+  </data>
+  <data name="pages_Discard.Text" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="pagesettings_Done.Text" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="pagesettings_NewTemplate.Text" xml:space="preserve">
+    <value>New Template</value>
+  </data>
+  <data name="pagesettings_SaveAsTemplate.Text" xml:space="preserve">
+    <value>Save As Template</value>
+  </data>
+  <data name="pagesettings_CopyPage.Text" xml:space="preserve">
+    <value>Create Copy</value>
+  </data>
+  <data name="analytics_PageTraffic.Text" xml:space="preserve">
+    <value>Page Analytics</value>
+  </data>
+  <data name="pagesettings_SaveTemplate.Text" xml:space="preserve">
+    <value>Save Template</value>
+  </data>
+  <data name="recyclebin_CancelConfirm.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="recyclebin_DeleteConfirm.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="WorkflowApplyOnSubpagesCheckBox.Text" xml:space="preserve">
+    <value>Apply setting to all subpages</value>
+  </data>
+  <data name="WorkflowLabel.Help" xml:space="preserve">
+    <value>Select a workflow to publish this page</value>
+  </data>
+  <data name="WorkflowLabel.Text" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="WorkflowNoteApplyOnSubpages.Text" xml:space="preserve">
+    <value>Note: This setting cannot be applied because there are one or more subpages pending to be published.</value>
+  </data>
+  <data name="WorkflowRunning.Text" xml:space="preserve">
+    <value>This page has a running workflow. The workflow must be completed to be changed</value>
+  </data>
+  <data name="recyclebin_ModuleTitle.Text" xml:space="preserve">
+    <value>Module Title</value>
+  </data>
+  <data name="pagesettings_ContentChanged.Text" xml:space="preserve">
+    <value>Changes have not been saved</value>
+  </data>
+  <data name="pagesettings_Errors_templates_EmptyTabName.Text" xml:space="preserve">
+    <value>The template name can't be empty.</value>
+  </data>
+  <data name="pagesettings_Errors_templates_NoTemplate.Text" xml:space="preserve">
+    <value>You need select a template to create new template.</value>
+  </data>
+  <data name="pagesettings_Errors_templates_PathDuplicateWithAlias.Text" xml:space="preserve">
+    <value>There is a site domain identical to your page template.</value>
+  </data>
+  <data name="pagesettings_Errors_templates_TabExists.Text" xml:space="preserve">
+    <value>The Template Name you chose is already being used for another template.</value>
+  </data>
+  <data name="pagesettings_Errors_templates_TabRecycled.Text" xml:space="preserve">
+    <value>A template with this name exists in the Recycle Bin.  To restore this template use the Recycle Bin.</value>
+  </data>
+  <data name="workflows_states_descriptions.Text" xml:space="preserve">
+    <value>Once a workflow state is in use you cannot delete it. The first and last workflow states of a workflow cannot be deleted.</value>
+  </data>
+  <data name="recyclebin_Template.Text" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="recyclebin_Templates.Text" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="recyclebin_NoItems.Text" xml:space="preserve">
+    <value>The recycle bin is currently empty</value>
+  </data>
+  <data name="analytics_Channels.Text" xml:space="preserve">
+    <value>Channels</value>
+  </data>
+  <data name="analytics_Devices.Text" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="analytics_SiteActivities.Text" xml:space="preserve">
+    <value>Site Activities</value>
+  </data>
+  <data name="analytics_TimeOnPage.Text" xml:space="preserve">
+    <value>Time On Page</value>
+  </data>
+  <data name="analytics_PageActivities.Text" xml:space="preserve">
+    <value>Page Activities</value>
+  </data>
+  <data name="workflows_header_actions.Text" xml:space="preserve">
+    <value>ACTIONS</value>
+  </data>
+  <data name="workflows_header_in_use.Text" xml:space="preserve">
+    <value>IN USE</value>
+  </data>
+  <data name="workflows_header_workflow_type.Text" xml:space="preserve">
+    <value>WORKFLOW TYPE</value>
+  </data>
+  <data name="workflows_tooltip_lock.Text" xml:space="preserve">
+    <value>Default workflows cannot be deleted</value>
+  </data>
+  <data name="analytics_Conversions.Text" xml:space="preserve">
+    <value>Conversions</value>
+  </data>
+  <data name="analytics_TopPages.Text" xml:space="preserve">
+    <value>Top Pages</value>
+  </data>
+  <data name="analytics_TopReferrers.Text" xml:space="preserve">
+    <value>Top Referrers</value>
+  </data>
+  <data name="analytics_TopOperatingSystems.Text" xml:space="preserve">
+    <value>Top OS's</value>
+  </data>
+  <data name="seconds.Text" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="pagesettings_Fields_Links.Text" xml:space="preserve">
+    <value>Link Tracking</value>
+  </data>
+  <data name="pages_Pending.Text" xml:space="preserve">
+    <value>Please drag the page into the desired location.</value>
+  </data>
+  <data name="analytics_NavigationSummary.Text" xml:space="preserve">
+    <value>Navigation Summary</value>
+  </data>
+  <data name="ExitPages.Text" xml:space="preserve">
+    <value>Exit Pages</value>
+  </data>
+  <data name="analytics_direct.Text" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="analytics_exitpages.Text" xml:space="preserve">
+    <value>Exit Pages</value>
+  </data>
+  <data name="analytics_external.Text" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="analytics_internal.Text" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="analytics_personalized.Text" xml:space="preserve">
+    <value>Personalized</value>
+  </data>
+  <data name="analytics_search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="analytics_social.Text" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="analytics_personalizedVersions.Text" xml:space="preserve">
+    <value>Personalized Versions:</value>
+  </data>
+  <data name="recyclebin_NoConfirm.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="recyclebin_RemoveModuleConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete this module.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RemoveModulesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete selected modules.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RemovePageConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete this page.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RemovePagesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete selected pages.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RemoveTemplateConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete this template.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RemoveTemplatesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to delete selected templates.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestoreModuleConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore this module.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestoreModulesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore selected modules.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestorePageConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore this page.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestorePagesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore selected pages.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestoreTemplateConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore this template.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_RestoreTemplatesConfirm.Text" xml:space="preserve">
+    <value>&lt;p&gt;Please confirm you wish to restore selected templates.&lt;/p&gt;</value>
+  </data>
+  <data name="recyclebin_YesConfirm.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>

@@ -1,0 +1,45 @@
+﻿<div class="page-settings add-template">
+    <div class="title">
+        <span class="caption" data-bind="html: resx.pagesettings_AddTemplate"></span>
+    </div>
+    <div class="body">
+        <ul class="tabs-nav">
+            <li><a href="#page-details" data-bind="html: resx.pagesettings_Tabs_Details"></a></li>
+        </ul>
+        <div class="content-container">
+            <div class="dnnFormMessage dnnFormError" data-bind="visible: status().code > 0, html: resx['pagesettings_Errors_' + status().message]"></div>
+            <div id="page-details">
+                <div class="subtitle" data-bind="html: page().name().length > 0 ? page().name : '&nbsp;'"></div>
+                <div class="dnnForm edit-form">
+                    <div class="form-item short short-left">
+                        <span class="caption required" data-bind="html: resx.pagesettings_Fields_TemplateName"></span>
+                        <input type="text" data-bind="value: page().name, css: { error: isErrorField('name') }, hasFocus: isErrorField('name'), valueUpdate: 'afterkeydown'" maxlength="50" />
+                    </div>
+                    <div class="form-item">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Description"></span>
+                        <textarea type="text" class="tall" data-bind="value: page().description" />
+                    </div>
+                </div>
+                <div class="dnnForm edit-form" data-bind="visible: pageTemplates().length > 0">
+                    <div class="form-item">
+                        <span class="caption subtitle required" data-bind="html: resx.pagesettings_Fields_PageTemplates"></span>
+                        <input type="hidden" id="templateId" data-bind="value: page().templateId" />
+                    </div>
+                    <div class="pagetemplate-list-scroller">
+                        <div class="pagetemplate-list-container" data-bind="foreach: pageTemplates">
+                            <div class="pagetemplate-list-item" data-bind="attr:{'data-template-id': id}, click: $root.selectTemplate">		
+                                <span class="thumbnail"><img class="list" data-bind="attr: { src: thumbnail }"/></span>
+                                <span class="name" data-bind="html: name"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a class="button cancel secondarybtn" href="#" data-bind="html: resx.pages_Discard"></a>
+        <a class="button create-page primarybtn" href="#" data-bind="html: resx.pagesettings_CreateTemplate"></a>
+    </div>
+</div>

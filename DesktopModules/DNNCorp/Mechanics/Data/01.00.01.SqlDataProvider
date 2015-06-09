@@ -1,0 +1,122 @@
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetRecentUserBadges]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetRecentUserBadges]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetRecentUserBadges]
+    @BadgeId int,
+    @PortalId int,
+	@Count int
+AS
+BEGIN
+    SELECT TOP (@Count)
+        [UserBadgeId],
+        UB.[BadgeId],
+        UB.[UserId],
+        UB.[PortalId],
+        UB.[CreatedOnDate],
+		U.DisplayName
+  FROM
+    {databaseOwner}[{objectQualifier}Mechanics_UserBadge] UB
+  INNER JOIN {databaseOwner}[{objectQualifier}Users] U
+	ON UB.UserID = U.UserID
+  WHERE
+    UB.[BadgeId] = @BadgeId AND UB.[PortalId] = @PortalId
+  ORDER BY UB.[CreatedOnDate] DESC
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = N'IX_{objectQualifier}Mechanics_UserScoring_UserIdPortalId')
+BEGIN
+	CREATE NONCLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoring_UserIdPortalId] ON {databaseOwner}[{objectQualifier}Mechanics_UserScoring] ([UserId] ASC, [PortalId] ASC)	
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]
+    @SearchTerm nvarchar(100),
+    @UserId int,
+    @PortalId int,
+	@DesktopModuleId int,
+    @PageIndex int,
+    @PageSize int,
+    @SortField nvarchar(25) = 'BadgeName',
+    @SortAscending bit = 0
+AS
+BEGIN
+    IF @SearchTerm IS NOT NULL AND LEN(@SearchTerm) > 0
+        SET @SearchTerm = '%' + @SearchTerm + '%'
+    ELSE
+        SET @SearchTerm = NULL
+                
+    -- Return total records
+    SELECT COUNT(*) AS [TotalRecords] FROM
+        (SELECT DISTINCT [badge].[BadgeId]
+         FROM {databaseOwner}[{objectQualifier}Mechanics_Badge] [badge]
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] [bsad] ON bsad.BadgeId = badge.BadgeId
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] [sad] ON sad.ScoringActionDefId = bsad.ScoringActionDefId
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}DesktopModules] [dm] ON sad.DesktopModuleId = dm.DesktopModuleId
+         WHERE
+            ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+            AND
+            ((@SearchTerm IS NOT NULL AND badge.[BadgeName] LIKE @SearchTerm) OR (@SearchTerm IS NULL))
+			AND badge.PortalId = @PortalId
+			AND (( @UserId > 0 AND [badge].[BadgeId] IN (SELECT BadgeId from {databaseOwner}[{objectQualifier}Mechanics_UserBadge] WHERE UserID = @UserId)) OR (@UserId <= 0 AND [badge].[BadgeId] > 0)) 
+        )
+		AS [badgeItems]
+
+    -- Set the page bounds
+    DECLARE 
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}[{objectQualifier}CalculatePagingInformation] @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+    
+    IF @PageLowerBound > 0
+        SET @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+    
+    ;WITH badgeRows AS
+    (
+        SELECT badgeItems.*,
+                ROW_NUMBER() OVER(ORDER BY
+                     CASE WHEN @SortField = 'BadgeName' AND @SortAscending = 1 THEN badgeItems.[BadgeName] END ASC,
+                     CASE WHEN @SortField = 'BadgeName' AND @SortAscending = 0 THEN badgeItems.[BadgeName] END DESC,
+                     CASE WHEN @SortField = 'Tier' AND @SortAscending = 1 THEN badgeItems.[Tier] END ASC,
+                     CASE WHEN @SortField = 'Tier' AND @SortAscending = 0 THEN badgeItems.[Tier] END DESC,
+                     CASE WHEN @SortField = 'TimeFrameInDays' AND @SortAscending = 1 THEN badgeItems.[TimeFrameInDays] END ASC,
+                     CASE WHEN @SortField = 'TimeFrameInDays' AND @SortAscending = 0 THEN badgeItems.[TimeFrameInDays] END DESC)
+                AS RowNumber
+        FROM (
+            SELECT DISTINCT [badge].[BadgeId],
+                [badge].[PortalId],
+                [badge].[BadgeName],
+                [badge].[TimeFrameInDays],
+                [badge].[Tier],
+                [badge].[ImageFileId],
+                [badge].[CreatedByUserID],
+                [badge].[CreatedOnDate],
+                [badge].[LastModifiedByUserID],
+                [badge].[LastModifiedOnDate]
+            FROM {databaseOwner}[{objectQualifier}Mechanics_Badge] [badge]
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] [bsad] ON bsad.BadgeId = badge.BadgeId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] [sad] ON sad.ScoringActionDefId = bsad.ScoringActionDefId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}DesktopModules] [dm] ON sad.DesktopModuleId = dm.DesktopModuleId
+         WHERE
+            ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+            AND
+            ((@SearchTerm IS NOT NULL AND badge.[BadgeName] LIKE @SearchTerm) OR (@SearchTerm IS NULL))
+			AND badge.PortalId = @PortalId
+			AND (( @UserId > 0 AND [badge].[BadgeId] IN (SELECT BadgeId from {databaseOwner}[{objectQualifier}Mechanics_UserBadge] WHERE UserID = @UserId)) OR (@UserId <= 0 AND [badge].[BadgeId] > 0)) 
+        ) AS [badgeItems]
+    )
+    SELECT TOP (@RowsToReturn) * FROM badgeRows
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO

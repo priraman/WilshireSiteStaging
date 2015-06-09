@@ -1,0 +1,887 @@
+.workflowIndexTemplate h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 11px;
+}
+/* Resources table */
+.personaBarDialog .resourcesUsedByWorkflow.head {
+  height: 15px;
+  width: 550px;
+  margin-top: 20px;
+  border: solid 1px #ddd;
+  padding: 10px;
+  background-color: #fff;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources {
+  max-height: 400px;
+  overflow: scroll;
+  overflow-x: hidden;
+  font-size: 13px;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li {
+  height: 15px;
+  padding: 10px;
+  color: #2b3337;
+  border: solid 1px transparent;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li.odd {
+  background-color: #f2f2f2;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li.even {
+  background-color: #fafafa;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li span.title {
+  margin-top: -11px;
+  padding-top: 3px;
+  font-size: 13px;
+  float: left;
+  min-width: 416px;
+  width: 80%;
+  overflow: hidden;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li span.contentType {
+  font-size: 13px;
+  float: left;
+}
+.personaBarDialog .resourcesUsedByWorkflow.resources ul li .clearBoth {
+  clear: both;
+}
+.personaBarDialog .resourcesUsedByWorkflow.head div.name {
+  float: left;
+  min-width: 416px;
+  width: 80%;
+}
+.personaBarDialog .resourcesUsedByWorkflow.head div.contentType {
+  float: left;
+}
+/* SCROLL BAR Style */
+.resourcesUsedByWorkflow.resources.jspScrollable {
+  border: solid 1px #ddd;
+}
+.resourcesUsedByWorkflow .jspVerticalBar .jspCap {
+  display: block;
+  height: 3px;
+  width: 11px;
+}
+.resourcesUsedByWorkflow .jspDrag {
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  opacity: .75;
+  background: #000;
+  cursor: pointer;
+}
+.resourcesUsedByWorkflow .jspContainer .jspPane {
+  width: 100% !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.resourcesUsedByWorkflow .jspVerticalBar {
+  background: none !important;
+}
+.jspHorizontalBar {
+  background: none !important;
+}
+.resourcesUsedByWorkflow .jspVerticalBar .jspTrack {
+  width: 7px !important;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar .jspTrack .jspDrag {
+  height: 7px !important;
+}
+.resourcesUsedByWorkflow .jspVerticalBar .jspTrack .jspDrag {
+  opacity: 0.5 !important;
+}
+.jspHorizontalBar .jspTrack .jspDrag {
+  opacity: 0.5 !important;
+}
+.resourcesUsedByWorkflow .jspContainer {
+  overflow: hidden;
+  position: relative;
+}
+.resourcesUsedByWorkflow .jspPane {
+  position: absolute;
+}
+.resourcesUsedByWorkflow .jspVerticalBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 11px;
+  height: 100%;
+  background: #ccc;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 11px;
+  background: #ccc;
+}
+.resourcesUsedByWorkflow .jspVerticalBar *,
+.resourcesUsedByWorkflow .jspHorizontalBar * {
+  margin: 0;
+  padding: 0;
+}
+.resourcesUsedByWorkflow .jspCap {
+  display: none;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar .jspCap {
+  float: left;
+}
+.resourcesUsedByWorkflow .jspTrack {
+  background: transparent;
+  position: relative;
+}
+.resourcesUsedByWorkflow .jspVerticalBar .jspTrack {
+  width: 10px;
+  margin: 0 0 0 3px;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar .jspTrack {
+  height: 5px;
+  margin: 3px 0 3px 0;
+}
+.resourcesUsedByWorkflow .jspVerticalBar .jspCap {
+  display: block;
+  height: 3px;
+  width: 11px;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar .jspCap {
+  display: block;
+  width: 3px;
+  height: 11px;
+}
+.resourcesUsedByWorkflow .jspDrag {
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  opacity: .75;
+  background: #000;
+  cursor: pointer;
+}
+.resourcesUsedByWorkflow .jspHorizontalBar .jspTrack,
+.resourcesUsedByWorkflow .jspHorizontalBar .jspDrag {
+  float: left;
+  height: 5px;
+}
+/* Space added where workflow have description */
+.spaceInfo {
+  height: 10px;
+}
+/* Backend Errors */
+.workflowspanelbody .workflows ul.errors {
+  list-style-type: none;
+  border: none;
+  color: red;
+  margin-top: 5px;
+}
+.workflowspanelbody .workflows ul.errors li * {
+  font-size: 11px;
+}
+/* Validators */
+span.validationMessage {
+  position: absolute;
+  background-color: red;
+  padding: 10px;
+  border-radius: 3px;
+  color: white;
+  margin-top: -5%;
+  margin-left: -20%;
+}
+span.validationMessage:after {
+  position: absolute;
+  bottom: -7px;
+  left: 15px;
+  content: "";
+  width: 0;
+  height: 0;
+  opacity: 0.75;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid red;
+}
+div.description span.validationMessage {
+  margin-top: -20%;
+  margin-left: 55%;
+}
+/* Workflow panel */
+.socialpanelheader {
+  position: relative;
+}
+.workflowspanelbody h3 {
+  color: #666;
+}
+.workflowspanelbody .workflows {
+  margin-top: 40px;
+}
+.workflowspanelbody .workflows .actionsHeader {
+  height: 60px;
+  width: 100%;
+}
+.workflowspanelbody .workflows .actionsHeader .createNewWorkflow {
+  margin-top: 12px;
+  float: right;
+  margin-right: 12px;
+}
+.workflowspanelbody .workflows .headersForList {
+  background-color: #fff;
+  height: 46px;
+  width: 100%;
+  min-width: 800px;
+  border: solid 1px #ddd;
+  height: 40px;
+}
+.workflowspanelbody .workflows .headersForList div {
+  padding-top: 12px;
+  float: left;
+  padding-left: 20px;
+  padding-right: 30px;
+  height: 30px;
+}
+.workflowspanelbody .workflows .headersForList .workflowType {
+  width: calc(100% - 312px);
+  min-width: 500px;
+}
+.workflowspanelbody .workflows .headersForList .inUse {
+  border-left: solid 1px #ddd;
+  border-right: solid 1px #ddd;
+}
+.workflowspanelbody .workflows ul.workflowsList {
+  width: 100%;
+  min-width: 800px;
+  margin: 0;
+}
+.workflowspanelbody .workflows ul.workflowsList .titleSettings .validationMessage.chrome,
+.workflowspanelbody .workflows ul.workflowsList .titleSettings .validationMessage.ffosx,
+.workflowspanelbody .workflows ul.workflowsList .titleSettings .validationMessage.safari,
+.workflowspanelbody .workflows ul.workflowsList .titleSettings .validationMessage.ie {
+  margin-top: -31px;
+}
+.workflowspanelbody .workflows ul.workflowsList .titleSettings .validationMessage.ff {
+  margin-top: -30px;
+}
+.workflowspanelbody .workflows ul.workflowsList .description .validationMessage.chrome,
+.workflowspanelbody .workflows ul.workflowsList .description .validationMessage.ie {
+  margin-top: -203px;
+}
+.workflowspanelbody .workflows ul.workflowsList .description .validationMessage.ffosx {
+  margin-top: -194px;
+}
+.workflowspanelbody .workflows ul.workflowsList .description .validationMessage.ff {
+  margin-top: -227px;
+}
+.workflowspanelbody .workflows ul.workflowsList .description .validationMessage.safari {
+  margin-top: -211px;
+}
+.workflowspanelbody .workflows ul.workflowsList li .title.active div.even,
+.workflowspanelbody .workflows ul.workflowsList li .title.active div.odd,
+.workflowspanelbody .workflows ul.workflowsList li .title.active div.even:hover,
+.workflowspanelbody .workflows ul.workflowsList li .title.active div.odd:hover {
+  color: white;
+  background-color: #0087c6;
+}
+.workflowspanelbody .workflows ul.workflowsList li .title i {
+  font-size: 10px;
+  position: absolute;
+  margin-left: 780px;
+  margin-top: -28px;
+  color: #666;
+}
+.workflowspanelbody .workflows ul.workflowsList li .title.active i {
+  font-size: 10px;
+  position: absolute;
+  margin-left: 780px;
+  margin-top: -28px;
+  color: #666;
+  color: #fff;
+}
+.workflowspanelbody .workflows ul.workflowsList li.isNewWorkflow > .title {
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+}
+.workflowspanelbody .workflows li div.title.active {
+  color: #FFF;
+  background-color: #0087c6;
+}
+.workflowspanelbody .workflows ul li .animationPanel {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  border-bottom: solid 0 #0065a4;
+  /* Resources info */
+}
+.workflowspanelbody .workflows ul li .animationPanel div.detailsPanel {
+  color: #6b6b6b;
+  padding: 20px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .bigHR {
+  height: 4px;
+  background-color: #d6d6d6;
+  border: none;
+}
+.workflowspanelbody .workflows ul li .animationPanel hr {
+  background-color: #d6d6d6;
+  border: none;
+  height: 1px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .resourcesInfo {
+  background-color: #f2f2f2;
+  height: 40px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .resourcesInfo .icon.info {
+  margin-left: 20px;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/info.png');
+  background-repeat: no-repeat;
+}
+.workflowspanelbody .workflows ul li .animationPanel .resourcesInfo .infoText {
+  margin-top: 3px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .resourcesInfo a {
+  color: #0196ff;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 3px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .states {
+  margin-top: 20px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .states .header h3 {
+  margin-bottom: 12px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table {
+  margin-top: 20px;
+  border: solid 1px #d6d6d6;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl td,
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th {
+  padding: 8px 9px 7px 9px;
+  border: none;
+  text-align: left;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tfoot {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 5px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tfoot td {
+  border-bottom: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top: 1px solid #ddd;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th {
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th > a {
+  display: block;
+  padding: 5px 9px;
+  color: #777;
+  text-transform: uppercase;
+  font-family: proxima_nova_c_semibold;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th > a[data-column] {
+  cursor: pointer;
+  background: url('../images/grid-sprite.png') no-repeat 100% 10px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th > a.asc {
+  background-position: 100% -32px;
+  text-decoration: underline;
+  color: #0e181c;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th > a.desc {
+  background-position: 100% -12px;
+  text-decoration: underline;
+  color: #0e181c;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl th:first-child {
+  border-left: none;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl td:first-child {
+  border-left: none;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl td em {
+  font-style: normal;
+  font-family: proxima_nova_semibold;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr:nth-child(2n) td {
+  background: rgba(0, 0, 0, 0.04);
+}
+.workflowspanelbody .workflows ul li .animationPanel table.non-touch .cmxtbl tr:hover td {
+  background: rgba(2, 139, 255, 0.15);
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr.edit-row td,
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr.edit-row:hover td {
+  background: #fff;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.non-touch .cmxtbl tfoot:hover td {
+  background: #fff;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr.edit-row td,
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr.edit-row:hover td {
+  padding: 0;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tbody.edit-body tr.edit-row td {
+  border-bottom: none;
+}
+.workflowspanelbody .workflows ul li .animationPanel table.cmxtbl tr.edit-row > td > div {
+  display: none;
+  padding: 33px 9px 15px 9px;
+  border-bottom: 2px solid #0087c6;
+}
+.workflowspanelbody .workflows ul li .animationPanel table th {
+  text-align: center;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td {
+  padding-left: 15px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td div.item {
+  width: 16px;
+  height: 16px;
+  text-indent: 100000px;
+  float: left;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item .edit,
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item .delete,
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item .moveUp {
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item .moveDown {
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item .moveDown.first {
+  margin-left: 36px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr div.separator {
+  width: 19px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.edit {
+  background-position: -135px -5px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.edit:hover {
+  background-position: -135px -31px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.edit:active {
+  background-position: -135px -57px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.delete {
+  background-position: -57px -5px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.delete:hover {
+  background-position: -57px -31px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.delete:active {
+  background-position: -57px -57px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveUp {
+  background-position: -214px -5px;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveUp:hover {
+  background-position: -214px -31px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveUp:active {
+  background-position: -214px -57px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveDown {
+  margin-left: 20px;
+  background-position: -214px -5px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveDown:hover {
+  background-position: -214px -31px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr td .item div.moveDown:active {
+  background-position: -214px -57px;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr.odd {
+  background-color: #fafafa;
+}
+.workflowspanelbody .workflows ul li .animationPanel table tr.even {
+  background-color: #f2f2f2;
+}
+.workflowspanelbody .workflows ul li .animationPanel .addAState {
+  margin-top: 22px;
+  margin-bottom: 22px;
+}
+.workflowspanelbody .workflows ul li .animationPanel .titleSettings {
+  margin-top: 20px;
+}
+.workflowspanelbody .workflows ul li .animationPanel input[type="text"] {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 12px;
+  width: 45%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.workflowspanelbody .workflows ul li .animationPanel textarea {
+  outline: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  margin-top: 12px;
+  display: block;
+  padding: 8px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-color: #d6d6d6;
+  width: 100%;
+  resize: none;
+}
+.workflowspanelbody .workflows ul li .animationPanel div.actions {
+  margin-top: 50px;
+  margin-left: 40%;
+  width: 50%;
+  float: left;
+}
+.workflowspanelbody .workflows ul li .animationPanel div.actions button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.workflowspanelbody button.plainbtn {
+  background: #fff;
+  color: #666;
+  display: inline-block;
+  padding: 9px 9px;
+  cursor: pointer;
+  min-width: 75px;
+  border-radius: 3px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #ddd;
+}
+.workflowspanelbody button.plainbtn.primarybtn {
+  color: #fff;
+  background: #0087c6;
+}
+.workflowspanelbody button.plainbtn.primarybtn:hover {
+  background: #2fa6eb;
+}
+.workflowspanelbody button.plainbtn.secondarybtn {
+  background: #e4e4e4;
+}
+.workflowspanelbody button.plainbtn.secondarybtn:hover {
+  background: #d9ecfa;
+}
+.workflowspanelbody button.plainbtn.primarybtn.disabled {
+  background: #86D0F2;
+}
+.workflowspanelbody .workflows ul {
+  border: solid 1px #ddd;
+}
+.workflowspanelbody .workflows li.workflowsListItem {
+  list-style-type: none;
+  border-bottom: solid 1px #fff;
+  /* Each workflow header (name, in use and actions)*/
+}
+.workflowspanelbody .workflows li.workflowsListItem:last-child {
+  border: none;
+}
+.workflowspanelbody .workflows li.workflowsListItem.isNewWorkflow {
+  border-bottom: none;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title {
+  cursor: pointer;
+  width: 100%;
+  height: 32px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.active {
+  border-bottom: none;
+  font-weight: bold;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.odd {
+  background-color: #fafafa;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.even {
+  background-color: #f2f2f2;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.active.odd,
+.workflowspanelbody .workflows li.workflowsListItem div.title.active.even {
+  background-color: #0087c6;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div {
+  float: left;
+  height: 26px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.name {
+  padding-top: 7px;
+  padding-left: 15px;
+  width: calc(100% - 265px);
+  min-width: 535px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.inUse {
+  margin-left: 12px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions {
+  width: 250px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions.open .icon.inUse {
+  background: none;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon {
+  width: 32px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.edit {
+  background-position: -128px -25px;
+  /*&:active {
+                  background-position: -128px -51px; // blue icon
+                }*/
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.edit:hover {
+  background-position: -128px -51px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.edit.lockDelSpace {
+  margin-right: 32px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.delete {
+  background-position: -50px -25px;
+  /*&:active {
+                  background-position: -50px -51px; // blue icon
+                }*/
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.delete:hover {
+  background-position: -50px -51px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.lock {
+  background-position: -230px -25px;
+  /*&:hover {
+                  background-position: -230px -25px; // black icon
+                }*/
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.arrow {
+  width: 32px;
+  height: 32px;
+  background-color: #bfdef6;
+  padding: 0;
+  background-position: -205px -23px;
+  /*&:active {
+                  background-position: -205px -49px; // blue icon
+                }*/
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.arrow.open {
+  background-color: none;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.arrow:hover {
+  background-position: -205px -49px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.arrow.open {
+  background-position: -205px -75px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.inUse {
+  background-position: -257px -25px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .icon.inUse.notUsed {
+  background: none;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .hiddenActions {
+  display: none;
+  width: 206px;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .hiddenActions.open {
+  display: block;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .hiddenActions.open .icon.arrow {
+  background-color: transparent;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title div.actions .hiddenActions .icon {
+  float: right;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.odd:hover,
+.workflowspanelbody .workflows li.workflowsListItem div.title.even:hover {
+  background-color: #daecf9;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.odd:hover div.actions .hiddenActions,
+.workflowspanelbody .workflows li.workflowsListItem div.title.even:hover div.actions .hiddenActions {
+  display: block;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.active.odd:hover,
+.workflowspanelbody .workflows li.workflowsListItem div.title.active.even:hover {
+  background-color: #2fa6eb;
+}
+.workflowspanelbody .workflows li.workflowsListItem div.title.active div.actions .hiddenActions {
+  display: block;
+}
+/* States Dialog */
+.personaBarDialog .workflowState input.stateName {
+  margin-top: 5px;
+  width: 400px;
+}
+.personaBarDialog .panel label.state {
+  color: #777;
+}
+.personaBarDialog .panel.firstPanel {
+  margin-top: 20px;
+}
+/* Left actions icons */
+div.icon {
+  width: 25px;
+  height: 25px;
+  text-indent: -10000px;
+  background-image: url('/DesktopModules/DNNCorp/EvoqContentLibrary/SharedAssets/Images/PersonaBar-icons.png');
+}
+div.icon.lock p {
+  text-indent: 0;
+}
+div.icon.lock .tag-menu {
+  width: 185px;
+  margin-left: -66px;
+  top: -50px;
+}
+body .ui-tooltip {
+  border-width: 2px;
+}
+/* Errors workflows add/edit state */
+.workflowState .validationMessage {
+  position: relative;
+  margin-top: none;
+}
+-44px .workflowState .validationMessage.ie::after {
+  bottom: -6px;
+}
+.workflowState .validationMessage.chrome,
+.workflowState .validationMessage.safari,
+.workflowState .validationMessage.ie {
+  top: -46px;
+}
+.workflowState .validationMessage.ff,
+.workflowState .validationMessage.ffosx {
+  top: -45px;
+}
+/* DNN Dialogs */
+#notification-dialog {
+  position: fixed;
+  top: 30%;
+}
+#confirmation-dialog {
+  position: fixed;
+  top: 30%;
+}
+#confirmation-dialog > div.buttonpanel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#confirmation-dialog #confirmbtn.btn.active {
+  background-color: #0281c6;
+  border: solid 1px #0281c6;
+  color: #FFF;
+}
+#confirmation-dialog > div.buttonpanel #confirmbtn {
+  margin-right: 4px;
+}
+#confirmation-dialog > div.buttonpanel #confirmbtn.btn.active:hover {
+  background-color: #028ed9;
+}
+#confirmation-dialog > div.buttonpanel #cancelbtn {
+  margin-left: 4px;
+}
+.tag-menu {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  bottom: 100%;
+  left: 10px;
+  color: #ddd;
+  display: none;
+  font-size: 11px;
+  padding: 10px 10px 10px 15px;
+  position: absolute;
+  text-align: left;
+  width: 250px;
+  z-index: 1000;
+}
+.tag-menu:after {
+  border-left: 7px solid rgba(0, 0, 0, 0);
+  border-right: 7px solid rgba(0, 0, 0, 0);
+  border-top: 7px solid #000000;
+  bottom: -7px;
+  content: "";
+  height: 0;
+  left: 65px;
+  opacity: 0.75;
+  position: absolute;
+  width: 0;
+}
+/* Add/Edit state */
+#page-permissions .dnnGrid.dnnPermissionsGrid.dnnForm .roles-container.dnnFormItem #roleGroupSelector,
+#page-permissions .dnnGrid.dnnPermissionsGrid.dnnForm .roles-container.dnnFormItem #roleSelector {
+  height: 33px;
+}
+/* Notification popup */
+.dnnDialogWhite {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  position: absolute;
+  padding: 15px;
+  background-color: #fff;
+  opacity: 0.9;
+  z-index: 99999;
+  border-radius: 3px;
+  color: #333;
+  display: none;
+}
+.dnnDialogWhite.ui-dialog-content.ui-widget-content {
+  overflow: hidden;
+  min-height: 0px !important;
+}
+.whiteIcon {
+  background-image: url('/DesktopModules/DNNCorp/EvoqContentLibrary/SharedAssets/Images/notifyWhite.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  padding: 7px 0 0 40px;
+  min-height: 31px;
+}
+.dnnFormPopup.dnnClear.dnnNotifDialog {
+  width: auto !important;
+}
+.loading {
+  height: 50px;
+  width: 50px;
+  margin: auto;
+  background: url(/images/loading.gif) no-repeat;
+}
+.dnnNotifDialog .ui-dialog-titlebar {
+  display: none !important;
+}
+.dnnNotifDialog .dnnDialog > p {
+  background-image: url(/DesktopModules/DNNCorp/Workflows/Assets/Images/notify.png);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  padding: 7px 0 5px 40px;
+  min-height: 31px;
+}
+.default-workflow-settings {
+    display: inline-block;
+    margin-top: 40px;
+}

@@ -1,0 +1,250 @@
+/* dashboard */
+div.dashboard-period > select {
+    float: right;
+    height: 35px;
+    width: 70px;
+}
+
+div.dashboard-period-date {
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+div.comparative-term {
+    text-align: right;
+}
+
+div.comparative-term > span {
+    font-family: proxima_nova_c_semibold;
+    text-transform: uppercase;
+    color: #999;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+div.comparative-term > select {
+    border: 1px solid #ccc;
+    padding: 4px;
+}
+
+.analytics-container {
+    border-color: #AAA;
+    border-width: 1px;
+    border-style: solid;
+    margin-bottom: 20px;
+}
+
+.analytics-container svg.donut-chart {
+    padding-top: 60px;
+}
+
+.analytics-container ul.graph-legend {
+    float: inherit;
+    margin-left: 25px;
+    background-color: inherit;
+}
+
+.analytics-container ul.graph-legend > li{
+
+}
+
+.analytics-container ul.graph-legend > li > div{
+     height: 20px;
+     width: 20px;
+ }
+
+.analytics-container .chart-container{
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.siteMetrics {
+    width: 100%;
+    background-color: #EEE;
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+    border-radius: 3px;
+}
+
+.siteMetrics > div {
+    display: inline-block;
+    text-align: center;
+    width: 32%;
+    padding-top: 10px;
+}
+
+.siteMetrics > div.middle {
+    border-right: 1px solid #AAA;
+    border-left: 1px solid #AAA;
+}
+
+.siteMetrics > div > div {
+    height:40px;
+}
+
+.siteMetrics .metric-name {
+    color: #0E181C;
+    font-family: proxima_nova_semibold;
+    font-size: 13px;
+}
+
+.siteMetrics .metric-value {
+    color: #0E181C;
+    font-family: proxima_nova_semibold;
+    font-size: 20px;
+}
+
+.siteMetrics .metric-time {
+    color: #0E181C;
+    font-family: proxima_nova_semibold;
+    font-size: 20px;
+    margin-top: 9px;
+    margin-bottom: -9px;
+}
+
+.analytics-container > table.cmxtbl {
+    overflow: hidden;
+    border: none;
+}
+
+.analytics-container > table.cmxtbl td,
+.analytics-container > table.cmxtbl th {
+    border: none;
+}
+
+.analytics-container > table.cmxtbl th {
+    border-bottom: 1px solid #ddd;
+}
+
+.analytics-container > table.cmxtbl.middleside {
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    overflow: inherit;
+}
+
+.analytics-container > table.cmxtbl.rightside {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #eaeaea;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.analytics-container > table.cmxtbl.leftside {
+    border-left: 1px solid #eaeaea;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.analytics-container > table.cmxtbl td {
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.analytics-container > table.cmxtbl th {
+    background-color: #eaeaea;
+}
+
+.analytics-container > table.cmxtbl th > a,
+.analytics-container > table.cmxtbl td > span {
+    color: black;
+    text-transform: none;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.analytics-container > table.cmxtbl td > span {
+    max-width: 188px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.analytics-container .label-col {
+    width: 190px;
+}
+
+.analytics-container .value-col{
+    width: 75px;
+}
+
+.donut-chart {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.donut-chart-tooltip {
+    background-color: #002e47;
+    opacity: 0.9;
+    position: absolute;
+    border-radius: 7px;
+    padding: 15px;
+    width: 80px;
+}
+
+.donut-chart-tooltip > span.title {
+    color: #c8c8c8;
+    font-family: proxima_nova_c_semibold;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.donut-chart-tooltip > span.info {
+    color: #ffffff;
+    font-family: proxima_nova_semibold;
+    display: block;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+}
+
+.donut-chart-tooltip-anchor {
+    left: 42px;
+    position: absolute;
+    bottom: 0;
+}
+
+.donut-chart-tooltip-anchor:after {
+    border-left: 7px solid rgba(0, 0, 0, 0);
+    border-right: 7px solid rgba(0, 0, 0, 0);
+    border-top: 7px solid #002e47;
+    bottom: -7px;
+    content: "";
+    height: 0;
+    opacity: 0.9;
+    position: absolute;
+    width: 0;
+}
+
+.donut-chart-container .graph-legend {
+    background-color: inherit;
+    float: inherit;
+    width: 200px;
+}
+
+.donut-chart-container .graph-legend > li {
+    display: block;
+    height: 55px;
+    margin: 10px;
+    width: 80px;
+}
+.donut-chart-container .graph-legend > li:last-child {
+    margin: 10px;
+}
+.donut-chart-container .graph-legend > li.item-left {
+    float: left;
+}
+
+.donut-chart-container .graph-legend > li.item-right {
+    float: right;
+}
+
+.donut-chart-container .graph-legend .value {
+    font-size: 24px;
+    display: block;
+    padding-left: 20px;
+}

@@ -1,0 +1,150 @@
+﻿<div id="site-traffic-panel">
+    <div class="dashboard-period-date" data-bind="html: periodLabel"></div>
+
+    <div class="dashboard-period">
+        <select data-bind="value: period, options: periods, optionsText: 'label', optionsValue: 'value'"></select>
+    </div>
+    <h2 data-bind="html: $root.contentResx.analytics_Dashboard"></h2>
+    <div class="clear"></div>
+
+    <h3 data-bind="html: $root.contentResx.analytics_PageViewActivity"></h3>
+
+    <div class="analytics-container">
+        <div id="page-views" class="chart-container">
+            <div class="line-chart-tooltip" style="display: none;">
+                <span class="title"></span>
+                <span class="info line-1"></span>
+                <span class="info line-2"></span>
+                <div class="line-chart-tooltip-anchor"></div>
+            </div>
+            <svg class="line-chart"></svg>
+        </div>
+        <ul id="page-views-legend" class="graph-legend"></ul>
+
+        <div class="siteMetrics">
+            <div class="first">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_PageViews"></span>
+                <div class="metric-value" data-bind="html: summary.totalPageViews"></div>
+            </div>
+            <div class="middle">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_UniqueVisitors"></span>
+                <div class="metric-value" data-bind="html: summary.totalVisits"></div>
+            </div>
+            <div class="last">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_UniqueSessions"></span>
+                <div class="metric-value" data-bind="html: summary.totalSessions"></div>
+            </div>
+        </div>
+        <div class="siteMetrics">
+            <div>
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_AverageTime"></span>
+                <div class="metric-value" data-bind="html: summary.averageTimeOnPage"></div>
+            </div>
+            <div class="middle">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_BounceRate"></span>
+                <div class="metric-value" data-bind="html: summary.bounceRate"></div>
+            </div>
+            <div class="last"></div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <h3 data-bind="html: $root.contentResx.analytics_SiteActivities"></h3>
+    <div class="analytics-container" data-bind="with: topReferrers">
+        <table class="cmxtbl">
+            <colgroup>
+                <col class="col-label"/>
+                <col class="col-count"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="label-col"><a data-bind="html: $root.contentResx.analytics_TopReferrers"></a></th>
+                <th class="value-col"></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: results">
+            <tr>
+                <td><span data-bind="html: label"></span></td>
+                <td><span data-bind="html: count"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+
+    <div class="analytics-container" data-bind="with: topPages">
+        <table class="cmxtbl">
+            <colgroup>
+                <col class="col-label"/>
+                <col class="col-count"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="label-col"><a data-bind="html: $root.contentResx.analytics_TopPages"></a></th>
+                <th class="value-col"></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: results">
+            <tr>
+                <td><span data-bind="html: label"></span></td>
+                <td><span data-bind="html: count"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+
+    <div class="analytics-container" data-bind="with: conversions">
+        <table class="cmxtbl">
+            <colgroup>
+                <col class="col-label"/>
+                <col class="col-count"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="label-col"><a data-bind="html: $root.contentResx.analytics_Conversions"></a></th>
+                <th class="value-col"></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: results">
+            <tr>
+                <td><span data-bind="html: label"></span></td>
+                <td><span data-bind="html: count"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+
+    <h3 data-bind="html: $root.contentResx.analytics_Channels"></h3>
+    <div class="analytics-container channels-devices">
+        <div class="chart-container donut-chart-container">
+            <div class="clear" id="channels-svg" style="position: relative">
+                <div class="donut-chart-center" id="channels-ratio"></div>
+            </div>
+            <div class="donut-chart-tooltip align-center" style="display: none;">
+                <span class="title"></span>
+                <span class="info line-1"></span>
+                <div class="donut-chart-tooltip-anchor"></div>
+            </div>
+            <ul id="channels-legend" class="graph-legend"></ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <h3 data-bind="html: $root.contentResx.analytics_Devices"></h3>
+    <div class="analytics-container channels-devices">
+        <div class="chart-container donut-chart-container">
+            <div class="clear" id="devices-svg" style="position: relative">
+                <div class="donut-chart-center" id="devices-ratio"></div>
+            </div>
+            <div class="donut-chart-tooltip align-center" style="display: none;">
+                <span class="title"></span>
+                <span class="info line-1"></span>
+                <div class="donut-chart-tooltip-anchor"></div>
+            </div>
+            <ul id="devices-legend" class="graph-legend"></ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,807 @@
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/***** Create ContentLayouts tables/sp *****/
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ContentLayouts]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE {databaseOwner}[{objectQualifier}ContentLayouts](
+	    [Id] [INT] IDENTITY(1,1) NOT NULL,
+        [PortalId] [INT] NOT NULL,
+	    [TabId] [INT] NOT NULL,
+	    [PaneName] [NVARCHAR](50) NOT NULL,
+	    [ControlName] [NVARCHAR](240) NOT NULL,
+	    [Position] [INT] NOT NULL,
+        [ColumnSizes] [NVARCHAR](240) NULL,
+	    [Enabled] [BIT] NOT NULL DEFAULT(0),
+        [CreatedByUserID] [INT] NOT NULL,
+		[CreatedOnDate] [DATETIME] NOT NULL,
+		[LastModifiedByUserID] [INT] NOT NULL,
+		[LastModifiedOnDate] [DATETIME] NOT NULL,
+        CONSTRAINT [PK_{objectQualifier}ContentLayouts] PRIMARY KEY CLUSTERED ([Id] ASC)
+    ) ON [PRIMARY]
+
+    ALTER TABLE {databaseOwner}[{objectQualifier}ContentLayouts] 
+        WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}ContentLayouts_{objectQualifier}TabId] FOREIGN KEY([TabId])
+        REFERENCES {databaseOwner}[{objectQualifier}Tabs] ([TabID])
+    ON DELETE CASCADE
+
+    ALTER TABLE {databaseOwner}[{objectQualifier}ContentLayouts] 
+        WITH CHECK ADD  CONSTRAINT [FK_{objectQualifier}ContentLayouts_{objectQualifier}PortalId] FOREIGN KEY([PortalId])
+        REFERENCES {databaseOwner}[{objectQualifier}Portals] ([PortalId])
+
+    CREATE NONCLUSTERED INDEX IX_{objectQualifier}ContentLayouts_PortalId ON {databaseOwner}[{objectQualifier}ContentLayouts](PortalId) 
+END
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetContentLayouts]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetContentLayouts]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetContentLayouts]
+	@PortalId INT
+AS
+BEGIN
+	SELECT   
+	  [Id],
+      [PortalId],
+      [TabId],
+      [PaneName],
+      [ControlName],
+      [Position],
+      [ColumnSizes],
+      [Enabled],
+      [CreatedByUserID],
+      [CreatedOnDate],
+      [LastModifiedByUserID],
+      [LastModifiedOnDate]
+	FROM {databaseOwner}[{objectQualifier}ContentLayouts]
+	WHERE [PortalId] = @PortalId OR @PortalId IS NULL
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SaveContentLayout]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}SaveContentLayout]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}SaveContentLayout]
+    @Id INT,
+	@PortalId INT,
+    @TabId INT,
+    @PaneName NVARCHAR(50),
+    @ControlName NVARCHAR(240),
+    @Position INT,
+    @ColumnSizes NVARCHAR(240) = NULL,
+    @Enabled BIT = 1,
+    @CreatedByUserID [INT] = -1,
+	@LastModifiedByUserID [INT] = -1
+AS
+BEGIN
+    IF ISNULL(@Id, 0) = 0
+    BEGIN
+        INSERT INTO {databaseOwner}[{objectQualifier}ContentLayouts](
+            [PortalId],
+            [TabId],
+            [PaneName],
+            [ControlName],
+            [Position],
+            [ColumnSizes],
+            [Enabled],
+            [CreatedByUserID],
+            [CreatedOnDate],
+            [LastModifiedByUserID],
+            [LastModifiedOnDate]
+        ) VALUES (
+            @PortalId,
+            @TabId,
+            @PaneName,
+            @ControlName,
+            @Position,
+            @ColumnSizes,
+            @Enabled,
+            @CreatedByUserID,
+            GETDATE(),
+            @LastModifiedByUserID,
+            GETDATE()
+        )
+
+        SELECT @Id = SCOPE_IDENTITY()
+    END
+    ELSE
+    BEGIN
+        UPDATE {databaseOwner}[{objectQualifier}ContentLayouts] SET
+            [PortalId] = @PortalId,
+            [TabId] = @TabId,
+            [PaneName] = @PaneName,
+            [ControlName] = @ControlName,
+            [Position] = @Position,
+            [ColumnSizes] = @ColumnSizes,
+            [Enabled] = @Enabled,
+            [LastModifiedByUserID] = @LastModifiedByUserID,
+            [LastModifiedOnDate] = GETDATE()
+        WHERE Id = @Id
+    END
+	SELECT @Id
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DeleteContentLayout]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}DeleteContentLayout]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteContentLayout]
+    @Id INT
+AS
+BEGIN
+    DELETE FROM {databaseOwner}[{objectQualifier}ContentLayouts] WHERE Id = @Id
+END
+GO
+
+/********************************************************
+ * TABLE: Analytics_PageViews
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_PageViews') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_PageViews
+			(
+				[PageViewId] [bigint] IDENTITY(1,1) NOT NULL,
+				[DateId] int NOT NULL,
+				[VisitorGuid] [uniqueidentifier] NOT NULL,
+				[SessionGuid] [uniqueidentifier] NOT NULL,
+				[PortalId] [int] NOT NULL,
+				[TabId] [int] NOT NULL,
+				[UserId] [int] NOT NULL,
+				[Device] [int] NOT NULL,
+				[OperatingSystem] nvarchar(200) NOT NULL,
+				[Channel] [int] NOT NULL,
+				[ReferrerHost] nvarchar(200) NOT NULL,
+				[ReferrerDetail] nvarchar(200) NOT NULL,
+				[ReferrerPageId] int NOT NULL,
+				[ExitPage] nvarchar(200) NOT NULL,
+				[TotalSeconds] [int] NOT NULL,
+				[UserAgent] [nvarchar](200) NOT NULL,
+				[PageLanguage] [nvarchar](10) NOT NULL,
+				[IPAddress] [nvarchar](50) NOT NULL,
+				[UrlQuery] [nvarchar](200) NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_PageViews] PRIMARY KEY CLUSTERED ( [PageViewId] ASC )		
+			) 
+	END
+GO
+
+
+
+/********************************************************
+ * PROCEDURE: Analytics_LogPageView
+ ********************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Analytics_LogPageView]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}Analytics_LogPageView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Analytics_LogPageView]
+	@DateId				INT,
+	@VisitorGuid		UNIQUEIDENTIFIER,
+	@SessionGuid		UNIQUEIDENTIFIER,
+	@PortalId			INT,
+	@TabId				INT,
+	@UserId				INT,
+	@Device				INT,
+	@OperatingSystem	NVARCHAR(200),
+	@Channel			INT,
+	@ReferrerHost		NVARCHAR(200),
+	@ReferrerDetail		NVARCHAR(200),
+	@ReferrerPageId		INT,
+	@ExitPage			NVARCHAR(200),
+	@TotalSeconds		INT,
+	@UserAgent			NVARCHAR(200),
+	@PageLanguage		NVARCHAR(10),
+	@IPAddress			NVARCHAR(50),
+	@UrlQuery			NVARCHAR(200)
+
+AS
+BEGIN
+	INSERT INTO {objectQualifier}Analytics_PageViews (
+		DateId,
+		VisitorGuid,
+		SessionGuid,
+		PortalId,
+		TabId,
+		UserId,
+		Device,
+		OperatingSystem,
+		Channel,
+		ReferrerHost,
+		ReferrerDetail,
+		ReferrerPageId,
+		ExitPage,
+		TotalSeconds,
+		UserAgent,
+		PageLanguage,
+		IPAddress,
+		UrlQuery
+	)
+	VALUES (
+		@DateId,
+		@VisitorGuid,
+		@SessionGuid,
+		@PortalId,
+		@TabId,
+		@UserId,
+		@Device,
+		@OperatingSystem,
+		@Channel,
+		@ReferrerHost,
+		@ReferrerDetail,
+		@ReferrerPageId,
+		@ExitPage,
+		@TotalSeconds,
+		@UserAgent,
+		@PageLanguage,
+		@IPAddress,
+		@UrlQuery
+	)END
+GO
+
+
+/********************************************************
+ * PROCEDURE: Analytics_ProcessPageViews
+ ********************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Analytics_ProcessPageViews]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}Analytics_ProcessPageViews]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Analytics_ProcessPageViews]
+	@FirstPageId		INT,
+	@BatchSize			INT
+AS
+BEGIN
+	DECLARE @LastPageId BIGINT
+	--Find LastPageId based on batch size
+	;WITH PageViews AS
+	(
+	SELECT top (@BatchSize) PageViewId from {databaseOwner}{objectQualifier}Analytics_PageViews where PageViewId > @FirstPageId
+	)
+	SELECT @LastPageId = MAX(PageViewId) from PageViews
+	IF @LastPageId IS NULL
+	BEGIN
+		SELECT @FirstPageId
+		RETURN
+	END
+	SELECT @LastPageId
+
+	--Process Devices
+	;WITH Source as (
+		SELECT DateId, PortalId, TabId, Device, OperatingSystem, COUNT(*) AS PageViews
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		GROUP BY DateId, PortalId, TabId, Device, OperatingSystem
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_Devices AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId    = s.TabId
+		AND f.Device   = s.Device
+		AND f.OperatingSystem = s.OperatingSystem) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, Device, OperatingSystem, PageViews) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.Device, s.OperatingSystem, s.PageViews)
+	WHEN MATCHED 
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews;
+
+	--Process PageViews
+	;WITH Source as (
+		SELECT pv.DateId, pv.PortalId, pv.TabId, t.TabName, COUNT(*) AS PageViews, SUM(TotalSeconds) AS TimeOnPage
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews pv WITH (NOLOCK)
+		INNER JOIN {databaseOwner}{objectQualifier}Tabs t WITH (NOLOCK)
+			ON pv.TabId = t.TabId
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		GROUP BY DateId, pv.PortalId, pv.TabId, t.TabName
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_PageViews AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId    = s.TabId) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, PageName, PageViews, TimeOnPage) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.TabName ,s.PageViews, s.TimeOnPage)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews,
+						f.TimeOnPage = f.TimeOnPage + s.TimeOnPage;
+
+	--Process Sessions
+	;WITH Source as (
+		SELECT pv.DateId, pv.PortalId, pv.TabId, pv.SessionGuid, COUNT(*) AS PageViews, SUM(TotalSeconds) AS TimeOnPage
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews pv WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		GROUP BY DateId, pv.PortalId, pv.TabId, pv.SessionGuid
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_Sessions AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId    = s.TabId
+		AND f.SessionGuid = s.SessionGuid) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, SessionGuid, PageViews, TimeOnPage) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.SessionGuid ,s.PageViews, s.TimeOnPage)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews,
+						f.TimeOnPage = f.TimeOnPage + s.TimeOnPage;
+
+	--Process Visitors
+	;WITH Source as (
+		SELECT pv.DateId, pv.PortalId, pv.TabId, pv.VisitorGuid, COUNT(*) AS PageViews, SUM(TotalSeconds) AS TimeOnPage
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews pv WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		GROUP BY DateId, pv.PortalId, pv.TabId, pv.VisitorGuid
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_Visitors AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId    = s.TabId
+		AND f.VisitorGuid = s.VisitorGuid) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, VisitorGuid, PageViews, TimeOnPage) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.VisitorGuid ,s.PageViews, s.TimeOnPage)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews,
+						f.TimeOnPage = f.TimeOnPage + s.TimeOnPage;
+
+	--Process Users
+	;WITH Source as (
+		SELECT pv.DateId, pv.PortalId, pv.TabId, pv.UserId, COUNT(*) AS PageViews, SUM(TotalSeconds) AS TimeOnPage
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews pv WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		AND UserId > 0
+		GROUP BY DateId, pv.PortalId, pv.TabId, pv.UserId
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_Users AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId   = s.TabId
+		AND f.UserId   = s.UserId) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, UserId, PageViews, TimeOnPage) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.UserId ,s.PageViews, s.TimeOnPage)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews,
+						f.TimeOnPage = f.TimeOnPage + s.TimeOnPage;
+
+	--Process Referrers 
+	;WITH Source as (
+		SELECT DateId, PortalId, TabId, Channel, ReferrerHost, ReferrerDetail, 
+			   ReferrerPageId, COUNT(*) AS PageViews
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		AND ((Channel > -1 OR ReferrerPageId > 0) AND ReferrerPageId <> TabId)
+		GROUP BY DateId, PortalId, TabId, Channel, ReferrerHost, ReferrerDetail, ReferrerPageId
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_Referrers AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId   = s.TabId
+		AND f.ReferrerDetail = s.ReferrerDetail) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, Channel, ReferrerHost, ReferrerDetail, ReferrerPageId, PageViews) 
+			VALUES(s.DateId, s.PortalId, s.TabId, s.Channel, s.ReferrerHost, s.ReferrerDetail, s.ReferrerPageId, s.PageViews)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews;
+
+	--Process Exit Pages 
+	;WITH Source as (
+		SELECT DateId, PortalId, ReferrerPageId, ExitPage, COUNT(*) AS PageViews
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		AND (Channel = -1 AND ReferrerPageId <> TabId)
+		GROUP BY DateId, PortalId, ReferrerPageId, ExitPage
+	) 
+	MERGE {databaseOwner}{objectQualifier}Analytics_Fact_ExitPages AS f
+	USING Source AS s
+		ON (f.DateId   = s.DateId 
+		AND f.PortalId = s.PortalId
+		AND f.PageId   = s.ReferrerPageId
+		AND f.ExitPage = s.ExitPage) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(DateId, PortalId, PageId, ExitPage, PageViews) 
+			VALUES(s.DateId, s.PortalId, s.ReferrerPageId, s.ExitPage, s.PageViews)
+	WHEN MATCHED
+		THEN UPDATE SET f.PageViews = f.PageViews + s.PageViews;
+
+	--Process Mechanics for Viewers 
+	;WITH Source as (
+		SELECT VisitorGuid, PortalId
+		FROM {databaseOwner}{objectQualifier}Analytics_PageViews WITH (NOLOCK)
+		WHERE PageviewId > @FirstPageId AND PageViewId <=  @LastPageId
+		AND UserId < 1
+		GROUP BY VisitorGuid, PortalId
+	) 
+	MERGE {databaseOwner}{objectQualifier}Mechanics_VisitorScoring AS f
+	USING Source AS s
+		ON (f.VisitorId   = s.VisitorGuid 
+		AND f.PortalId = s.PortalId) 
+	WHEN NOT MATCHED BY TARGET 
+		THEN INSERT(VisitorId, PortalId, ExperiencePoints, ReputationPoints) 
+			VALUES(s.VisitorGuid, s.PortalId, 0, 0)
+	WHEN MATCHED
+		THEN UPDATE SET f.LastModifiedOnDate = getutcdate();
+
+END
+GO
+
+/********************************************************
+ * TABLE: Analytics_PageEvents
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_EventData') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_EventData
+			(
+				[EventDataId] [BIGINT] IDENTITY(1,1) NOT NULL,
+				[PageViewId] [BIGINT] NOT NULL,
+				[VisitorId] [UNIQUEIDENTIFIER] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[TabId] [INT] NOT NULL,
+				[UserId] [INT] NOT NULL,
+				[PortalAliasId] [INT] NOT NULL,
+				[EventCategory] [NVARCHAR](256) NOT NULL,
+				[EventName] [NVARCHAR](256) NOT NULL,
+				[EventAction] [NVARCHAR](256) NOT NULL,
+				[EventValue] [NVARCHAR](2000) NOT NULL,
+				[EventDate] [DATETIME] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_EventData] PRIMARY KEY CLUSTERED ( [EventDataId] ASC )		
+			) 
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Visitors
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Visitors') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Visitors
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[VisitorGuid] [UNIQUEIDENTIFIER] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				[TimeOnPage] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Visitors] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			)
+			
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_Visitors ON {databaseOwner}{objectQualifier}Analytics_Fact_Visitors 
+			([VisitorGuid], [DateId], [PageId], [PortalId]) INCLUDE ([PageViews],[TimeOnPage]) 
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Users
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Users') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Users
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[UserId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				[TimeOnPage] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Users] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			)
+			
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_Users ON {databaseOwner}{objectQualifier}Analytics_Fact_Users 
+			([UserId], [DateId], [PageId], [PortalId]) 
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Devices
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Devices') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Devices
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[Device] [INT] NOT NULL,
+				[OperatingSystem] NVARCHAR(200) NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Devices] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			) 
+
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_Devices ON {databaseOwner}{objectQualifier}Analytics_Fact_Devices
+			([DateId], [PageId], [PortalId], [Device], [OperatingSystem])
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Conversions
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Conversions') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Conversions
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[EventName] NVARCHAR(200) NOT NULL,
+				[EventValue] NVARCHAR(200) NOT NULL,
+				[EventCount] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Conversions] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			) 
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_ExitPages
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_ExitPages') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_ExitPages
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[ExitPage] NVARCHAR(200) NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_ExitPages] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			) 
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Referrers
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Referrers') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Referrers
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[Channel] [INT] NOT NULL,
+				[ReferrerHost] NVARCHAR(200) NOT NULL,
+				[ReferrerDetail] NVARCHAR(200) NOT NULL,
+				[ReferrerPageId] INT NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Referrers] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			) 
+
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_Referrers ON {databaseOwner}{objectQualifier}Analytics_Fact_Referrers 
+			([DateId], [PageId], [PortalId], [Channel], [ReferrerDetail])
+
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_PageViews
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_PageViews') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_PageViews
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[PageName] [NVARCHAR](200) NOT NULL,
+				[PageViews] [INT] NOT NULL,
+				[TimeOnPage] [INT] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_PageViews_Page] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			)
+
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_PageViews ON {databaseOwner}{objectQualifier}Analytics_Fact_PageViews 
+			([DateId], [PageId], [PortalId])
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_Sessions
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_Sessions') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_Sessions
+		(
+			[FactId] [INT] IDENTITY(1,1) NOT NULL,
+			[DateId] [INT] NOT NULL,
+			[PortalId] [INT] NOT NULL,
+			[SessionGuid] [UNIQUEIDENTIFIER] NOT NULL,
+			[PageId] [INT] NOT NULL,
+			[PageViews] [INT] NOT NULL,
+			[TimeOnPage] [INT] NOT NULL,
+			CONSTRAINT [PK_{objectQualifier}Analytics_Fact_Sessions] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+		)
+
+		CREATE NONCLUSTERED INDEX IX_{objectQualifier}Analytics_Fact_Sessions ON {databaseOwner}{objectQualifier}Analytics_Fact_Sessions 
+			([SessionGuid], [DateId], [PageId], [PortalId])
+
+	END
+GO
+
+/********************************************************
+ * FUNCTION: Analytics_IsPagePersonalized
+ ********************************************************/
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = object_id(N'{databaseOwner}[{objectQualifier}Analytics_IsPagePersonalized]') AND type IN (N'FN', N'IF', N'TF'))
+	DROP FUNCTION {databaseOwner}[{objectQualifier}Analytics_IsPagePersonalized]
+GO
+
+CREATE FUNCTION {databaseOwner}[{objectQualifier}Analytics_IsPagePersonalized] (
+	@PageId INT
+)
+RETURNS BIT
+
+AS
+	BEGIN
+		DECLARE @IsPersonalized BIT
+		SET @IsPersonalized = 0
+
+		IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ContentPersonalization_PersonalizedTabs]') AND type in (N'U'))
+			BEGIN
+				IF (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}ContentPersonalization_PersonalizedTabs WHERE OriginalTabId = @PageId) > 0
+					SET @IsPersonalized = 1
+			END
+
+		RETURN @IsPersonalized
+	END
+GO
+
+/********************************************************
+ * TABLE: Analytics_Fact_LinkClicked
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Fact_LinkClicked') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+	BEGIN
+		CREATE TABLE {databaseOwner}{objectQualifier}Analytics_Fact_LinkClicked
+			(
+				[FactId] [INT] IDENTITY(1,1) NOT NULL,
+				[DateId] [INT] NOT NULL,
+				[PortalId] [INT] NOT NULL,
+				[PageId] [INT] NOT NULL,
+				[Link] NVARCHAR(2000) NOT NULL,
+				[LinkCount] [INT] NOT NULL,
+				[UserId] [INT] NOT NULL,
+				[VisitorId] [UNIQUEIDENTIFIER] NOT NULL,
+				CONSTRAINT [PK_{objectQualifier}Analytics_Fact_LinkClicked] PRIMARY KEY CLUSTERED ( [FactId] ASC )
+			) 
+	END
+GO
+
+/** Get Tab by ContentItem Id **/
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetTabByContentItemId]', N'P') IS NOT NULL
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabByContentItemId]
+GO
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabByContentItemId]
+	@ContentItemId int
+AS
+BEGIN
+	SELECT *
+	FROM   {databaseOwner}{objectQualifier}vw_Tabs
+	WHERE ContentItemId = @ContentItemId
+END
+GO
+
+/* Add Complete and Discard Workflow Tab Actions */
+DECLARE @ContentTypeId INT
+SELECT @ContentTypeId = ContentTypeId
+    FROM    {databaseOwner}{objectQualifier}ContentTypes
+    WHERE   ContentType = 'Tab'
+
+IF @ContentTypeId IS NOT NULL
+BEGIN
+	DECLARE @ActionId INT
+	/* Add Complete Workflow Tab Action */ 
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'CompleteWorkflow' AND ActionSource = 'Evoq.Content.Library.Components.Workflow.Actions.WorkflowCompleteTabAction, Evoq.Content.Library'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'CompleteWorkflow'
+			   ,'Evoq.Content.Library.Components.Workflow.Actions.WorkflowCompleteTabAction, Evoq.Content.Library')
+	END
+	
+	/* Add Discard Workflow Tab Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'DiscardWorkflow' AND ActionSource = 'Evoq.Content.Library.Components.Workflow.Actions.WorkflowDiscardTabAction, Evoq.Content.Library'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'DiscardWorkflow'
+			   ,'Evoq.Content.Library.Components.Workflow.Actions.WorkflowDiscardTabAction, Evoq.Content.Library')
+	END
+
+	/* Add Discard State Tab Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'DiscardState' AND ActionSource = 'Evoq.Content.Library.Components.Workflow.Actions.StateDiscardTabAction, Evoq.Content.Library'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'DiscardState'
+			   ,'Evoq.Content.Library.Components.Workflow.Actions.StateDiscardTabAction, Evoq.Content.Library')
+	END
+
+	/* Add Complete State Tab Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'CompleteState' AND ActionSource = 'Evoq.Content.Library.Components.Workflow.Actions.StateCompleteTabAction, Evoq.Content.Library'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'CompleteState'
+			   ,'Evoq.Content.Library.Components.Workflow.Actions.StateCompleteTabAction, Evoq.Content.Library')
+	END
+
+	/* Add Start Workflow Tab Action */
+	SET @ActionId = NULL
+	SELECT @ActionId = ActionId
+	FROM {databaseOwner}{objectQualifier}ContentWorkflowActions
+	WHERE ActionType = 'StartWorkflow' AND ActionSource = 'Evoq.Content.Library.Components.Workflow.Actions.WorkflowStartTabAction, Evoq.Content.Library'
+
+	IF @ActionId IS NULL
+	BEGIN
+		INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowActions]
+			   ([ContentTypeId]
+			   ,[ActionType]
+			   ,[ActionSource])
+		 VALUES
+			   (@ContentTypeId
+			   ,'StartWorkflow'
+			   ,'Evoq.Content.Library.Components.Workflow.Actions.WorkflowStartTabAction, Evoq.Content.Library')
+	END
+END
+GO
+
+/* Workflow notification updates */
+UPDATE {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes SET IsTask = 1
+    WHERE Name = 'ContentWorkflowStartWorkflowNotification' OR Name = 'ContentWorkflowNotification';
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

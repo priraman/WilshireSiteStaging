@@ -1,0 +1,120 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+DECLARE @damModuleDefinition INT
+
+SELECT @damModuleDefinition = MD.[ModuleDefID]
+FROM {databaseOwner}{objectQualifier}ModuleDefinitions MD
+WHERE MD.DefinitionName = 'Digital Asset Management'
+
+IF NOT EXISTS (SELECT *  FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'GroupUpdates')
+	EXEC	{databaseOwner}{objectQualifier}AddModuleControl
+		@ModuleDefID = @damModuleDefinition,
+		@ControlKey = N'GroupUpdates',
+		@ControlTitle = N'GroupUpdates',
+		@ControlSrc = N'DesktopModules/DigitalAssets/GroupUpdates.ascx',
+		@IconFile = NULL,
+		@ControlType = 1,
+		@ViewOrder = 0,
+		@HelpUrl = NULL,
+		@SupportsPartialRendering = 0,
+		@SupportsPopUps = 1,
+		@CreatedByUserID = -1
+
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}GetContentByTag') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetContentByTag
+GO
+
+/** Fix issue CONTENT-1751 **/
+/****************************/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileTags]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileTags]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetFileTags]	
+	@PortalId int
+AS
+BEGIN
+	SELECT t.TermID, t.Name, f.FileId, f.FolderId
+	FROM  {databaseOwner}{objectQualifier}vw_Files f
+		JOIN {databaseOwner}{objectQualifier}ContentItems c ON f.ContentItemID = c.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}ContentTypes ty ON c.ContentTypeID = ty.ContentTypeID
+		JOIN {databaseOwner}{objectQualifier}ContentItems_Tags ct ON f.ContentItemID = ct.ContentItemID
+		JOIN {databaseOwner}{objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+	WHERE ISNULL(@PortalId, -1) = ISNULL(f.PortalId, -1)
+	  AND ty.ContentType = 'File'
+END
+GO
+
+/** Fix issue CONTENT-1848 **/
+/****************************/
+IF EXISTS (SELECT *	FROM {databaseOwner}[{objectQualifier}CoreMessaging_SubscriptionTypes]	WHERE SubscriptionName = 'DNNCorp_File')
+	DELETE FROM {databaseOwner}[{objectQualifier}CoreMessaging_SubscriptionTypes]	WHERE SubscriptionName = 'DNNCorp_File'
+GO
+
+DECLARE @desktopModuleId INT;
+
+SELECT @desktopModuleId = DesktopModuleID FROM {databaseOwner}[{objectQualifier}vw_DesktopModules]
+WHERE FriendlyName = 'Digital Asset Management'
+
+EXEC {databaseOwner}[{objectQualifier}CoreMessaging_AddSubscriptionType ] @SubscriptionName = 'DNNCorp_File', @FriendlyName = 'File Subscriptions', @DesktopModuleId = @desktopModuleID
+
+GO
+
+IF EXISTS (SELECT *	FROM {databaseOwner}[{objectQualifier}CoreMessaging_SubscriptionTypes]	WHERE SubscriptionName = 'DNNCorp_Folder')
+	DELETE FROM {databaseOwner}[{objectQualifier}CoreMessaging_SubscriptionTypes]	WHERE SubscriptionName = 'DNNCorp_Folder'
+GO
+
+DECLARE @desktopModuleId INT;
+
+SELECT @desktopModuleId = DesktopModuleID FROM {databaseOwner}[{objectQualifier}vw_DesktopModules]
+WHERE FriendlyName = 'Digital Asset Management'
+
+EXEC {databaseOwner}[{objectQualifier}CoreMessaging_AddSubscriptionType ] @SubscriptionName = 'DNNCorp_Folder', @FriendlyName = 'Folder Subscriptions', @DesktopModuleId = @desktopModuleID
+
+GO
+/* Add Schedule Task to nofity administrators about documents that are about to expire */
+
+IF NOT exists (SELECT ScheduleID FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.DigitalAssets.Components.Controllers.ExpiredDocumentsScheduler, DotNetNuke.Professional.DigitalAssets')
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}Schedule
+	(
+		TypeFullName,
+		TimeLapse,
+		TimeLapseMeasurement,
+		RetryTimeLapse,
+		RetryTimeLapseMeasurement,
+		RetainHistoryNum,
+		AttachToEvent,
+		CatchUpEnabled,
+		Enabled,
+		ObjectDependencies,
+		FriendlyName
+	)
+	VALUES
+	(
+		'DotNetNuke.Professional.DigitalAssets.Components.Controllers.ExpiredDocumentsScheduler, DotNetNuke.Professional.DigitalAssets',
+		1,
+		'd',
+		30,
+		'm',
+		5,
+		'',
+		0,
+		1,
+		'ExpiredDocumentsScheduler',
+		'Expired documents Scheduler'
+	)
+END
+GO

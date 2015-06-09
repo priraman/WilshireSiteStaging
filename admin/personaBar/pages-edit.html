@@ -1,0 +1,127 @@
+﻿<div class="page-settings">
+    <div class="title">
+        <span class="caption" data-bind="html: resx.pagesettings_Caption"></span>
+        <span class="page-name" data-bind="html: page().localizedName"></span>
+        <a href="#" class="show-in-page-mgmt" data-bind="html: resx.pagesettings_ShowInPageManagement"></a>
+    </div>
+    <div class="body">
+        <ul class="tabs-nav">
+            <li><a href="#page-details" data-bind="html: resx.pagesettings_Tabs_Details"></a></li>
+            <li><a href="#page-permissions" data-bind="html: resx.pagesettings_Tabs_Permissions"></a></li>
+        </ul>
+        <div class="content-container">
+            <div class="dnnFormMessage dnnFormError" data-bind="visible: status().code > 0 && editType() == '', html: resx['pagesettings_Errors_' + status().message]"></div>
+            <div id="page-details">
+                <div class="summary">
+                    <div class="thumbnail">
+                        <img data-bind="attr: { src: page().thumbnail }" />
+                    </div>
+                    <div class="properties">
+                        <div class="page-name" data-bind="html: page().name().length > 0 ? page().name : '&nbsp;'"></div>
+                        <div class="subtitle page-created">
+                            <span class="caption" data-bind="html: resx.pagesettings_Created"></span>
+                            <span data-bind="html: page().created"></span>
+                        </div>
+                        <div class="subtitle page-hierarchy">
+                            <span class="caption" data-bind="html: resx.pagesettings_Parent"></span>
+                            <span data-bind="html: page().hierarchy().length == 0 ? resx.pagesettings_TopLevel : page().hierarchy"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-form">
+                    <div class="form-item short short-left">
+                        <span class="caption required" data-bind="html: resx.pagesettings_Fields_Name"></span>
+                        <input type="text" data-bind="value: page().name, css: { error: isErrorField('name') }, hasFocus: isErrorField('name'), valueUpdate: 'afterkeydown'" maxlength="50" />
+                    </div>
+                    <div class="form-item short short-right">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Title"></span>
+                        <input type="text" data-bind="value: page().title" maxlength="50" />
+                    </div>
+                    <div class="form-item">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Description"></span>
+                        <textarea type="text" data-bind="value: page().description" />
+                    </div>
+                    <div class="form-item short-left">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Tags"></span>
+                        <input type="text" class="tags-input" data-bind="value: page().tags" />
+                    </div>
+                    <div class="form-item short-right">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Workflow"></span>
+                        <select data-bind="disable: !page().isWorkflowCompleted(),
+                                            options: workflows,
+                                           optionsText: 'WorkflowName',
+                                           optionsValue: 'WorkflowId',
+                                           value: page().workflowId,
+										   event: {change: workflowChanged}"></select>
+                        <span data-bind="visible: !page().isWorkflowCompleted(), html: resx.WorkflowRunning"></span>
+                        <div class="form-item" data-bind="visible: workflowHasBeenChanged() && page().isWorkflowCompleted() && page().hasChild()">
+                            <div class="form-subFields">
+                                <span id="workflowApplyOnSubpagesMessage" data-bind="text: resx.WorkflowApplyOnSubpagesCheckBox"></span>
+                                <input id="workflowApplyOnSubpagesCheckbox" type="checkbox" data-bind="checked: page().applyWorkflowToChildren, disable: !page().isWorkflowPropagationAvailable()"><br />
+                                <span data-bind="text: resx.WorkflowNoteApplyOnSubpages, visible: !page().isWorkflowPropagationAvailable()" class="form-item last dnnFormMessage dnnFormWarning"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item short-left" data-bind="visible: page().customUrlEnabled">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_URL"></span>
+                        <div class="um-page-url-container" data-bind="css: { error: isErrorField('url') }">
+                            <span class="um-alias-caption" data-bind="html: page().alias"></span>
+                            <span class="um-page-url-textbox">
+                                <input type="text" data-bind="value: page().url, hasFocus: isErrorField('url')" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <span class="caption" data-bind="html: resx.pagesettings_Fields_Keywords"></span>
+                        <textarea type="text" data-bind="value: page().keywords" />
+                    </div>
+                    <div class="form-item short-right">
+                        <span class="caption inline" data-bind="html: resx.pagesettings_Fields_Links"></span>
+                        <input type="checkbox" data-bind="checked: page().trackLinks" />
+                    </div>
+                    <div class="form-item last short-left">
+                        <span class="caption inline" data-bind="html: resx.pagesettings_Fields_Menu"></span>
+                        <input type="checkbox" data-bind="checked: page().includeInMenu" />
+                    </div>
+                </div>
+            </div>
+            <div id="page-permissions">
+                <div class="copypermission-container" data-bind="visible: page().hasChild">
+                    <label data-bind="html: resx.pagesettings_CopyPermission"></label>
+                    <a href="#" class="simple-button btn-copypermission" data-bind="html: resx.pagesettings_Update"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="iconbutton-wrapper">
+            <div class="submenuEditBar" data-bind="html: resx.pagesettings_CopyPage"></div>
+            <a class="button left copypage" href="#"></a>
+        </div>
+        <div class="iconbutton-wrapper" data-bind="visible: page().isCopy() == false">
+            <div class="submenuEditBar" data-bind="html: resx.pagesettings_SaveAsTemplate"></div>
+            <a class="button left saveastpl" href="#"></a>
+        </div>
+        <div class="content-changed-tip" data-bind="html: resx.pagesettings_ContentChanged, visible: changed"></div>
+        <a class="button cancel secondarybtn" href="#" data-bind="html: resx.pages_Cancel, visible: changed"></a>
+        <a class="button save primarybtn" data-bind="html: resx.pagesettings_Save"></a>
+    </div>
+</div>
+<div class="dialog-newtpl pageSettingsForm">
+    <div class="dnnFormMessage dnnFormError" data-bind="visible: status().code > 0 && editType() == 'template', html: resx['pagesettings_Errors_' + status().message]"></div>
+    <div class="edit-form">
+        <div class="form-item">
+            <span class="caption" data-bind="html: resx.pagesettings_Fields_TemplateName"></span>
+            <input type="text" data-bind="value: template().name, css: { error: isErrorField('templateName') }, hasFocus: isErrorField('templateName')" maxlength="50" />
+        </div>
+        <div class="form-item">
+            <span class="caption" data-bind="html: resx.pagesettings_Fields_Description"></span>
+            <textarea type="text" data-bind="value: template().description" rows="8" />
+        </div>
+    </div>
+    <div class="actions">
+        <a class="button cancel-tpl secondarybtn" data-bind="html: resx.pages_Cancel"></a>
+        <a class="button savetpl primarybtn" data-bind="html: resx.pagesettings_Done"></a>
+    </div>
+</div>

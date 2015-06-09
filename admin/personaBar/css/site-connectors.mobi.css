@@ -1,0 +1,103 @@
+/* connections */
+.connections-col-checkmark {
+    width: 36px;
+}
+
+.connections-col-favicon {
+    width: 56px;
+}
+
+.connections-col-actions {
+    width: 115px;
+}
+
+table#connectionstbl.cmxtbl tr td {
+    background-color: #fff !important;
+    border-top: 1px solid #ddd;
+}
+
+table#connectionstbl.cmxtbl tr:first-child td,
+table#connectionstbl.cmxtbl tr.edit-row td {
+    border-top: none;
+}
+
+table#connectionstbl span.socialnetwork-connection {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+    table#connectionstbl span.socialnetwork-connection.verified {
+        background: url('../images/icon-connector-verified.png') no-repeat center center;
+    }
+
+table#connectionstbl span.socialnetwork-favicon {
+    display: block;
+    width: 38px;
+    height: 37px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+table#connectionstbl span.socialnetwork-favicon.connected {
+    background-position: 0 -37px;
+}
+
+table#connectionstbl span.socialnetwork-name {
+    text-transform: uppercase;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items {
+     width: 100%;
+     float: none;
+}
+.cmxtbl tr.edit-row > td > div > div.edit-buttons > div {
+    width: 50%;
+    float: left;
+    margin: 0 0 9px 0;
+}
+.cmxtbl tr.edit-row > td > div > div.edit-fields > div > div{
+    width: 100%;
+    margin: 0 0 9px 0;
+}
+.cmxtbl tr.edit-row > td > div > div.edit-items div.clear {
+    width: 100%;
+    float: none;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items label {
+    width: 20%;
+    display: inline-block;
+    text-align: right;
+    margin-right: 8px;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items label.formRequired:after {
+    content: "*";
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: Red;
+    font-size: 16px;
+    line-height: 1em;
+    font-family: proxima_nova_semibold;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items input[type="text"],
+.cmxtbl tr.edit-row > td > div > div.edit-items select {
+    width: 65%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items a.secondarybtn {
+    display: block;
+    float: right;
+    margin-right: 5px;
+}
+
+.cmxtbl tr.edit-row > td > div > div.edit-items a.primarybtn {
+    display: block;
+    float: left;
+    margin-left: 5px;
+}

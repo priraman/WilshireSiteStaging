@@ -1,0 +1,413 @@
+﻿.um-content {
+    padding: 10px 20px;
+}
+
+.um-content .custom-urls-header {
+    height: 32px;
+    padding: 10px;
+    background: #e5e5e5;
+}
+
+.um-content .custom-urls-header div {
+    margin: 0;
+    float: left;
+}
+
+.um-content .custom-urls-header a.dnnSecondaryAction {
+    float: right;
+}
+
+.um-content .system-generated-urls-header {
+    margin: 20px 0 0 0;
+    height: 32px;
+    padding: 10px;
+    background: #e5e5e5;
+}
+
+.um-content .system-generated-urls-header .dnnLabel,
+.um-content .custom-urls-header .dnnLabel {
+    display: inline-block;
+    float: none;
+    margin: 6px 0 2px 0;
+    padding-right: 0;
+    text-align: left;
+    width: auto;
+}
+
+.um-content .custom-urls-header .dnnLabel {
+    margin: 6px 0 2px 0;
+}
+
+.um-content .custom-urls-header .dnnLabel label span,
+.um-content .system-generated-urls-header .dnnLabel label span {
+    font-weight: bold;
+}
+
+.um-content .custom-urls-header a.dnnFormHelp,
+.um-content .system-generated-urls-header a.dnnFormHelp {
+    position: relative;
+}
+
+.um-content .dnnTableDisplay {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.um-content table.fixed {
+  table-layout: fixed;
+}
+
+.um-content .dnnTableDisplay th,
+.um-content .dnnTableDisplay td {
+    font-size: 12px;
+}
+
+.um-content .dnnTableDisplay th a,
+.um-content .dnnTableDisplay th a:link {
+    background-image: url('/../../Images/table-sort-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 100% 10px;
+    font-size: 12px;
+}
+
+.um-content .dnnTableDisplay th a:link.asc {
+    background-position: 100% -28px;
+}
+
+.um-content .dnnTableDisplay th a:link.desc {
+    background-position: 100% -8px;
+}
+
+.um-content .dnnTableDisplay th a.asc:hover,
+.um-content .dnnTableDisplay th a.asc:active {
+    background-image: url('/../../Images/table-sort-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 100% -28px;
+}
+
+.um-content .dnnTableDisplay th a.desc:hover,
+.um-content .dnnTableDisplay th a.desc:active {
+    background-image: url('/../../Images/table-sort-sprite.png');
+    background-repeat: no-repeat;
+    background-position: 100% -8px;
+}
+
+.um-content .custom-urls-col-default {
+    width: 40px;
+}
+
+.um-content .custom-urls-col-path {
+    width: 100%;
+}
+
+.um-content .custom-urls-col-language {
+    width: 160px;
+}
+
+.um-content .custom-urls-col-urltype {
+    width: 140px;
+}
+
+.um-content .custom-urls-col-actions {
+    width: 100px;
+}
+
+.um-content .number-cell {
+    text-align: right;
+}
+
+.um-content th a.no-sort {
+    pointer-events: none;
+    cursor: default;
+}
+
+.um-content ul.actions {
+    list-style: none; /* turns off bullets */
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.um-content ul.actions li {
+    float: left;
+    margin: 0 6px 0 0;
+    list-style-type: none; /* override skin css */
+}
+
+.um-content ul.actions li.last {
+    margin-right: 0;
+}
+
+.um-content ul.actions li a {
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 0 4px;
+    height: 16px;
+    width: 12px;
+    vertical-align: middle;
+}
+
+.um-content ul.actions li.action-edit a {
+    background: url("../../../icons/sigma/Edit_16X16_Standard.png") no-repeat center;
+}
+
+.um-content ul.actions li.action-delete a {
+    background: url("../../../icons/sigma/Delete_16X16_Standard.png") no-repeat center;
+}
+
+.um-content .dnnTableDisplay tr td.is200 {
+    background: url("Images/star_16x16.png") no-repeat center;
+}
+
+.um-content .dnnTableDisplay tr:nth-child(2n) td.is200 {
+    background: rgba(0, 0, 0, 0.04) url("Images/star_16x16.png") no-repeat center;
+}
+
+.um-content .dnnTableDisplay tr:hover td.is200 {
+    background: rgba(2, 139, 255, 0.15) url("Images/star_16x16.png") no-repeat center;
+}
+
+.um-content .um-edit-url-dialog {
+    padding: 16px 40px 10px 40px;
+    border: none;
+    -moz-box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.15) inset;
+    -webkit-box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.15) inset;
+    background: #fff;
+    position: relative;
+}
+
+.um-content .um-create-url-container .um-edit-url-dialog {
+    border: 1px solid #d1d1d1;
+}
+
+.um-content .um-create-url-container td .um-edit-url-dialog {
+    border-bottom: none;
+    border-top: none;
+}
+
+.um-content .dnnTableDisplay tr.um-edit-url-row td {
+    padding: 0;
+}
+
+.um-content .um-edit-url-dialog .dnnFormItem select {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.um-content .um-edit-url-dialog .dnnFormItem {
+    position: relative;
+    text-align: left;
+    clear: none;
+    width: auto;
+}
+
+.um-content .um-edit-url-dialog ul {
+    list-style-type: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.um-content .um-edit-url-dialog ul.um-fields {
+    margin: 6px 0 0 0;
+    white-space: normal;
+    position: relative;
+    background: #e3e3e5;
+}
+
+.um-content .um-edit-url-dialog ul.dnnActions {
+    padding-top: 18px;
+}
+
+.um-content .um-edit-url-dialog li {
+    list-style-type: none;
+    float: left;
+    margin: 0;
+}
+
+.um-content .um-edit-url-dialog li.dnnFormItem {
+    padding: 8px;
+}
+
+.um-content .um-edit-url-dialog li.dnnFormItem label {
+    font-style: italic;
+}
+
+.um-content .dnnFormItem .um-input-container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C9C9C9;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 1px 2px 0 rgba(0, 0, 0, 0.1) inset;
+    color: #333333;
+    font-size: 12px;
+    padding: 8px;
+    position: relative;
+}
+
+.um-content .dnnFormItem .um-input-container:active,
+.um-content .dnnFormItem .um-input-container:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid rgba(2, 139, 255, 0.5);
+    box-shadow: 0 0 3px 0 rgba(2, 139, 255, 0.4);
+    color: #333333;
+}
+
+.um-content .dnnFormItem .um-input-container input[type="text"],
+.um-content .dnnFormItem .um-input-container input[type="text"]:active,
+.um-content .dnnFormItem .um-input-container input[type="text"]:focus {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none !important;
+    height: 17px;
+    width: 100%;
+    max-width: 100%;
+    outline: none;
+}
+
+.um-content .um-edit-url-dialog li.um-alias-container {
+    float: left;
+    width: 220px;
+}
+
+.um-content .um-edit-url-dialog li.um-path-container {
+    margin-left: 230px;
+    max-width: 100%;
+    float: none;
+}
+
+.um-content .um-edit-url-dialog li.um-statuscodes-container {
+    float: left;
+    width: 160px;
+}
+
+.um-content .um-edit-url-dialog li.um-statuscodes-and-querystring-container {
+    margin-right: 210px;
+    max-width: 100%;
+    float: none;
+}
+
+.um-content .um-edit-url-dialog li.singleLocale {
+    margin-right: 0;
+    max-width: 100%;
+    float: none;
+}
+
+.um-content .um-edit-url-dialog li.um-locales-container {
+    float: right;
+    width: 200px;
+    background: #fff;
+}
+
+.um-content .um-edit-url-dialog li.um-querystring-container {
+    margin-left: 170px;
+    max-width: 100%;
+    float: none;
+}
+
+.um-content .um-edit-url-dialog li.disabled {
+    -webkit-opacity: 0.5;
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.wordwrap {
+    /* wrap long text and urls */
+    white-space: pre; /* CSS 2.0 */
+    white-space: pre-wrap; /* CSS 2.1 */
+    white-space: pre-line; /* CSS 3.0 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    word-wrap: break-word; /* IE 5+ */
+}
+
+.um-content .editing {
+    background-color: #ffff66;
+}
+
+.um-content .busy {
+/*
+    background-image: url("../../../../Images/icon_wait.gif");
+    background-repeat: no-repeat;
+    background-position: center center;
+*/
+    opacity: 0.50;
+}
+
+.um-busy-image {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -20px;
+}
+
+.um-content .um-edit-url-dialog ul.um-alias-options-fields {
+    margin: 0;
+    height: 40px;
+}
+
+.um-content .um-edit-url-dialog .um-alias-options-container {
+    padding: 0 0 0 4px;
+}
+
+.um-content .um-edit-url-dialog .um-alias-options-container div.um-alias-options-caption {
+    font-style: italic;
+    line-height: 20px;
+    float: left;
+    margin: 5px;
+}
+
+.um-content .um-edit-url-dialog .um-radiobuttons input[type="radio"] {
+    display: none;
+    display: inline\9; /* show in IE < 9 */
+}
+
+.um-content .um-edit-url-dialog .um-radiobuttons input[type="radio"] + label span {
+    display: inline-block;
+    display: none\9; /* disable in IE < 9 */
+    width: 19px;
+    height: 19px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url("/images/radiobutton.png") left top no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.um-content .um-edit-url-dialog .um-radiobuttons input[type="radio"]:checked + label span {
+    background-position: -50px 0;
+}
+
+.um-content .um-edit-url-dialog ul.um-radiobuttons {
+    float: left;
+    padding: 2px;
+}
+
+.um-content .um-edit-url-dialog ul.um-radiobuttons li {
+    padding: 4px 6px;
+}
+
+.um-content .um-edit-url-dialog .um-radiobuttons li label {
+    font-style: normal;
+}
+
+.um-edit-url-dialog div.dnnLabel {
+    width: auto; 
+    margin-top: 0;
+    float: none;
+}
+
+.um-edit-url-dialog a.dnnFormHelp {
+    top: 0;
+}
+
+.um-edit-url-dialog .um-alias-options-caption a.dnnFormHelp {
+    top: 2px;
+}
+

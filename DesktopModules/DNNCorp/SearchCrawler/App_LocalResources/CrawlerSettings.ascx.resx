@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdCancelDupConfig.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cmdDupAdd.Text" xml:space="preserve">
+    <value>Add Regex Pattern</value>
+  </data>
+  <data name="cmdDupDelete.Confirm" xml:space="preserve">
+    <value>Are you sure you want to delete this item?</value>
+  </data>
+  <data name="cmdDupDelete.Text" xml:space="preserve">
+    <value>Delete Regex Pattern</value>
+  </data>
+  <data name="cmdDupEdit.Text" xml:space="preserve">
+    <value>Edit Regex Pattern</value>
+  </data>
+  <data name="cmdSaveDupConfig.Text" xml:space="preserve">
+    <value>Save Duplicate Pattern</value>
+  </data>
+  <data name="cmdUpdateDupConfig.Text" xml:space="preserve">
+    <value>Update Duplicate Pattern</value>
+  </data>
+  <data name="plDupAdd.Help" xml:space="preserve">
+    <value>Duplicate Patterns are regular expressions that recognize URL parameters. By default, the spider indexes the same "tabid" only once.  If you have a control that through the use of URL parameters posts to the same page, and creates dynamic content, then you will have to create a regular expression that recognizes such parameters and add it to the list.  The Spider will recognize the parameters and not consider the same "tabid" as a duplicate.</value>
+  </data>
+  <data name="plDupAdd.Text" xml:space="preserve">
+    <value>Duplicate Patterns:</value>
+  </data>
+  <data name="plDupDescr.Help" xml:space="preserve">
+    <value>decription of the regex (usually the module name that will allow spidering of)</value>
+  </data>
+  <data name="plDupDescr.Text" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="plDupRegex.Help" xml:space="preserve">
+    <value>The regular expression that will allow the spider to recognize the parameters that the module uses to post to the same page and create dynamic content.</value>
+  </data>
+  <data name="plDupRegex.Text" xml:space="preserve">
+    <value>Regex Pattern:</value>
+  </data>
+  <data name="TabText.Text" xml:space="preserve">
+    <value>Advanced Crawlers</value>
+  </data>
+  <data name="Duplicates.Text" xml:space="preserve">
+    <value>Duplicates</value>
+  </data>
+  <data name="Descr.Header" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="RegexPattern.Header" xml:space="preserve">
+    <value>RegEx Pattern</value>
+  </data>
+  <data name="chkMSExcel.Text" xml:space="preserve">
+    <value>MS Excel</value>
+  </data>
+  <data name="chkMSPowerpoint.Text" xml:space="preserve">
+    <value>MS Powerpoint</value>
+  </data>
+  <data name="chkMSWord.Text" xml:space="preserve">
+    <value>MS Word</value>
+  </data>
+  <data name="chkPdf.Text" xml:space="preserve">
+    <value>PDF</value>
+  </data>
+  <data name="cmdIncludedExtensionsAdd.Text" xml:space="preserve">
+    <value>Add Extension</value>
+  </data>
+  <data name="cmdIncludedExtensionsDelete.Text" xml:space="preserve">
+    <value>Delete Extension</value>
+  </data>
+  <data name="IncludedExtensions.Text" xml:space="preserve">
+    <value>Included File Extensions</value>
+  </data>
+  <data name="IncludedExtensionsAlreadyExcluded.Text" xml:space="preserve">
+    <value>File extension already included</value>
+  </data>
+  <data name="IncludedExtensionsInvalidFormat.Text" xml:space="preserve">
+    <value>Invalid file extension. Examples: .xml, .php, .asp</value>
+  </data>
+  <data name="IncludedExtensionsRequired.Text" xml:space="preserve">
+    <value>Enter a file extension to include</value>
+  </data>
+  <data name="lblSearchSpiderOfficeDocuments.Help" xml:space="preserve">
+    <value>Select the type of MS Office documents whose content you want the spider to index</value>
+  </data>
+  <data name="lblSearchSpiderOfficeDocuments.Text" xml:space="preserve">
+    <value>Spider MS Office Documents:</value>
+  </data>
+  <data name="lblSearchSpiderPdf.Help" xml:space="preserve">
+    <value>Select this option if you want the spider to index the content of PDF documents</value>
+  </data>
+  <data name="lblSearchSpiderPdf.Text" xml:space="preserve">
+    <value>Spider PDF Documents:</value>
+  </data>
+  <data name="lbPdfMsg.Text" xml:space="preserve">
+    <value>In order to spider PDF documents, you need to &lt;a href="{0}"&gt;install the support package&lt;/a&gt;. </value>
+  </data>
+  <data name="cmdCancelUrlConfig.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cmdDirectoryAdd.Text" xml:space="preserve">
+    <value>Add Directory</value>
+  </data>
+  <data name="cmdDirectoryDelete.Text" xml:space="preserve">
+    <value>Delete Directory</value>
+  </data>
+  <data name="cmdUpdateUrlConfig.Text" xml:space="preserve">
+    <value>Update URL</value>
+  </data>
+  <data name="cmdUrlAdd.Text" xml:space="preserve">
+    <value>Add URL</value>
+  </data>
+  <data name="cmdUrlDelete.Text" xml:space="preserve">
+    <value>Delete URL</value>
+  </data>
+  <data name="cmdUrlEdit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ddlDirectory.Text" xml:space="preserve">
+    <value>- Select a Directory -</value>
+  </data>
+  <data name="ddlDirectoryRootUrl.Text" xml:space="preserve">
+    <value>- Select a Website Alias -</value>
+  </data>
+  <data name="Directories.Text" xml:space="preserve">
+    <value>Directories</value>
+  </data>
+  <data name="DirectoryRequired.Text" xml:space="preserve">
+    <value>Select a directory</value>
+  </data>
+  <data name="lblUrl.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="lblUrlActive.Text" xml:space="preserve">
+    <value>Enable&lt;br/&gt;Spidering</value>
+  </data>
+  <data name="lblUrlConfigTitle.Text" xml:space="preserve">
+    <value>Edit URL</value>
+  </data>
+  <data name="lblUrlDelete.Text" xml:space="preserve">
+    <value>Delete&lt;br/&gt;URL</value>
+  </data>
+  <data name="lblUrlDNN.Text" xml:space="preserve">
+    <value>DNN&lt;br/&gt;Imp</value>
+  </data>
+  <data name="lblUrlEdit.Text" xml:space="preserve">
+    <value>Edit&lt;br/&gt;URL</value>
+  </data>
+  <data name="lblUrlWin.Text" xml:space="preserve">
+    <value>Win&lt;br/&gt;Auth</value>
+  </data>
+  <data name="plAutoAddAlias.Help" xml:space="preserve">
+    <value>Select to add the default alias for this site to the list of URL's that will be searched.</value>
+  </data>
+  <data name="plAutoAddAlias.Text" xml:space="preserve">
+    <value>Add domain automatically:</value>
+  </data>
+  <data name="plDirectoryAdd.Help" xml:space="preserve">
+    <value>Select the directory that you would like the SearchCrawler to index directly, without performing a web site crawl.</value>
+  </data>
+  <data name="plDirectoryAdd.Text" xml:space="preserve">
+    <value>Available Directories</value>
+  </data>
+  <data name="plDirectoryRootUrl.Help" xml:space="preserve">
+    <value>The Root URL is needed to generate the URLs that will be used in Search Results to link to the files contained in the directories. NOTE: The same Website Alias will be applied to all directories.</value>
+  </data>
+  <data name="plDirectoryRootUrl.Text" xml:space="preserve">
+    <value>Root URL</value>
+  </data>
+  <data name="plDNNRoles.Help" xml:space="preserve">
+    <value>For Local Site Only: you can tell the spider to impersonate a DNN role (make sure there exists a valid user for the role selected), in order to spider pages that otherwise would require a login.</value>
+  </data>
+  <data name="plDNNRoles.Text" xml:space="preserve">
+    <value>DNN Role Impersonation:</value>
+  </data>
+  <data name="plSitemapUrl.Help" xml:space="preserve">
+    <value>Enter the URL of the sitemap file to use</value>
+  </data>
+  <data name="plSitemapUrl.Text" xml:space="preserve">
+    <value>Sitemap URL:</value>
+  </data>
+  <data name="plUrl.Help" xml:space="preserve">
+    <value>URL of the site to be spidered.</value>
+  </data>
+  <data name="plUrl.Text" xml:space="preserve">
+    <value>URL:</value>
+  </data>
+  <data name="plUrlActive.Help" xml:space="preserve">
+    <value>Enable Spidering of this URL. If checked, the spider will create a new index for this site on its next run.  If Unchecked, teh site will not be indexed, but any existing index will still be available for searches.</value>
+  </data>
+  <data name="plUrlActive.Text" xml:space="preserve">
+    <value>Enable Spidering:</value>
+  </data>
+  <data name="plWindowsAuthentication.Help" xml:space="preserve">
+    <value>Check this option if the Site's IIS security settings use Integrated Windows Authentication. If you leave user name and password blank, the Default Credentials Cache of the local server will be used.</value>
+  </data>
+  <data name="plWindowsAuthentication.Text" xml:space="preserve">
+    <value>Windows Authentication:</value>
+  </data>
+  <data name="plWindowsDomain.Help" xml:space="preserve">
+    <value>Enter the Computer Domain of the user account that will be used.</value>
+  </data>
+  <data name="plWindowsDomain.Text" xml:space="preserve">
+    <value>Windows Domain (optional):</value>
+  </data>
+  <data name="plWindowsPassword.Help" xml:space="preserve">
+    <value>Enter the Password that will be used.</value>
+  </data>
+  <data name="plWindowsPassword.Text" xml:space="preserve">
+    <value>Windows User Password (optional):</value>
+  </data>
+  <data name="plWindowsUser.Help" xml:space="preserve">
+    <value>Enter the Login Name (user account) that will be used.</value>
+  </data>
+  <data name="plWindowsUser.Text" xml:space="preserve">
+    <value>Windows User Account (optional):</value>
+  </data>
+  <data name="SuccessPatternSave.Text" xml:space="preserve">
+    <value>The reqular expression pattern has been saved successfully.</value>
+  </data>
+  <data name="UpdateFailureUser.Text" xml:space="preserve">
+    <value>Your changes have not been saved.  Make sure that the Impersonation Role you have selected has a valid user associated with it.</value>
+  </data>
+  <data name="UpdateSuccess.Text" xml:space="preserve">
+    <value>Your changes have been saved</value>
+  </data>
+  <data name="URL.Header" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="UrlActive.Header" xml:space="preserve">
+    <value>Enable Spidering</value>
+  </data>
+  <data name="UrlAlreadyExists.ErrorMessage" xml:space="preserve">
+    <value>URL already exists. Please enter a different URL.</value>
+  </data>
+  <data name="UrlDNNRole.Header" xml:space="preserve">
+    <value>DNN Impersonation</value>
+  </data>
+  <data name="Urls.Text" xml:space="preserve">
+    <value>URL Paths</value>
+  </data>
+  <data name="UrlWinAuthentication.Header" xml:space="preserve">
+    <value>Windows Auth</value>
+  </data>
+  <data name="valDirectoryRootUrl.ErrorMessage" xml:space="preserve">
+    <value>Paths Tab: Website Alias selection required</value>
+  </data>
+  <data name="valDocumentsRequireFullTrust.ErrorMessage" xml:space="preserve">
+    <value>Search Crawler requires Full Trust in IIS for MS Office / Pdf indexing. Either provide Full Trust or disable indexing of these files in Search Crawler Admin.</value>
+  </data>
+  <data name="valDup.ErrorMessage" xml:space="preserve">
+    <value>Invalid Regular Expression pattern</value>
+  </data>
+  <data name="valDupeDesc.Text" xml:space="preserve">
+    <value>A description is required!</value>
+  </data>
+  <data name="valDupeRegex.Text" xml:space="preserve">
+    <value>Invalid Regular Expression pattern!</value>
+  </data>
+  <data name="valUrl.ErrorMessage" xml:space="preserve">
+    <value>Invalid URL format (use: 'http://www.site.com')</value>
+  </data>
+  <data name="Actions.Header" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Actions.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="btnAddDirectory.Text" xml:space="preserve">
+    <value>Add Directory</value>
+  </data>
+  <data name="CollapseAll.Text" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="ContentCrawling.Text" xml:space="preserve">
+    <value>Content Crawling</value>
+  </data>
+  <data name="Directory.Text" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="ExpandAll.Text" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="introDirectories.Text" xml:space="preserve">
+    <value>This feature allows you to manage directories that you would like to be indexed by the search.</value>
+  </data>
+  <data name="introDuplicates.Text" xml:space="preserve">
+    <value>Many modules use the same page to post dynamic content. This feature allows you exclude particular URLs ( or parts thereof ) from being indexed by regular expression patterns.</value>
+  </data>
+  <data name="introUrlPath.Text" xml:space="preserve">
+    <value>This feature allows you to specify sites to be searchable.</value>
+  </data>
+  <data name="UnknownContentType.Text" xml:space="preserve">
+    <value>Unknown content type</value>
+  </data>
+  <data name="SitemapFileInvalid.Text" xml:space="preserve">
+    <value>Unable to validate Sitemap file. Check the Sitemap is available, well formed and a valid Sitemap file. You can see Sitemap format on http://www.sitemaps.org/protocol.php</value>
+  </data>
+  <data name="SitemapUrlInvalid.Text" xml:space="preserve">
+    <value>Invalid Sitemap URL format (use: 'http://www.site.com/sitemap.aspx')</value>
+  </data>
+  <data name="DirectoryPathSiteRoot.Text" xml:space="preserve">
+    <value>Site Root</value>
+  </data>
+  <data name="DirectoryPathUnavailable.Text" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="DirectoryPathHostRoot.Text" xml:space="preserve">
+    <value>Host Root</value>
+  </data>
+</root>

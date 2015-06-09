@@ -1,0 +1,42 @@
+Redactor Installations
+
+A Redactor Developer License, Corporate/Business License & OEM License purchases allow a multiple “live” installation in a production environment and ancillary “development use only” installations as needed to support the live installation (such as development and a staging servers). Additional installations do not require additional license purchases. If you have specific installation needs not covered by this license, please contact us. Imperavi will be the sole arbiter as to what constitutes commercial activities.
+
+
+Restrictions
+
+Unless you have been granted prior, written consent from Imperavi, you may not:
+	•	Reproduce, distribute, or transfer the Software as a sole product, or portions thereof, to any third party.
+	•	Sell, rent, lease, assign, or sublet the Software as a sole product or portions thereof.
+	•	Grant rights to any other person.
+	•	Use the software in violation of any United States or international laws or regulations.
+
+
+Display of Copyright Notices
+
+All copyright and proprietary notices and logos (if any) of Redactor/Imperavi and within the Software files must remain intact.
+
+
+Making Copies
+
+You may make copies of the Software for back-up purposes, provided that you reproduce the Software in its original form and with all proprietary notices on the back-up copy. You may include copies of the Software as an integral part of your product (according to Permitted Use stated above).
+
+
+Software Modification
+
+You may alter, modify, or extend the Software for your own use or for use in as an integral part of your product or service, or commission a third-party to perform modifications for you, but you may not resell, redistribute or transfer the modified or derivative version of the Software as a sole product without prior written consent from Imperavi. Components from the Software may not be extracted and used in other programs without prior written consent from Imperavi.
+
+
+Indemnity
+
+You agree to indemnify and hold harmless Imperavi for any third-party claims, actions or suits, as well as any related expenses, liabilities, damages, settlements or fees arising from your use or misuse of the Software, or a violation of any terms of this license.
+
+
+Disclaimer Of Warranty
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF QUALITY, PERFORMANCE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. FURTHER, IMPERAVI DOES NOT WARRANT THAT THE SOFTWARE OR ANY RELATED SERVICE WILL ALWAYS BE AVAILABLE.
+
+
+Limitations Of Liability
+
+YOU ASSUME ALL RISK ASSOCIATED WITH THE INSTALLATION AND USE OF THE SOFTWARE. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS OF THE SOFTWARE BE LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE. LICENSE HOLDERS ARE SOLELY RESPONSIBLE FOR DETERMINING THE APPROPRIATENESS OF USE AND ASSUME ALL RISKS ASSOCIATED WITH ITS USE, INCLUDING BUT NOT LIMITED TO THE RISKS OF PROGRAM ERRORS, DAMAGE TO EQUIPMENT, LOSS OF DATA OR SOFTWARE PROGRAMS, OR UNAVAILABILITY OR INTERRUPTION OF OPERATIONS.

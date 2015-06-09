@@ -1,0 +1,304 @@
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeaders]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeaders]
+    @PortalId INT,
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+        
+    ;WITH InnerLeaderList AS
+    (
+        SELECT
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            u.UserId AS [UserId],
+            up.PortalId AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(u.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM {databaseOwner}[{objectQualifier}Users] u
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID
+        WHERE (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+          AND ((us.PortalId = @PortalId) OR (us.PortalId IS NULL))
+          AND (up.PortalId = @PortalId)
+          AND (up.IsDeleted = 0 AND up.Authorised = 1)
+          AND (u.IsDeleted = 0)
+    ),
+    OuterLeaderList AS
+    (
+        SELECT InnerLeaderList.*,
+                ROW_NUMBER() OVER (ORDER BY InnerLeaderList.[ReputationPoints] DESC, InnerLeaderList.[UserId] ASC) AS [RowNumber]
+        FROM InnerLeaderList)
+    SELECT TOP (@RowsToReturn) * FROM OuterLeaderList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound 
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]
+	@PortalId INT,
+    @UserId INT,    
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+
+    ;WITH InnerLeaderList AS
+    (
+        SELECT DISTINCT
+            CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END AS [UserId],
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            COALESCE(r.[PortalId], -1) AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(u.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM {databaseOwner}[{objectQualifier}UserRelationships] ur
+            INNER JOIN {databaseOwner}[{objectQualifier}Relationships] r ON r.RelationshipID = ur.RelationshipID
+			LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON CASE WHEN ur.RelatedUserID = @UserId THEN ur.UserID ELSE ur.RelatedUserID END = up.UserId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON CASE WHEN ur.RelatedUserID = @UserId THEN ur.UserID ELSE ur.RelatedUserID END = us.UserId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END			
+        WHERE up.[PortalID] = @PortalId
+          AND (up.IsDeleted = 0 AND up.Authorised = 1)
+		  AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+          AND (ur.UserID = @UserId OR ur.RelatedUserID = @UserId)
+          AND r.Name = 'Friends'
+          AND ur.Status = 2 --Accepted
+          AND u.IsDeleted = 0
+          AND ((us.PortalId = @PortalId) OR (us.PortalId IS NULL))
+        
+        UNION -- include self
+
+        SELECT
+            @UserId AS [UserId],
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            COALESCE(us.[PortalId], -1) AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(u.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM {databaseOwner}[{objectQualifier}Users] u
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID
+        WHERE u.UserId = @UserId
+          AND (u.IsDeleted = 0)
+	  AND ((us.PortalId = @PortalID) OR (us.PortalId IS NULL))
+          AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+    ),
+    OuterLeaderList AS
+    (
+        SELECT InnerLeaderList.*,
+                ROW_NUMBER() OVER (ORDER BY InnerLeaderList.[ReputationPoints] DESC, InnerLeaderList.[UserId] ASC) AS [RowNumber]
+        FROM InnerLeaderList)
+    SELECT TOP (@RowsToReturn) * FROM OuterLeaderList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound 
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]', N'P') IS NOT NULL
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]
+    @PortalId INT,
+    @RoleId INT,
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT,
+        @PageUpperBound INT,
+        @RowsToReturn INT
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+
+    ;WITH InnerLeaderList
+    AS (
+        SELECT  COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+                u.UserId AS [UserId],
+                up.PortalId AS [PortalId],
+                COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+                COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+                COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+                COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+                COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+                COALESCE(ur.[LastModifiedOnDate], getdate()) AS [CreatedOnDate],
+                COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate],
+                ROW_NUMBER() Over (Order By COALESCE(us.[ReputationPoints], 0) Desc,
+                u.UserId Asc) As RowNumber
+        FROM    {databaseOwner}[{objectQualifier}Users] u
+                    INNER JOIN {databaseOwner}[{objectQualifier}UserRoles] ur ON ur.UserId = u.UserID
+                    LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID
+                    LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID
+        WHERE (@SearchText IS NULL
+               OR LEN(@SearchText) = 0
+               OR u.DisplayName LIKE '%' + @SearchText + '%')
+          AND ((us.PortalId = @PortalId) OR (us.PortalId IS NULL))
+          AND (up.PortalId = @PortalId)
+		  AND (ur.RoleID = @RoleId)
+		  AND (ur.Status = 1)
+          AND (up.IsDeleted = 0 AND up.Authorised = 1)
+          AND (u.IsDeleted = 0)
+      )
+    SELECT  TOP (@RowsToReturn) *
+    FROM    InnerLeaderList
+    WHERE   RowNumber >= @PageLowerBound
+      AND   RowNumber <= @PageUpperBound
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]
+	@PortalId INT,
+    @UserId INT,
+    @RoleId INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    DECLARE @RowIndex INT
+    DECLARE @PageIndex INT
+    DECLARE @PageOffset INT
+
+    ;WITH OuterUserList AS
+       (SELECT
+            ur.UserId,
+            COALESCE(us.ReputationPoints, 0) AS [ReputationPoints]
+        FROM {databaseOwner}[{objectQualifier}UserRoles] ur
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us on us.UserId = ur.UserID
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = us.UserId
+			LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = ur.UserID
+        WHERE 
+			((us.PortalId = @PortalId) OR (us.PortalId IS NULL))
+		  AND (up.PortalId = @PortalId)
+		  AND (up.IsDeleted = 0 AND up.Authorised = 1)
+		  AND ur.RoleID = @RoleId
+		  AND ur.Status = 1
+          AND u.IsDeleted = 0
+          AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+       ),
+
+    InnerUserList AS
+       (SELECT
+            [UserId],
+            [ReputationPoints],
+            ROW_NUMBER() OVER(ORDER BY ReputationPoints DESC) as [RowNumber]
+        FROM OuterUserList)
+    SELECT @RowIndex = RowNumber FROM InnerUserList WHERE [UserId] = @UserId
+    
+    IF @RowIndex IS NULL
+        SELECT
+            -1 AS [PageIndex],
+            -1 AS [PageOffset]
+    ELSE
+    BEGIN
+        SET @PageIndex = @RowIndex / @PageSize
+        SET @PageOffset = (@RowIndex - 1) - (@PageIndex * @PageSize)
+    
+        IF @PageOffset < 0
+        BEGIN
+            SET @PageIndex = @PageIndex - 1
+            SET @PageOffset = @PageSize - 1
+        END
+    
+        SELECT
+            @PageIndex AS [PageIndex],
+            @PageOffset AS [PageOffset]
+    END
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]
+    @PortalId INT,
+    @RoleId INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    IF @RoleId IS NULL
+        SET @RoleId = -1
+
+    IF @RoleId >= 0
+    BEGIN
+        SELECT COUNT(*) AS [TotalLeaders]
+            FROM {databaseOwner}[{objectQualifier}Users] u
+            LEFT JOIN {databaseOwner}[{objectQualifier}UserRoles] mur ON mur.UserID = u.UserID
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID
+            WHERE UserRoleID IS NOT NULL
+              AND mur.RoleID = @RoleId
+			  AND mur.Status = 1
+              AND up.PortalID = @PortalId
+			  AND (up.IsDeleted = 0 AND up.Authorised = 1)
+              AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+    END
+    ELSE
+    BEGIN
+        SELECT COUNT(*) AS [TotalLeaders] FROM {databaseOwner}[{objectQualifier}Users] u
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID
+            WHERE up.PortalID = @PortalId
+			  AND (up.IsDeleted = 0 AND up.Authorised = 1)
+              AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR DisplayName LIKE '%' + @SearchText + '%')
+    END
+END
+GO
+

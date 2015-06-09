@@ -1,0 +1,47 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetFileTags]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetFileTags]
+GO
+
+DECLARE @damModuleDefinition INT
+
+SELECT @damModuleDefinition = MD.[ModuleDefID]
+FROM {databaseOwner}{objectQualifier}ModuleDefinitions MD
+WHERE MD.DefinitionName = 'Digital Asset Management'
+
+IF EXISTS (SELECT *  FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'EditWorkflow')
+	
+	DECLARE @editWorkflowControlId INT
+
+	SELECT @editWorkflowControlId = MC.ModuleControlID FROM {databaseOwner}{objectQualifier}ModuleControls MC
+	WHERE MC.ModuleDefID = @damModuleDefinition
+		AND MC.ControlKey = N'EditWorkflow'
+
+	EXEC	{databaseOwner}{objectQualifier}DeleteModuleControl
+		@ModuleControlId = @editWorkflowControlId
+GO
+
+IF EXISTS (SELECT *  FROM {databaseOwner}{objectQualifier}ModuleControls 
+WHERE ModuleDefID = @damModuleDefinition
+AND ControlKey = N'GroupUpdates')
+	
+	DECLARE @groupUpdatesControlId INT
+
+	SELECT @groupUpdatesControlId = MC.ModuleControlID FROM {databaseOwner}{objectQualifier}ModuleControls MC
+	WHERE MC.ModuleDefID = @damModuleDefinition
+		AND MC.ControlKey = N'GroupUpdates'
+
+	EXEC	{databaseOwner}{objectQualifier}DeleteModuleControl
+		@ModuleControlId = @groupUpdatesControlId
+GO

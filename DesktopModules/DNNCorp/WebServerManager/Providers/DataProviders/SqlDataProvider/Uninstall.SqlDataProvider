@@ -1,0 +1,5 @@
+﻿IF EXISTS (SELECT ScheduleID FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.WebServerManager.Components.ServerMonitorSchedule, DotNetNuke.Professional.WebServerManager')
+BEGIN
+    DELETE FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.WebServerManager.Components.ServerMonitorSchedule, DotNetNuke.Professional.WebServerManager'
+END
+GO

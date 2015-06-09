@@ -1,0 +1,88 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+/****** Fix bug 22247: change length of Invoice column to 150. ******/
+ALTER TABLE {databaseOwner}{objectQualifier}DNNPRO_License ALTER COLUMN Invoice NVARCHAR(150)
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}DNNPRO_AddLicense') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}{objectQualifier}DNNPRO_AddLicense
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DNNPRO_AddLicense
+	@Email NVARCHAR(150),
+	@Invoice NVARCHAR(150),
+	@Expires NVARCHAR(20),
+	@ServiceEndDate NVARCHAR(20),
+	@Signature NVARCHAR(60),
+	@HostName NVARCHAR(100),
+	@Environment INT,
+	@AdditionalInfo NVARCHAR(MAX)
+AS
+
+INSERT INTO {databaseOwner}{objectQualifier}DNNPRO_License (
+	[Email],
+	[Invoice],
+	[Expires],
+	[ServiceEndDate],
+	[Signature],
+	[HostName],
+	[Environment],
+	[AdditionalInfo]
+) VALUES (
+	@Email,
+	@Invoice,
+	@Expires,
+	@ServiceEndDate,
+	@Signature,
+	@HostName,
+	@Environment,
+	@AdditionalInfo
+)
+
+SELECT SCOPE_IDENTITY()
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}DNNPRO_UpdateLicense') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE {databaseOwner}{objectQualifier}DNNPRO_UpdateLicense
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DNNPRO_UpdateLicense
+	@LicenseID INT, 
+	@Email NVARCHAR(150), 
+	@Invoice NVARCHAR(150), 
+	@Expires NVARCHAR(20), 
+	@ServiceEndDate NVARCHAR(20), 
+	@Signature NVARCHAR(60), 
+	@HostName NVARCHAR(100), 
+	@Environment INT,
+	@AdditionalInfo NVARCHAR(MAX)
+AS
+
+UPDATE {databaseOwner}{objectQualifier}DNNPRO_License SET
+	[Email] = @Email,
+	[Invoice] = @Invoice,
+	[Expires] = @Expires,
+	[ServiceEndDate] = @ServiceEndDate,
+	[Signature] = @Signature,
+	[HostName] = @HostName,
+	[Environment] = @Environment,
+	[AdditionalInfo] = @AdditionalInfo
+WHERE
+	[LicenseID] = @LicenseID
+
+GO
+
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

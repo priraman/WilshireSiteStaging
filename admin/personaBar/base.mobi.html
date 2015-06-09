@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PersonaBar mobile</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <script type="text/javascript">
+        window.Sys = !window.Sys ? window.top.Sys : window.Sys;
+    </script>
+</head>
+<body>
+    <div class="header" id="header-mobi">
+        <div class="logo">
+            <span id="breadcrumb">&nbsp;</span>
+            <div class="site-toggle">
+                <a id="toggle"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+
+        <div class="socialmask"></div>
+
+        <div id="nav-menu" class="nav-menu" style="display:none;">
+            <ul>                
+                <li class="btn-tasks" data-panel-id="#tasks-panel">
+                    <div class="icon"></div>
+                    <span data-bind="html: nav_Tasks"></span>
+                    <span class="total-tasks"></span>
+                </li>
+                <li class="btn-view-site" id="btn-viewsite">
+                    <div class="icon"></div>
+                    <span data-bind="html: nav_Site"></span>
+                </li>
+                <li class="btn-logout" id="btn-logout">
+                    <div class="icon"></div>
+                    <span data-bind="html: nav_LogOut"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="personabar-panels"></div>
+        
+
+        <div class="socialpanel" data-template="tasks" data-name="Tasks" id='tasks-panel'>
+        </div>
+
+    </div>
+
+    <!-- extra -->
+    <div id="mask"></div>
+    <div id="confirmation-dialog">
+        <p></p>
+        <div class="buttonpanel">
+            <a id="confirmbtn"></a>
+            <a id="cancelbtn"></a>
+        </div>
+    </div>
+    <div id="notification-dialog">
+        <p></p>
+    </div>
+    <div id="personaBar-loadingbar" style="display: none;">
+        <div></div>
+    </div>
+    <!-- end extra -->
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+</body>
+</html>

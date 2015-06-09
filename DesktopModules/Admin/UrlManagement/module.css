@@ -1,0 +1,224 @@
+﻿.dnnUrlManagement .dnnFormItem .dnnLabel + div.captioned-box {
+    padding: 8px;
+    white-space: normal;
+    margin: 0 0 0 -4px;
+    background: #e3e3e5;
+    display: inline-block;
+    width: 578px;
+    position: relative;
+}
+
+.dnnUrlManagement .dnnFormItem input[type="text"] {
+    width: 100%;
+    margin-bottom: 0; /* reset the default */
+    max-width: 560px;
+}
+
+.dnnUrlManagement .dnnFormItem .captioned-box label {
+    font-style: italic;
+    display: block;
+}
+
+.dnnUrlManagement .dnnFormItem > input {
+    margin-left: 4px;
+}
+
+.dnnUrlManagement table.dnnFormRadioButtons {
+    background: #e3e3e5;
+}
+
+.dnnUrlManagement div.urlGeneral,
+.dnnUrlManagement div.urlRegex,
+.dnnUrlManagement div.urlTestUrl {
+    margin: 16px 0;
+}
+
+.dnnUrlManagement .dnnFormItem {
+    margin-bottom: 14px;
+}
+
+.dnnUrlManagement .dnnFormItem input[type="text"] + a.dnnPrimaryAction, .dnnFormItem input[type="text"] + a.dnnSecondaryAction, .dnnFormItem input[type="text"] + a.dnnTerriaryAction {
+    margin: 6px 0 0 0;
+}
+
+.test-url-result {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: #b6b6b6 1px solid;
+    position: relative;
+}
+
+.dnnUrlManagement .messages {
+    display: inline-block;
+    width: 340px;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.dnnUrlManagement .dnnFormItem span.dnnFormMessage.dnnFormError {
+    width: 320px;
+}
+
+.dnnUrlManagement a.disabled {
+    pointer-events: none;
+    cursor: default;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 & 9, should come BEFORE filter */
+    filter: alpha(opacity=50); /* IE 8 & 9 */
+    -moz-opacity:0.5; /* Older than Firefox 0.9 */
+    -khtml-opacity: 0.5; /* Safari 1.x (pre WebKit!) */
+    opacity: 0.5; /* Firefox 0.9+, Safari 2, Chrome any, Opera 9+, IE 9+ */
+}
+
+
+.dnnUrlManagement .select-page-container {
+    display: inline-block;
+    position: relative;
+    width: 578px;
+    margin: 0 0 0 -4px;
+    padding: 8px;
+    background: none repeat scroll 0 0 #E3E3E5;
+    white-space: normal;
+    height: 400px;
+}
+
+.dnnUrlManagement .select-page-container input.search-box {
+    width: 168px;
+}
+.left-pane {
+    float: left;
+    position: relative;
+    width: 280px;
+    margin: 0;
+    padding: 0 10px 0 0;
+}
+
+.right-pane {
+    float: right;
+    width: 280px;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.page-list-label {
+    display: block;
+    margin: 0 0 -1px 0;
+    padding: 5px 6px;
+    background: #F0F2F1;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#F0F2F1)); /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-linear-gradient(top, #FFFFFF, #F0F2F1); /* Safari 5.1, Chrome 10+ */
+    background: -moz-linear-gradient(top, #FFFFFF, #F0F2F1); /* Firefox 3.6+ */
+    background: -ms-linear-gradient(top, #FFFFFF, #F0F2F1); /* IE 10 */
+    background: -o-linear-gradient(top, #FFFFFF, #F0F2F1); /* Opera 11.10+ */
+    border: 1px solid #C9C9C9;
+}
+
+.left-pane .page-list-label {
+    margin-top: 10px;
+}
+
+.left-pane h2.dnnFormSectionHead {
+    letter-spacing: -0.03em;
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 20px;
+}
+
+.left-pane h2.dnnFormSectionHead a {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 0;
+}
+
+.dnnForm .left-pane fieldset {
+    margin-bottom: 0;
+}
+
+.left-pane select {
+    width: 100%;
+    height: 110px;
+}
+
+.left-pane select option {
+    margin: 0 0 0 -5px;
+    padding: 3px;
+}
+
+.label-and-field {
+    margin: 8px 0 0 0;
+}
+
+.left-pane .dnnLabel,
+.right-pane .dnnLabel {
+    width: auto;
+    display: inline-block;
+    text-align: left;
+    float: none;
+    margin: 0 0 2px 0;
+    padding-right: 0;
+}
+
+.dnnUrlManagement .dnnFormItem input.optional-settings-text {
+    width: 270px;
+}
+
+.left-pane a.dnnFormHelp, .right-pane a.dnnFormHelp {
+    position: relative;
+}
+
+.test-url-button {
+    position: absolute;
+    top: 366px;
+    left: 0;
+}
+
+.um-resulting-urls-container {
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 358px;
+    border: 1px solid #C9C9C9;
+}
+
+.um-resulting-urls-container ul {
+    list-style-type: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.um-resulting-urls-container ul li {
+    list-style-type: none;
+    display: block;
+    padding: 4px;
+    margin: 0;
+    border-bottom: 1px solid #C9C9C9;
+}
+
+.um-resulting-urls-container ul li a,
+.um-resulting-urls-container ul li a:link,
+.um-resulting-urls-container ul li a:visited,
+.um-resulting-urls-container ul li a:hover,
+.um-resulting-urls-container ul li a:active
+{
+    display: block;
+    color: #3B96B6;
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: none;
+}
+
+.um-resulting-urls-container ul li a:hover {
+    text-decoration: underline;
+}
+
+.um-resulting-urls-container ul li:hover {
+    background-color: #d9eeff;
+}
+
+.clear {
+    clear: both;
+}

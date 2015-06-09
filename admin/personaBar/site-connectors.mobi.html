@@ -1,0 +1,48 @@
+﻿<!-- connections mobile panel -->
+<div>
+    <h2 data-bind="html: $root.resx.title_Settings"></h2>
+    <h3 data-bind="html: $root.resx.title_Connections"></h3>
+    <div class="normalPanel">
+        <div class="searchpanel">
+            <p data-bind="html: $root.resx.txt_SetupConnections"></p>
+        </div>
+        <table class="cmxtbl" id="connectionstbl">
+                <colgroup>
+                    <col class="connections-col-checkmark" />
+                    <col class="connections-col-favicon" />
+                    <col class="connections-col-name" />
+                    <col class="connections-col-actions" />
+                </colgroup>
+                <tbody data-bind="foreach: connections">
+                    <tr>
+                        <td><span class="socialnetwork-connection" data-bind="css: { verified: connected }"></span></td>
+                        <td><span data-bind="attr: { 'class': faviconCss, 'style': 'background-image: url(' + icon + ');' }, css: { connected: connected() }"></span></td>
+                        <td><span class="socialnetwork-name" data-bind="html: displayName"></span></td>
+                        <td><a class='primarybtn' data-bind="click: edit, html: $root.resx.btn_Edit, visible: connected() && !inEdit()"></a>
+                            <a class='plainbtn' data-bind="click: edit, html: $root.resx.btn_Connect, visible: !connected() && !inEdit()"></a>
+                        </td>
+                    </tr>
+                    <tr class="edit-row">
+                        <td colspan="4">
+                            <div class="edit-form mobile-view" data-bind="attr: {id: 'connector-' + name}">
+                                <div class="edit-items edit-fields" data-bind="html: editLayout"></div>
+                                <div class="edit-items edit-buttons">
+                                    <div>
+                                        <a class="secondarybtn" data-bind="click: cancel, html: $root.resx.btn_Cancel"></a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- ko foreach: buttons -->
+                                    <div>
+                                        <a data-bind="click: function (item, e) { action.apply(this, [$parent, e]); }, html: text, attr: {'class': className}"></a>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

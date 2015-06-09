@@ -1,0 +1,50 @@
+﻿<div class="conn-ga-advancedSetting panel firstPanel">
+    <div>
+        <label data-bind="html: resx.Label"></label>
+        <input type="text" data-bind="value: editModel.label, valueUpdate: 'afterkeydown'" maxlength="50" />
+    </div>
+    <div>
+        <label data-bind="html: resx.Value"></label>
+        <input type="text" data-bind="value: editModel.value, valueUpdate: 'afterkeydown'" maxlength="50" />
+    </div>
+    <div>
+        <label data-bind="html: resx.Page"></label>
+        <div class="pagesDropDown"></div>
+    </div>
+    <div>
+        <label data-bind="html: resx.Role"></label>
+        <select id="RolesDropDown" name="RolesDropDown"
+            data-bind="value: editModel.role, options: roleData, optionsText: 'RoleName', optionsValue: 'RoleId'" >
+        </select>
+    </div>
+</div>
+<div class="conn-ga-advancedSetting panel">
+    <div data-bind="html: resx.GoogleAnalytics" class="title">
+    </div>
+    <div class="rule-grid">
+        <ul class="item header">
+            <li class="col-edit" data-bind="html: resx.Edit"></li>
+            <li class="col-delete" data-bind="html: resx.Delete"></li>
+            <li class="col-label" data-bind="html: resx.Label"></li>
+            <li class="col-value" data-bind="html: resx.Value"></li>
+            <li class="col-page" data-bind="html: resx.Page"></li>
+            <li class="col-role" data-bind="html: resx.Role"></li>
+            <li class="col-sort"></li>
+        </ul>
+        <div class="items" data-bind="foreach: rules">
+            <ul class="item">
+                <li class="col-edit"><a href="#" data-bind="attr: {title: $parent.resx.Edit}, click: $parent.editRule"></a></li>
+                <li class="col-delete"><a href="#" data-bind="attr: {title: $parent.resx.Delete}, click: $parent.deleteRule"></a></li>
+                <li class="col-label" data-bind="html: label"></li>
+                <li class="col-value" data-bind="html: value"></li>
+                <li class="col-page" data-bind="html: pageName"></li>
+                <li class="col-role" data-bind="html: roleName"></li>
+                <li class="col-sort">
+                    <a class="up" href="#"  data-bind="attr: {title: $parent.resx.MoveUp}, click: $parent.moveUp, css: { visible: $index() > 0}"></a>
+                    <a class="down" href="#" data-bind="attr: {title: $parent.resx.MoveDown}, click: $parent.moveDown, css: { visible: $index() < $parent.rules().length - 1}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="emptyinfo" data-bind="visible: rules().length == 0, html: resx.NoRule"></div>
+    </div>
+</div>

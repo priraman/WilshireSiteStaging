@@ -1,0 +1,103 @@
+﻿;WITH Dups as
+(
+	SELECT PrivilegeDefId, PortalId, ROW_NUMBER() OVER(PARTITION by PrivilegeDefId, PortalId ORDER BY PrivilegeId)
+	AS duplicateRecCount
+	FROM {databaseOwner}{objectQualifier}Mechanics_Privilege
+)
+DELETE FROM Dups
+WHERE duplicateRecCount > 1
+GO
+
+IF OBJECT_ID(N'IX_{objectQualifier}Mechanics_Privilege_PrivilegeDefId_PortalId', N'UQ') IS NOT NULL
+    ALTER TABLE  {databaseOwner}{objectQualifier}Mechanics_Privilege DROP CONSTRAINT
+        IX_{objectQualifier}Mechanics_Privilege_PrivilegeDefId_PortalId
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_Privilege ADD CONSTRAINT
+        IX_{objectQualifier}Mechanics_Privilege_PrivilegeDefId_PortalId UNIQUE NONCLUSTERED
+(
+            PrivilegeDefId, PortalId
+)
+GO
+
+IF EXISTS (SELECT * FROM {databaseOwner}sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}Mechanics_GetContentItemLogCount]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetContentItemLogCount]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetContentItemLogCount]
+	@PortalId int,
+	@ContentItemId int,
+	@ScoringActionDefId int
+AS
+BEGIN
+	SELECT
+		COUNT([UserScoringLogId])
+	FROM
+		{databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]
+
+	WHERE [ContentItemId] = @ContentItemId
+	AND [ScoringActionDefId] = @ScoringActionDefId
+	AND [PortalId] = @PortalId
+END
+GO
+
+IF object_id(N'CK_{objectQualifier}Mechanics_UserScoring_ExperiencePoints') IS NULL
+BEGIN
+	UPDATE  {databaseOwner}{objectQualifier}Mechanics_UserScoring
+	SET ExperiencePoints = 0
+	WHERE ExperiencePoints < 0
+
+	ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_UserScoring
+		ADD CONSTRAINT CK_{objectQualifier}Mechanics_UserScoring_ExperiencePoints CHECK (ExperiencePoints >= 0)
+END
+GO
+
+IF object_id(N'CK_{objectQualifier}Mechanics_UserScoring_RP_GT_XP') IS NULL
+BEGIN
+	UPDATE {databaseOwner}{objectQualifier}Mechanics_UserScoring
+	SET ReputationPoints = ExperiencePoints
+	WHERE ExperiencePoints < ReputationPoints
+
+	ALTER TABLE  {databaseOwner}{objectQualifier}Mechanics_UserScoring
+		ADD CONSTRAINT CK_{objectQualifier}Mechanics_UserScoring_RP_GT_XP CHECK (ExperiencePoints >= ReputationPoints)
+END
+GO
+
+IF object_id(N'CK_{objectQualifier}Mechanics_Privilege_ReputationPoints') IS NULL
+BEGIN
+	UPDATE  {databaseOwner}{objectQualifier}Mechanics_Privilege
+	SET ReputationPoints = 0
+	WHERE ReputationPoints < 0
+
+	ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_Privilege
+		ADD CONSTRAINT CK_{objectQualifier}Mechanics_Privilege_ReputationPoints CHECK (ReputationPoints >= 0)
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeaders]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]
+GO
+
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]', N'P') IS NOT NULL
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserPosition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserPosition]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinFriends]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinFriends]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]
+GO

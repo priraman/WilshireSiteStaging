@@ -1,0 +1,466 @@
+div.assets-panel {
+	padding-bottom: 500px;	
+}
+
+div.assets-panel > div.panel {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 8px;
+    position: relative;
+}
+
+div.assets-panel > div.panel.top-panel {
+    margin-bottom: 10px;
+    padding: 20px 10px
+}
+
+div.assets-panel > div.panel.top-panel::before, 
+div.assets-panel > div.panel.top-panel::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;    
+}
+
+div.assets-panel > div.panel.top-panel:before {
+    top: -10px;
+    border-bottom-color: #ddd;
+    border-width: 0 14px 9px 14px;
+}
+
+div.assets-panel > div.panel.top-panel:after {
+    top: -9px;    
+    border-bottom-color: #fff;
+    border-width: 0 15px 10px 15px;
+}
+
+div.assets-panel > div.panel.add-folder:before {
+    left: 71px;    
+}
+
+div.assets-panel > div.panel.add-folder:after {
+    left: 70px;    
+}
+
+div.assets-panel > div.panel.add-asset:before {
+    right: 71px;    
+}
+
+div.assets-panel > div.panel.add-asset {
+    padding: 5px 5px 15px;
+    position: relative;
+}
+
+div.assets-panel > div.panel.add-asset:after {
+    right: 70px;    
+}
+
+div.assets-panel > div.panel.add-asset > div.replace-confirmation {
+    text-align: center;
+}
+
+div.assets-panel > div.panel.add-asset > div.replace-confirmation > img {
+    max-width: 80%;
+    border: 2px solid #ddd;    
+    margin-top: 15px;
+}
+
+div.assets-panel > div.panel.add-asset > div.replace-confirmation > span {
+    display: block;
+    margin-top: 10px;
+}
+
+div.assets-panel > div.header-panel > input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;    
+}
+
+div.assets-panel > div.header-panel > input.search {
+    background-image: url("../images/search.png");
+    background-position: 95% center;
+    background-repeat: no-repeat;
+}
+
+div.assets-panel .dnnDropDownList {
+    width: 100%;
+}
+
+div.assets-panel .dnnDropDownList .dt-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+div.assets-panel .dnnDropDownList .selected-item {
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+div.assets-panel .dnnDropDownList .dt-container .dt-content {
+	overflow: auto;
+}
+
+div.assets-panel .main-buttons {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin: 20px 0;
+    text-align: center;
+}
+
+div.assets-panel .main-buttons > a {
+    padding: 10px 25px;
+    margin: 0 2px;
+}
+
+div.assets-panel .breadcrumbs-container {
+    margin-bottom: 10px;    
+}
+
+div.assets-panel .breadcrumbs-container > span:first-child {
+   	font-weight: bold;
+}
+
+div.assets-panel .breadcrumbs-container > ul , .breadcrumbs-container > ul > li {
+    display: inline;
+    color: #aaa;
+}
+
+div.assets-panel .breadcrumbs-container a {
+    text-decoration: none;
+    color: #3FA4D3;
+}
+
+div.assets-panel .breadcrumbs-container li:not(:last-child)::after {
+    content: ' / ';
+}
+
+div.assets-panel .breadcrumbs-container span.breadcrumb-search::before {
+    content: ' > ';
+}
+
+div.assets-panel div.item-container {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+div.assets-panel div.item-container.subfolder {
+	border-left: 6px #2FA6EB solid;
+	padding-left: 4px;	
+}
+
+div.assets-panel .item  {
+    background-color: #79bdd8;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Proxima Nova-light",HelveticaNeue-Light,Arial-light,Helvetica,sans-serif;
+    font-size: 17px;
+    height: 70px;
+    margin: 0 0 4px 0;
+    overflow: hidden;
+    padding: 5px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+div.assets-panel div.item-container > .item:last-child {
+    margin-bottom: 0;
+}
+
+div.assets-panel .item > div.overlay  {
+    background-color: #000;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: 0.2s;
+    -webtik-transition: 0.2s;
+    opacity: 0;
+}
+
+div.assets-panel .item.selected > div.overlay  {    
+	opacity: 1;
+    transition: 0.2s;
+    -webtik-transition: 0.2s;
+	background-color: rgba(0,0,0,0.6);
+}
+
+div.assets-panel .item .overlay-disabled {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: black;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: visibility 0.2s linear, opacity 0.2s linear;
+	-moz-transition: visibility 0.2s linear, opacity 0.2s linear;
+	-o-transition: visibility 0.2s linear, opacity 0.2s linear;
+}
+
+div.assets-panel div.item-container.disabled .item .overlay-disabled {
+    opacity: 0.5;
+    visibility: visible;
+}
+
+.item.saved {
+    -webkit-animation: card-saved 1.5s 1;
+    -moz-animation: card-saved 1.5s 1;
+    animation: card-saved 1.5s 1;
+}
+
+@-webkit-keyframes card-saved {
+    0% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+    33% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    66% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+}
+
+@-moz-keyframes card-saved {
+    0% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+    33% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    66% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+}
+
+@keyframes card-saved {
+    0% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+    33% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    66% { box-shadow: 0 0 0 8px rgba(0, 220, 0, 1); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 220, 0, 0); }
+}
+
+div.assets-panel .item.selected > div.overlay > div.action {
+    float: right;
+    background-color: #2FA6EB;
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+div.assets-panel .item.selected >  div.overlay > div.delete {
+	background-image: url("../images/icon-delete-asset-folder-mobile.png");
+}
+
+div.assets-panel .item.selected >  div.overlay > div.edit {
+	background-image: url("../images/icon-pencil-white.png");
+}
+
+div.assets-panel .item > div.overlay > div.arrow {
+    float: right;
+    background-color: #427E95;
+    height: 100%;
+    width: 70px;
+    position: relative;    
+}
+
+div.assets-panel .item > div.overlay > div.arrow::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 8px 0px 8px;
+    border-color: #ffffff transparent transparent transparent;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translateY(-50%);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+}
+
+div.assets-panel .item.selected > div.overlay > div.arrow::after {
+	transform: translate(-50%, -50%) rotate(-180deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-180deg);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+}
+
+div.assets-panel div.parent .item-icon  {	
+	background-image: url(../images/icon-asset-manager-standard-folder.png);
+}
+
+div.assets-panel .item-icon {
+    height: 40px;
+    display: inline-block;
+    width: 40px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 4px solid #79bdd8;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 1);
+    float: left;
+    margin: 6px 16px;
+    background-color: #eee;
+}
+
+div.assets-panel .item-icon.folder {
+    background-color: #9edcef;
+    background-size: 55%;
+}
+
+div.assets-panel .item > span {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    display: block;   
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.assets-panel .item > span > font.highlight {
+    background-color: #cccccc;
+}
+
+div.assets-panel label {
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+div.assets-panel label.formRequired::after {
+    content: "*";
+    display: inline-block;
+    margin: 0 0 0 5px;
+    color: Red;
+    font-size: 16px;
+    line-height: 1em;
+    font-weight: bold;
+}
+
+div.assets-panel div.field {
+    position: relative;
+}
+
+div.assets-panel div.field > label {
+    display: block;        
+}
+
+div.assets-panel div.field.hide {
+    display: none;
+}
+
+div.assets-panel input[type=text], div.assets-panel select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;    
+    box-sizing: border-box;
+    margin-bottom: 10px
+}
+
+div.assets-panel div.field > input[type='radio'],    
+div.assets-panel div.versioning > input[type='checkbox'] {
+    margin-bottom: 20px    
+}
+
+div.assets-panel div.field > input[type=radio] + label {
+    display: inline;        
+    margin-right: 15px;
+}
+
+div.assets-panel div.buttons {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+div.assets-panel a.upload {
+    background-color: #E8F4FC;
+    background-image: url(../images/upload.png);
+    background-repeat: no-repeat;
+    background-position: center 30%;    
+    width: 100%;
+    height: 200px;
+    border: 2px #E5EBF1 dashed;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+}
+
+div.assets-panel a.upload > span {
+    border: 1px #ddd solid;
+    background-color: #fff;
+    color: #333;
+    border-radius: 3px;
+    padding: 8px 20px;    
+    top: 130px;
+    position: relative;        
+}
+
+div.assets-panel input[type=file] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    opacity: 0;
+}
+
+div.assets-panel div.add-asset > div.buttons {
+    padding-top: 5px;
+}
+
+div.assets-panel div.file-details,
+div.assets-panel div.folder-details {
+    padding: 20px 10px 30px;
+    box-sizing: border-box;
+    position: relative;
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+div.assets-panel div.details-field.subscribe {
+    float: right;
+}
+
+div.assets-panel div.details-field.subscribe > span {
+    vertical-align: top;
+}
+
+div.assets-panel a.show-more {
+    display: block;
+    line-height: 40px;
+    margin: 12px 0;
+}
+
+div.assets-panel span.details-label {
+    font-weight: bold;
+}
+
+div.assets-panel div.separator {
+    clear: both;    
+    border-bottom: 1px solid #e2e2e2;
+    margin: 20px 0;
+}
+
+div.assets-panel div.details-field {
+    margin-bottom: 5px
+}
+
+div.assets-panel div.details-field a { 
+	color: #0087c6;
+	text-decoration: none; 
+	word-break: break-all;
+}
+
+div.assets-panel div.details-field a:hover { 
+	color: #2fa6eb;
+}

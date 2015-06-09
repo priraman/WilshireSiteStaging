@@ -1,0 +1,78 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages><package name="Cavalier" type="Skin" version="0.0.0">
+  <friendlyName>Cavalier</friendlyName>
+  <description />
+  <iconFile />
+  <owner>
+    <name>DNN Corp</name>
+    <organization>DNN Corp</organization>
+    <url>http://www.dnnsoftware.com</url>
+    <email />
+  </owner>
+  <license />
+  <releaseNotes />
+  <components>
+    <component type="Skin">
+      <skinFiles>
+        <skinName>Cavalier</skinName>
+        <basePath></basePath>
+        <skinFile>
+          <path>CSS</path>
+          <name>Content.css</name>
+        </skinFile>
+        <skinFile>
+          <path>CSS</path>
+          <name>Typography.css</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>arrowDown.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>breadcrumb.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>icon_arrow.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>icon_close_dialog.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>pggrade.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Images</path>
+          <name>search.png</name>
+        </skinFile>
+        <skinFile>
+          <path>Simple</path>
+          <name>menudef.xml</name>
+        </skinFile>
+        <skinFile>
+          <path>Simple</path>
+          <name>SimpleTokens.txt</name>
+        </skinFile>
+        <skinFile>
+          <name>Main.ascx</name>
+        </skinFile>
+        <skinFile>
+          <name>Main.css</name>
+        </skinFile>
+        <skinFile>
+          <name>Main.doctype.xml</name>
+        </skinFile>
+        <skinFile>
+          <name>popUpSkin.ascx</name>
+        </skinFile>
+        <skinFile>
+          <name>Skin.css</name>
+        </skinFile>
+      </skinFiles>
+    </component>
+  </components>
+</package></packages>
+</dotnetnuke>

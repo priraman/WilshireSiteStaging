@@ -1,0 +1,43 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/***** Fix bug Content-2481: Add notification actions and the workflow sources. *****/
+DECLARE @NotificationTypeId INT
+SELECT @NotificationTypeId = NotificationTypeId
+    FROM    {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes
+    WHERE   Name = 'ContentWorkflowNotification'
+IF @NotificationTypeId IS NOT NULL
+BEGIN
+    INSERT INTO {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypeActions(
+        [NotificationTypeID],
+        [NameResourceKey],
+        [DescriptionResourceKey],
+        [ConfirmResourceKey],
+        [Order],
+        [APICall],
+        [CreatedByUserID],
+        [CreatedOnDate],
+        [LastModifiedByUserID],
+        [LastModifiedOnDate])
+    VALUES(
+        @NotificationTypeId,
+        'Review',
+        'Review',
+        NULL,
+        1,
+        'DesktopModules/InternalServices/API/ContentWorkflowService/Review',
+        -1,
+        GETDATE(),
+        -1,
+        GETDATE()
+        )
+END
+GO
+

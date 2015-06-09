@@ -1,0 +1,272 @@
+/* dashboard */
+ul.dashboard-period {
+    list-style: none inside none;
+    position: absolute;
+    z-index: 9999;
+    top: 52px;
+    left: 290px;
+}
+
+    ul.dashboard-period > li {
+        font-family: proxima_nova_semibold;
+        display: inline-block;
+        border-radius: 3px;
+        color: #0e181c;
+        padding: 10px 15px;
+        margin-right: 5px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+        ul.dashboard-period > li:hover {
+            background-color: #d9ecfa;
+        }
+
+        ul.dashboard-period > li.selected {
+            background-color: #0087c6;
+            color: #f4f4f4;
+        }
+
+div.dashboard-period-date {
+    position: absolute;
+    z-index: 9999;
+    top: 27px;
+    right: 30px;
+    font-size: 14px;
+    text-align: right;
+}
+
+div.comparative-term {
+    position: absolute;
+    z-index: 9999;
+    top: 58px;
+    right: 30px;
+    text-align: right;
+}
+
+    div.comparative-term > span {
+        font-family: proxima_nova_c_semibold;
+        text-transform: uppercase;
+        color: #999;
+        display: inline-block;
+        margin-right: 5px;
+        letter-spacing: 1px;
+    }
+
+    div.comparative-term > select {
+        border: 1px solid #ccc;
+        padding: 4px;
+        min-width: 55px;
+    }
+
+div.module-performance {
+    overflow: hidden;
+    position: relative;
+    height: 190px;
+    margin-bottom: 30px;
+}
+
+    div.module-performance > a {
+        display: block;
+        position: absolute;
+        width: 30px;
+        height: 190px;
+        background-color: #ddd;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
+    }
+
+        div.module-performance > a:hover {
+            background-color: #eee;
+        }
+
+a.module-performance-scroll-left {
+    left: 0;
+    background-image: url('../images/icon-carousel-arrow-prev.png');
+}
+
+a.module-performance-scroll-right {
+    right: 0;
+    background-image: url('../images/icon-carousel-arrow-next.png');
+}
+
+div.module-performance-card-holder {
+    width: 2000px;
+    position: absolute;
+    height: 190px;
+    left: 45px;
+}
+
+div.module-performance-card {
+    display: inline-block;
+    border: 1px solid #e1e1e6;
+    border-radius: 3px;
+    background-color: #ffffff;
+    padding: 15px 12px 12px 12px;
+    margin-right: 14px;
+    text-align: center;
+    width: 200px;
+}
+
+    div.module-performance-card.clickable {
+        cursor: pointer;
+    }
+
+        div.module-performance-card.clickable:hover {
+            background-color: #eef7ff;
+        }
+
+    div.module-performance-card > .module-name {
+        display: block;
+        color: #0e181c;
+        font-family: proxima_nova_semibold;
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+div.percent-progress {
+    display: inline-block;
+    width: 26px;
+    height: 20px;
+    vertical-align: top;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+    div.percent-progress.higher {
+        background-image: url(../images/icon-engagement-up.png);
+    }
+
+    div.percent-progress.lower {
+        background-image: url(../images/icon-engagement-down.png);
+    }
+
+    div.percent-progress .tag-menu {
+        left: -50px;
+        width: 220px;
+        bottom: 120%;
+    }
+
+div.module-performance-card > .percent {
+    font-size: 55px;
+    color: #0e181c;
+    font-family: proxima_nova_semibold;
+    line-height: 50px;
+}
+
+div.module-performance-card > .percent-label {
+    font-size: 20px;
+    color: #878383;
+    font-family: proxima_nova_semibold;
+    vertical-align: top;
+    width: 26px;
+    display: inline-block;
+}
+
+div.module-performance-card > div.count-column {
+    width: 50%;
+    float: right;
+}
+
+div.module-performance-card .count {
+    font-size: 26px;
+    color: #0e181c;
+    font-family: proxima_nova_semibold;
+    display: block;
+    text-align: center;
+}
+
+div.module-performance-card .label {
+    display: block;
+    font-family: proxima_nova_c_semibold;
+    color: #878383;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+    div.module-performance-card .label.borderbottom {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e1e1e6;
+        margin-bottom: 10px;
+    }
+
+.incontext-analytics div.module-performance-card {
+    margin: 0 0 2px 0;
+    border: none;
+}
+
+ul.popular-content-list {
+    list-style-type: none;
+    display: block;
+    min-height: 400px;
+}
+
+    ul.popular-content-list > li {
+        display: block;
+        padding: 15px 10px 15px 10px;
+        list-style-type: none;
+        border-bottom: 1px solid #eee;
+    }
+
+        ul.popular-content-list > li > p {
+            margin-left: 85px;
+        }
+
+            ul.popular-content-list > li > p.dashboard-popular-content {
+                margin-left: 65px;
+            }
+
+            ul.popular-content-list > li > p > span {
+                display: block;
+                color: #999;
+                font-family: proxima_nova_c_semibold;
+            }
+
+                ul.popular-content-list > li > p > span.content-title {
+                    margin-bottom: 5px;
+                    color: #444;
+                    font-size: 14px;
+                    font-family: proxima_nova;
+                }
+
+        ul.popular-content-list > li > div.left > .percent-progress {
+            width: 13px;
+            height: 13px;
+            background-position: top center;
+        }
+
+        ul.popular-content-list > li > div.left > .percent-progress.higher {
+            background-image: url(../images/icon-engagement-up-small.png);
+        }
+
+        ul.popular-content-list > li > div.left > .percent-progress.lower {
+            background-image: url(../images/icon-engagement-down-small.png);
+        }
+
+        ul.popular-content-list > li > div.left > .percent-progress .tag-menu {
+            left: -67px;
+            bottom: 180%;
+        }
+
+        ul.popular-content-list > li > div.left > span.percent {
+            font-size: 22px;
+            font-family: proxima_nova_semibold;
+            line-height: 22px;
+            vertical-align: top;
+            display: inline;
+        }
+
+        ul.popular-content-list > li > div.left > span.count-number {
+            font-size: 22px;
+            font-family: proxima_nova_semibold;
+            line-height: 22px;
+            vertical-align: top;
+            width: 55px;
+            display: inline-block;
+            text-align: center;
+        }

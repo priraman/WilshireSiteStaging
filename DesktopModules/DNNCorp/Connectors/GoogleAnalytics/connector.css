@@ -1,0 +1,229 @@
+﻿#connector-GoogleAnalytics > div.edit-fields > div > div {
+    width: 100%;
+}
+#connector-GoogleAnalytics > div.edit-fields > div > div label {
+    width: 20%;
+}
+#connector-GoogleAnalytics > div.edit-fields > div > div input[type='text'] {
+    width: 65%;
+}
+
+#connector-GoogleAnalytics {
+    position: relative;
+}
+#connector-GoogleAnalytics .advancedSetting{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: -67px;
+    background: url('Images/Icon-Adv-Settings.png') no-repeat 0 0;
+}
+#connector-GoogleAnalytics.mobile-view .advancedSetting {
+    top: -43px;
+}
+.conn-ga-advancedSetting {
+    
+}
+.conn-ga-advancedSetting.firstPanel > div {
+    height: 50px;
+}
+.conn-ga-advancedSetting > div label {
+    width: 20%;
+    text-align: right;
+    padding-right: 10px;
+    display: inline-block;
+}
+.conn-ga-advancedSetting > div input[type="text"],
+.conn-ga-advancedSetting > div select {
+    width: 50%;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.conn-ga-advancedSetting > div input[type="text"] + span {
+    margin-left: 5px;
+    color: #f00;
+}
+
+.conn-ga-advancedSetting > div div.pagesDropDown {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+}
+.conn-ga-advancedSetting > div div.pagesDropDown .dnnDropDownList {
+    width: 100%;
+}
+.conn-ga-advancedSetting > div div.pagesDropDown .dnnDropDownList .selected-item,
+.conn-ga-advancedSetting > div div.pagesDropDown .dnnDropDownList .dt-container {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.conn-ga-advancedSetting .rule-grid {
+    background-color: #fff;
+    border: solid 1px #ddd;
+}
+.conn-ga-advancedSetting .rule-grid .emptyinfo {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.conn-ga-advancedSetting .rule-grid .items {
+    max-height: 200px;
+    outline: none;
+}
+.conn-ga-advancedSetting .rule-grid ul.item {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: solid 1px #ddd;
+    margin-right: 20px;
+}
+.conn-ga-advancedSetting .rule-grid ul.item:last-child {
+    border-bottom: none;
+}
+.conn-ga-advancedSetting .rule-grid ul.item:after {
+    clear: both;
+    content: '';
+}
+.conn-ga-advancedSetting .rule-grid ul.item.header {
+    background-color: #efefef;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li {
+    float: left;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.conn-ga-advancedSetting .rule-grid ul.item li:last-child {
+    border-right: none;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-edit {
+    width: 7%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-edit a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('Images/icon-edit.png') no-repeat center center;
+    vertical-align: middle;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-delete {
+    width: 7%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-delete a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('Images/icon-delete.png') no-repeat center center;
+    vertical-align: middle;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-label {
+    width: 18%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-value {
+    width: 18%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-page {
+    width: 18%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-role {
+    width: 18%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-sort {
+    width: 14%;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-sort a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../../EvoqContentLibrary/SharedAssets/Images/PersonaBar-icons.png') no-repeat -214px -5px;
+    vertical-align: middle;
+    visibility: hidden;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-sort a.visible {
+    visibility: visible;
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-sort a.up {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2); 
+    -webkit-transform: rotate(-180deg); 
+    -moz-transform: rotate(-180deg); 
+    -o-transform: rotate(-180deg); 
+    -ms-transform: rotate(-180deg); 
+    transform: rotate(-180deg);
+}
+.conn-ga-advancedSetting .rule-grid ul.item li.col-sort a.down {
+}
+
+/* Scroll Bar Styles*/
+/* SCROLL BAR Style */
+.conn-ga-advancedSetting .rule-grid.jspScrollable {
+    border: solid 1px #ddd;
+}
+.conn-ga-advancedSetting .rule-grid .jspVerticalBar .jspCap {
+    display: block;
+    height: 3px;
+    width: 11px;
+}
+.conn-ga-advancedSetting .rule-grid .jspDrag {
+    position: relative;
+    top: 0;
+    left: 0;
+    -ms-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    -ms-opacity: .75;
+    opacity: .75;
+    background: #000;
+    cursor: pointer;
+}
+.conn-ga-advancedSetting .rule-grid .jspContainer {
+    overflow: hidden;
+    position: relative;
+}
+.conn-ga-advancedSetting .rule-grid .jspContainer .jspPane {
+    width: 100% !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+}
+.conn-ga-advancedSetting .rule-grid .jspContainer .jspVerticalBar {
+    border-left: 1px solid #ddd;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 11px;
+    height: 100%;
+    background-color: #fff;
+}
+.conn-ga-advancedSetting .rule-grid .jspVerticalBar .jspTrack {
+    width: 7px !important;
+}
+.conn-ga-advancedSetting .rule-grid .jspVerticalBar .jspTrack .jspDrag {
+    -ms-opacity: 0.5 !important;
+    opacity: 0.5 !important;
+}
+.conn-ga-advancedSetting .rule-grid .jspVerticalBar * {
+    margin: 0;
+    padding: 0;
+}
+.conn-ga-advancedSetting .rule-grid .jspCap {
+    display: none;
+}
+
+.conn-ga-advancedSetting .rule-grid .jspTrack {
+    background: transparent;
+    position: relative;
+}
+.conn-ga-advancedSetting .rule-grid .jspVerticalBar .jspTrack {
+    width: 10px;
+    margin: 0 0 0 3px;
+}

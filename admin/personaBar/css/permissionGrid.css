@@ -1,0 +1,408 @@
+#roleGroupSelector, #roleGroupSelector {
+    -webkit-appearance: menulist;
+}
+
+﻿.dnnFormItem input[type="text"],
+.dnnFormItem select,
+.dnnFormItem textarea,
+.dnnFormItem input[type="email"],
+.dnnFormItem input[type="search"],
+.dnnFormItem input[type="password"] {
+    margin-bottom: 18px;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.8), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 12px;
+}
+
+.dnnFormItem .token-input-list-facebook input[type="text"] {
+    margin-bottom: 0;
+}
+
+div.dnnPermissionsGrid .roles-container select {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    margin-left: 15px;
+}
+
+.dnnPermissionsGrid > .dnnFormItem select {
+    width: 25%;
+    margin: 0 5px 5px 0;
+    min-width: 180px;
+    color: #777;
+}
+
+.dnnGrid.dnnPermissionsGrid.dnnForm .simple-button {
+    background-color: #FFF;
+    vertical-align: top;
+    font-weight: bold;
+    padding: 9px 24px;
+}
+
+ul.token-input-list-facebook {
+    overflow: hidden;
+    height: auto !important;
+    width: 35%;
+    cursor: text;
+    min-height: 1px;
+    z-index: 999;
+    margin: 0;
+    list-style-type: none;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+    color: #999;
+    font-size: 12px;
+}
+
+ul.token-input-list-facebook li input {
+    border: 0;
+    width: 100px;
+    padding: 3px 8px;
+    background-color: white;
+    margin: 2px 0;
+    -webkit-appearance: caret;
+}
+
+li.token-input-token-facebook {
+    overflow: hidden;
+    height: auto !important;
+    height: 15px;
+    margin: 3px;
+    padding: 1px 3px;
+    background-color: #eff2f7;
+    color: #000;
+    cursor: default;
+    border: 1px solid #ccd5e4;
+    font-size: 11px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    float: left;
+    white-space: nowrap;
+}
+
+li.token-input-token-facebook p {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
+li.token-input-token-facebook span {
+    color: #a6b3cf;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+li.token-input-selected-token-facebook {
+    background-color: #FEFDDE;
+    border: 1px #EEECE5 solid;
+    color: #000;
+}
+
+li.token-input-input-token-facebook {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-facebook {
+    position: absolute;
+    width: 252px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 11px;
+    font-family: Verdana;
+    z-index: 99999999999999999999999999999999999;
+}
+
+div.token-input-dropdown-facebook p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
+}
+
+div.token-input-dropdown-facebook ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown-facebook ul li {
+    background-color: #fff;
+    padding: 3px;
+    margin: 0;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item-facebook {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item2-facebook {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-facebook ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-facebook {
+    background-color: #FEFDDE;
+    color: #000;
+}
+
+/* Extracted from PageSettings.css */
+.dnnPermissionsGrid a.simple-button {
+    display:inline-block;
+    border:1px solid #bfbfbf;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    color:#000;
+    text-decoration:none;
+    padding:9px 24px;
+}
+
+.dnnPermissionsGrid .title-container {
+    overflow:auto;
+}
+
+.dnnPermissionsGrid .title-container .simple-button {
+    float:right;
+}
+
+table.dnnPermissionsGrid,table.dnnGrid,table.dnnASPGrid {
+    border:1px solid #c9c9c9;
+    margin-bottom:20px;
+}
+
+table.dnnPermissionsGrid {
+    color:#777;
+}
+
+table.dnnPermissionsGrid tr.dnnGridHeader td {
+    line-height:120%;
+    text-align:center;
+    vertical-align:middle;
+    padding:4px;
+}
+
+table.dnnPermissionsGrid tr.dnnGridItem td,table.dnnPermissionsGrid tr.dnnGridAltItem td {
+    border-bottom:1px solid #c9c9c9;
+    border-top:1px solid #c9c9c9;
+    text-align:center;
+    width:70px;
+    padding:5px 4px;
+}
+
+table.dnnPermissionsGrid tr.dnnGridItem td.permissionHeader,table.dnnPermissionsGrid tr.dnnGridAltItem td.permissionHeader {
+    border-right:1px solid #c9c9c9;
+    padding-left:10px;
+    text-align:left;
+    width:150px;
+}
+
+table.dnnPermissionsGrid tr.dnnGridHeader td.permissionHeader {
+    padding-left:10px;
+    text-align:left;
+}
+
+.dnnPermissionsGrid > .dnnFormItem label {
+    color:#777;
+    margin-right:8px;
+}
+
+.dnnPermissionsGrid > .dnnFormItem select {
+    color:#777;
+    min-width:180px;
+    width:25%;
+    margin:0 5px 5px 0;
+}
+
+.dnnPermissionsGrid > .dnnFormItem input {
+    color:#777;
+    height:17px;
+    margin-bottom:0;
+    width:25%;
+}
+
+.dnnPermissionsGrid > .dnnFormItem ul.token-input-list-facebook {
+    display:inline-block;
+    vertical-align:top;
+}
+
+.dnnPermissionsGrid > .dnnFormItem > .leftGroup {
+    float:left;
+    margin-right:35px;
+}
+
+.dnnPermissionsGrid > .dnnFormItem > .rightGroup {
+    float:left;
+}
+
+.dnnPermissionsGrid > .dnnFormItem > .rightGroup > .dnnSecondaryAction {
+    position:absolute;
+}
+
+.dnnPermissionsGrid > .dnnFormItem {
+    margin-bottom:18px;
+    overflow:auto;
+}
+
+.dnnGridHeader td,thead.dnnGridHeader th,tr.dnnGridHeader th {
+    background:0;
+    border-bottom:1px solid #c9c9c9;
+    border-right:1px solid #c9c9c9;
+    padding:6px 12px;
+}
+
+.dnnGridItem td,.dnnGridAltItem td {
+    border-right:1px solid #c9c9c9;
+    padding:6px;
+}
+
+.dnnGridItem td input,.dnnGridAltItem td input {
+    margin-bottom:none;
+}
+
+.dnnGridAltItem {
+    background:#F2F2F2;
+}
+
+.dnnGridItem:hover,.dnnGridAltItem:hover {
+    background-color:#e8f1fa;
+}
+
+div.dnnPermissionsGrid .roles-container {
+    min-height:41px;
+}
+
+div.dnnPermissionsGrid .roles-container .simple-button {
+    margin-left:10px;
+    padding-bottom:6px;
+    text-transform:uppercase;
+}
+
+div.dnnPermissionsGrid .roles-container select {
+    box-shadow:none;
+    margin-left:15px;
+    moz-box-shadow:none;
+    webkit-box-shadow:none;
+}
+
+div.dnnPermissionsGrid .users-container {
+    overflow:visible;
+}
+
+div.dnnPermissionsGrid .users-container > label {
+    display:block;
+    font-weight:700;
+    line-height:30px;
+}
+
+div.dnnPermissionsGrid .users-container .simple-button {
+    margin-left:10px;
+    text-transform:uppercase;
+}
+
+div.dnnPermissionsGrid .users-container .token-input-list-facebook {
+    box-shadow:none;
+    moz-box-shadow:none;
+    webkit-box-shadow:none;
+}
+
+table.dnnPermissionsGrid .dnnGridHeader td {
+    background:none;
+}
+
+table.dnnPermissionsGrid .dnnGridItem {
+    background-color:#f2f2f2;
+}
+
+table.dnnPermissionsGrid .dnnGridAltItem {
+    background-color:#fff;
+}
+
+table.dnnPermissionsGrid .dnnItem td span {
+    display:inline-block;
+    height:16px;
+    vertical-align:middle;
+    width:16px;
+    background:url(../Images/icon-permission-sprint.png) no-repeat center center;
+}
+
+table.dnnPermissionsGrid .dnnItem td span.permission-locked {
+    background-position:-64px 0;
+}
+
+table.dnnPermissionsGrid .dnnItem td span.permission-granted {
+    background-position:-32px 0;
+}
+
+table.dnnPermissionsGrid .dnnItem td span.permission-denied {
+    background-position:-48px 0;
+}
+
+table.dnnPermissionsGrid .dnnItem td span.permission-unchecked {
+    background-position:-16px 0;
+}
+
+table.dnnPermissionsGrid .dnnItem td.permissionGridActions {
+    border-left:1px solid #c9c9c9;
+}
+
+table.dnnPermissionsGrid .dnnItem td.permissionGridActions a {
+    background:url(../Images/icon-permission-sprint.png) no-repeat 0 0;
+    display:inline-block;
+    height:16px;
+    vertical-align:middle;
+    width:16px;
+}
+
+div.dnnPermissionsGrid ul.token-input-list-facebook {
+    padding:5px!important;
+}
+
+div.dnnPermissionsGrid .token-input-list-facebook .token-input-input-token-facebook input[type=text] {
+    border: none;
+    box-shadow: none;
+    outline: 0;
+    padding:3px;
+}
+
+div.dnnPermissionsGrid .token-input-list-facebook .token-input-token-facebook {
+    margin:2px;
+}
+
+.token-input-dropdown-facebook ul li img {
+    margin-right:4px;
+}
+
+.token-input-dropdown-facebook ul li span {
+    display:inline-block;
+    vertical-align:top;
+    line-height:25px;
+}
+
+table.dnnPermissionsGrid td.permissionHeader + td,table.dnnPermissionsGrid td.last {
+    background-image:0 0 rgba(201,201,201,0) 5px;
+}
+
+div.dnnPermissionsGrid .token-input-list-facebook .token-input-input-token-facebook input[type=text] {
+    padding: 0;
+    height: 20px;
+}

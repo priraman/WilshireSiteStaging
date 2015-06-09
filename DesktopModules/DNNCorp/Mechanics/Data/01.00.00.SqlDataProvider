@@ -1,0 +1,1917 @@
+﻿--Gamings Mechanics Schema
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition]
+        (
+            [PrivilegeDefId] [int] IDENTITY(1,1) NOT NULL,
+            [PrivilegeName] [nvarchar](100) NULL,			
+            [DefaultReputationPoints] [int] NOT NULL,
+            [DesktopModuleId] [int] NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_PrivilegeDefinition] PRIMARY KEY NONCLUSTERED ( [PrivilegeDefId] )
+        )				
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_PrivilegeDefinition_PrivilegeDefId] ON {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] ([PrivilegeDefId] ASC)		
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_Privilege]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_Privilege]
+        (
+            [PrivilegeId] [int] IDENTITY(1,1) NOT NULL,
+            [PrivilegeDefId] [int] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+            [CreatedByUserID] [int] NOT NULL,	
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_Privilege_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            [LastModifiedByUserID] [int] NOT NULL,
+            [LastModifiedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_Privilege_LastModifiedOnDate]  DEFAULT (getutcdate()) NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_Privilege] PRIMARY KEY NONCLUSTERED ( [PrivilegeId] )
+        )				
+
+    CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_Privilege_PrivilegeId] ON {databaseOwner}[{objectQualifier}Mechanics_Privilege] ([PrivilegeId] ASC)		
+    
+    ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_Privilege]  
+        ADD CONSTRAINT [FK_{objectQualifier}Mechanics_Privilege_{objectQualifier}Mechanics_PrivilegeDefinition] FOREIGN KEY([PrivilegeDefId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] ([PrivilegeDefId]) ON DELETE CASCADE		
+
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition]
+        (
+            [ScoringActionDefId] [int] IDENTITY(1,1) NOT NULL,
+            [ActionName] [nvarchar](100) NOT NULL,			
+            [DefaultExperiencePoints] [int] NOT NULL,
+            [DefaultReputationPoints] [int] NOT NULL,
+            [DefaultMaxCount] [int] NOT NULL,
+            [DefaultInterval] [int] NOT NULL,
+            [DesktopModuleId] [int] NOT NULL,
+            [ActionType] [int] NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_ScoringActionDefinition] PRIMARY KEY NONCLUSTERED ( [ScoringActionDefId] )
+        )				
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_ScoringActionDefinition_ScoringActionDefId] ON {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] ([ScoringActionDefId] ASC)		
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_ScoringAction]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_ScoringAction]
+        (
+            [ScoringActionId] [int] IDENTITY(1,1) NOT NULL,
+            [ScoringActionDefId] [int] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ExperiencePoints] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+            [MaxCount] [int] NOT NULL,
+            [Interval] [int] NOT NULL,		
+            [CreatedByUserID] [int] NOT NULL,	
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_ScoringAction_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            [LastModifiedByUserID] [int] NOT NULL,
+            [LastModifiedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_ScoringAction_LastModifiedOnDate]  DEFAULT (getutcdate()) NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_ScoringAction] PRIMARY KEY NONCLUSTERED ( [ScoringActionId] )
+        )				
+
+    CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_ScoringAction_ScoringActionId] ON {databaseOwner}[{objectQualifier}Mechanics_ScoringAction] ([ScoringActionId] ASC)		
+    
+    ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_ScoringAction]  
+        ADD CONSTRAINT [FK_{objectQualifier}Mechanics_ScoringAction_{objectQualifier}Mechanics_ScoringActionDefinition] FOREIGN KEY([ScoringActionDefId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] ([ScoringActionDefId]) ON DELETE CASCADE		
+
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_UserScoring]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+        (
+            [UserScoringId] [int] IDENTITY(1,1) NOT NULL,
+            [UserId] [int] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ExperiencePoints] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+            [TopReputationPoints] [int] NOT NULL,
+            [DailyReputationPoints] [int] NOT NULL,
+            [BestReputationPoints] [int] NOT NULL,
+            [ContentViewedCount] [int] NOT NULL,
+            [ContentInteractedCount] [int] NOT NULL,
+            [ContentCreatedCount] [int] NOT NULL,
+            [ContentEditedCount] [int] NOT NULL,
+            [ContentDeletedCount] [int] NOT NULL,
+            [ContentFlaggedCount] [int] NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_UserScoring_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            [LastModifiedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_UserScoring_LastModifiedOnDate]  DEFAULT (getutcdate()) NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_UserScoring] PRIMARY KEY NONCLUSTERED ( [UserScoringId] )
+        )		
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoring_UserId] ON {databaseOwner}[{objectQualifier}Mechanics_UserScoring] ([UserId] ASC)
+
+        CREATE INDEX [IX_{objectQualifier}Mechanics_UserScoring_ReputationPoints] ON {databaseOwner}[{objectQualifier}Mechanics_UserScoring] ([ReputationPoints] DESC)
+    END
+GO
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]
+        (
+            [UserScoringLogId] [int] IDENTITY(1,1) NOT NULL,
+            [UserId] [int] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ContentItemId] [int] NULL,
+            [Notes] [nvarchar](400) NULL,
+            [Context] [nvarchar](200) NULL,
+            [ScoringActionDefId] [int] NOT NULL,
+            [ExperiencePoints] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_UserScoringLog_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_UserScoringLog] PRIMARY KEY NONCLUSTERED ( [UserScoringLogId] )
+        )		
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoringLog_UserIdPortalId] ON {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] ([UserId] ASC, [PortalId] ASC)		
+        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoringLog_CreatedDate]	ON {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] ([CreatedOnDate] DESC)
+        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserScoringLog_ContentItemId]	ON {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] ([ContentItemId])
+
+        ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]  
+            ADD CONSTRAINT [FK_{objectQualifier}Mechanics_UserScoringLog_{objectQualifier}Mechanics_ScoringActionDefinition] FOREIGN KEY([ScoringActionDefId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] ([ScoringActionDefId]) ON DELETE CASCADE		
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_Badge]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_Badge]
+        (
+            [BadgeId] [int] IDENTITY(1,1) NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [BadgeName] [nvarchar](100) NULL,			
+            [Tier] [int] NOT NULL,
+            [TimeFrameInDays] [int] NOT NULL,
+            [ImageFileId] [int] NOT NULL,
+            [CreatedByUserID] [int] NOT NULL,	
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_Badge_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            [LastModifiedByUserID] [int] NOT NULL,
+            [LastModifiedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_Badge_LastModifiedOnDate]  DEFAULT (getutcdate()) NOT NULL,			
+            CONSTRAINT [PK_{objectQualifier}Mechanics_Badge] PRIMARY KEY NONCLUSTERED ( [BadgeId] )
+        )				
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_Badge_BadgeId] ON {databaseOwner}[{objectQualifier}Mechanics_Badge] ([BadgeId] ASC)		
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef]
+        (
+            [BadgeSadId] [int] IDENTITY(1,1) NOT NULL,
+            [BadgeId] [int] NOT NULL,
+            [ScoringActionDefId] [int] NOT NULL,
+            [NumberOfTimes] [int] NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_BadgeScoActDef_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_BadgeScoActDef] PRIMARY KEY NONCLUSTERED ( [BadgeSadId] )
+        )				
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_BadgeScoActDef_BadgeSadId] ON {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] ([BadgeSadId] ASC)		
+
+        ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef]  
+            ADD CONSTRAINT [FK_{objectQualifier}Mechanics_BadgeScoActDef_{objectQualifier}Mechanics_Badge] FOREIGN KEY([BadgeId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_Badge] ([BadgeId]) ON DELETE CASCADE		
+
+        ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef]  
+            ADD CONSTRAINT [FK_{objectQualifier}Mechanics_BadgeScoActDef_{objectQualifier}Mechanics_ScoringActionDefinition] FOREIGN KEY([ScoringActionDefId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] ([ScoringActionDefId]) ON DELETE CASCADE		
+
+    END
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_UserBadge]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_UserBadge]
+        (
+            [UserBadgeId] [int] IDENTITY(1,1) NOT NULL,
+            [BadgeId] [int] NOT NULL,
+            [UserId] [int] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_UserBadge_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_UserBadge] PRIMARY KEY NONCLUSTERED ( [UserBadgeId] )
+        )				
+
+        CREATE CLUSTERED INDEX [IX_{objectQualifier}Mechanics_UserBadge_UserBadgeId] ON {databaseOwner}[{objectQualifier}Mechanics_UserBadge] ([UserBadgeId] ASC)		
+
+        ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_UserBadge]  
+            ADD CONSTRAINT [FK_{objectQualifier}Mechanics_UserBadge_{objectQualifier}Mechanics_Badge] FOREIGN KEY([BadgeId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_Badge] ([BadgeId]) ON DELETE CASCADE		
+    END
+GO
+
+/* Add Column to Messaging Table */
+/******************************/
+
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_NAME = '{objectQualifier}CoreMessaging_MessageRecipients' 
+           AND  COLUMN_NAME = 'SendToast')
+   BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}CoreMessaging_MessageRecipients ADD
+            SendToast bit NOT NULL DEFAULT ((0))
+    END 
+GO
+
+/* Add Notification Types
+TODO - This needs to be removed later as it should be done by API - which doesn't work currently 
+As IUpgradeable is not called for a Libarary, e.g. Mechanics
+*/
+
+IF NOT EXISTS( SELECT * FROM {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+            WHERE [NAME] = 'DNNCorp_PrivilegeAwarded' 
+            AND   [DESCRIPTION] = 'Privilege Awarded')
+   BEGIN
+        INSERT INTO {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+        ([Name],
+         [Description],
+         [CreatedByUserID],
+         [CreatedOnDate],
+         [LastModifiedByUserID],
+         [LastModifiedOnDate]
+        )
+        VALUES		
+        (
+        'DNNCorp_PrivilegeAwarded',
+        'Privilege Awarded',
+        -1,
+        GETUTCDATE(),
+        -1,
+        GETUTCDATE()
+        )
+    END 
+GO
+
+IF NOT EXISTS( SELECT * FROM {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+            WHERE [NAME] = 'DNNCorp_BadgeAwarded' 
+            AND   [DESCRIPTION] = 'Badge Awarded')
+   BEGIN
+        INSERT INTO {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+        ([Name],
+         [Description],
+         [CreatedByUserID],
+         [CreatedOnDate],
+         [LastModifiedByUserID],
+         [LastModifiedOnDate]
+        )
+        VALUES		
+        (
+        'DNNCorp_BadgeAwarded',
+        'Badge Awarded',
+        -1,
+        GETUTCDATE(),
+        -1,
+        GETUTCDATE()
+        )
+    END 
+GO
+
+IF NOT EXISTS( SELECT * FROM {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+            WHERE [NAME] = 'DNNCorp_ReputationAwarded' 
+            AND   [DESCRIPTION] = 'Reputation Awarded')
+   BEGIN
+        INSERT INTO {databaseOwner}{objectQualifier}CoreMessaging_NotificationTypes 
+        ([Name],
+         [Description],
+         [CreatedByUserID],
+         [CreatedOnDate],
+         [LastModifiedByUserID],
+         [LastModifiedOnDate]
+        )
+        VALUES		
+        (
+        'DNNCorp_ReputationAwarded',
+        'Reputation Awarded',
+        -1,
+        GETUTCDATE(),
+        -1,
+        GETUTCDATE()
+        )
+    END 
+GO
+
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_ScoringActionIsOfActionType]', N'FN') IS NOT NULL
+    DROP FUNCTION {databaseOwner}[{objectQualifier}Mechanics_ScoringActionIsOfActionType]
+GO
+
+CREATE FUNCTION {databaseOwner}[{objectQualifier}Mechanics_ScoringActionIsOfActionType](
+        @ScoringActionDefId int,
+        @ActionType int)
+    RETURNS bit
+AS
+BEGIN
+    IF EXISTS(
+            SELECT	*
+            FROM	{databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition]
+            WHERE	[ScoringActionDefId] = @ScoringActionDefId AND [ActionType] = @ActionType)
+        RETURN 1
+
+    RETURN 0
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_SaveUserScore]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveUserScore]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveUserScore]
+    @UserId INT,
+    @PortalId INT,
+    @ContentItemId INT,
+    @ScoringActionDefId INT,		
+    @ExperiencePoints INT,
+    @ReputationPoints INT,
+    @Notes nvarchar(400),
+    @Context nvarchar(200)
+AS 
+    IF @UserId IS NULL OR @UserId < 0
+        RETURN
+
+	-- NOTE(cbond): If Analytics is installed, reschedule a recalculation of this user's analytics data in about twenty minutes. If they do something
+	-- else before that twenty minutes is up, we will push the recalc forward by another 20 minutes. Only when they stop interacting with the site do
+	-- we go back and reclaculate all the analytics data for that user (rather than doing so every time they complete an action, this means we will
+	-- recalc the data after it has changed and after the point it is likely to be updated again. We ignore any exceptions because this is not critical
+	IF EXISTS (SELECT * FROM {databaseOwner}sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}Analytics_Reschedule_User') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	BEGIN
+		BEGIN TRY
+			EXEC {databaseOwner}{objectQualifier}Analytics_Reschedule_User @PortalId, @UserId
+		END TRY
+		BEGIN CATCH
+		END CATCH
+	END
+
+    DECLARE @UserScoringLogId INT
+
+    INSERT INTO {databaseOwner}{objectQualifier}Mechanics_UserScoringLog
+            ( UserId,
+              PortalId,
+              ContentItemId,                          
+              ScoringActionDefId,
+              ExperiencePoints,
+              ReputationPoints,
+              Notes,	
+              Context,				
+              CreatedOnDate		        
+            )
+    VALUES  ( @UserId, -- UserId INT
+              @PortalId, -- PortalId INT			 
+              @ContentItemId, --ContentItemId INT 
+              @ScoringActionDefId, -- ScoringActionDefId INT
+              @ExperiencePoints, -- ExperiencePoints INT
+              @ReputationPoints, -- ReputationPoints INT
+              @Notes, -- Notes nvarchar(400)
+              @Context, -- Context nvarchar(200)
+              getutcdate() -- CreatedOnDate - datetime			        
+            )
+                    
+    SET @UserScoringLogId = SCOPE_IDENTITY()
+    SELECT @UserScoringLogId
+
+    DECLARE @NewTopRP INT
+    DECLARE @NewRP INT
+    DECLARE @CurTopRP INT
+    DECLARE @CurRP INT
+    DECLARE @CurUserScoringId INT
+    
+    DECLARE @CurDailyRP INT
+    DECLARE @NewDailyRP INT
+    DECLARE @CurBestRP INT
+    DECLARE @NewBestRP INT
+
+    DECLARE @InteractedCount INT
+    DECLARE @ViewedCount INT
+    DECLARE @CreatedCount INT
+    DECLARE @EditedCount INT
+    DECLARE @DeletedCount INT
+    DECLARE @FlaggedCount INT
+
+    -- Flagged
+    SELECT @InteractedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 0)) AS INT)
+    SELECT @ViewedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 1)) AS INT)
+    SELECT @CreatedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 2)) AS INT)
+    SELECT @EditedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 3)) AS INT)
+    SELECT @DeletedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 4)) AS INT)
+    SELECT @FlaggedCount = CAST((SELECT {databaseOwner}{objectQualifier}Mechanics_ScoringActionIsOfActionType(@ScoringActionDefId, 5)) AS INT)
+
+    SELECT
+        @CurUserScoringId = UserScoringId,
+        @CurTopRP = TopReputationPoints,
+        @CurRP = ReputationPoints,
+        @CurDailyRP = COALESCE(DailyReputationPoints, 0),
+        @CurBestRP = COALESCE(BestReputationPoints, 0)
+    FROM	{databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+    WHERE	[PortalId] = @PortalId AND [UserId] = @UserId
+
+    SELECT	@NewDailyRP = COALESCE(SUM([ReputationPoints]), 0)
+    FROM	{databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]
+    WHERE	[PortalId] = @PortalId AND [UserId] = @UserId
+    AND		[CreatedOnDate] >= dateadd(hour, -24, getutcdate()) AND [CreatedOnDate] <= getutcdate()
+
+    IF @NewDailyRP > @CurBestRP
+        SELECT @NewBestRP = COALESCE(@NewDailyRP, 0)
+    ELSE
+        SELECT @NewBestRP = COALESCE(@CurBestRP, 0)
+
+	IF @NewDailyRP > @NewBestRP
+		SELECT @NewBestRP = @NewDailyRP
+
+    IF @CurUserScoringId IS NOT NULL
+     BEGIN
+        SET @NewRP = @CurRP + @ReputationPoints
+        IF @NewRP > @CurTopRP
+            SET @NewTopRP = @NewRP --Bump to new high
+        ELSE
+            SET @NewTopRP = @CurTopRP --Unchanged
+
+        UPDATE {databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+        SET ExperiencePoints = ExperiencePoints + @ExperiencePoints,
+            ReputationPoints = @NewRP,
+            TopReputationPoints = @NewTopRP,
+            BestReputationPoints = @NewBestRP,
+            DailyReputationPoints = @NewDailyRP,
+            ContentInteractedCount = ContentInteractedCount + @InteractedCount,
+            ContentViewedCount = ContentViewedCount + @ViewedCount,
+            ContentCreatedCount = ContentCreatedCount + @CreatedCount,
+            ContentEditedCount = ContentEditedCount + @EditedCount,
+            ContentDeletedCount = ContentDeletedCount + @DeletedCount,
+            ContentFlaggedCount = ContentFlaggedCount + @FlaggedCount,
+            LastModifiedOnDate = getutcdate()
+        WHERE UserId = @UserId AND PortalId = @PortalId
+     END
+    ELSE
+     BEGIN
+        IF @ReputationPoints > 0
+            SET @NewTopRP = @ReputationPoints
+        ELSE
+            SET @NewTopRP = 0
+
+        INSERT INTO {databaseOwner}{objectQualifier}Mechanics_UserScoring
+                ( UserId,
+                  PortalId,            
+                  ExperiencePoints,
+                  ReputationPoints,
+                  TopReputationPoints,
+                  BestReputationPoints,
+                  DailyReputationPoints,
+                  ContentInteractedCount,
+                  ContentViewedCount,
+                  ContentCreatedCount,
+                  ContentEditedCount,
+                  ContentDeletedCount,
+                  ContentFlaggedCount,
+                  CreatedOnDate,
+                  LastModifiedOnDate		        
+                )
+        VALUES  ( @UserId,           -- UserId INT
+                  @PortalId,         -- PortalId INT
+                  @ExperiencePoints, -- ExperiencePoints INT
+                  @ReputationPoints, -- ReputationPoints INT
+                  @NewTopRP,         -- TopReputationPoints INT
+                  @NewBestRP,		 -- BestReputationPoints INT
+                  @NewDailyRP,		 -- DailyReputationPoints INT
+                  @InteractedCount,	 -- Number of content interactions
+                  @ViewedCount,		 -- Number of content items viewed
+                  @CreatedCount,	 -- Number of content items created
+                  @EditedCount,		 -- Number of content items edited
+                  @DeletedCount,	 -- Number of content items deleted
+                  @FlaggedCount,	 -- Flagged item count
+                  getutcdate(),      -- CreatedOnDate - datetime			        
+                  getutcdate()       -- LastModifiedOnDate - datetime
+                )
+     END   
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserScore]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScore]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScore]
+    @UserId INT,
+    @PortalId INT
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserScoring] 
+    WHERE UserId=@UserId AND PortalId=@PortalId
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]
+    @ActionName nvarchar(400),
+    @DefaultExperiencePoints INT,
+    @DefaultReputationPoints INT,
+    @DefaultMaxCount INT,
+    @DefaultInterval INT,
+    @DesktopModuleId INT,
+    @ActionType INT
+AS 
+    INSERT INTO  {databaseOwner}{objectQualifier}Mechanics_ScoringActionDefinition
+            ( ActionName,
+              DefaultExperiencePoints,            
+              DefaultReputationPoints,					
+              DefaultMaxCount,
+              DefaultInterval,
+              DesktopModuleId,
+              ActionType			  	        
+            )
+    VALUES  ( @ActionName, -- nvarchar(400)
+              @DefaultExperiencePoints, -- DefaultExperiencePoints INT
+              @DefaultReputationPoints, -- DefaultReputationPoints INT
+              @DefaultMaxCount, -- DefaultMaxCount INT
+              @DefaultInterval, -- DefaultInterval INT
+              @DesktopModuleId, -- DesktopModuleId INT             
+              @ActionType 
+            )
+                    
+    SELECT SCOPE_IDENTITY()	
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActionDefinitions]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActionDefinitions]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActionDefinitions]
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] 
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActions]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActions]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllScoringActions]
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_ScoringAction] 
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetScoringAction]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringAction]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringAction]
+    @ScoringActionId INT
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_ScoringAction] 
+    WHERE ScoringActionId = @ScoringActionId
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_SaveScoringAction]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveScoringAction]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveScoringAction]
+    @ScoringActionId INT,
+    @ScoringActionDefId INT,
+    @PortalId INT,
+    @ExperiencePoints INT,
+    @ReputationPoints INT,
+    @MaxCount INT,
+    @Interval INT,
+    @CreateUpdateUserID INT
+AS 
+    IF ( @ScoringActionId = -1 ) 
+        BEGIN
+        INSERT INTO {databaseOwner}{objectQualifier}Mechanics_ScoringAction
+          ( ScoringActionDefId,
+            PortalId,            
+            ExperiencePoints,					
+            ReputationPoints,
+            MaxCount,
+            Interval,
+            [CreatedByUserID],
+            [CreatedOnDate],
+            [LastModifiedByUserID],
+            [LastModifiedOnDate]			          
+          )
+            VALUES  
+          ( @ScoringActionDefId, -- ScoringActionDefId INT
+            @PortalId, -- PortalId INT
+            @ExperiencePoints, -- ExperiencePoints INT
+            @ReputationPoints, -- ReputationPoints INT
+            @Interval, -- MaxCount INT              
+            @MaxCount, -- MaxCount INT              
+            @CreateUpdateUserID , -- CreatedBy - int
+            getutcdate(), -- CreatedOn - datetime
+            @CreateUpdateUserID , -- LastModifiedBy - int
+            getutcdate() -- LastModifiedOn - datetime
+           )
+
+         SELECT  @ScoringActionId = SCOPE_IDENTITY()
+        END
+    ELSE
+        BEGIN
+            UPDATE  {databaseOwner}{objectQualifier}Mechanics_ScoringAction
+            SET		ScoringActionDefId = @ScoringActionDefId, -- ScoringActionDefId INT
+                    PortalId = @PortalId, -- PortalId INT
+                    ExperiencePoints = @ExperiencePoints, -- ExperiencePoints INT
+                    ReputationPoints = @ReputationPoints, -- ReputationPoints INT
+                    Interval = @Interval, -- Interval INT              
+                    MaxCount = @MaxCount, -- MaxCount INT              
+                    LastModifiedByUserID = @CreateUpdateUserID,
+                    LastModifiedOnDate = getutcdate()
+            WHERE   ScoringActionId = @ScoringActionId
+        END		        
+            
+    SELECT  @ScoringActionId
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogCount]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogCount]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogCount]
+    @ScoringActionDefId INT,
+    @UserId INT,
+    @PortalId INT,
+    @DaysSince INT
+AS 
+    IF @DaysSince > 0 
+        BEGIN
+            SELECT COUNT(*) AS TotalRecords
+            FROM {databaseOwner}{objectQualifier}Mechanics_UserScoringLog
+            WHERE ScoringActionDefId = @ScoringActionDefId
+            AND   UserId = @UserId
+            AND   PortalId = @PortalId
+            AND   CreatedOnDate >= getutcdate() - @DaysSince
+        END
+    ELSE
+        BEGIN
+            SELECT COUNT(*) AS TotalRecords
+            FROM {databaseOwner}{objectQualifier}Mechanics_UserScoringLog
+            WHERE ScoringActionDefId = @ScoringActionDefId
+            AND   UserId = @UserId
+            AND   PortalId = @PortalId
+        END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]	
+AS 
+    SELECT DISTINCT sad.DesktopModuleId, dm.FriendlyName As ModuleName
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] AS sad
+    INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS dm
+        ON sad.DesktopModuleId = dm.DesktopModuleId	
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserScoreLogView]	
+    @UserId INT,
+    @PortalId INT
+AS 
+    SELECT DISTINCT usl.*, sad.ActionName, dm.FriendlyName As ModuleName
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] AS usl
+    INNER JOIN   {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] AS sad
+        ON usl.ScoringActionDefId = sad.ScoringActionDefId
+    INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS dm
+        ON sad.DesktopModuleId = dm.DesktopModuleId	
+    WHERE usl.UserId = @UserId
+    AND   usl.PortalId = @PortalId
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetScoringActionView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringActionView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringActionView]	
+    @SearchTerm nvarchar(100),
+    @DesktopModuleId int,
+    @PageIndex int,
+    @PageSize int,
+    @SortField nvarchar(25) = 'ActionName',
+    @SortAscending bit = 0, 
+	@IncludePositiveRPsOnly bit = 0
+AS 
+BEGIN
+    --Return total records
+     ;WITH CounterCTE  AS
+	 (
+	SELECT CASE WHEN sa.ReputationPoints IS NOT NULL THEN sa.ReputationPoints ELSE  sad.DefaultReputationPoints END AS ReputationPoints
+        FROM	{databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] AS sad
+        INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS dm
+            ON sad.DesktopModuleId = dm.DesktopModuleId	
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringAction] sa
+            ON sad.ScoringActionDefId = sa.ScoringActionDefId	
+        WHERE ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+        AND ((sad.ActionName LIKE '%' + @SearchTerm + '%' AND @SearchTerm IS NOT NULL) OR (@SearchTerm IS NULL))
+	)	
+	SELECT COUNT(*) AS TotalRecords FROM CounterCTE
+	WHERE (( ReputationPoints > 0 AND @IncludePositiveRPsOnly = 1) OR (@IncludePositiveRPsOnly = 0))	
+			
+    -- Set the page bounds
+    DECLARE 
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+    
+    ;WITH sadItems  AS
+    (
+        SELECT  	
+            CASE WHEN sa.ExperiencePoints IS NOT NULL THEN sa.ExperiencePoints ELSE  sad.DefaultExperiencePoints END AS ExperiencePoints,
+            CASE WHEN sa.ReputationPoints IS NOT NULL THEN sa.ReputationPoints ELSE  sad.DefaultReputationPoints END AS ReputationPoints,
+            CASE WHEN sa.MaxCount IS NOT NULL THEN sa.MaxCount ELSE  sad.DefaultMaxCount END AS MaxCount,
+            CASE WHEN sa.Interval IS NOT NULL THEN sa.Interval ELSE  sad.DefaultInterval END AS Interval,
+            sad.ScoringActionDefId, sad.ActionName, sad.DesktopModuleId, dm.FriendlyName AS ModuleName,
+            COALESCE(sa.PortalId, -1) [PortalId],
+            COALESCE(sa.ScoringActionId, -1) [ScoringActionId]
+        FROM
+            {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] AS sad
+        INNER JOIN
+                {databaseOwner}[{objectQualifier}DesktopModules] AS dm
+            ON sad.DesktopModuleId = dm.DesktopModuleId	
+        LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Mechanics_ScoringAction] sa
+            ON sad.ScoringActionDefId = sa.ScoringActionDefId	
+        WHERE ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+        AND ((sad.ActionName LIKE '%' + @SearchTerm + '%' AND @SearchTerm IS NOT NULL) OR (@SearchTerm IS NULL))	
+		
+    ),
+    SecondList AS
+	( Select *,
+                ROW_NUMBER() OVER(ORDER BY
+                     CASE WHEN @SortField = 'ActionDisplayName' AND @SortAscending = 1 THEN [ActionName] END ASC,
+                     CASE WHEN @SortField = 'ActionDisplayName' AND @SortAscending = 0 THEN [ActionName] END DESC,
+                     CASE WHEN @SortField = 'ModuleName' AND @SortAscending = 1 THEN [ModuleName] END ASC,
+                     CASE WHEN @SortField = 'ModuleName' AND @SortAscending = 0 THEN [ModuleName] END DESC,
+                     CASE WHEN @SortField = 'ExperiencePoints' AND @SortAscending = 1 THEN [ExperiencePoints] END ASC,
+                     CASE WHEN @SortField = 'ExperiencePoints' AND @SortAscending = 0 THEN [ExperiencePoints] END DESC,
+                     CASE WHEN @SortField = 'ReputationPoints' AND @SortAscending = 1 THEN [ReputationPoints] END ASC,
+                     CASE WHEN @SortField = 'ReputationPoints' AND @SortAscending = 0 THEN [ReputationPoints] END DESC,					 
+                     CASE WHEN @SortField = 'MaxCount' AND @SortAscending = 1 THEN [MaxCount] END ASC,
+                     CASE WHEN @SortField = 'MaxCount' AND @SortAscending = 0 THEN [MaxCount] END DESC)
+                AS RowNumber 
+	  FROM sadItems
+	  WHERE (( ReputationPoints > 0 AND @IncludePositiveRPsOnly = 1) OR (@IncludePositiveRPsOnly = 0))	
+	)
+    SELECT TOP (@RowsToReturn) * FROM SecondList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeByName]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeByName]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeByName]
+    @PrivilegeName varchar(200),
+    @DesktopModuleId int,
+    @PortalId int
+AS
+BEGIN
+    SELECT p.*
+        FROM
+            {databaseOwner}[{objectQualifier}Mechanics_Privilege] p,
+            {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] d
+    WHERE
+        d.PrivilegeDefID = p.PrivilegeDefId AND d.PrivilegeName = @PrivilegeName
+            AND (p.PortalId = -1 OR p.PortalId = @PortalId)
+            AND (d.DesktopModuleId < 0 OR d.DesktopModuleId = @DesktopModuleId)
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeView]
+    @SearchTerm nvarchar(100),
+    @DesktopModuleId int,
+    @PageIndex int,
+    @PageSize int,
+    @SortField nvarchar(25) = 'PrivilegeName',
+    @SortAscending bit = 0
+AS
+BEGIN
+    --Return total records
+    SELECT COUNT(*) AS TotalRecords
+        FROM {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] AS pd
+            INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS dm ON pd.DesktopModuleId = dm.DesktopModuleId	
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_Privilege] p ON pd.PrivilegeDefId = p.PrivilegeDefId
+        WHERE ((pd.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND pd.DesktopModuleId IS NOT NULL))
+            AND ((pd.PrivilegeName LIKE '%' + @SearchTerm + '%' AND @SearchTerm IS NOT NULL) OR (@SearchTerm IS NULL))		
+
+    -- Set the page bounds
+    DECLARE 
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}[{objectQualifier}CalculatePagingInformation] @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+    
+    ;WITH privilegeItems AS
+    (
+        SELECT
+            CASE
+                WHEN p.ReputationPoints IS NOT NULL
+                    THEN p.ReputationPoints
+                    ELSE pd.DefaultReputationPoints
+                END AS ReputationPoints,
+            pd.PrivilegeDefId,
+            pd.PrivilegeName,
+            pd.DesktopModuleId,
+            dm.FriendlyName [ModuleName],
+            COALESCE(p.PortalId, -1) [PortalId],
+            COALESCE(p.PrivilegeId, -1) [PrivilegeId],
+                ROW_NUMBER() OVER(ORDER BY
+                     CASE WHEN @SortField = 'PrivilegeName' AND @SortAscending = 1 THEN [PrivilegeName] END ASC,
+                     CASE WHEN @SortField = 'PrivilegeName' AND @SortAscending = 0 THEN [PrivilegeName] END DESC,
+                     CASE WHEN @SortField = 'ModuleName' AND @SortAscending = 1 THEN [FriendlyName] END ASC,
+                     CASE WHEN @SortField = 'ModuleName' AND @SortAscending = 0 THEN [FriendlyName] END DESC,
+                     CASE WHEN @SortField = 'ReputationPoints' AND @SortAscending = 1 THEN COALESCE([ReputationPoints], [DefaultReputationPoints]) END ASC,
+                     CASE WHEN @SortField = 'ReputationPoints' AND @SortAscending = 0 THEN COALESCE([ReputationPoints], [DefaultReputationPoints]) END DESC)
+                AS RowNumber
+        FROM {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] AS pd
+            INNER JOIN
+                    {databaseOwner}[{objectQualifier}DesktopModules] AS dm
+                ON pd.DesktopModuleId = dm.DesktopModuleId	
+        LEFT OUTER JOIN
+                    {databaseOwner}[{objectQualifier}Mechanics_Privilege] p
+                ON pd.PrivilegeDefId = p.PrivilegeDefId	
+        WHERE ((pd.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND pd.DesktopModuleId IS NOT NULL))
+        AND ((pd.PrivilegeName LIKE '%' + @SearchTerm + '%' AND @SearchTerm IS NOT NULL) OR (@SearchTerm IS NULL))		
+    )
+    SELECT TOP (@RowsToReturn) * FROM privilegeItems
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeModuleView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeModuleView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeModuleView]	
+AS
+BEGIN
+    SELECT DISTINCT
+        pd.DesktopModuleId,
+        dm.FriendlyName [ModuleName]
+    FROM
+        {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] AS pd
+    INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS dm ON pd.DesktopModuleId = dm.DesktopModuleId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPrivilege]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilege]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilege]	
+    @PrivilegeId INT
+AS
+BEGIN
+    SELECT * FROM {databaseOwner}[{objectQualifier}Mechanics_Privilege] WHERE PrivilegeId = @PrivilegeId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeDefinition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeDefinition]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPrivilegeDefinition]	
+    @PrivilegeDefId INT
+AS
+BEGIN
+    SELECT * FROM {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] WHERE PrivilegeDefId = @PrivilegeDefId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_AddPrivilegeDefinition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddPrivilegeDefinition]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddPrivilegeDefinition]
+    @PrivilegeName nvarchar(400),
+    @DefaultReputationPoints INT,
+    @DesktopModuleId INT
+AS
+BEGIN
+    INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition]
+        ([PrivilegeName],
+            [DefaultReputationPoints],
+            [DesktopModuleId])
+    VALUES
+        (@PrivilegeName,
+         @DefaultReputationPoints,
+         @DesktopModuleId)
+          
+    SELECT SCOPE_IDENTITY()	
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_SavePrivilege]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SavePrivilege]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SavePrivilege]
+    @PrivilegeId INT,
+    @PrivilegeDefId INT,
+    @PortalId INT,
+    @ReputationPoints INT,
+    @UserId INT
+AS 
+BEGIN
+    IF COALESCE(@PrivilegeId, -1) < 0
+    BEGIN
+        INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_Privilege]
+          ([PrivilegeDefId],
+           [PortalId],
+           [ReputationPoints],
+           [CreatedByUserID],
+           [CreatedOnDate],
+           [LastModifiedByUserID],
+           [LastModifiedOnDate])
+        VALUES  
+          (@PrivilegeDefId,
+           @PortalId,
+           @ReputationPoints,
+           @UserId,
+           getutcdate(),
+           @UserId,
+           getutcdate())
+
+         SELECT @PrivilegeId = SCOPE_IDENTITY()
+    END
+    ELSE
+    BEGIN
+        UPDATE {databaseOwner}[{objectQualifier}Mechanics_Privilege]
+            SET
+                [PrivilegeDefId] = @PrivilegeDefId,
+                [PortalId] = @PortalId,
+                [ReputationPoints] = @ReputationPoints,
+                [LastModifiedByUserID] = @UserId,
+                [LastModifiedOnDate] = getutcdate()
+            WHERE PrivilegeId = @PrivilegeId
+    END
+        
+    SELECT @PrivilegeId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllPrivilegeDefinitions]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllPrivilegeDefinitions]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllPrivilegeDefinitions]
+AS 
+    SELECT * FROM {databaseOwner}[{objectQualifier}Mechanics_PrivilegeDefinition] 
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllPrivileges]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllPrivileges]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllPrivileges]
+AS 
+    SELECT * FROM {databaseOwner}[{objectQualifier}Mechanics_Privilege] 
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllBadges]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllBadges]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllBadges]
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_Badge] 
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetAllBadgeSads]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllBadgeSads]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetAllBadgeSads]
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] 
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadge]
+    @UserId INT,
+    @PortalId INT,
+    @BadgeId INT
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserBadge] 	
+    WHERE 
+        UserId   = @UserId
+    AND PortalId = @PortalId
+    AND BadgeId  = @BadgeId
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByUser]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByUser]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByUser]
+    @UserId INT,
+    @PortalId INT
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserBadge] 	
+    WHERE 
+        UserId   = @UserId
+    AND PortalId = @PortalId
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgeByBadge]
+    @BadgeId INT
+AS 
+    SELECT *
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserBadge] 	
+    WHERE 
+        BadgeId = @BadgeId
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_AddBadgeToUser]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddBadgeToUser]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddBadgeToUser]
+    @UserId INT,
+    @PortalId INT,
+    @BadgeId INT
+AS
+    INSERT INTO {databaseOwner}{objectQualifier}Mechanics_UserBadge
+            ( UserId,
+              PortalId,                          
+              BadgeId,					
+              CreatedOnDate		        
+            )
+    VALUES  ( @UserId, -- UserId INT
+              @PortalId, -- PortalId INT			  
+              @BadgeId, -- BadgeId INT			  
+              getutcdate() -- CreatedOnDate - datetime			        
+            )
+                    
+    SELECT SCOPE_IDENTITY()	
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_CreateBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_CreateBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_CreateBadge]
+    @PortalId int,
+    @Name nvarchar(256),
+    @TimeFrameInDays int,
+    @Tier int,
+    @ImageFileId int,
+    @ScoringActionDefinitionList varchar(1024), -- serialized list of BadgeSads
+    @UserId int = -1
+AS
+BEGIN
+    BEGIN TRANSACTION
+    
+    -- Create new Badge row that we can reference in the BadgeScoActDef rows.
+    DECLARE @BadgeId INT
+    INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_Badge] (
+            [PortalId],
+            [BadgeName],
+            [TimeFrameInDays],
+            [Tier],
+            [ImageFileId],
+            [CreatedByUserID],
+            [CreatedOnDate],
+            [LastModifiedByUserID],
+            [LastModifiedOnDate])
+        VALUES
+            (@PortalId,
+             @Name,
+             @TimeFrameInDays,
+             @Tier,
+             @ImageFileId,
+             @UserId,
+             GETUTCDATE(),
+             @UserId,
+             GETUTCDATE())
+    SELECT @BadgeId = SCOPE_IDENTITY()
+        
+    -- Convert Scoring Action Definition serialized list into table of intermediate values
+    DECLARE @ScoringActionIntermediate TABLE (SecondStage VARCHAR(1024))
+
+    INSERT INTO @ScoringActionIntermediate
+        SELECT RowValue FROM {databaseOwner}{objectQualifier}ConvertListToTable(',', @ScoringActionDefinitionList)
+
+    DECLARE IntermediateCursor CURSOR FAST_FORWARD FOR
+        SELECT SecondStage FROM @ScoringActionIntermediate
+
+    -- Iterate through each intermediate still-serialized BadgeSad value and parse them out
+    DECLARE @SecondStageIterator VARCHAR(1024)
+
+    OPEN IntermediateCursor
+    FETCH NEXT FROM IntermediateCursor INTO @SecondStageIterator
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @ScoringActionDefId INT
+        DECLARE @NumberOfTimes INT
+
+        SET @ScoringActionDefId = {databaseOwner}{objectQualifier}GetElement(1, @SecondStageIterator, ' ')
+        SET @NumberOfTimes = {databaseOwner}{objectQualifier}GetElement(2, @SecondStageIterator, ' ')
+
+        -- Now create a BadgeScoActDef row for this parsed-out value in @BadgeSad, referenced to @BadgeId
+        INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] (
+                [BadgeId],
+                [ScoringActionDefId],
+                [NumberOfTimes],
+                [CreatedOnDate])
+            VALUES (
+                @BadgeId,
+                @ScoringActionDefId,
+                @NumberOfTimes,
+                GETUTCDATE())
+    
+        FETCH NEXT FROM IntermediateCursor INTO @SecondStageIterator
+    END
+
+    -- Commit all our changes
+    COMMIT TRANSACTION	
+        
+    SELECT @BadgeId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_UpdateBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_UpdateBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_UpdateBadge]
+    @BadgeId int,
+    @Name nvarchar(256),
+    @TimeFrameInDays int,
+    @Tier int,
+    @ImageFileId int,
+    @ScoringActionDefinitionList varchar(1024), -- serialized list of BadgeSads
+    @UserId int = -1
+AS
+BEGIN
+    BEGIN TRANSACTION
+    
+    UPDATE {databaseOwner}[{objectQualifier}Mechanics_Badge]
+        SET
+            [BadgeName] = @Name,
+            [TimeFrameInDays] = @TimeFrameInDays,
+            [Tier] = @Tier,
+            [ImageFileId] = @ImageFileId,
+            [LastModifiedByUserID] = @UserId,
+            [LastModifiedOnDate] = getutcdate()
+        WHERE
+            [BadgeId] = @BadgeId
+
+    DELETE FROM {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] WHERE [BadgeId] = @BadgeId		
+
+    -- Convert Scoring Action Definition serialized list into table of intermediate values
+    DECLARE @ScoringActionIntermediate TABLE (SecondStage VARCHAR(1024))
+
+    INSERT INTO @ScoringActionIntermediate
+        SELECT RowValue FROM {databaseOwner}{objectQualifier}ConvertListToTable(',', @ScoringActionDefinitionList)
+
+    DECLARE IntermediateCursor CURSOR FAST_FORWARD FOR
+        SELECT SecondStage FROM @ScoringActionIntermediate
+
+    -- Iterate through each intermediate still-serialized BadgeSad value and parse them out
+    DECLARE @SecondStageIterator VARCHAR(1024)
+
+    OPEN IntermediateCursor
+    FETCH NEXT FROM IntermediateCursor INTO @SecondStageIterator
+    
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @ScoringActionDefId INT
+        DECLARE @NumberOfTimes INT
+
+        SET @ScoringActionDefId = {databaseOwner}{objectQualifier}GetElement(1, @SecondStageIterator, ' ')
+        SET @NumberOfTimes = {databaseOwner}{objectQualifier}GetElement(2, @SecondStageIterator, ' ')
+
+        -- Now create a BadgeScoActDef row for this parsed-out value in @BadgeSad, referenced to @BadgeId
+        INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] (
+                [BadgeId],
+                [ScoringActionDefId],
+                [NumberOfTimes],
+                [CreatedOnDate])
+            VALUES (
+                @BadgeId,
+                @ScoringActionDefId,
+                @NumberOfTimes,
+                GETUTCDATE())
+    
+        FETCH NEXT FROM IntermediateCursor INTO @SecondStageIterator
+    END
+
+    -- Commit all our changes
+    COMMIT TRANSACTION	
+        
+    SELECT 0
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeView]
+    @SearchTerm nvarchar(100),
+    @PortalId int,
+	@DesktopModuleId int,
+    @PageIndex int,
+    @PageSize int,
+    @SortField nvarchar(25) = 'BadgeName',
+    @SortAscending bit = 0
+AS
+BEGIN
+    IF @SearchTerm IS NOT NULL AND LEN(@SearchTerm) > 0
+        SET @SearchTerm = '%' + @SearchTerm + '%'
+    ELSE
+        SET @SearchTerm = NULL
+                
+    -- Return total records
+    SELECT COUNT(*) AS [TotalRecords] FROM
+        (SELECT DISTINCT [badge].[BadgeId]
+         FROM {databaseOwner}[{objectQualifier}Mechanics_Badge] [badge]
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] [bsad] ON bsad.BadgeId = badge.BadgeId
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] [sad] ON sad.ScoringActionDefId = bsad.ScoringActionDefId
+         LEFT OUTER JOIN {databaseOwner}[{objectQualifier}DesktopModules] [dm] ON sad.DesktopModuleId = dm.DesktopModuleId
+         WHERE
+            ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+            AND
+            ((@SearchTerm IS NOT NULL AND badge.[BadgeName] LIKE @SearchTerm) OR (@SearchTerm IS NULL))
+			AND badge.PortalId = @PortalId
+        ) AS [badgeItems]
+
+    -- Set the page bounds
+    DECLARE 
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}[{objectQualifier}CalculatePagingInformation] @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+    
+    IF @PageLowerBound > 0
+        SET @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+    
+    ;WITH badgeRows AS
+    (
+        SELECT badgeItems.*,
+                ROW_NUMBER() OVER(ORDER BY
+                     CASE WHEN @SortField = 'BadgeName' AND @SortAscending = 1 THEN badgeItems.[BadgeName] END ASC,
+                     CASE WHEN @SortField = 'BadgeName' AND @SortAscending = 0 THEN badgeItems.[BadgeName] END DESC,
+                     CASE WHEN @SortField = 'Tier' AND @SortAscending = 1 THEN badgeItems.[Tier] END ASC,
+                     CASE WHEN @SortField = 'Tier' AND @SortAscending = 0 THEN badgeItems.[Tier] END DESC,
+                     CASE WHEN @SortField = 'TimeFrameInDays' AND @SortAscending = 1 THEN badgeItems.[TimeFrameInDays] END ASC,
+                     CASE WHEN @SortField = 'TimeFrameInDays' AND @SortAscending = 0 THEN badgeItems.[TimeFrameInDays] END DESC)
+                AS RowNumber
+        FROM (
+            SELECT DISTINCT [badge].[BadgeId],
+                [badge].[PortalId],
+                [badge].[BadgeName],
+                [badge].[TimeFrameInDays],
+                [badge].[Tier],
+                [badge].[ImageFileId],
+                [badge].[CreatedByUserID],
+                [badge].[CreatedOnDate],
+                [badge].[LastModifiedByUserID],
+                [badge].[LastModifiedOnDate]
+            FROM {databaseOwner}[{objectQualifier}Mechanics_Badge] [badge]
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] [bsad] ON bsad.BadgeId = badge.BadgeId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] [sad] ON sad.ScoringActionDefId = bsad.ScoringActionDefId
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}DesktopModules] [dm] ON sad.DesktopModuleId = dm.DesktopModuleId
+         WHERE
+            ((sad.DesktopModuleId = @DesktopModuleId AND @DesktopModuleId IS NOT NULL) OR (@DesktopModuleId IS NULL AND sad.DesktopModuleId IS NOT NULL))
+            AND
+            ((@SearchTerm IS NOT NULL AND badge.[BadgeName] LIKE @SearchTerm) OR (@SearchTerm IS NULL))
+			AND badge.PortalId = @PortalId
+        ) AS [badgeItems]
+    )
+    SELECT TOP (@RowsToReturn) * FROM badgeRows
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetBadgeModuleView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeModuleView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetBadgeModuleView]	
+AS
+BEGIN
+    SELECT DISTINCT [dm].[DesktopModuleID] as [DesktopModuleId], [dm].FriendlyName as [ModuleName]
+    FROM {databaseOwner}[{objectQualifier}Mechanics_Badge] [badge]
+    LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_BadgeScoActDef] [bsad] ON bsad.BadgeId = badge.BadgeId
+    LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] [sad] ON sad.ScoringActionDefId = bsad.ScoringActionDefId
+    LEFT OUTER JOIN {databaseOwner}[{objectQualifier}DesktopModules] [dm] ON sad.DesktopModuleId = dm.DesktopModuleId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserBadgesByUser]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgesByUser]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserBadgesByUser]
+    @UserId int,
+    @PortalId int
+AS
+BEGIN
+    SELECT
+        [UserBadgeId],
+        [BadgeId],
+        [UserId],
+        [PortalId],
+        [CreatedOnDate]
+  FROM
+    {databaseOwner}[{objectQualifier}Mechanics_UserBadge]
+  WHERE
+    [UserId] = @UserId AND [PortalId] = @PortalId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLatestUserBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLatestUserBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLatestUserBadge]
+    @UserId int,
+    @PortalId int
+AS
+BEGIN
+    SELECT TOP 1
+        [UserBadgeId],
+        [BadgeId],
+        [UserId],
+        [PortalId],
+        [CreatedOnDate]
+  FROM
+    {databaseOwner}[{objectQualifier}Mechanics_UserBadge]
+  WHERE
+    [UserId] = @UserId AND [PortalId] = @PortalId
+  ORDER BY [CreatedOnDate] DESC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_DeleteBadge]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_DeleteBadge]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_DeleteBadge]
+	@BadgeId INT,
+	@PortalId INT
+AS 
+	DELETE  FROM {databaseOwner}{objectQualifier}Mechanics_Badge
+	WHERE   BadgeId = @BadgeId
+			AND PortalId = @PortalId
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_IsToastPending]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_IsToastPending]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_IsToastPending]	
+    @NotificationId int
+AS
+BEGIN
+    SELECT Sendtoast 
+    FROM {databaseOwner}[{objectQualifier}CoreMessaging_MessageRecipients]
+    WHERE MessageId = @NotificationId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_MarkReadyForToast]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_MarkReadyForToast]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_MarkReadyForToast]	
+    @NotificationId int,
+    @UserId int
+AS
+BEGIN	
+    UPDATE {databaseOwner}[{objectQualifier}CoreMessaging_MessageRecipients]
+    SET Sendtoast = 1,
+    [LastModifiedOnDate] = GETDATE()
+    WHERE MessageId = @NotificationId
+    AND UserId = @UserId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_MarkToastSent]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_MarkToastSent]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_MarkToastSent]	
+    @RecipientId int
+AS
+BEGIN	
+    UPDATE {databaseOwner}{objectQualifier}CoreMessaging_MessageRecipients
+    SET Sendtoast = 0,
+    [LastModifiedOnDate] = GETDATE()
+    WHERE RecipientId = @RecipientId
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetToasts]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetToasts]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetToasts]	
+    @UserId int,
+    @PortalId int
+AS
+BEGIN	
+    SELECT DISTINCT mr.*, m.PortalId, m.Subject, m.Body
+    FROM {databaseOwner}{objectQualifier}CoreMessaging_MessageRecipients mr 
+        INNER JOIN {databaseOwner}{objectQualifier}CoreMessaging_Messages m
+    ON mr.MessageID = m.MessageID	
+    WHERE mr.UserID = @UserID
+    AND   m.PortalID = @PortalID
+    AND   mr.SendToast = 1
+    ORDER BY mr.RecipientID DESC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserSocialView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserSocialView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserSocialView]	
+    @UserId int,
+    @PortalId int
+AS
+BEGIN	
+    DECLARE @ReputationPoints INT 
+    SELECT @ReputationPoints = [ReputationPoints]
+    FROM   {databaseOwner}[{objectQualifier}Mechanics_UserScoring] 
+    WHERE UserId=@UserId AND PortalId=@PortalId
+    if (@ReputationPoints IS NULL) SET @ReputationPoints = 0
+    SELECT @ReputationPoints AS [ReputationPoints] 
+
+    EXEC {databaseOwner}[{objectQualifier}CoreMessaging_CountNotifications] @UserId, @PortalId;
+    
+    EXEC {databaseOwner}[{objectQualifier}CoreMessaging_CountNewThreads] @UserId, @PortalId;
+    
+    EXEC {databaseOwner}[{objectQualifier}Mechanics_GetToasts] @UserId, @PortalId;
+    
+END
+GO
+
+-- Leaderboard procedures
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetUserPosition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserPosition]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetUserPosition]
+    @UserId INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    DECLARE @RowIndex INT
+    DECLARE @PageIndex INT
+    DECLARE @PageOffset INT
+        
+    ;WITH OuterUserList AS
+       (SELECT
+            us.UserId,
+            us.ReputationPoints
+        FROM {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = us.UserID
+        WHERE (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+    UNION ALL
+        SELECT
+            u.UserId as [UserId],
+            0 as [ReputationPoints]
+        FROM {databaseOwner}[{objectQualifier}Users] u
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID
+        WHERE us.UserScoringId IS NULL AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')),
+    InnerUserList AS
+       (SELECT
+            [UserId],
+            [ReputationPoints],
+            ROW_NUMBER() OVER(ORDER BY ReputationPoints DESC, UserID ASC) as [RowNumber]
+        FROM OuterUserList)
+    SELECT @RowIndex = RowNumber FROM InnerUserList WHERE [UserId] = @UserId
+
+    IF @RowIndex IS NULL
+        SELECT
+            -1 AS [PageIndex],
+            -1 AS [PageOffset],
+            -1 AS [Rank]
+    ELSE
+    BEGIN
+        SET @PageIndex = @RowIndex / @PageSize
+        SET @PageOffset = (@RowIndex - 1) - (@PageIndex * @PageSize)
+    
+        IF @PageOffset < 0
+        BEGIN
+            SET @PageIndex = @PageIndex - 1
+            SET @PageOffset = @PageSize - 1
+        END
+    
+        SELECT
+            @PageIndex AS [PageIndex],
+            @PageOffset AS [PageOffset],
+            @RowIndex AS [Rank]
+    END
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinGroup]
+    @UserId INT,
+    @RoleId INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    DECLARE @RowIndex INT
+    DECLARE @PageIndex INT
+    DECLARE @PageOffset INT
+
+    ;WITH OuterUserList AS
+       (SELECT
+            ur.UserId,
+            COALESCE(us.ReputationPoints, 0) AS [ReputationPoints]
+        FROM {databaseOwner}[{objectQualifier}UserRoles] ur
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us on us.UserId = ur.UserID
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = us.UserId
+        WHERE ur.RoleID = @RoleId AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')),
+    InnerUserList AS
+       (SELECT
+            [UserId],
+            [ReputationPoints],
+            ROW_NUMBER() OVER(ORDER BY ReputationPoints DESC) as [RowNumber]
+        FROM OuterUserList)
+    SELECT @RowIndex = RowNumber FROM InnerUserList WHERE [UserId] = @UserId
+    
+    IF @RowIndex IS NULL
+        SELECT
+            -1 AS [PageIndex],
+            -1 AS [PageOffset]
+    ELSE
+    BEGIN
+        SET @PageIndex = @RowIndex / @PageSize
+        SET @PageOffset = (@RowIndex - 1) - (@PageIndex * @PageSize)
+    
+        IF @PageOffset < 0
+        BEGIN
+            SET @PageIndex = @PageIndex - 1
+            SET @PageOffset = @PageSize - 1
+        END
+    
+        SELECT
+            @PageIndex AS [PageIndex],
+            @PageOffset AS [PageOffset]
+    END
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinFriends]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinFriends]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetPositionWithinFriends]
+    @UserId INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    SET NOCOUNT ON
+
+    DECLARE @RowIndex INT
+    DECLARE @PageIndex INT
+    DECLARE @PageOffset INT
+
+    ;WITH OuterUserList AS
+       (
+		SELECT DISTINCT
+		    CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END AS [UserId],
+			(SELECT [ReputationPoints] FROM {objectQualifier}Mechanics_UserScoring us WHERE us.[UserId] = CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END) AS [ReputationPoints]
+		FROM
+			{objectQualifier}UserRelationships ur,
+			{objectQualifier}Relationships r
+		WHERE (ur.UserID = @UserId OR ur.RelatedUserID = @UserId) AND r.RelationshipID = ur.RelationshipID AND r.Name = 'Friends' AND ur.[Status] = 2
+		AND   (
+			@SearchText IS NULL
+		 OR LEN(@SearchText) = 0
+		 OR (SELECT [DisplayName] FROM {objectQualifier}Users WHERE UserID = (CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END)) LIKE '%' + @SearchText + '%')
+		
+		UNION
+
+		SELECT
+			@UserId AS [UserId],
+			COALESCE((SELECT [ReputationPoints] FROM {databaseOwner}[{objectQualifier}Mechanics_UserScoring] WHERE UserId = @UserId), 0) AS [ReputationPoints]
+		),
+    InnerUserList AS
+       (SELECT
+            [UserId],
+            [ReputationPoints],
+            ROW_NUMBER() OVER(ORDER BY ReputationPoints DESC) as [RowNumber]
+        FROM OuterUserList)
+    SELECT @RowIndex = RowNumber FROM InnerUserList WHERE [UserId] = @UserId
+    
+    IF @RowIndex IS NULL
+        SELECT
+            -1 AS [PageIndex],
+            -1 AS [PageOffset],
+			-1 AS [Rank]
+    ELSE
+    BEGIN
+        SET @PageIndex = @RowIndex / @PageSize
+        SET @PageOffset = (@RowIndex - 1) - (@PageIndex * @PageSize)
+    
+        SELECT
+            @PageIndex AS [PageIndex],
+            @PageOffset AS [PageOffset],
+			@RowIndex AS [Rank]
+    END
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeaders]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeaders]
+    @PortalId INT,
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+        
+    ;WITH InnerLeaderList AS
+    (
+        SELECT
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            u.UserId AS [UserId],
+            up.PortalId AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(us.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM {databaseOwner}[{objectQualifier}Users] u
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID AND up.PortalId = @PortalId 
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID AND us.PortalId = @PortalId 
+        WHERE (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+        AND (up.PortalId = @PortalId)
+    ),
+    OuterLeaderList AS
+    (
+        SELECT InnerLeaderList.*,
+                ROW_NUMBER() OVER (ORDER BY InnerLeaderList.[ReputationPoints] DESC, InnerLeaderList.[UserId] ASC) AS [RowNumber]
+        FROM InnerLeaderList)
+    SELECT TOP (@RowsToReturn) * FROM OuterLeaderList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersByGroup]
+    @RoleId INT,
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+
+    ;WITH InnerLeaderList AS
+    (
+        SELECT
+                COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+                ur.UserId AS [UserId],
+                r.[PortalId] AS [PortalId],
+                COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+                COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+                COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+                COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+                COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+                COALESCE(us.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+                COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+            FROM {databaseOwner}[{objectQualifier}UserRoles] ur
+            INNER JOIN {databaseOwner}[{objectQualifier}Roles] r ON r.RoleID = ur.RoleID
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us on us.UserId = ur.UserID
+            LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = ur.UserID
+            WHERE ur.RoleID = @RoleId
+        ),
+    OuterLeaderList AS
+    (
+        SELECT InnerLeaderList.*,
+                ROW_NUMBER() OVER (ORDER BY InnerLeaderList.[ReputationPoints] DESC, InnerLeaderList.[UserId] ASC) AS [RowNumber]
+        FROM InnerLeaderList)
+    SELECT TOP (@RowsToReturn) * FROM OuterLeaderList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetLeadersWithinFriends]
+    @UserId INT,
+    @PageIndex INT,
+    @PageSize INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    DECLARE
+        @PageLowerBound INT, 
+        @PageUpperBound INT, 
+        @RowsToReturn int
+
+    exec {databaseOwner}{objectQualifier}CalculatePagingInformation @PageIndex, @PageSize, @RowsToReturn output, @PageLowerBound output, @PageUpperBound output
+
+    IF @PageLowerBound > 0
+        SELECT @PageLowerBound = @PageLowerBound + 1
+
+    IF @RowsToReturn > @PageSize
+        SET @RowsToReturn = @PageSize
+
+    ;WITH InnerLeaderList AS
+    (
+		SELECT DISTINCT
+		    CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END AS [UserId],
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            COALESCE(r.[PortalId], -1) AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(us.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM {databaseOwner}[{objectQualifier}UserRelationships] ur
+		INNER JOIN {databaseOwner}[{objectQualifier}Relationships] r ON r.RelationshipID = ur.RelationshipID
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON CASE WHEN ur.RelatedUserID = @UserId THEN ur.UserID ELSE ur.RelatedUserID END = us.UserId
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u ON u.UserID = CASE WHEN ur.[UserID] = @UserId THEN ur.[RelatedUserID] ELSE ur.[UserID] END
+        WHERE (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+        AND (ur.UserID = @UserId OR ur.RelatedUserID = @UserId)
+		AND r.Name = 'Friends'
+        AND ur.Status = 2 --Accepted
+		
+		UNION -- include self
+
+        SELECT
+		    @UserId AS [UserId],
+            COALESCE(us.[UserScoringId], -1) AS [UserScoringId],
+            COALESCE(us.[PortalId], -1) AS [PortalId],
+            COALESCE(us.[ExperiencePoints], 0) AS [ExperiencePoints],
+            COALESCE(us.[ReputationPoints], 0) AS [ReputationPoints],
+            COALESCE(us.[TopReputationPoints], 0) AS [TopReputationPoints],
+            COALESCE(us.[DailyReputationPoints], 0) AS [DailyReputationPoints],
+            COALESCE(us.[BestReputationPoints], 0) AS [BestReputationPoints],
+            COALESCE(us.[CreatedOnDate], getdate()) AS [CreatedOnDate],
+            COALESCE(us.[LastModifiedOnDate], getdate()) AS [LastModifiedOnDate]
+        FROM	{databaseOwner}[{objectQualifier}Users] u
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Mechanics_UserScoring] us ON us.UserId = u.UserID
+        WHERE	u.UserId = @UserId
+		AND		(@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+    ),
+    OuterLeaderList AS
+    (
+        SELECT InnerLeaderList.*,
+                ROW_NUMBER() OVER (ORDER BY InnerLeaderList.[ReputationPoints] DESC, InnerLeaderList.[UserId] ASC) AS [RowNumber]
+        FROM InnerLeaderList)
+    SELECT TOP (@RowsToReturn) * FROM OuterLeaderList
+    WHERE RowNumber >= @PageLowerBound AND RowNumber <= @PageUpperBound	
+    ORDER BY RowNumber ASC
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetTotalLeaders]
+    @RoleId INT,
+    @SearchText NVARCHAR(255) = ''
+AS
+BEGIN
+    IF @RoleId IS NULL
+        SET @RoleId = -1
+
+    IF @RoleId >= 0
+        SELECT COUNT(*) AS [TotalLeaders]
+            FROM {databaseOwner}[{objectQualifier}Users] u
+            LEFT JOIN {databaseOwner}[{objectQualifier}UserRoles] mur ON mur.UserID = u.UserID AND mur.RoleID = @RoleId
+            WHERE UserRoleID IS NOT NULL AND (@SearchText IS NULL OR LEN(@SearchText) = 0 OR u.DisplayName LIKE '%' + @SearchText + '%')
+    ELSE
+        SELECT COUNT(*) AS [TotalLeaders] FROM {databaseOwner}[{objectQualifier}Users]
+            WHERE (@SearchText IS NULL OR LEN(@SearchText) = 0 OR DisplayName LIKE '%' + @SearchText + '%')
+END
+GO
+
+--Add Journal Type for Badge
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}Journal_Types
+            WHERE [JournalType] = 'badge') 
+   BEGIN
+		DECLARE @JournalTypeId INT
+		SELECT @JournalTypeId = COALESCE(max(JournalTypeId),0) FROM {databaseOwner}{objectQualifier}Journal_Types
+		SET @JournalTypeId = @JournalTypeId + 1
+
+         INSERT INTO  {databaseOwner}{objectQualifier}Journal_Types
+           ([JournalTypeID]
+		   ,[JournalType]
+           ,[icon]
+           ,[PortalId]
+           ,[IsEnabled]
+           ,[AppliesToProfile]
+           ,[AppliesToGroup]
+           ,[AppliesToStream]
+           ,[Options]
+           ,[SupportsNotify]
+           ,[EnableComments])
+         VALUES  
+		   (@JournalTypeId--<JournalTypeId, int,>
+		   ,'badge'--<JournalType, nvarchar(25),>
+           ,''--<icon, nvarchar(25),>
+           ,-1--<PortalId, int,>
+           ,1--<IsEnabled, bit,>
+           ,1--<AppliesToProfile, bit,>
+           ,1--<AppliesToGroup, bit,>
+           ,1--<AppliesToStream, bit,>
+           ,NULL--<Options, nvarchar(max),>
+           ,1--<SupportsNotify, bit,>
+           ,1)--<EnableComments, bit,>
+    END 
+GO

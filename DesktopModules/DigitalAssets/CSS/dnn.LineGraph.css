@@ -1,0 +1,57 @@
+﻿/*
+ * Line Graph stylization (SVG)
+ */
+
+svg.time-line-graph .chart-group path {
+	stroke: #3794E9;
+	stroke-width: 2px;
+	fill: none;
+    /*shape-rendering: crispEdges;*/
+}
+
+svg.time-line-graph .axis {
+	shape-rendering: crispEdges;
+}
+
+svg.time-line-graph .x.axis line {
+	stroke: #D3D3D3;
+	stroke-opacity: 0;
+}
+
+svg.time-line-graph .x.axis .minor {
+	stroke-opacity: .5;
+	stroke-opacity: 0;
+}
+
+svg.time-line-graph .x.axis path {
+	display: none;
+}
+
+svg.time-line-graph .y.axis line {
+	fill: none;	
+	stroke: #D3D3D3;
+}
+
+svg.time-line-graph .y.axis path {
+	display: none;
+}
+
+svg.time-line-graph .x .major line {
+	fill: none;
+}
+
+svg.time-line-graph text {
+    fill: #D3D3D3;
+    font-family: arial;
+    font-size: 10px;
+}
+
+svg.time-line-graph .point-group circle {
+    stroke: #3794E9;
+    stroke-width: 2px;
+    fill: #fff;
+}
+
+svg.time-line-graph .point-group circle:hover {
+    fill: #3794E9;
+}

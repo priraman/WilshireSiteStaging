@@ -1,0 +1,250 @@
+﻿.pageHistoryContainer {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	background-color: #FAFAFA;
+	border-top: 4px solid #777777; 
+	z-index:1005;
+	color: #000000;
+	display: none;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pageHistoryContainer .title {
+    background: #f2f2f2;
+    padding: 30px 30px 15px 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d9d8d8;
+  }
+#editBarContainer.personaBarShown .pageHistoryContainer {
+	padding-left: 85px;
+}
+
+.pageHistoryContainer button {
+	padding: 5px 10px 5px 10px;
+	background-color: #FFFFFF;
+	border: 1px;
+	border-color: #CECECE;
+	border-style: solid;
+	border-radius: 3px;
+}
+
+	.pageHistoryContainer button:disabled {
+		color: grey;
+	}
+	.pageHistoryContainer button:enabled {
+		font-weight: bolder;
+	}
+	.pageHistoryContainer button:enabled:hover {
+		background-color: #F2F2F2;
+	}
+
+.pageHistoryContainer .tableContainer {
+	margin: 30px;
+}
+
+.pageHistoryContainer .historyClose {
+	background-image: url('../images/HistoryTabCloseIcon.png');
+	height: 17px;
+	width: 16px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin: 25px;
+    cursor: pointer;
+}
+.pageHistoryContainer .message {
+	padding-left: 25px;
+	margin-bottom: 10px;
+}
+	.pageHistoryContainer .message .bolder {
+		font-weight: bolder;
+	}
+
+.pageHistoryContainer ul li {
+	list-style-type: none;
+	list-style: none;
+	float: left;
+	position: relative;
+	padding: 0px;
+	margin-right: 10px;
+	background-repeat: no-repeat;
+}
+
+.pageHistoryContainer .versionAction {
+    cursor: pointer;
+}
+
+.pageHistoryContainer .showVersion {
+	background-image: url('../images/ShowVersionIcon.png');
+	width: 15px;
+	height: 10px;
+}
+.pageHistoryContainer .restoreVersion {
+	background-image: url('../images/RestoreVersionIcon.png');
+	width: 13px;
+	height: 13px;
+}
+
+.pageHistoryContainer .deleteVersion {
+	background-image: url('../images/DeleteVersionIcon.png');
+	width: 12px;
+	height: 12px;
+}
+
+/* table */
+.historytbl {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #f0f0f3;
+	margin-bottom: 25px;
+}
+    .historytbl td, .historytbl th {
+        padding: 8px 9px 7px 9px;
+        border: none;
+        text-align: left;
+    }
+	
+	.historytbl td.bolder {
+		font-weight: bolder;
+	}
+	
+    .historytbl tfoot {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 5px;
+    }
+
+        .historytbl tfoot td {
+            border-bottom: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top: 1px solid #ddd;
+        }
+		
+    .historytbl thead {
+        padding-top: 6px;
+        padding-bottom: 6px;
+		border-bottom: 1px solid #d9d8d8;
+		font-weight: bolder;
+    }
+	.historytbl thead td {
+        padding-top: 6px;
+        padding-bottom: 6px;
+		border: 1px solid #d9d8d8;
+		font-weight: bolder;
+    }
+	
+    .historytbl tbody tr:nth-child(2n+1) td {
+        background: #f2f2f2;
+    }
+	
+	.historytbl tbody tr:nth-child(2n) td {
+        background: #fafafa;
+    }
+
+	
+/* COMPARE SYTLES */
+
+.compareVersionsContainer{
+	display: none;
+	width: 100%;
+	height: 100%;
+	z-index:1004;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	background-color: #0F0F0F;
+}
+#editBarContainer.personaBarShown .compareVersionsContainer {
+	padding-left: 85px;
+}
+
+.compareVersionsContainer .compareVersionIframe {
+	width: 100%;
+	height: 50%;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.compareVersionsContainer .compareVersionIframe .compareDiffVersion {
+	margin-top: 5px;
+}
+
+.compareVersionsContainer .labelHistoryVersion {
+	position: absolute;
+	right: 30px;
+	padding: 10px 24px;
+	background-color: #000000;
+	color: #FFFFFF;
+	border-radius: 3px;
+}
+
+.compareVersionsContainer .labelHistoryVersion .arrow {
+	background-image: url('../images/CompareVersionArrow.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-right: 30px;
+}
+
+.historyVersionEditBar {
+	position: fixed;
+	z-index: 1110;
+	height: 54px;
+	width: 100%;
+	bottom: 0px;
+	color: white;
+	min-height: 20px;
+	padding: 26px 26px 0;
+	background-color: #0F0F0F;
+    box-sizing: content-box;
+}
+
+.historyVersionEditBar .CloseCompareMode {
+	background-color: #000000;
+	border-color: #FFFFFF;
+    border-style: solid;
+	border-width: 1px;
+	height: 35px;
+	width: 98px;
+	color: #FFFFFF;
+	margin-left: 12px;
+	border-radius: 3px;
+    cursor: pointer;
+}
+
+.historyVersionEditBar .right-section {
+    float: right;
+    padding-right: 175px;
+} 
+
+.historyVersionEditBar .legeng-key {
+	margin-left: 30px;
+	padding-top: 7px;
+	float: left;
+}
+
+.historyVersionEditBar ins {
+	color: #5bdb2a;
+	text-decoration: none;
+} 
+.historyVersionEditBar del {
+	color: #FF0000;
+	text-decoration: none;
+}
+
+/* PREVIEW A VERSION SYTLES */
+.editbar .labelPreviewVersion {
+	position: fixed;
+	right: 30px;
+	padding: 10px 24px;
+	background-color: #000000;
+	color: #FFFFFF;
+	border-radius: 0px 0px 3px 3px;
+	top: 0px;
+}

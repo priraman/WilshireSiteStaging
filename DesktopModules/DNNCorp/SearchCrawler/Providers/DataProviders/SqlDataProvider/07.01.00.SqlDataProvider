@@ -1,0 +1,255 @@
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}SearchTypes WHERE [SearchTypeName] = 'document') 
+   BEGIN
+         INSERT INTO  {databaseOwner}{objectQualifier}SearchTypes
+            (SearchTypeName, SearchResultClass)
+         VALUES  ('document', 'DotNetNuke.Professional.SearchCrawler.Results.FileResultController')
+    END 
+GO
+
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}SearchTypes WHERE [SearchTypeName] = 'url') 
+   BEGIN
+		INSERT INTO  {databaseOwner}{objectQualifier}SearchTypes
+            (SearchTypeName, SearchResultClass)
+         VALUES  ('url', 'DotNetNuke.Professional.SearchCrawler.Results.UrlResultController')
+    END 
+GO
+
+--add new file crawler
+if not exists (select ScheduleID from {databaseOwner}{objectQualifier}Schedule where TypeFullName = 'DotNetNuke.Professional.SearchCrawler.FileCrawler.FileCrawler, DotNetNuke.Professional.SearchCrawler') begin
+	insert into {databaseOwner}{objectQualifier}Schedule
+	(
+		FriendlyName,
+		TypeFullName,
+		TimeLapse,
+		TimeLapseMeasurement,
+		RetryTimeLapse,
+		RetryTimeLapseMeasurement,
+		RetainHistoryNum,
+		AttachToEvent,
+		CatchUpEnabled,
+		Enabled,
+		ObjectDependencies
+	)
+	values
+	(
+		'Search: File Crawler',
+		'DotNetNuke.Professional.SearchCrawler.FileCrawler.FileCrawler, DotNetNuke.Professional.SearchCrawler',
+		1,
+		'd',
+		30,
+		'm',
+		5,
+		'',
+		0,
+		1,
+		'SearchCrawler'
+	)
+
+	declare @ScheduleID int
+	set @ScheduleID = @@identity
+		
+	insert into {databaseOwner}{objectQualifier}ScheduleItemSettings(ScheduleID, SettingName, SettingValue) values(@ScheduleID, 'IndexPath', 'DesktopModules\DNNCorp\SearchCrawler\Input\index')	
+end
+
+/* Rename 'SearchCrawler' to 'Search: Url Crawler' "*/
+UPDATE {databaseOwner}{objectQualifier}Schedule SET FriendlyName = 'Search: Url Crawler' WHERE TypeFullName = 'DotNetNuke.Professional.SearchCrawler.SearchSpider.SearchSpider, DotNetNuke.Professional.SearchCrawler'
+
+--enable site crawler
+IF EXISTS(SELECT * FROM {databaseOwner}[{objectQualifier}Schedule] WHERE TypeFullName = 'DotNetNuke.Services.Search.SearchEngineScheduler, DOTNETNUKE' AND Enabled = 0)
+BEGIN
+	UPDATE {databaseOwner}[{objectQualifier}Schedule]
+	SET Enabled = 1
+	WHERE TypeFullName = 'DotNetNuke.Services.Search.SearchEngineScheduler, DOTNETNUKE' AND Enabled = 0
+END
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_SelectPreviousFileCrawlerRunItems]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_SelectPreviousFileCrawlerRunItems]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_DeletePreviousFileCrawlerRunItems]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_DeletePreviousFileCrawlerRunItems]
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}sc_InsertPreviousFileCrawlerRunItem]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}sc_InsertPreviousFileCrawlerRunItem]
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+DROP TABLE {databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems
+(
+	[FileId] [int] NOT NULL,
+	[SearchTypeId] [int] NOT NULL,
+	[ScheduleId] [int] NOT NULL,
+	[FileName] [nvarchar](246) NOT NULL,
+	[Url] [nvarchar] (256)  NULL,
+	[FileUniqueId] [uniqueidentifier] NULL,
+	[Sha1Hash] [varchar](40) NULL,
+	[BodyIndexed] [bit] NOT NULL
+);
+GO
+
+CREATE CLUSTERED INDEX Idx_SearchPreviousFileCrawlerRunItems ON {databaseOwner}{objectQualifier}SearchPreviousFileCrawlerRunItems(FileId);
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_SelectPreviousFileCrawlerRunItems]
+@ScheduleId int
+AS
+BEGIN
+	SELECT
+		FileId,
+		SearchTypeId,
+		ScheduleId,
+		FileName,
+		Url,
+		FileUniqueId,
+		Sha1Hash,
+		BodyIndexed
+	FROM {objectQualifier}SearchPreviousFileCrawlerRunItems
+	WHERE ScheduleId = @ScheduleId
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_DeletePreviousFileCrawlerRunItems]
+@ScheduleId int		
+AS
+BEGIN
+	  DELETE 
+	  FROM {objectQualifier}SearchPreviousFileCrawlerRunItems
+      WHERE ScheduleId = @ScheduleId	
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_InsertPreviousFileCrawlerRunItem]
+		@FileId int,
+		@SearchTypeId int,
+		@ScheduleId int,
+		@FileName nvarchar(246),
+		@Url nvarchar(246),
+		@FileUniqueId uniqueidentifier,
+		@Sha1Hash varchar(40),
+		@BodyIndexed bit
+AS
+BEGIN
+	INSERT INTO {objectQualifier}SearchPreviousFileCrawlerRunItems
+	  (FileId,
+		SearchTypeId,
+		ScheduleId,
+		FileName,
+		Url,
+		FileUniqueId,
+		Sha1Hash,
+		BodyIndexed)	
+      VALUES
+	  (@FileId,
+		@SearchTypeId,
+		@ScheduleId,
+		@FileName,
+		@Url,
+		@FileUniqueId,
+		@Sha1Hash,
+		@BodyIndexed)
+END
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_AddUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_AddUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_SelectUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_SelectUrl
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_SelectUrlById') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_SelectUrlById
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}sc_UpdateUrl') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}sc_UpdateUrl
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}sc_Url' AND COLUMN_NAME='PortalId')
+	BEGIN
+		ALTER TABLE {databaseOwner}{objectQualifier}sc_Url 
+			ADD PortalId int NOT NULL DEFAULT(0);
+	END
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}sc_AddUrl
+	@Url nvarchar(256),
+	@PortalId int
+AS
+	insert into {databaseOwner}{objectQualifier}sc_Url (Url,PortalId)
+	values (@Url,@PortalId)
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_SelectUrl]
+AS
+BEGIN
+	SELECT
+		UrlId,
+		Url,
+		UrlActive,
+		UrlDNNRole,
+		UrlDNNUser,
+		UrlWinAuthentication,
+		UrlWinDomain,
+		UrlWinUser,
+		UrlWinPassword,
+		UrlSitemap,
+		PortalId
+	FROM {objectQualifier}sc_Url
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_SelectUrlById]
+	@UrlId int
+AS
+BEGIN
+	SELECT
+		UrlId,
+		Url,
+		UrlActive,
+		UrlDNNRole,
+		UrlDNNUser,
+		UrlWinAuthentication,
+		UrlWinDomain,
+		UrlWinUser,
+		UrlWinPassword,
+		UrlSitemap,
+		PortalId
+	FROM {objectQualifier}sc_Url
+	WHERE UrlId = @UrlId
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}sc_UpdateUrl]
+	@UrlId int,
+	@Url nvarchar(256),
+	@UrlActive bit,
+	@UrlDNNRole nvarchar(50),
+	@UrlDNNUser nvarchar(50),
+	@UrlWinAuthentication bit,
+	@UrlWinDomain nvarchar(50),
+	@UrlWinUser nvarchar(50),
+	@UrlWinPassword nvarchar(50),
+	@UrlSitemap nvarchar(256),
+	@PortalId int
+AS
+BEGIN
+	UPDATE {objectQualifier}sc_Url
+	SET	Url = @Url,
+		UrlActive = @UrlActive,
+		UrlDNNRole = @UrlDNNRole,
+		UrlDNNUser = @UrlDNNUser,
+		UrlWinAuthentication = @UrlWinAuthentication,
+		UrlWinDomain = @UrlWinDomain,
+		UrlWinUser = @UrlWinUser,
+		UrlWinPassword = @UrlWinPassword,
+		UrlSitemap = @UrlSitemap,
+		PortalId = @PortalId
+	WHERE UrlId = @UrlId
+END
+GO

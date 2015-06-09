@@ -1,0 +1,153 @@
+﻿<div id="editBarContainer">
+    <div class="previewModeContainer">
+        <div id="previewModeImage">
+            <iframe id="previewModeFrame"></iframe>
+        </div>
+        <div id="perviewBottomBar"></div>
+    </div>
+
+    <div class="historyVersionEditBar" data-bind="visible: history.editBarVisible">
+        <div class="legeng-key" data-bind="visible: history.compareMode"><ins data-bind="text: $root.resx.label_CompareInserted"></ins></div>
+        <div class="legeng-key" data-bind="visible: history.compareMode"><del data-bind="text: $root.resx.label_CompareDeleted"></del></div>
+        <div class="right-section">
+            <button class="CloseCompareMode" data-bind="text: resx.button_Close, click: history.hideComparationOrPreview"></button>
+        </div>
+    </div>
+
+    <div id="pageHistoryContainer" class="pageHistoryContainer"
+         data-bind="inOutVisible: history.visible">
+        <div class="title">
+            <h2 data-bind="text: resx.h2_TittleHistoryTab" />
+        </div>
+        <div class="tableContainer">
+            <div class="message"><span class="bolder" data-bind="text: resx.history_NumberOfVersionsMessage"></span> <span data-bind="text: history.maxNumberOfVersions"></span></div>
+            <table class="historytbl">
+                <thead>
+                    <tr>
+                        <td data-bind="text: resx.header_Compare" />
+                        <td data-bind="text: resx.header_Version" />
+                        <td data-bind="text: resx.header_Date" />
+                        <td data-bind="text: resx.header_User" />
+                        <td data-bind="text: resx.header_State" />
+                        <td data-bind="text: resx.header_Actions" />
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: history.versions">
+                    <tr>
+                        <td><input type="checkbox" data-bind="checked: compare, enable: $root.history.getNumberOfSelectedVersions() < 2 || compare" /></td>
+                        <td data-bind="text: versionNumber"></td>
+                        <td data-bind="text: date" class="bolder"></td>
+                        <td data-bind="text: user"></td>
+                        <td data-bind="text: state"></td>
+                        <td>
+                            <ul>
+                                <li href="#" data-bind="click: $root.history.showVersion, attr: {title: $root.resx.a_ShowVersion}" class="versionAction showVersion" />
+                                <li href="#" data-bind="click: $root.history.restoreVersion, attr: {title: $root.resx.a_RestoreVersion}, visible: $index() > 0 && isPublished && $root.history.versions().length > 1 && $root.history.versions()[0].isPublished" class="versionAction restoreVersion" />
+                                <li href="#" data-bind="click: $root.history.deleteVersion, attr: {title: $root.resx.a_DeleteVersion}, visible: isPublished && (!$root.history.versions()[0].isPublished && $index() != 1 || $root.history.versions()[0].isPublished && $index() > 0) && $root.history.versions().length > 1 " class="versionAction deleteVersion" />
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <button data-bind="click: history.compareVersions, enable: history.getNumberOfSelectedVersions() == 2 && !history.isComparing(), text: history.isComparing() ? resx.button_ComparingVersions : resx.button_CompareVersions" />
+            </div>
+            <div data-bind="click: history.hide, attr: {title: resx.button_CloseHistory}" class="historyClose" />
+        </div>
+    </div>
+
+    <div class="compareVersionsContainer">
+        <div class="labelHistoryVersion">
+            <span data-bind="text: $root.resx.label_CompareVersion" /> <span data-bind="text: $root.history.originalVersion" />
+        </div>
+        <iframe class="compareVersionIframe compareDiffVersion"></iframe>
+        <div class="labelHistoryVersion">
+            <span data-bind="text: $root.resx.label_CompareVersion" /> <span data-bind="text: $root.history.targetVersion" />
+        </div>
+        <iframe class="compareVersionIframe compareOriginalVersion"></iframe>
+    </div>
+
+    <div id="editBarPanelsExtensionPoint"></div>
+
+    <div id="edit-bar" class="editbar">
+        <div class="labelPreviewVersion" data-bind="visible: history.previewModeVisible">
+            <span data-bind="text: $root.resx.label_CompareVersion" /> <span data-bind="text: $root.history.previewVersion" />
+        </div>
+
+        <div class="previewModeOptions">
+            <ul class="menuEditBar">
+                <li class="Desktop left-button desktopOptions">
+                </li>
+                <li class="Portrait MobileOptionButton mobileOptions" data-bind="attr: {title: resx.button_Portrait}">
+
+                    <div class="submenuEditBar portraitTooltip">
+                        <div>
+                            <span data-bind="text: resx.button_Portrait"></span>
+                            <div class="submenuBottom"></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="Landscape MobileOptionButton mobileOptions" data-bind="attr: {title: resx.button_Landscape}">
+
+                    <div class="submenuEditBar landscapeTooltip">
+                        <div>
+                            <span data-bind="text: resx.button_Landscape"></span>
+                            <div class="submenuBottom"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="menuEditBar">
+                <li id="editBarAddModuleButton" class="AddModule left-button notInPreviewMode notForPageEditors">
+                    <div class="submenuEditBar viewModesMenu" data-bind="text: resx.button_AddModule" />
+                </li>
+                <li id="editBarSettingButton" class="Settings left-button notInPreviewMode notForPageEditors">
+                    <div class="submenuEditBar viewModesMenu" data-bind="text: resx.button_PageSettings" />
+                </li>
+                <li id="editBarHistoryButton" class="History left-button notInPreviewMode notIfVersionsDisabled notForModuleEditors" data-bind="click: history.toggleView">
+                    <div class="submenuEditBar viewModesMenu" data-bind="text: resx.button_PageHistory" />
+                </li>
+                <li id="editBarViewModesButton" class="Viewmodes left-button">
+                    <div class="submenuEditBar viewModesMenu">
+                        <div>
+                            <div class="textInEditHoverMenu" data-bind="text: resx.header_ViewSite"></div>
+                            <ul class="menuEditBar hover-menu">
+                                <li id="DesktopModeButton" class="DesktopModeButton ViewMenuButton" data-bind="text: resx.button_DesktopMode"></li>
+                                <li id="TabletModeButton" class="TabletModeButton ViewMenuButton" data-bind="text: resx.button_TabletMode"></li>
+                                <li id="PhoneModeButton" class="PhoneModeButton ViewMenuButton" data-bind="text: resx.button_PhoneMode"></li>
+                            </ul>
+                            <div class="submenuBottom">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="ClosePreviewMode left-button previewModeOptions noChangeTrigger" data-bind="attr: {title: resx.button_ClosePreviewMode}">
+                    <div class="submenuEditBar viewModesMenu" data-bind="text: resx.button_ClosePreviewMode"></div>
+                </li>
+                <li>
+                    <div class="left-button previewModeLabel previewModeOptions" data-bind="text: $root.resx.label_PreviewMode" />
+                </li>
+            </ul>
+        </div>
+        <div id="editBarOptionsExtensionPoint"></div>
+
+        <div class="right-section">
+            <div class="edit-mode-message" data-bind="text: workflow.info">
+            </div>
+            <div>
+                <button class="Publish right-button" data-bind="text: resx.button_Submit, click: workflow.submit, visible: workflow.hasNext() && !workflow.isApprovalAction()"></button>
+                <button class="Publish right-button" data-bind="text: resx.button_Approve, click: workflow.approve, visible: workflow.hasNext() && workflow.isApprovalAction()"></button>
+                <button class="Publish right-button" data-bind="text: resx.button_Publish, click: workflow.publish, visible: workflow.isPublishAvailable()"></button>
+                <button class="Discard right-button" data-bind="text: resx.button_Reject, click: workflow.goPrevious, visible: workflow.hasPrevious()"></button>
+                <button class="Discard right-button" data-bind="text: resx.button_Discard, click: workflow.discard, visible: workflow.isDiscardAvailable() && history.versions().length > 0 && !history.versions()[0].isPublished"></button>
+                <button class="Discard right-button" data-bind="text: resx.button_Discard, click: workflow.discardWithComment, visible: workflow.isDiscardWithCommentAvailable() && history.versions().length > 0 && !history.versions()[0].isPublished"></button>
+                <button class="Close right-button" data-bind="text: resx.button_Close, click: workflow.close, visible: workflow.isCloseAvailable()"></button>
+                <button class="Save right-button" data-bind="text: resx.button_Save, click: workflow.close, visible: workflow.isSaveDraftAvailable()"></button>
+            </div>
+            <div class="private-page" data-bind="visible: workflow.isPrivatePage(), attr :{ title: resx.PrivatePageTooltip }" />
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,190 @@
+﻿.personaBarDialogMask {
+    top: 0;
+    position: fixed;
+    z-index: 99999 !important;
+    width: 100%;
+    height: 100%;
+	background: #000;
+    opacity: 0.75;
+}
+
+.personaBarDialog {
+    position: absolute;
+    left: 50%;
+    width: 650px;
+    font-family: proxima_nova_semibold, arial;
+    z-index: 99999 !important;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.personaBarDialog .dialogTitle {
+    cursor: move;
+}
+
+/* Title of dialog */
+.personaBarDialog .dialogTitle span.dialogTitle {
+    line-height: 68px;
+    color: #fff;
+    font-size: 24px;
+    margin-left: 32px;
+}
+
+/* Close button */
+.personaBarDialog .dialogTitle span.btn-close {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background-image: none;
+    background: url('../images/PersonaBarDialog-icons.png') no-repeat;
+    float: right;
+    margin: 28px 36px 0 0;
+    cursor: pointer;
+}
+
+.personaBarDialog .dialogTitle span.btn-close:hover {
+    background-position-x: -17px;
+}
+
+.personaBarDialog .dialogTitle span.btn-close:active {
+    background-position-x: -34px;
+}
+
+/* All dialog */
+.personaBarDialog .dialogContainer {
+    min-height: 100px;
+    position: relative;
+}
+
+/* Inner Title dialog */
+.personaBarDialog .dialogContainer .dialogTitle {
+    /*height: 68px;*/
+    line-height: 36px;
+    background-color: #092836;
+
+    -moz-border-top-left-radius: 5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius: 5px;
+
+    -moz-border-top-right-radius: 5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius: 5px;
+}
+
+.personaBarDialog .dialogContainer .dialogTitle h1 {
+    font-size: 20px;
+}
+
+/* Where all data go */
+.personaBarDialog .dialogContainer .dialogContent {
+    padding: 24px;
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Title of data */
+.personaBarDialog .dialogContainer .dialogContent .dialogTitle {
+	font-size: large;
+    background: none;
+	margin-bottom: 15px;
+}
+
+.personaBarDialog .container .content ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.personaBarDialog .dialogContainer .dialogContent .panels .panel {
+    background-color: #f0f0f0;
+    padding: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+    margin-bottom: 4px;
+}
+
+/* Actions area for dialog buttons */
+.personaBarDialog .actions {
+    height: 85px;
+    border-top: 1px solid #f1f1f1;
+    background-color: #f4f4f4;
+
+    -moz-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius: 5px;
+
+    -moz-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius: 5px;
+    width: 100%;
+}
+
+/* Buttons */
+.personaBarDialog .actions span.btn {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    float: right;
+    margin: 22px 27px 0 0;
+    padding: 0;
+    background-color: #ddd;
+    cursor: pointer;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
+}
+
+.personaBarDialog .actions span.btn-cancel {
+    background-image: none;
+    text-shadow: none;
+    background-color: #ddd;
+    color: #777;
+}
+
+.personaBarDialog .actions span.btn-accept {
+    background-image: none;
+    text-shadow: none;
+    background-color: #1688c4;
+    color: #FFF;
+}
+
+.personaBarDialog .actions span.btn-accept.disabled {
+    background-image: none;
+    text-shadow: none;
+    background-color: #86D0F2;
+}
+
+
+.personaBarDialog .actions span.btn-cancel:hover {
+    background-image: none;
+    text-shadow: none;
+    background-color: #e8e8e8;
+}
+
+.personaBarDialog .actions span.btn-accept:hover {
+    background-image: none;
+    text-shadow: none;
+    background-color: #6cb6f3;
+}
+
+/* Form fields */
+.personaBarDialog .dialogContainer .dialogContent textarea {
+	width: 100%;
+}
+
+/* Errors in ul li */
+.personaBarDialog ul.errors {
+    border: none;
+    color: red;
+    margin-top: 5px;
+}
+
+ul.errors li span.backError {
+    font-size: 11px;
+}

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionDeleteTooltip.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ActionEditTooltip.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ColumnActions.Text" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ColumnLanguage.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ColumnUrl.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="ColumnUrlType.Text" xml:space="preserve">
+    <value>URL Type</value>
+  </data>
+  <data name="CreateButton.Text" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateButtonTooltip.Text" xml:space="preserve">
+    <value>Create Custom URL</value>
+  </data>
+  <data name="CreateUrlDialogTitle.Text" xml:space="preserve">
+    <value>Create URL</value>
+  </data>
+  <data name="CustomUrlsLabel.Help" xml:space="preserve">
+    <value>URLs that have been created for this page.</value>
+  </data>
+  <data name="CustomUrlsLabel.Text" xml:space="preserve">
+    <value>Custom URLs</value>
+  </data>
+  <data name="DuplicateUrl.Error" xml:space="preserve">
+    <value>The url is a duplicate of an existing url.</value>
+  </data>
+  <data name="EditLanguageLabel.Help" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="EditLanguageLabel.Text" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="EditSiteAliasLabel.Text" xml:space="preserve">
+    <value>Site Alias:</value>
+  </data>
+  <data name="EditSiteAliasLabel.Help" xml:space="preserve">
+    <value>Select the alias for the page if you wish to use a specific alias.</value>
+  </data>
+  <data name="EditUrlDialogTitle.Text" xml:space="preserve">
+    <value>Edit URL</value>
+  </data>
+  <data name="EditUrlPathLabel.Help" xml:space="preserve">
+    <value>Specify the path for the URL.  Do not enter http:// or the site alias.</value>
+  </data>
+  <data name="EditUrlPathLabel.Text" xml:space="preserve">
+    <value>URL Path:</value>
+  </data>
+  <data name="EditUrlQueryStringLabel.Help" xml:space="preserve">
+    <value>Add an optional Querystring to the Redirect URL if you wish to match on a URL with a Path and any matching Querystring parameters.  The Querystring is the segment of the URL to the right of the first ? in the URL. e.g. example.com/url-to-redirect?id=123</value>
+  </data>
+  <data name="EditUrlQueryStringLabel.Text" xml:space="preserve">
+    <value>Query String:</value>
+  </data>
+  <data name="EditUrlTypeLabel.Help" xml:space="preserve">
+    <value>Select 'Active' or 'Redirect'.  Active means the URL will be used as the URL for the page, and will return a HTTP status code of 200.  'Redirect' means the entered URL will be redirected to the Active URL for the current page.</value>
+  </data>
+  <data name="EditUrlTypeLabel.Text" xml:space="preserve">
+    <value>URL Type:</value>
+  </data>
+  <data name="InvalidUrl.Error" xml:space="preserve">
+    <value>The submitted URL is not valid.  The culture selected does not match the culture of the alias.</value>
+  </data>
+  <data name="RemoveUrlPromptMessage.Text" xml:space="preserve">
+    <value>Are you sure you want to remove this URL?</value>
+  </data>
+  <data name="RemoveUrlPromptTitle.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="SystemGeneratedUrlsLabel.Help" xml:space="preserve">
+    <value>URLs generated automatically for this page.</value>
+  </data>
+  <data name="SystemGeneratedUrlsLabel.Text" xml:space="preserve">
+    <value>System Generated URLs</value>
+  </data>
+  <data name="TabText.Text" xml:space="preserve">
+    <value>URL Management</value>
+  </data>
+  <data name="CustomUrlPathCleaned.Error" xml:space="preserve">
+    <value>The Page URL entered contains characters which cannot be used in a URL or are illegal characters for a URL.   These characters have been removed.  Click the 'Update' button again to accept the modified URL.&lt;br&gt;[NOTE: The illegal characters list is the following: &lt;&gt;\?:&amp;=+|%# ]</value>
+  </data>
+  <data name="UrlPathNotUnique.Error" xml:space="preserve">
+    <value>The submitted URL is not available.  If you wish to accept the suggested alternative, please click Save.</value>
+  </data>
+  <data name="SelectedSiteAliasUsage.Help" xml:space="preserve">
+    <value>If the selected site alias is different from the primary site alias, select the usage option.</value>
+  </data>
+  <data name="SelectedSiteAliasUsage.Text" xml:space="preserve">
+    <value>Selected Site Alias Usage:</value>
+  </data>
+  <data name="ThisPageOnly.Text" xml:space="preserve">
+    <value>This page only</value>
+  </data>
+  <data name="PageAndChildPages.Text" xml:space="preserve">
+    <value>Page and Child Pages</value>
+  </data>
+  <data name="SameAsParentPage.Text" xml:space="preserve">
+    <value>Same as Parent Page</value>
+  </data>
+</root>

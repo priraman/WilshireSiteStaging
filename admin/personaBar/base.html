@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PersonaBar</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <style>
+        #topLevelMenu .hovermenu > ul, ul.personabarnav {list-style-type: none;}
+    </style>
+    <script type="text/javascript">
+        window.Sys = !window.Sys ? window.top.Sys : window.Sys;
+    </script>
+</head>
+<body>
+    <div class="personabar" id="personabar">
+        <div class="personabarLogo"></div>
+        <div id="topLevelMenu"></div>
+        <div class="socialmanageravatar">
+            <span>
+                <em>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />
+                </em>
+            </span>
+        </div>
+    </div>
+
+    <div class="incontext-analytics">
+        <div>
+        </div>
+    </div>
+
+    <div class="socialmask"></div>
+
+    <div class="socialpanel-placeholder"></div>
+
+    <div id="personabar-panels"></div>
+
+    <div class="socialtasks">
+        <div>
+        </div>
+    </div>
+    <!-- extra -->
+    <div id="mask"></div>
+    <div id="confirmation-dialog">
+        <p></p>
+        <div class="buttonpanel">
+            <a id="confirmbtn"></a>
+            <a id="cancelbtn"></a>
+        </div>
+    </div>
+    <div id="notification-dialog">
+        <p></p>
+    </div>
+    <div id="personaBar-loadingbar" style="display: none;">
+        <div></div>
+    </div>
+    <!-- end extra -->
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+</body>
+</html>

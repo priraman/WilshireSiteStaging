@@ -1,0 +1,195 @@
+﻿.dam-stats-top-bar {
+    padding: 5px;
+    background: #eee;
+    text-align: right;
+}
+
+.dam-stats-top-bar > div {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto !important;
+}
+
+.dam-stats-top-bar > div.RadComboBox > table {
+    width: 175px !important;    
+}
+
+.dam-stats-to-label {
+    margin-right: 6px;
+}
+
+.dam-stats-separator {
+    background-color: #D7D7D7;
+    height: 30px;
+    margin: 0 15px;
+    width: 1px;
+}
+
+.dam-stats-graph-container {
+    position: relative;
+}
+
+.dam-stats-graph {
+    clear: both;
+    width: 930px;
+    height: 200px;
+    position: relative;
+}
+
+.dam-stats-period-aggregation {
+    list-style: none inside none;
+    display: inline;
+    font-size: 0;
+    float: right;
+    margin: 15px 0 0;
+}
+
+.dam-stats-period-aggregation li {
+    font-size: 12px;
+    display: inline-block;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F0F2F1 100%) repeat scroll 0 0;    
+    border: 1px solid #C2C2C2;
+    border-width: 1px 0 1px 1px;
+
+    -moz-box-shadow: 0 1px grey;
+    -webkit-box-shadow: 0 1px grey;
+    box-shadow: 0 1px grey;
+
+    color: #999999;
+    line-height: 30px;
+    width: 60px;
+    text-align: center;
+}
+
+.dam-stats-period-aggregation a,
+.dam-stats-period-aggregation a:link,
+.dam-stats-period-aggregation a:visited,
+.dam-stats-period-aggregation a:hover,
+.dam-stats-period-aggregation a:active {
+    display: block;
+    color: #979797;
+    text-decoration: none;
+    background-color: #F0F2F1; /* old browsers */
+    background-image: -moz-linear-gradient(top,  #ffffff 0%, #F0F2F1 100%); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff) color-stop(100%,#F0F2F1)); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, #ffffff 0%,#F0F2F1 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, #ffffff 0%,#F0F2F1 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, #ffffff 0%,#F0F2F1 100%); /* IE10+ */
+    background-image: linear-gradient(to bottom, #ffffff 0%,#F0F2F1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#F0F2F1', GradientType=0); /* IE6-9 */
+
+}
+
+.dam-stats-period-aggregation a.selected {
+    background-color: #EAEAEA; /* old browsers */
+    background-image: -moz-linear-gradient(top,  #D0D0D0 0%, #EAEAEA 100%); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#D0D0D0) color-stop(100%,#EAEAEA)); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, #D0D0D0 0%,#EAEAEA 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, #D0D0D0 0%,#EAEAEA 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, #D0D0D0 0%,#EAEAEA 100%); /* IE10+ */
+    background-image: linear-gradient(to bottom, #D0D0D0 0%,#EAEAEA 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D0D0D0', endColorstr='#EAEAEA', GradientType=0); /* IE6-9 */
+    color: #666666;
+}
+
+.dam-stats-period-aggregation li:first-child {
+    border-radius: 3px 0 0 3px;
+}
+
+.dam-stats-period-aggregation li:last-child {
+    border-radius: 0 3px 3px 0;
+    border-width: 1px;
+}
+
+.dam-stats-container {
+    margin: 10px 0;
+    position: relative;
+    background: #eee;
+    padding: 14px 0;
+}
+
+.dam-stats-container table.fixed {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.dam-stats-container table.stats {
+    width: 100%;
+}
+
+.dam-stats-container table.stats th {
+    width: 50%
+}
+
+.dam-stats-container table.stats th,
+.dam-stats-container table.stats td {
+    text-align: center;
+    border-left: solid #d8d7d7 1px;
+    color: #656565;
+    font-family: Arial,​ Helvetica,​ sans-serif;
+    padding: 6px 0;
+}
+
+.dam-stats-container table.stats th {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.dam-stats-container table.stats td {
+    font-weight: 500;
+}
+
+.dam-stats-container table.stats th:first-child,
+.dam-stats-container table.stats td:first-child {
+    border-left: none;
+}
+
+.dam-stats-container table.stats td.stats-cell-total-downloads {
+    font-size: 28px;
+}
+
+.dam-stats-container table.stats td.stats-cell-last-updated span.date {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+} 
+
+.dam-stats-container table.stats td.stats-cell-last-updated span.time {
+    font-size: 12px;
+} 
+
+.dam-stats-container table.stats td.stats-cell-last-updated a.user {
+    font-size: 12px;
+    text-decoration: none;
+} 
+
+.dam-stats-tooltip {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.75);
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-weight: bold;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    width: 170px;
+}
+
+.dam-stats-tooltip-anchor {
+    left: 83px;
+    position: absolute;
+    top: 38px;
+}
+
+.dam-stats-tooltip-anchor:after {
+    border-left: 7px solid rgba(0, 0, 0, 0);
+    border-right: 7px solid rgba(0, 0, 0, 0);
+    border-top: 7px solid #000000;
+    bottom: -7px;
+    content: "";
+    height: 0;
+    opacity: 0.75;
+    position: absolute;
+    width: 0;
+}

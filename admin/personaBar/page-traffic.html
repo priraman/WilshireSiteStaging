@@ -1,0 +1,221 @@
+﻿<!-- panel -->
+<div class="socialpanelheader dashboard">
+    <h3 data-bind="html: $root.contentResx.analytics_PageTraffic"></h3>
+
+    <div class="dashboard-period-date" data-bind="html: periodLabel"></div>
+
+    <ul class="dashboard-period">
+        <li data-bind="css: { selected: period() == 'Day' }, click: changePeriod, html: $root.contentResx.analytics_Day"
+            data-value="Day"></li>
+        <li data-bind="css: { selected: period() == 'Week' }, click: changePeriod, html: $root.contentResx.analytics_Week"
+            data-value="Week"></li>
+        <li data-bind="css: { selected: period() == 'Month' }, click: changePeriod, html: $root.contentResx.analytics_Month"
+            data-value="Month"></li>
+        <li data-bind="css: { selected: period() == 'Year' }, click: changePeriod, html: $root.contentResx.analytics_Year"
+            data-value="Year"></li>
+        <li data-bind="css: { selected: period() == 'Custom' }, click: showCustomCalendar, html: $root.contentResx.analytics_Custom, clickBubble: false" class="dashboard-period-custom-calendar"></li>
+    </ul>
+
+    <input type="text" id="dashboard-period-custom-calendar-start-field" />
+    <input type="text" id="dashboard-period-custom-calendar-end-field" />
+
+    <div id="dashboard-period-custom-calendar-container">
+        <span class="pika-triangle-arrow"></span>
+        <div>
+            <span data-bind="html: startDateLabel"></span>
+            <div id="dashboard-period-custom-calendar-container-left"></div>
+        </div>
+        <div>
+            <span data-bind="html: endDateLabel"></span>
+            <div id="dashboard-period-custom-calendar-container-right"></div>
+        </div>
+        <span class="pika-bottom clear">
+            <a class="pika-calendar-apply-btn" data-bind="html: $root.contentResx.analytics_Apply, click: applyCustomDates"></a>
+            <div class="clear"></div>
+        </span>
+    </div>
+</div>
+
+<div class="socialpanelbody" id="page-traffic-panel">
+    <span class="page-name" data-bind="html: $root.pageName"></span>
+    <div>
+        <h3 data-bind="html: $root.contentResx.analytics_PageViewActivity"></h3>
+
+        <div id="page-views" class="chart-container">
+            <ul id="page-views-legend" class="graph-legend"></ul>
+            <div class="line-chart-tooltip" style="display: none;">
+                <span class="title"></span>
+                <span class="info line-1"></span>
+                <span class="info line-2"></span>
+                <div class="line-chart-tooltip-anchor"></div>
+            </div>
+            <svg class="line-chart"></svg>
+        </div>
+
+        <div class="siteMetrics">
+            <div class="first">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_PageViews"></span>
+                <div class="metric-value" data-bind="html: summary.totalPageViews"></div>
+            </div>
+            <div>
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_UniqueVisitors"></span>
+                <div class="metric-value" data-bind="html: summary.totalVisits"></div>
+            </div>
+            <div>
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_UniqueSessions"></span>
+                <div class="metric-value" data-bind="html: summary.totalSessions"></div>
+            </div>
+            <div>
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_AverageTime"></span>
+                <div class="metric-value" data-bind="html: summary.averageTimeOnPage"></div>
+            </div>
+            <div class="last">
+                <span class="metric-name" data-bind="html: $root.contentResx.analytics_BounceRate"></span>
+                <div class="metric-value" data-bind="html: summary.bounceRate"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <h3 data-bind="html: $root.contentResx.analytics_PageActivities"></h3>
+        <div class="three-columns analytics" data-bind="with: topReferrers">
+            <table class="cmxtbl leftside">
+                <colgroup>
+                    <col class="col-label"/>
+                    <col class="col-count"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="label-col"><a data-bind="html: $root.contentResx.analytics_TopReferrers"></a></th>
+                    <th class="value-col">
+                        <ul class="right pager" data-bind="enable: pagerVisible">
+                            <li><a data-bind="click: prev, attr: { 'class': pagerPrevClass }"></a></li>
+                            <li><a data-bind="click: next, attr: { 'class': pagerNextClass }"></a></li>
+                        </ul>
+                    </th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: results">
+                <tr data-bind="css: {last: $index() == $parent.results().length - 1}">
+                    <td><span data-bind="html: label"></span></td>
+                    <td><span data-bind="html: count"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="three-columns analytics" data-bind="with: topOperatingSystems">
+            <table class="cmxtbl">
+                <colgroup>
+                    <col class="col-label"/>
+                    <col class="col-count"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="label-col"><a data-bind="html: $root.contentResx.analytics_TopOperatingSystems"></a></th>
+                    <th class="value-col">
+                        <ul class="right pager" data-bind="enable: pagerVisible">
+                            <li><a data-bind="click: prev, attr: { 'class': pagerPrevClass }"></a></li>
+                            <li><a data-bind="click: next, attr: { 'class': pagerNextClass }"></a></li>
+                        </ul>
+                    </th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: results">
+                <tr data-bind="css: {last: $index() == $parent.results().length - 1}">
+                    <td><span data-bind="html: label"></span></td>
+                    <td><span data-bind="html: count"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="three-columns analytics" data-bind="with: conversions">
+            <table class="cmxtbl rightside">
+                <colgroup>
+                    <col class="col-label"/>
+                    <col class="col-count"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="label-col"><a data-bind="html: $root.contentResx.analytics_Conversions"></a></th>
+                    <th class="value-col">
+                        <ul class="right pager" data-bind="enable: pagerVisible">
+                            <li><a data-bind="click: prev, attr: { 'class': pagerPrevClass }"></a></li>
+                            <li><a data-bind="click: next, attr: { 'class': pagerNextClass }"></a></li>
+                        </ul>
+                    </th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: results">
+                <tr data-bind="css: {last: $index() == $parent.results().length - 1}">
+                    <td><span data-bind="html: label"></span></td>
+                    <td><span data-bind="html: count"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+
+        <div id="navigation-summary">
+            <h3 data-bind="html: $root.contentResx.analytics_NavigationSummary"></h3>
+            <div class="chart-container">
+                <ul id="navigation-summary-legend" class="graph-legend"></ul>
+                <div>
+                    <img id="navigation-summary-pageicon" src="../personaBar/images/icon_analytics_navigation.png" />
+                    <div class="navigation-summary-tooltip" style="display: none;">
+                        <span class="title"></span>
+                        <span class="info line-1"></span>
+                        <span class="info line-2"></span>
+                        <div class="navigation-summary-tooltip-anchor"></div>
+                    </div>
+                    <svg class="referrers-svg"></svg>
+                    <svg class="exitPages-svg"></svg>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="channels" class="channels-devices">
+            <h3 data-bind="html: $root.contentResx.analytics_Channels"></h3>
+            <div class="chart-container donut-chart-container">
+                <div class="clear" id="channels-svg" style="position: relative">
+                    <div class="donut-chart-center" id="channels-ratio"></div>
+                </div>
+                <div class="donut-chart-tooltip align-center" style="display: none;">
+                    <span class="title"></span>
+                    <span class="info line-1"></span>
+                    <div class="donut-chart-tooltip-anchor"></div>
+                </div>
+                <ul id="channels-legend" class="graph-legend"></ul>
+            </div>
+        </div>
+        <div id="devices" class="channels-devices">
+            <h3 data-bind="html: $root.contentResx.analytics_Devices"></h3>
+
+            <div class="chart-container donut-chart-container">
+                <div class="clear" id="devices-svg" style="position: relative">
+                    <div class="donut-chart-center" id="devices-ratio"></div>
+                </div>
+                <div class="donut-chart-tooltip align-center" style="display: none;">
+                    <span class="title"></span>
+                    <span class="info line-1"></span>
+                    <div class="donut-chart-tooltip-anchor"></div>
+                </div>
+                <ul id="devices-legend" class="graph-legend"></ul>
+            </div>
+        </div>
+
+        <h3 data-bind="html: $root.contentResx.analytics_TimeOnPage"></h3>
+
+        <div id="time-on-page" class="chart-container">
+            <ul id="time-on-page-legend" class="graph-legend" style="visibility: hidden"></ul>
+            <div class="line-chart-tooltip" style="display: none;">
+                <span class="title"></span>
+                <span class="info line-1"></span>
+                <span class="info line-2"></span>
+                <div class="line-chart-tooltip-anchor"></div>
+            </div>
+            <svg class="line-chart"></svg>
+        </div>
+    </div>
+</div>

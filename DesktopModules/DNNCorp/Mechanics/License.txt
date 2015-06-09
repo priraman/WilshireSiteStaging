@@ -1,0 +1,11 @@
+﻿<div class="License">
+	<h3>License</h3>
+	<p class="Owner">
+		DotNetNuke&reg;  <a href=http://www.dotnetnuke.com>http://www.dotnetnuke.com</a></br>
+		Copyright (c) 2002-2014</br>
+		by DNN Corporation</br>
+	</p>
+	<p>
+		All Rights Reserved
+	</p>
+</div>

@@ -1,0 +1,229 @@
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}HtmlText' AND COLUMN_NAME='PublishDate')
+	BEGIN
+		ALTER TABLE {databaseOwner}{objectQualifier}HtmlText
+			ADD [PublishDate] [DATETIME] NULL
+	END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddHtmlText
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddHtmlText
+    @ModuleID        INT,
+    @Content         NTEXT,
+    @Summary	     NTEXT,
+    @StateID         INT,
+    @IsPublished     BIT,
+    @PublishDate     DATETIME,
+    @UserID          INT,
+    @History         INT
+AS
+    DECLARE @Version INT
+    SELECT @Version = MAX(Version) FROM {databaseOwner}{objectQualifier}HtmlText WHERE ModuleID = @ModuleID
+
+    IF @Version IS NULL
+      SELECT @Version = 1
+    ELSE
+      SELECT @Version = @Version + 1
+
+    INSERT INTO {databaseOwner}{objectQualifier}HtmlText (
+      ModuleID,
+      Content,
+      Summary,
+      Version,
+      StateID,
+      IsPublished,
+      PublishDate,
+      CreatedByUserID,
+      CreatedOnDate,
+      LastModifiedByUserID,
+      LastModifiedOnDate
+    ) 
+    VALUES (
+      @ModuleID,
+      @Content,
+      @Summary,
+      @Version,
+      @StateID,
+      @IsPublished,
+      @PublishDate,
+      @UserID,
+      GETDATE(),
+      @UserID,
+      GETDATE()
+    )
+
+    IF @History > 0
+    BEGIN
+      DELETE
+      FROM   {databaseOwner}{objectQualifier}HtmlText
+      WHERE  ModuleID = @ModuleID
+      AND    Version <= (@Version - @History)
+    END
+
+    SELECT SCOPE_IDENTITY()
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}UpdateHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateHtmlText
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateHtmlText
+    @ItemID          INT,
+    @Content         NTEXT,
+    @Summary		 NTEXT,
+    @StateID         INT,
+    @IsPublished     BIT,
+    @PublishDate     DATETIME,
+    @UserID          INT
+AS
+    UPDATE {databaseOwner}{objectQualifier}HtmlText
+        SET     Content              = @Content,
+	            Summary				 = @Summary,
+                StateID              = @StateID,
+                IsPublished          = @IsPublished,
+                PublishDate          = @PublishDate,
+                LastModifiedByUserID = @UserID,
+                LastModifiedOnDate   = GETDATE()
+    WHERE  ItemID = @ItemID
+
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PublishHtmlContentSchedule') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}PublishHtmlContentSchedule
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}PublishHtmlContentSchedule
+AS 
+    WITH    LastStates
+              AS ( SELECT   MAX(StateID) AS StateID
+                   FROM     {databaseOwner}{objectQualifier}WorkflowStates
+                   GROUP BY WorkflowID
+                 )
+
+        UPDATE  {databaseOwner}{objectQualifier}HtmlText
+        SET     IsPublished = 1 ,
+                PublishDate = NULL
+        FROM    {databaseOwner}{objectQualifier}HtmlText t
+                INNER JOIN LastStates s ON t.StateID = s.StateID
+        WHERE   IsPublished = 0
+                AND PublishDate < GETDATE()
+                AND PublishDate IS NOT NULL
+GO
+
+-- Add the Schedule
+IF NOT exists (SELECT ScheduleID FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Professional.HtmlPro.Components.ContentPublishSchedule, DotNetNuke.Professional.HtmlPro')
+BEGIN
+    INSERT INTO {databaseOwner}{objectQualifier}Schedule (
+        TypeFullName ,
+        TimeLapse ,
+        TimeLapseMeasurement ,
+        RetryTimeLapse ,
+        RetryTimeLapseMeasurement ,
+        RetainHistoryNum ,
+        AttachToEvent ,
+        CatchUpEnabled ,
+        Enabled,
+        ObjectDependencies ,
+        Servers ,
+        CreatedByUserID ,
+        CreatedOnDate ,
+        LastModifiedByUserID ,
+        LastModifiedOnDate ,
+        FriendlyName)
+
+        VALUES (
+        'DotNetNuke.Professional.HtmlPro.Components.ContentPublishSchedule, DotNetNuke.Professional.HtmlPro', 
+        1, 
+        'm', 
+        30, 
+        's', 
+        10, 
+        '', 
+        0, 
+        1,
+        '',
+        NULL,
+        -1,
+        GETDATE(),
+        -1,
+        GETDATE(),
+        'Html Content Publish')
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}WorkflowStates' AND COLUMN_NAME='NotifyAdmin')
+	BEGIN
+		ALTER TABLE {databaseOwner}{objectQualifier}WorkflowStates
+			ADD [NotifyAdmin] [bit] NOT NULL DEFAULT(1)
+	END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}UpdateWorkflowState') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateWorkflowState
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateWorkflowState
+    @StateID        INT,
+    @StateName      NVARCHAR(50),
+    @Order          INT,
+    @Notify         BIT,
+    @NotifyAdmin    BIT,
+    @IsActive       BIT
+AS
+    UPDATE {databaseOwner}{objectQualifier}WorkflowStates
+    SET    StateName = @StateName,
+           [Order] = @Order,
+           Notify = @Notify,
+	       NotifyAdmin = @NotifyAdmin,
+           IsActive = @IsActive
+    WHERE  StateID = @StateID
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddWorkflowState') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddWorkflowState
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddWorkflowState
+    @WorkflowID     INT,
+    @StateName      NVARCHAR(50),
+    @Order          INT,
+    @Notify         BIT,
+    @NotifyAdmin    BIT,
+    @IsActive       BIT
+AS
+    INSERT into {databaseOwner}{objectQualifier}WorkflowStates (
+      WorkflowID,
+      StateName,
+      [Order],
+      Notify,
+      NotifyAdmin,
+      IsActive
+    )
+    VALUES (
+      @WorkflowID,
+      @StateName,
+      @Order,
+      @Notify,
+      @NotifyAdmin,
+      @IsActive
+    )
+
+    SELECT SCOPE_IDENTITY()
+GO

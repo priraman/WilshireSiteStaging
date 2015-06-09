@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Desktop.Text" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="Direct.Text" xml:space="preserve">
+    <value>Direct</value>
+  </data>
+  <data name="DirectReferral.Text" xml:space="preserve">
+    <value>Direct Referral</value>
+  </data>
+  <data name="ExitPages.Text" xml:space="preserve">
+    <value>Exit Pages</value>
+  </data>
+  <data name="External.Text" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="Internal.Text" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="InternalServerError.Text" xml:space="preserve">
+    <value>An internal server error occurred</value>
+  </data>
+  <data name="LinkClicked.Text" xml:space="preserve">
+    <value>Link Clicked</value>
+  </data>
+  <data name="Mobile.Text" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="NewWorkflow.Text" xml:space="preserve">
+    <value>New Workflow</value>
+  </data>
+  <data name="QInvalidFileMessage.Text" xml:space="preserve">
+    <value>Extension not allowed.</value>
+  </data>
+  <data name="Referral.Text" xml:space="preserve">
+    <value>Referral</value>
+  </data>
+  <data name="GroupJoined.Text" xml:space="preserve">
+    <value>Joined Group</value>
+  </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Social.Text" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="Tablet.Text" xml:space="preserve">
+    <value>Tablet</value>
+  </data>
+  <data name="TrackLinksLabel.Help" xml:space="preserve">
+    <value>Check this box to enable link tracking for all links on this page.</value>
+  </data>
+  <data name="TrackLinksLabel.Text" xml:space="preserve">
+    <value>Track Links?</value>
+  </data>
+  <data name="UserAuthenticated.Text" xml:space="preserve">
+    <value>Logins</value>
+  </data>
+  <data name="UserCreated.Text" xml:space="preserve">
+    <value>New Users</value>
+  </data>
+  <data name="WorkflowNotFound.Text" xml:space="preserve">
+    <value>Workflow not found</value>
+  </data>
+  <data name="WorkflowStateNotFound.Text" xml:space="preserve">
+    <value>Workflow state not found</value>
+  </data>
+  <data name="QFileIsTooLarge.Text" xml:space="preserve">
+    <value>Size bigger than {0}.</value>
+  </data>
+  <data name="QUploadFailed.Text" xml:space="preserve">
+    <value>File upload failed!</value>
+  </data>
+  <data name="QImageExtensions.Text" xml:space="preserve">
+    <value>jpg,jpe,bmp,gif,png,jpeg,ico</value>
+  </data>
+  <data name="QImageProgress.Text" xml:space="preserve">
+    <value>Please wait to complete.</value>
+  </data>
+  <data name="QContinueQuestion.Text" xml:space="preserve">
+    <value>Would you like to upload the rest of {0} file(s)?</value>
+  </data>
+  <data name="QUploadTitle.Text" xml:space="preserve">
+    <value>{0} file(s) cannot be uploaded!</value>
+  </data>
+  <data name="QImageProgressTitle.Text" xml:space="preserve">
+    <value>File is uploading!</value>
+  </data>
+  <data name="ClickedLink.Text" xml:space="preserve">
+    <value>Clicked link</value>
+  </data>
+  <data name="LinkClicked_desc.Text" xml:space="preserve">
+    <value>Clicked a link on a page that has link tracking enabled</value>
+  </data>
+  <data name="Login.Text" xml:space="preserve">
+    <value>Logged-in</value>
+  </data>
+  <data name="Login_desc.Text" xml:space="preserve">
+    <value>Logged-in to the site</value>
+  </data>
+  <data name="Register.Text" xml:space="preserve">
+    <value>Joined Site</value>
+  </data>
+  <data name="Register_desc.Text" xml:space="preserve">
+    <value>Registered on the site</value>
+  </data>
+  <data name="PackageNotFound.Text" xml:space="preserve">
+    <value>Package not found {0}</value>
+  </data>
+  <data name="TabCreated.Text" xml:space="preserve">
+    <value>Page Created</value>
+  </data>
+  <data name="TabCreated_desc.Text" xml:space="preserve">
+    <value>A Page was created</value>
+  </data>
+  <data name="TabHardDeleted.Text" xml:space="preserve">
+    <value>Page Hard Deleted</value>
+  </data>
+  <data name="TabHardDeleted_desc.Text" xml:space="preserve">
+    <value>A Page was hard deleted</value>
+  </data>
+  <data name="TabSoftDeleted.Text" xml:space="preserve">
+    <value>Page Soft Deleted</value>
+  </data>
+  <data name="TabSoftDeleted_desc.Text" xml:space="preserve">
+    <value>A Page was soft deleted</value>
+  </data>
+  <data name="TabUpdated.Text" xml:space="preserve">
+    <value>Page Updated</value>
+  </data>
+  <data name="TabUpdated_desc.Text" xml:space="preserve">
+    <value>A Page was updated</value>
+  </data>
+  <data name="ModuleCreated.Text" xml:space="preserve">
+    <value>Module Created</value>
+  </data>
+  <data name="ModuleCreated_desc.Text" xml:space="preserve">
+    <value>A Module was created</value>
+  </data>
+  <data name="ModuleHardDeleted.Text" xml:space="preserve">
+    <value>Module Hard Deleted</value>
+  </data>
+  <data name="ModuleHardDeleted_desc.Text" xml:space="preserve">
+    <value>A Module was hard deleted</value>
+  </data>
+  <data name="ModuleSoftDeleted.Text" xml:space="preserve">
+    <value>Module Soft Deleted</value>
+  </data>
+  <data name="ModuleSoftDeleted_desc.Text" xml:space="preserve">
+    <value>A Module was soft deleted</value>
+  </data>
+  <data name="ModuleUpdated.Text" xml:space="preserve">
+    <value>Module Updated</value>
+  </data>
+  <data name="ModuleUpdated_desc.Text" xml:space="preserve">
+    <value>A Module was updated</value>
+  </data>
+  <data name="PageViewed.Text" xml:space="preserve">
+    <value>Page Viewed</value>
+  </data>
+  <data name="PageViewed_desc.Text" xml:space="preserve">
+    <value>A Page was viewed</value>
+  </data>
+  <data name="FollowRequested.Text" xml:space="preserve">
+    <value>Follows</value>
+  </data>
+  <data name="FriendshipAccepted.Text" xml:space="preserve">
+    <value>Friendships Created</value>
+  </data>
+  <data name="FileAdded.Text" xml:space="preserve">
+    <value>File added</value>
+  </data>
+  <data name="FileAdded_desc.Text" xml:space="preserve">
+    <value>When a file is added</value>
+  </data>
+  <data name="FileDeleted.Text" xml:space="preserve">
+    <value>File Deleted</value>
+  </data>
+  <data name="FileDeleted_desc.Text" xml:space="preserve">
+    <value>When a file is Deleted</value>
+  </data>
+  <data name="FileUpdated.Text" xml:space="preserve">
+    <value>File Updated</value>
+  </data>
+  <data name="FileUpdated_desc.Text" xml:space="preserve">
+    <value>When a file is updated</value>
+  </data>
+  <data name="FilePropertiesChanged.Text" xml:space="preserve">
+    <value>File Properties Changed</value>
+  </data>
+  <data name="FilePropertiesChanged_desc.Text" xml:space="preserve">
+    <value>When the properties of a file changed</value>
+  </data>
+  <data name="FolderAdded.Text" xml:space="preserve">
+    <value>Folder Added</value>
+  </data>
+  <data name="FolderAdded_desc.Text" xml:space="preserve">
+    <value>When a folder is added</value>
+  </data>
+  <data name="FolderDeleted.Text" xml:space="preserve">
+    <value>Folder Deleted</value>
+  </data>
+  <data name="FolderDeleted_desc.Text" xml:space="preserve">
+    <value>When a folder is deleted</value>
+  </data>
+  <data name="FolderUpdated.Text" xml:space="preserve">
+    <value>Folder Updated</value>
+  </data>
+  <data name="FolderUpdated_desc.Text" xml:space="preserve">
+    <value>When a folder updated</value>
+  </data>
+  <data name="AddImageModuleTitle.Text" xml:space="preserve">
+    <value>Click to add an image</value>
+  </data>
+  <data name="AddModuleTitle.Text" xml:space="preserve">
+    <value>Click to add a module</value>
+  </data>
+  <data name="AddTextModuleTitle.Text" xml:space="preserve">
+    <value>Click to add text</value>
+  </data>
+</root>

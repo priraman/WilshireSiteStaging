@@ -1,0 +1,997 @@
+﻿.dnnDocumentViewerSettingsScopeWrapper {
+    overflow: hidden;
+}
+
+.dnnDocumentViewerSettingControlBox {
+    background: none repeat scroll 0 0 #E3E3E5;
+    display: inline-block;
+    padding: 8px;
+    position: relative;
+    white-space: normal;
+    margin: 0 0 14px 0;
+}
+
+.dnnDocumentViewerLayoutSettings {
+    display: inline-table;
+}
+
+.dnnDocumentViewerSettingColumnsSettings {
+    max-width: 522px;
+}
+
+.dnnDocumentViewerSettingsInlinePanel {
+    display: inline-block;
+    float: left;
+    padding: 8px;    
+}
+
+.dnnDocumentViewerSettingsGridTopHeader {
+    font-weight: bold;
+    padding: 5px;
+    min-height: 20px;
+    border: none;
+    background: #f0f2f1;
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); /* W3C */
+}
+
+.dnnDocumentViewerSettingsColumnsContainer {
+    width: 238px;
+    background: white;
+    border: solid 1px #c2c2c2;
+    padding: 0px; 
+}
+
+.dnnDocumentViewerSettingsInlinePanel ul.buttonGroup {
+    list-style: none outside none;
+    margin: 0;
+}
+.dnnDocumentViewerSettingsInlinePanel .pager.buttonGroup a.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.65;
+}
+.dnnDocumentViewerSettingsInlinePanel .pager a.pager-prev span {
+    background-image: url("Images/left.png");
+}
+.dnnDocumentViewerSettingsInlinePanel .pager a.pager-next span {
+    background-image: url("Images/right.png");
+}
+.dnnDocumentViewerSettingsInlinePanel .pager.buttonGroup a {
+    cursor: pointer;
+}
+.dnnDocumentViewerSettingsInlinePanel .pager.buttonGroup a span {
+    margin-left: 2px;
+    margin-top: 15px;
+}
+.dnnDocumentViewerSettingsInlinePanel .buttonGroup a span {
+    text-indent: -10000000px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    margin-right: 2px;
+}
+.dnnDocumentViewerSettingsInlinePanel ul.buttonGroup li a {
+    padding: 5px 0px;
+    margin-top: 5px;    
+    border: 1px solid #c2c2c2;
+    background: #f0f2f1;
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); 
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); 
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); 
+    color: #999999;
+    font-weight: normal;
+    box-shadow: 0 1px grey;
+    -webkit-box-shadow: 0 1px grey;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+table.dnnDocumentViewerSettingsGrid.dnnGrid {
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+    margin-bottom: 0px;
+}
+
+.dnnDocumentViewerSettingsGrid.dnnGrid td {
+    background: white;
+    padding: 0px 0px 0px 10px;
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.dnnDocumentViewerSettingsPlaceholder {
+    box-shadow: 0 0 13px 8px rgba(0, 0, 0, 0.1) inset;
+    background-color: #E8F0FB;
+    border-color: #CED4E0;
+    border-style: dashed;
+    border-width: 2px;
+    height: 32px;
+    position: relative;
+    transition: box-shadow 200ms ease-in-out 0s;
+}
+
+.dnnDocumentViewerSettingsGrid .dnnGridHeader th.noBorderLeft {
+    border-left: none;
+}
+.dnnDocumentViewerSettingsGrid .dnnGridHeader th.noBorderRight {
+    border-right: none;
+}
+
+.dnnDocumentViewerSettingsGrid.dnnGrid td.center {
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dnnDocumentViewerSettingsGrid thead tr th.center {
+    text-align: center;
+    padding: 0px;
+}
+
+.dnnDocumentViewerSettingsGrid thead tr th {
+    border: 1px solid #c2c2c2;
+    padding: 0px 0px 0px 10px;
+    font-weight: normal;
+}
+
+.dnnDocumentViewerBackground {
+    background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.dnnDocumentViewerLoading {
+    background: url("../../../Images/loading.gif") no-repeat scroll center center #FFFFFF;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+    left: 220px;
+    right: 0;
+    top: 42px;
+}
+
+.dnnDocumentViewerLeftPane {
+    position: absolute;
+    width: 220px;
+    min-height: 465px;
+    height: 100%;
+    outline: none;
+    background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 100%) repeat-y scroll right center / 15px auto transparent;
+}
+
+.dnnDocumentViewerLeftPane ul.dnnAdminTabNav {
+    border-bottom: 0 none;
+    height: 35px;
+    margin: 0 0 4px 5px;
+    padding: 0;
+    width: 200px;
+}
+
+.dnnDocumentViewerLeftPane ul.dnnAdminTabNav li {
+    margin-right: 0;
+    width: 50%;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabContent, #dnnDocumentViewerLeftPaneTagsTabContent {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 42px;
+}
+
+.dnnDocumentViewerLeftPane ul.buttonGroup li.ui-tabs-active a {
+    background: linear-gradient(to bottom, #D0D0D0 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
+    color: #666666;
+    text-shadow: 0 0;
+}
+
+.dnnDocumentViewerLeftPane ul.buttonGroup li:first-child a {
+    border-radius: 3px 0 0 3px;
+    border-right: 0 none;
+}
+
+.dnnDocumentViewerLeftPane ul.buttonGroup li:last-child a {
+    border-radius: 0 3px 3px 0;
+}
+
+.dnnDocumentViewerLeftPane ul.buttonGroup li a {
+    padding: 5px 0px;
+    margin-top: 5px;    
+    border: 1px solid #c2c2c2;
+    background: #f0f2f1;
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); 
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); 
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); 
+    color: #999999;
+    font-weight: normal;
+    box-shadow: 0 1px grey;
+    -webkit-box-shadow: 0 1px grey;
+}
+
+.dnnDocumentViewerLeftPane ul.dnnAdminTabNav li a {
+    width: 100%;
+}
+
+.dnnDocumentViewerTree {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+#dnnDocumentViewerContentPane {
+    margin-left: 220px;
+}
+
+#dnnDocumentViewerMainBar {
+    border-left: 1px solid #CCCCCC;
+    padding: 6px 0 0 10px;
+    height: 36px;
+}
+
+button.dnnDocumentViewerMainButton {
+    border-radius: 3px 3px 3px 3px;
+    margin-right: 10px;
+    background-image: linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -o-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -moz-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -ms-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #FEFEFE),
+        color-stop(1, #EAEAEA)
+    );
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.4), 0 1px 0 0 #FFFFFF inset;
+    border: 1px solid #C2C2C2;
+    height: 30px;
+    min-width: 31px;
+    cursor: pointer;
+    padding: 0;  
+}
+
+button.dnnDocumentViewerMainButton span {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 30px;
+    max-width: 30px;
+    width: 100%;
+    text-indent: -10000000px; 
+}
+
+#dnnDocumentViewerToggleButton {
+    float: left;
+}
+
+.dnnDocumentViewerRightAlign {
+    float: right
+}
+
+#dnnDocumentViewerBreadcrumb {    
+    padding-top: 2px;
+    vertical-align: middle;
+}
+
+#dnnDocumentViewerBreadcrumb ul {
+    list-style: none outside none;
+    margin-bottom: 0;
+    margin-left: 7px;  
+}
+
+#dnnDocumentViewerBreadcrumb li {
+    float: left;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+    font-size: 13px;
+}
+
+#dnnDocumentViewerBreadcrumb li.dnnDocumentViewerBreadcrumbLink {
+    background-image: url("../../../icons/sigma/BreadcrumbArrows_16x16_Gray.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+    padding-right: 20px;
+    font-size: 13px;
+}
+
+#dnnDocumentViewerSelectionToolbar {    
+    min-height: 20px;
+    border: none;
+    border-right: 1px solid #E0E0E0;
+    background: #f0f2f1;
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); /* W3C */
+    border-left: 1px solid #CCCCCC;
+    padding: 9px 10px;
+}
+
+#dnnDocumentViewerSelectionToolbar button {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    margin-left: 7px;
+    padding: 0;
+    position: relative;
+    width: 20px;
+}
+
+#dnnDocumentViewerSelectionToolbar button span {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 20px;
+    width: 20px;
+    text-indent: -10000000px; 
+}
+
+#dnnDocumentViewerGetUrlButton span {
+    background-image: url("../../../icons/sigma/FileLink_16x16_Gray.png");
+}
+
+#dnnDocumentViewerDownloadButton span {
+    background-image: url("../../../icons/sigma/FileDownload_16x16_Gray.png");
+}
+
+#dnnDocumentViewerContainer {
+    background-color: white;
+    min-height: 445px;
+    padding-bottom: 38px;
+    position: relative;
+}
+
+.dnnDocumentViewerNoItems {
+    font-size: 12px;
+    height: 38px;
+    left: 0;
+    line-height: 38px;
+    padding: 1px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 30px;
+    width: auto;
+}
+
+.dnnDocumentViewerNoItems > span {
+    color: #BBBBBB;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+#dnnDocumentViewerGridContainer {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 13px;
+    min-height: 432px;
+}
+
+table.dnnDocumentViewerGrid {
+    width: 100%;
+    border-spacing: 0;
+    border-color: #E0E0E0;
+    border-bottom: medium none;
+    color: #777777;
+    margin-bottom: 0;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader {
+    text-align: left;
+    border-bottom: 1px solid #E0E0E0;
+    border-right: 1px solid #E0E0E0;
+    white-space: nowrap;
+}
+
+.dnnDocumentViewerGrid tr.dnnGridItem td {
+    border-top: medium none;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 6px 12px;
+}
+
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span,
+.dnnDocumentViewerGrid tbody > tr > td,
+.dnnDocumentViewerGrid tbody > tr > td > div > span,
+.dnnDocumentViewerGrid tbody > tr > td > div > a {
+    font-family: Arial,Helvetica,sans-serif;
+    color: inherit;
+    font-weight: normal;
+}
+
+.dnnDocumentViewerGrid > tbody > tr > td > div > a:hover > span {
+    text-decoration: underline;
+    color: black;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th > div {
+    position: relative;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span.title {
+    cursor: pointer;
+    float: left;
+    margin-right: 20px;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span.noSort {
+    visibility: collapse;
+    display: none;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span.sortAsc,
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span.sortDesc {
+    background: url("../../../images/dnnSpinnerUpArrow.png") no-repeat scroll center center transparent;
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    width: 15px;
+    position:absolute; 
+    right: 0;
+}
+
+.dnnDocumentViewerGrid thead.dnnGridHeader > tr > th span.sortDesc {
+    background: url("../../../images/dnnSpinnerDownArrow.png") no-repeat scroll center center transparent;
+}
+
+.dnnDocumentViewerGrid tr.dnnGridItem {
+    height: 40px;
+    white-space: nowrap;
+}
+
+.dnnDocumentViewerGrid tr.dnnDocumentViewerSelectedRow, .dnnDocumentViewerGrid tr.dnnDocumentViewerSelectedRow:hover {
+    color: white;
+    background-color: #4D8AE2;
+}
+
+.dnnDocumentViewerGrid .ItemIcon {
+    height: 16px;
+    margin-right: 5px;
+    width: 16px;
+}
+
+.dnnDocumentViewerPager {
+    background-color: #F7F7F7;
+    border-top: 1px solid #CCCCCC;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: auto;
+    line-height: 51px;
+    color: #999999;
+    font-size: 12px;
+    height: 51px;
+}
+
+.dnnDocumentViewerPager a, .dnnDocumentViewerPager a:link, .dnnDocumentViewerPager a:visited, .dnnDocumentViewerPager a:active{
+    color: #999999;
+    font-size: 12px;
+}
+
+.dnnDocumentViewerPagerDisabled {
+    visibility: hidden;
+}
+
+.dnnDocumentViewerPager select {
+    margin-bottom: 0;
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerLeft {
+    float: left;
+    margin-left: 20px; 
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerLeft a {
+    margin-right: 5px;
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerLeft a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerLeft ul {
+    display: inline;
+    list-style: none;
+    margin: 0;
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerLeft ul li {
+    display: inline;
+}
+
+.dnnDocumentViewerPager a.dnnDocumentViewerPagerCurrentPage {
+    color: black;
+}
+
+.dnnDocumentViewerPager .dnnDocumentViewerPagerRight {
+    float: right;
+    margin-right: 20px;
+}
+
+#dnnDocumentViewerToggleButton span.treeViewHide {
+    background-image: url("../../../icons/sigma/TreeViewHide_16x16_Gray.png");
+}
+
+#dnnDocumentViewerToggleButton span.treeViewShow {
+    background-image: url("../../../icons/sigma/TreeViewShow_16x16_Gray.png");
+}
+
+#dnnDocumentViewerRefreshButton span {
+    background-image: url("../../../icons/sigma/FolderRefreshSync_16x16_Gray.png");
+}
+
+/* unselectable style */
+*.dnn-unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none; /*  Introduced in IE 10 */
+    user-select: none;
+}
+
+#dnnDocumentViewerTreeContainer {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.dnnDocumentViewerTree ul, li {
+    padding: 0;
+    margin: 0
+}
+
+.dnnDocumentViewerTree ul.tv-nodes {
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    line-height: 18px;
+    padding: 0;
+    margin: 0 0 0 2px;
+}
+
+.dnnDocumentViewerTree ul.tv-root {
+    margin: 4px 4px 0 -10px;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes li {
+    list-style: none;
+    padding: 0 0 0 16px;
+    margin: 0;
+    white-space: nowrap;
+    border-right: 4px solid transparent;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.text {
+    color: #222;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 8px 0 24px;
+    line-height: 20px;
+    background: url("Images/page.png") no-repeat 6px center;
+    border: 1px solid transparent;
+    margin: 0 0 0 6px;
+    font-family: Arial, ​Helvetica​, sans-serif;
+    font-size: 13px;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.text:focus {
+    border: 1px solid #aaa;
+}
+
+.dnnDocumentViewerTree  ul.tv-nodes a.text {
+    background: url("../../../icons/sigma/FolderStandard_16x16_Standard.png") no-repeat 2px center;    
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.text:hover {
+    background-color: #666;
+    color: #ddd;
+    text-decoration: underline;
+    padding-bottom: -1px;
+    border: 1px solid #666;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.text.unselectable:hover {
+    color: #222;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: default;
+    padding-bottom: 0;
+    border: 1px solid transparent;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.selected:hover {
+    color: #222;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes a.icon,
+.dnnDocumentViewerTree ul.tv-nodes a.icon:link,
+.dnnDocumentViewerTree ul.tv-nodes a.icon:visited,
+.dnnDocumentViewerTree ul.tv-nodes a.icon:hover,
+.dnnDocumentViewerTree ul.tv-nodes a.icon:active {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0;
+    height: 16px;
+    width: 16px;
+    border: 1px solid transparent;
+    outline: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes li a.text.selected {
+    color: #4E89E3;
+    font-weight: bold;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes li a.text.selected:focus {
+    border: 1px solid #aaa;
+}
+
+.dnnDocumentViewerTree ul.tv-nodes li a.text.first-item {
+    font-weight: bold;
+}
+
+.dnnDocumentViewerTree .tv-nodes li a.collapsed {
+    background: url(../../../Resources/Shared/components/DropDownList/Images/tree-sprite.png) no-repeat 0 -2px;
+}
+
+/*
+.dnnDocumentViewerTree .tv-nodes li a:hover.collapsed {
+    background: url(../../../../Resources/Shared/components/DropDownList/Images/tree2.png) no-repeat -16px -16px;
+}
+*/
+
+.dnnDocumentViewerTree .tv-nodes li a.expanded {
+    background: url(../../../Resources/Shared/components/DropDownList/Images/tree-sprite.png) no-repeat 0 -18px;
+}
+
+/*
+.dnnDocumentViewerTree .tv-nodes li a:hover.expanded {
+    background: url(../../../../Resources/Shared/components/DropDownList/Images/tree2.png) no-repeat 0 -16px;
+}
+*/
+
+.dnnDocumentViewerTree .tv-nodes li a.empty {
+    visibility: hidden;
+}
+
+.dnnDocumentViewerTree .tv-nodes li a.expanding,
+.dnnDocumentViewerTree .tv-nodes li a:hover.expanding {
+    background: url("../../../Images/dnnanim.gif") no-repeat 0 0;
+}
+
+.loading-items {
+    background-image: url("../../../Images/icon_wait.gif");
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.50;
+}
+
+/* Tags Panel */
+#dnnDocumentViewerLeftPaneTagsTab {
+    height: 100%;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags {
+    padding: 10px 10px 10px 5px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.tags {
+    list-style: none outside none;
+    color: #666666;
+    margin: 0 15px 0 0;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.tags li {
+    margin: 6px 0;
+    padding: 1px 10px 1px 15px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.tags li:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.tags li a {
+    color: inherit;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.tags li span {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px 5px 5px 5px;
+    float: right;
+    font-size: smaller;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .toolbar {
+    height: 32px;
+    margin-bottom: 15px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.buttonGroup {
+    list-style: none outside none;
+    margin: 0;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.buttonGroup li {
+    float: left;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.sorting.buttonGroup li:last-child {
+    width: 50px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags ul.pager {
+    float: right;
+    margin-right: 3px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .buttonGroup > a {
+    border: 1px solid #C2C2C2;
+    color: #555;
+    display: block;
+    float: left;
+    height: 26px;
+    margin-top: 0;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .buttonGroup > a:active {
+    opacity: 0.7;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .buttonGroup a span {
+    text-indent: -10000000px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    margin-right: 2px;
+    margin-left: 6px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .pager.buttonGroup a span {
+    margin-left: 2px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting span.sort {
+    background-position: center center;
+    width: 12px;
+    margin-right: 4px;
+    margin-left: 0;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting span.asc {
+    background-image: url("images/up.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting span.desc {
+    background-image: url("images/down.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting a.sorting-alpha span.icon {
+    background-image: url("images/order_alpha.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting li.ui-tabs-active a.sorting-alpha span.icon {
+    background-image: url("images/order_alpha_active.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting a.sorting-count span.icon {
+    background-image: url("images/order_count.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .sorting li.ui-tabs-active a.sorting-count span.icon {
+    background-image: url("images/order_count_active.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .pager a.pager-next span {
+    background-image: url("images/right.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .pager a.pager-prev span {
+    background-image: url("images/left.png");
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags a.disabled {
+    opacity: 0.65;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags a.enabled {
+    cursor: pointer;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags .selected {
+    background: none repeat scroll 0 0 #CCCCCC;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTags div.loading {
+    background: url('Images/horizontal-loading.gif') center center no-repeat;
+    float: right;
+    height: 20px;
+    position: relative;
+    width: 32px;
+}
+
+#dnnDocumentViewerLeftPaneFilesTabTagsPager {
+    border-top: 1px solid #999999;
+    bottom: 0;
+    box-shadow: 0 0, 0 1px #DDDDDD inset;
+    color: #666666;
+    height: 33px;
+    left: 0;
+    padding-top: 18px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+#FilterByFolderOptions .CustomHelpTag {
+    position: relative;
+    float: left;
+}
+
+#FilterByFolderOptions .dnnDropDownList {
+    margin-bottom: 0px;
+    width: 98%;
+}
+
+#dnnDocumentViewerGetUrlModal input {
+    cursor: pointer;
+    margin-top: 25px;
+    width: 390px;
+}
+
+ul#dnnDocumentViewerContextMenu {
+    position: absolute;
+
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+    width: 180px;
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #CCCCCC;
+    list-style: none outside none;
+    margin: 0px;
+}
+
+ul#dnnDocumentViewerContextMenu > li {
+    border-bottom: 1px solid #DFDFDF;
+    height: 35px;
+}
+
+ul#dnnDocumentViewerContextMenu > li > a {
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    color: #777777;
+    display: block;
+    line-height: 35px;
+    padding-left: 40px;
+}
+
+ul#dnnDocumentViewerContextMenu > li > a:hover {
+    background-color: #E8F0FC;
+    color: #000000;
+}
+
+.dnnDocumentViewerGrid tr.dnnGridItem td div.dnnModuleDocumentViewerNoWidthFixedColumn {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 80px;
+    max-width: 400px;
+}
+
+.dnnDocumentViewerGrid tr.dnnGridItem td div.dnnModuleDocumentViewerRightAlignColumn {
+    text-align: right;
+}
+
+.dnnDocumentViewerGrid tr.dnnGridItem td div.dnnModuleDocumentViewerLeftAlignColumn {
+    text-align: left;
+}
+
+#ItemsPerPageFormItem .dnnDocumentViewerItemsPerPageComboBox {
+    width: 60px;
+}
+
+.dnnDocumentViewerLayoutSettings ul.dnnAdminTabNav {
+     border-bottom-width: 0;    
+}
+
+.dnnDocumentViewerLayoutSettings ul.dnnAdminTabNav li a {
+background-image: linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -o-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -moz-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -ms-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #FEFEFE),
+        color-stop(1, #EAEAEA)
+    );
+    border: 1px solid #C2C2C2;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.4), 0 1px 0 0 #FFFFFF inset;
+    padding: 7px;
+    font-weight: normal;
+}
+
+.dnnDocumentViewerLayoutSettings ul.dnnAdminTabNav li.ui-tabs-active a {
+    background-image: none;
+    background-color: #777777;
+    color: white;
+    border-color: #565A5D;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.4), 0 0 5px 0 #565A5D inset;
+    margin-top: 0;
+}
+
+.dnnDocumentViewerColorSettings {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%) no-repeat scroll center top / 100% 20px rgba(0, 0, 0, 0);
+    border-radius: 0 !important;
+    margin: 4px -8px -8px;
+    padding: 24px 9px 10px;
+}
+
+.dnnDocumentViewerColorSetting {
+    height: 30px;
+    width: 50%;
+    position: relative;
+    float: left;
+}
+
+.dnnDocumentViewerColorSetting > span {
+    position: absolute;
+    right: 50px;
+    top: 2px;
+}
+
+.dnnDocumentViewerColorSetting > span:after {
+    content: ":";
+}
+
+div.RadColorPicker {
+    float: right;
+    margin-right: 4px;
+}
+
+.RadColorPicker input.rcpInput,
+.RadColorPicker input.rcpHexInput {
+    margin-bottom: 0;
+    padding: 2px;
+}
+
+.RadColorPicker input.rcpInput {
+    width: 22px;
+}
+
+.RadColorPicker input.rcpHexInput {
+    width: 50px;
+}
+
+.RadColorPicker label + input {
+    margin-left: 0;
+}
+
+.dnnDocumentViewerLayoutComboBox {
+    margin-right: 4px;
+}

@@ -1,0 +1,434 @@
+﻿/********************************************************
+ * TABLE: Mechanics_VisitorScoring Table
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_VisitorScoring]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_VisitorScoring]
+        (
+            [VisitorScoringId] [int] IDENTITY(1,1) NOT NULL,
+            [VisitorId] [uniqueidentifier] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ExperiencePoints] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_VisitorScoring_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            [LastModifiedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_VisitorScoring_LastModifiedOnDate]  DEFAULT (getutcdate()) NOT NULL,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_VisitorScoring] PRIMARY KEY CLUSTERED ( [VisitorScoringId] )
+        )		
+
+        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}Mechanics_VisitorScoring_VisitorIdPortalId] ON {databaseOwner}[{objectQualifier}Mechanics_VisitorScoring] ([VisitorId] ASC, [PortalId] ASC)
+    END
+GO
+
+/********************************************************
+ * TABLE: Mechanics_VisitorScoringLog Table
+ ********************************************************/
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_VisitorScoringLog]') AND type in (N'U'))
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}Mechanics_VisitorScoringLog]
+        (
+            [VisitorScoringLogId] [int] IDENTITY(1,1) NOT NULL,
+            [VisitorId] [uniqueidentifier] NOT NULL,
+            [PortalId] [int] NOT NULL,
+            [ContentItemId] [int] NULL,
+            [Context] [nvarchar](1500) NULL,
+            [ScoringActionDefId] [int] NOT NULL,
+            [ExperiencePoints] [int] NOT NULL,
+            [ReputationPoints] [int] NOT NULL,
+			[GroupId] INT NOT NULL,
+            [CreatedOnDate] [datetime] CONSTRAINT [DF_{objectQualifier}Mechanics_VisitorScoringLog_CreatedOnDate]  DEFAULT (getutcdate()) NOT NULL ,
+            CONSTRAINT [PK_{objectQualifier}Mechanics_VisitorScoringLog] PRIMARY KEY CLUSTERED ( [VisitorScoringLogId] )
+        )		
+
+        ALTER TABLE {databaseOwner}[{objectQualifier}Mechanics_VisitorScoringLog]  
+            ADD CONSTRAINT [FK_{objectQualifier}Mechanics_VisitorScoringLog_{objectQualifier}Mechanics_ScoringActionDefinition] FOREIGN KEY([ScoringActionDefId]) REFERENCES {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] ([ScoringActionDefId]) ON DELETE CASCADE		
+    END
+GO
+
+/********************************************************
+ * Add Column PackageId to Mechanics_ScoringActionDefinition Table
+ ********************************************************/
+IF NOT EXISTS ( SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_NAME = N'{objectQualifier}Mechanics_ScoringActionDefinition'
+                AND  COLUMN_NAME = N'PackageId' )
+    ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_ScoringActionDefinition
+        ADD PackageId INT NOT NULL DEFAULT (0)
+GO
+
+/********************************************************
+ * Add Column IsEnabled to Mechanics_ScoringActionDefinition Table
+ ********************************************************/
+IF NOT EXISTS ( SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_NAME = N'{objectQualifier}Mechanics_ScoringActionDefinition'
+                AND  COLUMN_NAME = N'IsEnabled' )
+    ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_ScoringActionDefinition
+        ADD IsEnabled BIT NOT NULL DEFAULT (1)
+GO
+
+/********************************************************
+ * Increase column size Context in Mechanics_UserScoringLog
+ ********************************************************/
+ALTER TABLE {databaseOwner}{objectQualifier}Mechanics_UserScoringLog
+	ALTER COLUMN [Context] nvarchar(1500)
+GO
+
+/********************************************************
+ * VIEW: vw_Mechanics_ScoringActionDefinitions
+ ********************************************************/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}vw_Mechanics_ScoringActionDefinitions') and OBJECTPROPERTY(id, N'IsView') = 1)
+	DROP VIEW {databaseOwner}{objectQualifier}vw_Mechanics_ScoringActionDefinitions
+GO
+
+CREATE VIEW {databaseOwner}[{objectQualifier}vw_Mechanics_ScoringActionDefinitions]
+AS
+	SELECT  COALESCE(DM.FriendlyName, P.FriendlyName, N'Unknown') AS FriendlyName,
+			SAD.ScoringActionDefId, 
+			SAD.ActionName, 
+			SAD.DefaultExperiencePoints, 
+			SAD.DefaultReputationPoints, 
+			SAD.DefaultMaxCount, 
+			SAD.DefaultInterval, 
+			SAD.DesktopModuleId, 
+			SAD.ActionType, 
+			SAD.PackageId,
+			SAD.IsEnabled
+		FROM    {databaseOwner}{objectQualifier}Mechanics_ScoringActionDefinition AS SAD
+			LEFT OUTER JOIN {databaseOwner}{objectQualifier}DesktopModules AS DM 
+				ON CASE WHEN SAD.DesktopModuleId <= 0 THEN 0 ELSE SAD.DesktopModuleId END = DM.DesktopModuleId
+			LEFT OUTER JOIN {databaseOwner}{objectQualifier}Packages AS P 
+				ON CASE WHEN SAD.PackageId <= 0 THEN 0 ELSE SAD.PackageId END = P.PackageId
+GO
+
+/********************************************************
+ * SPROC: Mechanics_GetScoringModuleView
+ ********************************************************/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetScoringModuleView]	
+AS 
+    SELECT DISTINCT DesktopModuleId, PackageId, FriendlyName As ModuleName
+    FROM   {databaseOwner}[{objectQualifier}vw_Mechanics_ScoringActionDefinitions] 
+GO
+
+/********************************************************
+ * SPROC: Mechanics_AddScoringActionDefinition
+ ********************************************************/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]') AND type in (N'P', N'PC'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_AddScoringActionDefinition]
+    @ActionName nvarchar(400),
+    @DefaultExperiencePoints INT,
+    @DefaultReputationPoints INT,
+    @DefaultMaxCount INT,
+    @DefaultInterval INT,
+    @DesktopModuleId INT,
+	@PackageId INT,
+    @ActionType INT,
+	@IsEnabled BIT
+AS 
+    INSERT INTO  {databaseOwner}{objectQualifier}Mechanics_ScoringActionDefinition
+            ( ActionName,
+              DefaultExperiencePoints,            
+              DefaultReputationPoints,					
+              DefaultMaxCount,
+              DefaultInterval,
+              DesktopModuleId,
+			  PackageId,
+              ActionType,
+			  IsEnabled			  	        
+            )
+    VALUES  ( @ActionName, -- nvarchar(400)
+              @DefaultExperiencePoints, -- DefaultExperiencePoints INT
+              @DefaultReputationPoints, -- DefaultReputationPoints INT
+              @DefaultMaxCount, -- DefaultMaxCount INT
+              @DefaultInterval, -- DefaultInterval INT
+              @DesktopModuleId, -- DesktopModuleId INT   
+			  @PackageId,       -- PackageId INT         
+              @ActionType,
+			  @IsEnabled 
+            )
+                    
+    SELECT SCOPE_IDENTITY()	
+GO
+
+/********************************************************
+ * SPROC: Mechanics_SaveUserScore
+ ********************************************************/
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_SaveUserScore]', N'P') IS NULL
+	EXEC('CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveUserScore] AS BEGIN SELECT 1 END');
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveUserScore]
+	@UserId INT,
+    @PortalId INT,
+    @ContentItemId INT,
+    @ScoringActionDefId INT,
+    @ExperiencePoints INT,
+    @ReputationPoints INT,
+    @Notes nvarchar(400),
+    @Context nvarchar(200),
+    @GroupId INT,
+    @CreatedOnDate datetime = NULL
+
+AS
+BEGIN
+   IF @UserId IS NULL OR @UserId < 0
+        RETURN
+
+    IF @CreatedOnDate IS NULL
+        SET @CreatedOnDate = GETUTCDATE()
+
+    DECLARE @UserScoringLogId INT
+
+    INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]
+            ( UserId,
+              PortalId,
+              GroupId,
+              ContentItemId,
+              ScoringActionDefId,
+              ExperiencePoints,
+              ReputationPoints,
+              Notes,
+              Context,
+              CreatedOnDate
+            )
+    VALUES  ( @UserId,
+              @PortalId,
+              @GroupId,
+              @ContentItemId,
+              @ScoringActionDefId,
+              @ExperiencePoints,
+              @ReputationPoints,
+              @Notes,
+              @Context,
+              @CreatedOnDate
+            )
+
+    SET @UserScoringLogId = SCOPE_IDENTITY()
+    SELECT @UserScoringLogId
+
+    DECLARE @TotalExperiencePoints INT
+    DECLARE @TotalReputationPoints INT
+    DECLARE @TopReputationPoints INT
+    DECLARE @InteractedCount INT
+    DECLARE @ViewedCount INT
+    DECLARE @CreatedCount INT
+    DECLARE @EditedCount INT
+    DECLARE @DeletedCount INT
+    DECLARE @FlaggedCount INT
+
+
+    SELECT @TotalExperiencePoints = SUM(ExperiencePoints),
+        @TotalReputationPoints = SUM(ReputationPoints),
+        @TopReputationPoints = SUM(CASE WHEN ReputationPoints > 0 THEN ReputationPoints ELSE 0 END),
+        @InteractedCount = SUM(CASE WHEN ActionType = 0 THEN 1 ELSE 0 END),
+                @ViewedCount = SUM(CASE WHEN ActionType = 1 THEN 1 ELSE 0 END),
+                @CreatedCount = SUM(CASE WHEN ActionType = 2 THEN 1 ELSE 0 END),
+                @EditedCount = SUM(CASE WHEN ActionType = 3 THEN 1 ELSE 0 END),
+                @DeletedCount = SUM(CASE WHEN ActionType = 4 THEN 1 ELSE 0 END),
+                @FlaggedCount = SUM(CASE WHEN ActionType = 5 THEN 1 ELSE 0 END)
+    FROM {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog] usl
+    INNER JOIN {databaseOwner}[{objectQualifier}Mechanics_ScoringActionDefinition] sad on usl.ScoringActionDefId = sad.ScoringActionDefId
+    WHERE usl.UserId = @UserId
+    AND usl.PortalId = @PortalId
+
+    DECLARE @UserScoringId INT
+    DECLARE @BestReputationPoints INT
+
+    SELECT @UserScoringId = UserScoringId,
+        @BestReputationPoints = COALESCE(BestReputationPoints, 0)
+    FROM {databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+    WHERE [PortalId] = @PortalId AND [UserId] = @UserId
+
+    DECLARE @DailyReputationPoints INT
+
+    SELECT @DailyReputationPoints = COALESCE(SUM([ReputationPoints]), 0)
+    FROM {databaseOwner}[{objectQualifier}Mechanics_UserScoringLog]
+    WHERE [PortalId] = @PortalId AND [UserId] = @UserId
+    AND [CreatedOnDate] >= dateadd(hour, -24, @CreatedOnDate) AND [CreatedOnDate] <= @CreatedOnDate
+    AND ReputationPoints > 0
+
+    IF @DailyReputationPoints > @BestReputationPoints OR @BestReputationPoints IS NULL
+        SELECT @BestReputationPoints = @DailyReputationPoints
+
+    IF @UserScoringId IS NOT NULL
+     BEGIN
+        UPDATE {databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+        SET ExperiencePoints = @TotalExperiencePoints,
+            ReputationPoints = @TotalReputationPoints,
+            TopReputationPoints = @TopReputationPoints,
+            BestReputationPoints = @BestReputationPoints,
+            DailyReputationPoints = @DailyReputationPoints,
+            ContentInteractedCount = @InteractedCount,
+            ContentViewedCount = @ViewedCount,
+            ContentCreatedCount = @CreatedCount,
+            ContentEditedCount = @EditedCount,
+            ContentDeletedCount = @DeletedCount,
+            ContentFlaggedCount = @FlaggedCount,
+            LastModifiedOnDate = GETUTCDATE()
+        WHERE UserScoringId = @UserScoringId
+     END
+    ELSE
+     BEGIN
+        INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_UserScoring]
+                ( UserId,
+                  PortalId,
+                  ExperiencePoints,
+                  ReputationPoints,
+                  TopReputationPoints,
+                  BestReputationPoints,
+                  DailyReputationPoints,
+                  ContentInteractedCount,
+                  ContentViewedCount,
+                  ContentCreatedCount,
+                  ContentEditedCount,
+                  ContentDeletedCount,
+                  ContentFlaggedCount,
+                  CreatedOnDate,
+                  LastModifiedOnDate
+                )
+        VALUES  ( @UserId,
+                  @PortalId,
+                  @TotalExperiencePoints,
+                  @TotalReputationPoints,
+                  @TopReputationPoints,
+                  @BestReputationPoints,
+                  @DailyReputationPoints,
+                  @InteractedCount,
+                  @ViewedCount,
+                  @CreatedCount,
+                  @EditedCount,
+                  @DeletedCount,
+                  @FlaggedCount,
+                  GETUTCDATE(),
+                  GETUTCDATE()
+                )
+     END
+END
+GO
+
+/********************************************************
+ * SPROC: Mechanics_SaveVisitorScore
+ ********************************************************/
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_SaveVisitorScore]', N'P') IS NULL
+	EXEC('CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveVisitorScore] AS BEGIN SELECT 1 END');
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_SaveVisitorScore]
+	@VisitorId uniqueidentifier,
+    @PortalId INT,
+    @ContentItemId INT,
+    @ScoringActionDefId INT,
+    @ExperiencePoints INT,
+    @ReputationPoints INT,
+    @Context nvarchar(200),
+    @GroupId INT,
+    @CreatedOnDate datetime = NULL
+
+AS
+BEGIN
+   IF @VisitorId IS NULL
+        RETURN
+
+    IF @CreatedOnDate IS NULL
+        SET @CreatedOnDate = GETUTCDATE()
+
+    DECLARE @VisitorScoringLogId INT
+
+    INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_VisitorScoringLog]
+            ( VisitorId,
+              PortalId,
+              GroupId,
+              ContentItemId,
+              ScoringActionDefId,
+              ExperiencePoints,
+              ReputationPoints,
+              Context,
+              CreatedOnDate
+            )
+    VALUES  ( @VisitorId,
+              @PortalId,
+              @GroupId,
+              @ContentItemId,
+              @ScoringActionDefId,
+              @ExperiencePoints,
+              @ReputationPoints,
+              @Context,
+              @CreatedOnDate
+            )
+
+    SET @VisitorScoringLogId = SCOPE_IDENTITY()
+    SELECT @VisitorScoringLogId
+
+    DECLARE @VisitorScoringId INT
+    DECLARE @BestReputationPoints INT
+
+    SELECT @VisitorScoringId = VisitorScoringId
+    FROM {databaseOwner}[{objectQualifier}Mechanics_VisitorScoring]
+    WHERE [PortalId] = @PortalId AND [VisitorId] = @VisitorId
+
+    IF @VisitorScoringId IS NOT NULL
+     BEGIN
+        UPDATE {databaseOwner}[{objectQualifier}Mechanics_VisitorScoring]
+        SET ExperiencePoints = ExperiencePoints + @ExperiencePoints,
+            ReputationPoints = ReputationPoints + @ReputationPoints,
+            LastModifiedOnDate = GETUTCDATE()
+        WHERE VisitorScoringId = @VisitorScoringId
+     END
+    ELSE
+     BEGIN
+        INSERT INTO {databaseOwner}[{objectQualifier}Mechanics_VisitorScoring]
+                ( VisitorId,
+                  PortalId,
+                  ExperiencePoints,
+                  ReputationPoints,
+                  CreatedOnDate,
+                  LastModifiedOnDate
+                )
+        VALUES  ( @VisitorId,
+                  @PortalId,
+                  @ExperiencePoints,
+                  @ReputationPoints,
+                  GETUTCDATE(),
+                  GETUTCDATE()
+                )
+     END
+END
+GO
+
+/********************************************************
+ * SPROC: Mechanics_GetVisitorScoreLogCount
+ ********************************************************/
+IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}Mechanics_GetVisitorScoreLogCount]', N'P') IS NULL
+	EXEC('CREATE PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetVisitorScoreLogCount] AS BEGIN SELECT 1 END');
+GO
+
+ALTER PROCEDURE {databaseOwner}[{objectQualifier}Mechanics_GetVisitorScoreLogCount]
+    @ScoringActionDefId INT,
+    @VisitorId uniqueidentifier,
+    @PortalId INT,
+    @DaysSince INT = 0
+AS
+    IF @DaysSince > 0
+        BEGIN
+			DECLARE @SinceDate AS datetime  = getutcdate() - @DaysSince
+
+            SELECT COUNT(*) AS TotalRecords
+            FROM {databaseOwner}{objectQualifier}Mechanics_VisitorScoringLog WITH (NOLOCK)
+            WHERE ScoringActionDefId = @ScoringActionDefId
+            AND   VisitorId = @VisitorId
+            AND   PortalId = @PortalId
+            AND   CreatedOnDate >= @SinceDate
+        END
+    ELSE
+        BEGIN
+            SELECT COUNT(*) AS TotalRecords
+            FROM {databaseOwner}{objectQualifier}Mechanics_VisitorScoringLog WITH (NOLOCK)
+            WHERE ScoringActionDefId = @ScoringActionDefId
+            AND   VisitorId = @VisitorId
+            AND   PortalId = @PortalId
+        END
+GO

@@ -1,0 +1,380 @@
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/******** Migrate HTML Pro Workflows to Content Workflow *****/
+
+/***** CONTENT-3838: merge script. *****/
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}HtmlText' AND COLUMN_NAME='PublishDate')
+	BEGIN
+		ALTER TABLE {databaseOwner}{objectQualifier}HtmlText
+			ADD [PublishDate] [DATETIME] NULL
+	END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}UpdateHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateHtmlText
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateHtmlText
+    @ItemID          INT,
+    @Content         NTEXT,
+    @Summary		 NTEXT,
+    @StateID         INT,
+    @IsPublished     BIT,
+    @PublishDate     DATETIME,
+    @UserID          INT
+AS
+    UPDATE {databaseOwner}{objectQualifier}HtmlText
+        SET     Content              = @Content,
+	            Summary				 = @Summary,
+                StateID              = @StateID,
+                IsPublished          = @IsPublished,
+                PublishDate          = @PublishDate,
+                LastModifiedByUserID = @UserID,
+                LastModifiedOnDate   = GETDATE()
+    WHERE  ItemID = @ItemID
+
+GO
+
+/* Remove ForeignKey to prevent errors with the workflow html pro obsolete feature */
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'FK_{objectQualifier}HtmlText_{objectQualifier}WorkflowStates') AND type in (N'F'))
+BEGIN
+	ALTER TABLE {databaseOwner}{objectQualifier}HtmlText DROP FK_{objectQualifier}HtmlText_{objectQualifier}WorkflowStates
+END
+GO
+
+/* Remove ForeignKey to prevent errors with the workflow html pro obsolete feature */
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'FK_{objectQualifier}HtmlTextLog_{objectQualifier}WorkflowStates') AND type in (N'F'))
+BEGIN
+	ALTER TABLE {databaseOwner}{objectQualifier}HtmlTextLog DROP FK_{objectQualifier}HtmlTextLog_{objectQualifier}WorkflowStates
+END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}GetAllHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}GetAllHtmlText
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetAllHtmlText
+
+@ModuleID int
+
+as
+
+SELECT {databaseOwner}{objectQualifier}HtmlText.*,
+       {databaseOwner}{objectQualifier}WorkflowStates.*,
+       {databaseOwner}{objectQualifier}Workflow.WorkflowName,
+       {databaseOwner}{objectQualifier}Users.DisplayName,
+       {databaseOwner}{objectQualifier}Modules.PortalID
+FROM   {databaseOwner}{objectQualifier}HtmlText
+INNER JOIN {databaseOwner}{objectQualifier}Modules ON {databaseOwner}{objectQualifier}Modules.ModuleID = {databaseOwner}{objectQualifier}HtmlText.ModuleID
+LEFT OUTER JOIN {databaseOwner}{objectQualifier}WorkflowStates ON {databaseOwner}{objectQualifier}WorkflowStates.StateID = {databaseOwner}{objectQualifier}HtmlText.StateID
+LEFT OUTER JOIN {databaseOwner}{objectQualifier}Workflow ON {databaseOwner}{objectQualifier}WorkflowStates.WorkflowID = {databaseOwner}{objectQualifier}Workflow.WorkflowID
+LEFT OUTER JOIN {databaseOwner}{objectQualifier}Users ON {databaseOwner}{objectQualifier}HtmlText.LastModifiedByUserID = {databaseOwner}{objectQualifier}Users.UserID
+WHERE  {databaseOwner}{objectQualifier}HtmlText.ModuleID = @ModuleID
+ORDER BY {databaseOwner}{objectQualifier}HtmlText.LastModifiedOnDate DESC
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}WorkflowMigrationMatches]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE {databaseOwner}[{objectQualifier}WorkflowMigrationMatches](	    
+        [PortalID] [INT] NOT NULL,
+	    [OldWorkflowID] [INT] NOT NULL,
+	    [NewWorkflowID] [INT] NOT NULL
+        CONSTRAINT [PK_{objectQualifier}WorkflowMigrationMatches] PRIMARY KEY CLUSTERED ([PortalID],[OldWorkflowID] ASC)
+    ) ON [PRIMARY]
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MoveHTMLWorkflowsToContentWorkflow]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}MoveHTMLWorkflowsToContentWorkflow]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}MoveHTMLWorkflowsToContentWorkflow]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+	-- WF values
+	DECLARE @newWorkflowId int, @workflowId int, @portalId int, @workflowName nvarchar(50),
+    @description nvarchar(2000), @isDeleted bit, @isSystem bit, @workflowKey nvarchar(50)
+
+	-- WF States values
+	DECLARE @newWorkflowStateId int, @workflowStateId int, @stateOrder int, @workflowStateName nvarchar(50), @isSystemState bit;
+
+	--Migrate Workflows with no collision name
+    DECLARE HtmlWf_Cursor CURSOR FOR 
+	SELECT w.WorkflowID
+		, p.PortalID	
+		, w.WorkflowName
+		, w.Description
+		, w.IsDeleted
+		, CASE 
+			WHEN w.WorkflowName in ('Direct Publish','Save Draft','Content Approval')
+				THEN 1
+				ELSE 0
+		END IsSystem,
+		CASE 
+			WHEN w.WorkflowName = 'Direct Publish'
+				THEN N'DirectPublish'				
+			WHEN w.WorkflowName = 'Save Draft'
+				THEN N'SaveDraft'
+			WHEN w.WorkflowName = 'Content Approval'
+				THEN N'ContentApproval'
+			ELSE w.WorkflowName
+		END WorkflowKey
+	FROM {databaseOwner}[{objectQualifier}Workflow] w
+		INNER JOIN {databaseOwner}[{objectQualifier}Portals] p
+			ON	p.PortalID = w.PortalID
+			OR w.PortalId is NULL
+	
+	--Select the Content REVIEW permission
+	DECLARE @contentPermissionId int;
+	SELECT @contentPermissionId = PermissionID FROM {databaseOwner}[{objectQualifier}Permission]
+	WHERE PermissionCode = N'SYSTEM_CONTENTWORKFLOWSTATE'
+
+	DECLARE @lastStateOrder int;
+
+	OPEN HtmlWf_Cursor
+
+	FETCH NEXT FROM HtmlWf_Cursor
+	INTO @workflowId, @portalId, @workflowName,
+    @description, @isDeleted, @isSystem, @workflowKey;
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		-- If Workflow is a default workflow and it already exists, then it is skipped
+		IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}ContentWorkflows] WHERE WorkflowKey = @workflowKey AND PortalID = @portalId)
+		BEGIN
+			INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflows] (PortalID, WorkflowName, WorkflowKey, Description, IsDeleted, DispositionEnabled, StartAfterCreating, StartAfterEditing, IsSystem) 
+				VALUES (@portalId, @workflowName, @workflowKey, @description, @isDeleted, 0, 1, 1, @isSystem)
+
+			SELECT @newWorkflowId = SCOPE_IDENTITY();
+
+			INSERT INTO {databaseOwner}[{objectQualifier}WorkflowMigrationMatches] (PortalID, OldWorkflowID, NewWorkflowID)
+				VALUES (@portalId, @workflowId, @newWorkflowId)
+
+			SELECT @lastStateOrder = (SELECT MAX(ws2.[Order]) 
+											FROM {databaseOwner}[{objectQualifier}WorkflowStates] ws2 
+											WHERE ws2.WorkflowID = @workflowId
+											GROUP BY WorkflowID)
+
+			--Migrate Workflows States
+			DECLARE HtmlWfState_Cursor CURSOR FOR 
+			SELECT ws.StateID, ws.StateName, ws.[Order]
+				, CASE WHEN ws.[Order] = 1
+						THEN 1
+					WHEN ws.[Order] = @lastStateOrder
+						THEN 1
+					ELSE 0
+				END IsSystem
+			FROM {databaseOwner}[{objectQualifier}WorkflowStates] ws	
+			WHERE ws.WorkflowID = @workflowId
+				AND ws.IsActive = 1
+
+			OPEN HtmlWfState_Cursor;
+
+			FETCH NEXT FROM HtmlWfState_Cursor INTO
+			@workflowStateId, @workflowStateName, @stateOrder, @isSystemState;
+
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowStates]
+					([WorkflowID], [StateName], [Order], [IsActive], [SendEmail], [SendMessage], [IsDisposalState], [OnCompleteMessageSubject], [OnCompleteMessageBody], [OnDiscardMessageSubject], [OnDiscardMessageBody], [IsSystem])
+				VALUES
+					(@newWorkflowId, @workflowStateName, @stateOrder, 1, 0, 1, 0, N'', N'', N'', N'', @isSystemState);
+
+				SELECT @newWorkflowStateId = SCOPE_IDENTITY();
+				IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}WorkflowStatePermission]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+				BEGIN
+					--Insert WF State Permissions
+					INSERT INTO {databaseOwner}[{objectQualifier}ContentWorkflowStatePermission] 
+						(StateID, PermissionID, AllowAccess, RoleID, UserID, CreatedByUserID, CreatedOnDate, LastModifiedByUserID, LastModifiedOnDate)
+					SELECT @newWorkflowStateId, @contentPermissionId, wfs.AllowAccess, wfs.RoleID, wfs.UserID, wfs.CreatedByUserID, wfs.CreatedOnDate, wfs.LastModifiedByUserID, wfs.LastModifiedOnDate
+					FROM {databaseOwner}[{objectQualifier}WorkflowStatePermission] wfs
+					WHERE wfs.StateID = @workflowStateId
+				END
+
+				FETCH NEXT FROM HtmlWfState_Cursor INTO
+				@workflowStateId, @workflowStateName, @stateOrder, @isSystemState;
+			END
+			CLOSE HtmlWfState_Cursor;
+			DEALLOCATE HtmlWfState_Cursor
+        
+		END -- IF NOt EXISTS
+		FETCH NEXT FROM HtmlWf_Cursor
+		INTO @workflowId, @portalId, @workflowName,
+		@description, @isDeleted, @isSystem, @workflowKey;
+		
+	END 
+	CLOSE HtmlWf_Cursor;
+	DEALLOCATE HtmlWf_Cursor;
+
+	-- Ensure "ContentApproval" workflow
+	IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}ContentWorkflows] WHERE WorkflowKey = 'ContentApproval')
+	BEGIN
+		UPDATE {databaseOwner}[{objectQualifier}ContentWorkflows]
+			SET  [WorkflowKey] = 'ContentApproval'
+			WHERE WorkflowName = 'Content Approval'
+	END
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetWorkflowMigrationTabDetails]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetWorkflowMigrationTabDetails]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetWorkflowMigrationTabDetails]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	WITH WorkflowNumSteps (WorkflowID, NumSteps)
+	AS
+	(
+		SELECT WorkflowID, COUNT(*) NumSteps FROM {databaseOwner}[{objectQualifier}WorkflowStates] GROUP BY WorkflowID
+	)
+
+	SELECT m.PortalID
+			, tm.[TabID]     
+			, (SELECT MAX(wns2.WorkflowID)
+				FROM WorkflowNumSteps wns2
+					INNER JOIN {databaseOwner}[{objectQualifier}WorkflowStates] ws2
+						ON wns2.WorkflowID = ws2.WorkflowID
+					INNER JOIN {databaseOwner}[{objectQualifier}HtmlText] ht2
+						ON ht2.StateID = ws2.StateID
+					INNER JOIN {databaseOwner}[{objectQualifier}TabModules] tb2
+						ON tb2.ModuleID = ht2.ModuleID
+				WHERE tb2.TabID = tm.[TabID]
+					AND wns2.NumSteps = MAX(wns.NumSteps)
+				GROUP BY tb2.TabID) WorkflowID	  
+			, MIN(Convert(int,ht.IsPublished)) AllPublished
+	FROM {databaseOwner}[{objectQualifier}TabModules] tm
+	  INNER JOIN {databaseOwner}[{objectQualifier}Modules] m
+		ON tm.ModuleID = m.ModuleID
+	  INNER JOIN ( SELECT ModuleID, StateID, IsPublished FROM {databaseOwner}[{objectQualifier}HtmlText] h				
+					GROUP BY ModuleID, StateID, ItemId, IsPublished
+					HAVING ItemID = (SELECT MAX(ItemID) FROM {databaseOwner}[{objectQualifier}HtmlText] h2				
+													WHERE h.ModuleID = h2.ModuleID
+													GROUP BY ModuleID) ) ht
+		ON ht.ModuleID = m.ModuleID  
+	  INNER JOIN {databaseOwner}[{objectQualifier}WorkflowStates] ws
+		ON ws.StateID = ht.StateID
+	  INNER JOIN [WorkflowNumSteps] wns
+		ON wns.WorkflowID = ws.WorkflowID
+	GROUP BY PortalID, TabID
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetWorkflowMigrationMatches]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetWorkflowMigrationMatches]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetWorkflowMigrationMatches]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	SELECT PortalID, OldWorkflowId, NewWorkflowID
+	FROM {databaseOwner}[{objectQualifier}WorkflowMigrationMatches]
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DeleteHtmlWorkflowNotifications]') AND type in (N'P', N'PC'))
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}DeleteHtmlWorkflowNotifications]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteHtmlWorkflowNotifications]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	DELETE FROM {databaseOwner}[{objectQualifier}CoreMessaging_Messages]
+	WHERE MessageID IN (
+						SELECT m.MessageID 
+						FROM {databaseOwner}[{objectQualifier}CoreMessaging_Messages] m
+							INNER JOIN {databaseOwner}[{objectQualifier}CoreMessaging_NotificationTypes] nt
+								ON m.NotificationTypeID = nt.NotificationTypeID
+								AND nt.Name = N'HtmlProWorkflow')
+	-- Core Messaging Recipients are deleted due to foreign key restrictions
+END
+GO
+
+/* Delete HTML Publishing Schedule Job */
+
+DELETE FROM {databaseOwner}[{objectQualifier}Schedule]
+	WHERE TypeFullName = 'DotNetNuke.Professional.HtmlPro.Components.ContentPublishSchedule, DotNetNuke.Professional.HtmlPro'
+
+/* AddHtmlText */
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddHtmlText
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddHtmlText
+    @ModuleID        INT,
+    @Content         NTEXT,
+    @Summary	     NTEXT,
+    @StateID         INT,
+    @IsPublished     BIT,
+    @PublishDate     DATETIME,
+    @UserID          INT,
+    @History         INT
+AS
+    DECLARE @Version INT
+    SELECT @Version = MAX(Version) FROM {databaseOwner}{objectQualifier}HtmlText WHERE ModuleID = @ModuleID
+
+    IF @Version IS NULL
+      SELECT @Version = 1
+    ELSE
+      SELECT @Version = @Version + 1
+
+    INSERT INTO {databaseOwner}{objectQualifier}HtmlText (
+      ModuleID,
+      Content,
+      Summary,
+      Version,
+      StateID,
+      IsPublished,
+      PublishDate,
+      CreatedByUserID,
+      CreatedOnDate,
+      LastModifiedByUserID,
+      LastModifiedOnDate
+    ) 
+    VALUES (
+      @ModuleID,
+      @Content,
+      @Summary,
+      @Version,
+      @StateID,
+      @IsPublished,
+      @PublishDate,
+      @UserID,
+      GETDATE(),
+      @UserID,
+      GETDATE()
+    )
+
+    IF @History > 0
+    BEGIN
+      DELETE
+      FROM   {databaseOwner}{objectQualifier}HtmlText
+      WHERE  ModuleID = @ModuleID
+      AND    Version <= (@Version - @History)
+    END
+
+    SELECT SCOPE_IDENTITY()
+GO
+
+/*************************************************************/
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
