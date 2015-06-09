@@ -22,7 +22,8 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 
 <dnn:META ID="META1" runat="server" Name="viewport" Content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
-<div class="topBar">
+
+<div class="topBar hide">
     <div class="skinWidth">
 	    <div class="language"><dnn:LANGUAGE runat="server" id="dnnLANGUAGE" showMenu="False" showLinks="True" /></div>
 	    <div class="right">
@@ -32,18 +33,22 @@
     </div>
 	<div class="dnnClear"></div>
 </div>
-<div class="header">
-	<div class="skinWidth">
-		<div class="topHeader">
-			<div class="mobileMenu"><a href="javascript:void(0)">Menu</a></div>
-			<div class="logo"><dnn:LOGO runat="server" id="dnnLOGO" /></div>
-            <div class="search dnnRight"><dnn:SEARCH ID="dnnSearch" runat="server" ShowSite="false" ShowWeb="false" EnableTheming="true" Submit="Search" CssClass="SearchButton" /></div>
-			<div class="nav"><dnn:MENU MenuStyle="Simple" runat="server"></dnn:MENU></div>
-           
-			<div class="dnnClear"></div>
+
+<div class="CenteringWrapper">
+	<div id="HeaderWrapper">
+      <div id="ChooseLocationWrapper"></div>
+      <div id="MainLogoHolder" class="logo">
+      	<dnn:LOGO runat="server" id="dnnLOGO" />
+  		</div>
+      <div id="TopNavWrapper">
+     		<div id="TopNav01Holder" class="nav">
+     			<dnn:MENU MenuStyle="Simple" runat="server"></dnn:MENU>
+  			</div>
+  			<div class="dnnClear"></div>
 		</div><!--/topLink-->
 	</div><!--/skinWidth-->
 </div><!--/header-->
+
 <div class="ContentWrapDark">
     <div id="TopHeroDark" class="TopHeroDark" runat="server"></div>
     <div class="skinWidth">
