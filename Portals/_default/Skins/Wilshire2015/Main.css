@@ -15,37 +15,1243 @@
     width:725px;
 }
 
-@media only screen and (min-width: 48em) and (max-width: 64em) {  
-	.rightPaneWide{
-		width: calc(100% - 255px);
-	}
+
+/* temp adjustment */
+.dnnFormMessage.dnnFormWarning {
+	  margin: auto;
+	  text-align: center;
 }
 
-@media only screen and (max-width: 47.9em) {
-	.topPane{
-		float: none;
-        width: 95%;
-        margin: 0 auto 0 auto;
-	}
-	.contentPane {
-		float: none;
-        width: 95%;
-        margin: 15px auto 0 auto;
-	}
-	.leftPaneNarrow{
-		float: none;
-        width: 95%;
-        margin: 15px auto 0 auto;
-	}	
-	.rightPaneWide{
-		float: none;
-        width: 95%;
-        margin: 15px auto 15px auto;
-	}
+
+/* Original CSS */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    outline: none;
+    vertical-align: baseline;
 }
 
-	/* temp adjustment */
-	.dnnFormMessage.dnnFormWarning {
-		  margin: auto;
-		  text-align: center;
-	}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+html {
+    height: 100%;
+    overflow-y: scroll;
+    /* remove if not a centered site */
+}
+
+
+body {
+    line-height: 1;
+    font: 12px Arial, Helvetica, Verdana, Sans-Serif;
+    color: #3c3c3c;
+    background: #fff;
+}
+
+/* Elements */
+
+a {
+    color: #085280;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a.ArrowLink_Back {
+    padding-left: 10px;
+    background: url(/dsgn/Bullet_Arrow01_Back.gif) no-repeat 0 4px;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+h1 {
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: normal;
+    color: #085280;
+}
+
+h4 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #085280;
+    margin-bottom: 15px;
+}
+
+h5 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #085280;
+}
+
+h6 {
+}
+
+hr {
+}
+
+img {
+    border: none;
+}
+
+p {
+    line-height: 16px;
+    margin-bottom: 15px;
+}
+
+sup {
+    font-size: 70%;
+    vertical-align: top;
+}
+
+sub {
+    font-size: 70%;
+    vertical-align: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ContentTable01 {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.ContentTable01 td {
+    line-height: 16px;
+    padding: 0 25px 25px 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+li {
+}
+
+/* Styles by Site Structure */
+
+#GradientWrapper {
+    float: left;
+    width: 100%;
+    min-height: 670px;
+    height: auto !important;
+    height: 670px;
+    background: #f1f1f1 url(/dsgn/GradientWrapper.gif) repeat-x 0 0;
+}
+
+.CenteringWrapper {
+    width: 990px;
+    margin: 0 auto;
+}
+
+#HeaderWrapper {
+    float: left;
+    position: relative;
+    z-index: 2;
+    width: 990px;
+    height: 142px;
+}
+
+#ChooseLocationWrapper {
+    float: left;
+    width: 990px;
+    height: 38px;
+}
+
+#ChooseLocationHolder {
+    float: right;
+    width: 234px;
+    height: 24px;
+    padding: 14px 0 0 53px;
+    font-size: 10px;
+    color: #545454;
+    cursor: pointer;
+    background: url(/dsgn/ChooseLocationHolder.gif) no-repeat 0 0;
+}
+
+.SelectedObject:hover {
+    cursor: pointer;
+}
+
+.SelectedObject span {
+    color: #848484;
+}
+
+.LocationDropDownList {
+    width: 150px;
+    margin: 0 0 10px -95px;
+    padding: 7px 0;
+    font-size: 10px;
+    background: #f6f6f6;
+}
+
+.LocationDropDownList a {
+    float: left;
+    display: block;
+    width: 132px;
+    padding: 2px 7px 2px 11px;
+    color: #848484;
+    text-decoration: none;
+}
+
+.LocationDropDownList a:hover {
+    color: #fff;
+    background: #848484;
+}
+
+#MainLogoHolder {
+    float: left;
+    width: 221px;
+    height: 104px;
+}
+
+#TopNavWrapper {
+    float: left;
+    width: 769px;
+    height: 104px;
+}
+
+#TopNav01Holder {
+    float: left;
+    width: 769px;
+    height: 49px;
+}
+
+#TopNav01Holder ul {
+    margin-top: 19px;
+    margin-left: 12px;
+}
+
+#TopNav01Holder li {
+    float: left;
+    display: inline;
+    margin-right: 14px;
+}
+
+.TopNav01_Outer {
+    display: block;
+    height: 23px;
+    padding-right: 8px;
+    background: url(/dsgn/TopNav01_Outer.gif) no-repeat right 0;
+}
+
+.TopNav01_Inner {
+    display: block;
+    height: 19px;
+    padding-top: 4px;
+    padding-left: 8px;
+    background: url(/dsgn/TopNav01_Inner.gif) no-repeat left 0;
+}
+
+#TopNav01Holder li:hover {
+    cursor: pointer;
+}
+
+#TopNav01Holder li:hover .TopNav01_Outer, #TopNav01Holder li.active .TopNav01_Outer {
+    background-position: right -23px;
+}
+
+#TopNav01Holder li:hover .TopNav01_Inner, #TopNav01Holder li.active .TopNav01_Inner {
+    background-position: left -23px;
+}
+
+#TopNav01Holder a {
+    font-size: 11px;
+    color: #3c3c3c;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+#TopNav01Holder li:hover a, #TopNav01Holder a:hover, #TopNav01Holder li.active a, #TopNav01Holder li.active a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#TopNav02Holder {
+    float: left;
+    width: 769px;
+    height: 55px;
+    background: url(/dsgn/TopNav02Holder.gif) no-repeat 0 0;
+}
+
+#TopNav02Holder:hover {
+    /*background: none;*/
+}
+
+/**********************/
+
+#IndexesHolder {
+    float: left;
+    width: 242px;
+    height: 321px;
+    padding: 36px 9px 0 8px;
+    background: url(/dsgn/IndexesHolder.gif) no-repeat 0 0;
+}
+
+#PromoStrip_Home {
+    float: left;
+    width: 100%;
+    height: 153px;
+    padding-top: 26px;
+}
+
+#PromoStrip_Home .CenteringWrapper {
+    width: 984px;
+    padding-left: 6px;
+}
+
+#PromoStrip_Home .CopyHolder01 {
+    padding: 0px;
+}
+
+.PromoHolder_Home {
+    float: left;
+    width: 222px;
+    padding-right: 24px;
+}
+
+.PromoHolder_Home h4 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #232323;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.PromoHolder_Home h5 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2a2a2a;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.PromoHolder_Home p {
+    font-size: 12px;
+    line-height: normal;
+}
+
+.PromoHolder_Home li {
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #131414;
+}
+
+.PromoHolder_Home a {
+    color: #131414;
+    text-decoration: none;
+}
+
+.PromoHolder_Home a:hover {
+    color: #6f7375;
+    text-decoration: none;
+}
+
+.PromoHolder_Home span, .PromoHolder_Home a span, .PromoHolder_Home a:hover span {
+    color: #056099;
+}
+
+#MiddleWrapper_Outer {
+    float: left;
+    width: 990px;
+    margin-bottom: 15px;
+    padding-bottom: 35px;
+    background: url(/dsgn/MiddleWrapper_Outer.gif) no-repeat bottom;
+}
+
+.login-button
+{   
+    margin-top:6px;
+    margin-left:59px;
+    float:left;
+ }
+ 
+ .login-textbox
+ {    
+    margin-top:6px;
+ }
+ 
+ 
+
+#MiddleWrapper_Inner {
+    float: left;
+    width: 990px;
+    min-height: 185px;
+    height: auto !important;
+    height: 185px;
+    padding-top: 35px;
+    background: url(/dsgn/MiddleWrapper_Inner.gif) no-repeat top;
+}
+
+#MiddleWrapper_Tile {
+    float: left;   
+    width: 926px;
+    padding: 0 30px 0 32px;
+    border-right: 1px solid #ececec;
+    border-left: 1px solid #ececec;
+    background: #fff url(/dsgn/MiddleWrapper_Tile.gif) no-repeat 1px 0px;
+}
+
+#BreadCrumbsHolder {
+    float: left;
+    width: 926px;
+    height: 22px;
+}
+
+#BreadCrumbsHolder ul {
+    margin-left: 8px;
+}
+
+#BreadCrumbsHolder li {
+    float: left;
+    display: inline;
+    font-size: 11px;
+    color: #387398;
+}
+
+#BreadCrumbsHolder a {
+    color: #626161;
+    text-decoration: none;
+}
+
+#BreadCrumbsHolder a:hover {
+    text-decoration: underline;
+}
+
+#BreadCrumbsHolder span {
+    color: #626161;
+    margin: 0 4px;
+}
+
+.MainContentHolder01 {
+    float: left;
+    display: inline;
+    width: 450px;
+    margin-right: 16px;
+}
+
+.MainContentHolder02 {
+    float: left;
+    display: inline;
+    width: 677px;
+    margin-right: 16px;
+}
+
+.MainContentHolder01 ul, .MainContentHolder02 ul {
+    margin: 0 0 15px 16px;
+    list-style-type: square;
+    line-height: 16px;
+}
+
+.MainContentHolder01 ul ul, .MainContentHolder02 ul ul {
+    margin: 5px 0 5px 20px;
+    list-style-type: disc;
+}
+
+.MainContentHolder01 ul.ArrowList, .MainContentHolder02 ul.ArrowList {
+    clear: both;
+    margin: 0 0 15px 0;
+    list-style-type: none;
+    line-height: 16px;
+}
+
+.MainContentHolder01 ul.ArrowList li, .MainContentHolder02 ul.ArrowList li {
+    padding-left: 10px;
+    margin-bottom: 4px;
+    background: url(/dsgn/Bullet_Arrow01.gif) no-repeat 0 5px;
+}
+
+.MainImageHolder_ContentArea {
+    float: left;
+    width: 677px;
+    margin-bottom: 15px;
+}
+
+.SectionTitleHolder {
+    float: left;
+    width: 100%;
+    margin-bottom: 12px;
+    border-top: 3px solid #c0bfbf;
+    border-bottom: 1px solid #c0bfbf;
+}
+
+.SectionTitleHolder h2 {
+    padding: 12px 8px 8px 8px;
+}
+
+.PageTitleHolder {
+    float: left;
+    width: 100%;
+    margin-bottom: 18px;
+    background: url(/dsgn/Border_Dotted01.gif) repeat-x bottom;
+}
+
+.PageTitleHolder h3 {
+    padding: 0px 8px 8px 8px;
+}
+
+.IntroParaHolder {
+    padding: 0 8px;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.IntroParaHolder p {
+    line-height: 18px;
+}
+/* TABLE design */
+#ctl00_MainContentPanel02 table
+{
+}
+
+#ctl00_MainContentPanel02 table td
+{
+    vertical-align:top;
+}
+
+/* Custom style in RadEditor */
+
+.IntroPara {
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.CopyHolder01 {
+    padding: 0 8px;
+  clear: both;
+}
+
+.ContentPromoHolder01 {
+    display: block;
+    /*margin: 0 8px 20px 8px;*/
+    padding: 22px 16px;
+    background-color: #f8f7f7;
+}
+
+.CopyHolder01 .ContentPromoHolder01 {
+    margin: 0 0 20px 0;
+}
+
+.ContentPromoHolder01 h4 {
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.QuotePromo {
+    padding: 0 10px 0 12px;
+    background: url(/dsgn/QuotePromo_OpenQuote.gif) no-repeat 0px 0px;
+}
+
+.QuotePromo_Quote {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.QuotePromo_Attribute {
+    font-size: 16px;
+}
+
+.QuotePromo_Attribute span {
+    font-size: 13px;
+}
+
+/* Office Locations Map */
+
+.MapHolder {
+    float: left;
+    position: relative;
+    width: 677px;
+    height: 360px;
+    margin: 20px 0 25px 0;
+    background: url(/dsgn/Map_OfficeLocations.gif) no-repeat 0 0;
+}
+
+.MapHolder a {
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    color: #0f406b;
+    font-size: 11px;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-image: url(/dsgn/Bullet_MapLocation_Off.png);
+}
+
+.MapHolder a:hover {
+    z-index: 9999;
+    text-decoration: none;
+    background-image: url(/dsgn/Bullet_MapLocation_On.png);
+}
+
+.MapHolder a.LocatorR {
+    padding-right: 10px;
+    background-position: right;
+}
+
+.MapHolder a.LocatorBR {
+    padding-right: 6px;
+    padding-bottom: 6px;
+    background-position: right bottom;
+}
+
+.MapHolder a.LocatorL {
+    padding-left: 10px;
+    background-position: left;
+}
+
+.MapHolder a.LocatorBL {
+    padding-left: 6px;
+    padding-bottom: 6px;
+    background-position: left bottom;
+}
+
+/* Cities */
+
+.MapHolder a.MapLocation_Amsterdam {
+    top: 47px;
+    left: 324px;
+}
+
+.MapHolder a.MapLocation_Canberra {
+    top: 258px;
+    left: 612px;
+}
+
+.MapHolder a.MapLocation_Chicago {
+    top: 76px;
+    left: 101px;
+}
+
+.MapHolder a.MapLocation_Denver {
+    top: 79px;
+    left: 60px;
+}
+
+.MapHolder a.MapLocation_London {
+    top: 48px;
+    left: 270px;
+}
+
+.MapHolder a.MapLocation_LosAngeles {
+    top: 96px;
+    left: -3px;
+}
+
+.MapHolder a.MapLocation_Melbourne {
+    top: 265px;
+    left: 547px;
+}
+
+.MapHolder a.MapLocation_NewYork {
+    top: 88px;
+    left: 163px;
+}
+
+.MapHolder a.MapLocation_Pittsburgh {
+    top: 75px;
+    left: 154px;
+}
+
+.MapHolder a.MapLocation_Singapore {
+    top: 175px;
+    left: 537px;
+}
+
+.MapHolder a.MapLocation_Tokyo {
+    top: 95px;
+    left: 592px;
+}
+
+.MapHolder a.MapLocation_HongKong {
+    top: 122px;
+    left: 553px;
+}
+
+.MapHolder a.MapLocation_Suzhou {
+    top: 105px;
+    left: 560px;
+}
+
+/* Tooltips on the Contact map */
+
+.ToolTip_Outer {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    width: 167px;
+    padding-bottom: 39px;
+    background: url(/dsgn/ToolTip_Outer.png) no-repeat 0 bottom;
+}
+
+.ToolTip_Inner {
+    float: left;
+    width: 167px;
+    padding-top: 16px;
+    background: url(/dsgn/ToolTip_Inner.png) no-repeat 0 top;
+}
+
+.ToolTip_Inner h5 {
+    color: #fff;
+}
+
+.ToolTip_Inner a {
+    position: relative;
+    display: inline;
+    float: none;
+    background: none;
+    color: #fff;
+}
+
+.ToolTip_Tile {
+    float: left;
+    width: 137px;
+    padding: 0 15px;
+    color: #fff;
+    background: url(/dsgn/ToolTip_Tile.png) repeat-y 0 0;
+}
+
+
+/* Tooltips on the Contact map for Wider Content (Hong Kong)*/
+
+.ToolTip_Outer_HK {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    width: 197px;
+    padding-bottom: 39px;
+    background: url(/dsgn/ToolTip_Outer_HK.png) no-repeat 0 bottom;
+}
+
+.ToolTip_Inner_HK {
+    float: left;
+    width: 197px;
+    padding-top: 16px;
+    background: url(/dsgn/ToolTip_Inner_HK.png) no-repeat 0 top;
+}
+
+.ToolTip_Inner_HK h5 {
+    color: #fff;
+}
+
+.ToolTip_Inner_HK a {
+    position: relative;
+    display: inline;
+    float: none;
+    background: none;
+    color: #fff;
+}
+
+.ToolTip_Tile_HK {
+    float: left;
+    width: 167px;
+    padding: 0 15px;
+    color: #fff;
+    background: url(/dsgn/ToolTip_Tile_HK.png) repeat-y 0 0;
+}
+
+
+/* Tooltip on the team pages */
+
+.ToolTip_Outer2 {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    width: 170px;
+    padding-top: 17px;
+    background: url(/dsgn/ToolTip_Outer2.png) no-repeat 50% top;
+}
+
+.ToolTip_Outer2 .ToolTip_Inner {
+    float: left;
+    width: 170px;
+    padding: 0px;
+    background: none;
+}
+
+.ToolTip_Outer2 .ToolTip_Tile {
+    float: left;
+    width: 150px;
+    padding: 10px;
+    color: #fff;
+    background: #bf5701;
+}
+
+/* Team Sections */
+
+.TeamGridHolder {
+    float: left;
+    width: 652px;
+    /*padding-left: 8px;*/
+    /*background: url(/Images/TeamGridHolder.gif) repeat-y 0 0;*/
+}
+
+.TeamGridHolder img {
+    float: left;
+    display: inline;
+    width: 150px;
+    margin: 0 20px 20px 0;
+    /*margin: 0 70px 20px 0;*/
+}
+
+.Bio_ImgCol {
+    float: left;
+    display: inline;
+    width: 214px;
+    margin-right: 26px;
+}
+
+.Bio_ImgCol img {
+    float: left;
+    width: 214px;
+    margin-bottom: 10px;
+}
+
+.Bio_ContactHolder {
+    float: left;
+    width: 214px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.Bio_EmailHolder {
+    float: left;
+    width: 174px;
+    height: 20px;
+    padding: 10px 5px 5px 35px;
+    border-bottom: 1px solid #e0e0e0;
+    background: url(/dsgn/Icon_EmailLink.png) no-repeat left;
+}
+
+.Bio_PhoneHolder {
+    float: left;
+    width: 174px;
+    height: 20px;
+    padding: 10px 5px 5px 35px;
+    border-bottom: 1px solid #e0e0e0;
+    background: url(/dsgn/Icon_Phone.png) no-repeat left;
+}
+
+.Bio_ContentCol {
+    float: left;
+    width: 437px;
+}
+
+.Bio_Header {
+    float: left;
+    width: 397px;
+    padding: 0 40px 0 0;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #c0bfbf;
+}
+
+.Bio_Header h4 {
+    font-size: 20px;
+    color: #303030;
+    margin-bottom: 24px;
+}
+
+.Bio_Header h5 {
+    font-size: 15px;
+    color: #085280;
+    margin-bottom: 14px;
+}
+
+.Bio_Content {
+    float: left;
+    width: 397px;
+    padding: 0 40px 0 0;
+}
+
+/* Press */
+
+.NewsDate {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Right Content 01 - L2 Pages */
+
+.RightContentHolder01 {
+    float: left;
+    width: 460px;
+}
+
+.MainImageHolder {
+    float: left;
+    width: 460px;
+    margin-bottom: 10px;
+    line-height: 0;
+}
+
+.L3BoxNavHolder li {
+    float: left;
+    display: inline;
+    width: 227px;
+    height: 150px;
+    margin-bottom: 5px;
+}
+
+li.L3BoxNavLeft {
+    margin-right: 6px;
+}
+
+.L3BoxNavHolder li a {
+    display: block;
+    width: 201px;
+    height: 120px;
+    padding: 15px 13px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.L3BoxNavHolder li a span {
+    color: #fff;
+}
+
+.L3BoxNavHolder br {
+    font-size: 8px;
+    height: 8px;
+    line-height: 8px;
+}
+
+.L3BoxNavColor1 a {
+    /* Dark Orange */
+    background: #df7e26;
+}
+
+.L3BoxNavColor2 a {
+    /* Dark Gray */
+    background: #585d65;
+}
+
+.L3BoxNavColor3 a {
+    /* Light Orange */
+    background: #f2a42a;
+}
+
+.L3BoxNavColor4 a {
+    /* Medium Gray */
+    background: #a9abaf;
+}
+
+.L3BoxNavColor5 a {
+    /* Light Gray */
+    background: #c9c9c9;
+}
+
+.L3BoxNavColor1 a:hover, .L3BoxNavColor2 a:hover, .L3BoxNavColor3 a:hover, .L3BoxNavColor4 a:hover, .L3BoxNavColor5 a:hover {
+    background: #000;
+}
+
+.L3BoxNavHeader {
+    font-size: 20px;
+    padding-right: 18px;
+    background: url(/dsgn/Arrow_L3BoxNavHeader.png) no-repeat right;
+}
+
+/* Right Content 02 - L3 pages and below */
+
+.RightContentHolder02 {
+    float: left;
+    width: 233px;
+}
+
+/* L3 List Nav */
+
+.L3NavHolder {
+    float: left;
+    width: 209px;
+    margin-bottom: 5px;
+    padding: 12px;
+    background: #df7e26;
+}
+
+.L3NavHolder ul {
+    border-top: 1px solid #ecb17b;
+}
+
+.L3NavHolder li {
+    border-bottom: 1px solid #ecb17b;
+}
+
+.L3NavHolder a {
+    display: block;
+    padding: 8px 16px;
+    color: #fff;
+    text-decoration: none;
+    background: url(/dsgn/Arrow_L3Nav.png) no-repeat 7px 12px;
+}
+
+.L3NavHolder a:hover, .L3NavHolder a.active, .L3NavHolder a.active:hover {
+    background-color: #c05802;
+}
+
+/* L4 List Nav */
+
+.L3NavHolder li ul {
+    border: none;
+    padding-bottom: 8px;
+    background-color: #c05802;
+}
+
+.L3NavHolder li ul li {
+    border: none;
+    margin-bottom: 1px;
+    padding: 0;
+}
+
+.L3NavHolder li ul li a {
+    padding: 3px 10px 3px 25px;
+    background: url(/dsgn/Arrow_L4Nav.png) no-repeat 18px 8px;
+}
+
+.L3NavHolder li ul li a:hover {
+    background-color: #ca640e;
+}
+
+.L3NavHolder li ul li a.active, .L3NavHolder li ul li a.active:hover {
+    background-color: #8f3000;
+}
+
+/* L5 List Nav */
+
+.L3NavHolder li ul li ul {
+    margin: 3px 0 0 28px;
+}
+
+.L3NavHolder li ul li ul li {
+    margin-bottom: 3px;
+}
+
+.L3NavHolder li ul li ul li a {
+    display: inline;
+    padding: 0 0 0 10px;
+    background: url(/dsgn/Arrow_L4Nav.png) no-repeat 0px 5px;
+}
+
+.L3NavHolder li ul li ul li a:hover {
+    background-color: Transparent;
+    text-decoration: underline;
+}
+
+.L3NavHolder li ul li ul li a.active, .L3NavHolder li ul li ul li a.active:hover {
+    background-color: Transparent;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* L4 Promo Box Nav */
+
+.L4BoxNavHolder li {
+    float: left;
+    display: inline;
+    width: 233px;
+    margin-bottom: 5px;
+}
+
+.L4BoxNavHolder li a {
+    display: block;
+    width: 207px;
+    padding: 15px 13px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.L4BoxNavHolder li a span {
+    color: #fff;
+}
+
+.L4BoxNavHolder br {
+    font-size: 8px;
+    height: 8px;
+    line-height: 8px;
+}
+
+.RightContentPromoHolder01 {
+    float: left;
+    width: 219px;
+    margin-top: 17px;
+    padding: 7px;
+    background: #f4f4f4;
+}
+
+.RightContentPromoImg01 {
+    float: left;
+    margin-bottom: 15px;
+    border: 1px solid #cacfd7;
+}
+
+.RightContentPromoHolder01 h5 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #303030;
+    margin-bottom: 10px;
+    padding: 0 3px 3px 3px;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.RightContentPromoHolder01 p {
+    color: #6e6e6e;
+    line-height: 15px;
+    padding: 0 10px 15px 3px;
+    margin: 0px;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.RightContentPromoHolder01 a {
+    color: #303030;
+}
+
+.RightContentPromoHolder01 a:hover {
+}
+
+#FooterWrapper {
+    float: left;
+    width: 100%;
+    margin-top: 30px;
+    background: #fff;
+}
+
+#FooterWrapper_Home {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+    background: #fbfbfb;
+}
+
+#FooterRow01 {
+    float: left;
+    width: 978px;
+    margin-bottom: 20px;
+    padding: 0 6px 15px 0;
+    border-bottom: 1px solid #e1e7ea;
+}
+
+#FooterLinksHolder {
+    float: left;
+    width: 620px;
+}
+
+#FooterLinksHolder li {
+    float: left;
+    display: inline;
+    margin-right: 40px;
+}
+
+#FooterLinksHolder a {
+    font-size: 10px;
+    color: #004063;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+#FooterLinksHolder a:hover {
+    text-decoration: underline;
+}
+
+#CopyrightHolder {
+    float: left;
+    width: 358px;
+}
+
+#CopyrightHolder p {
+    font-size: 10px;
+    text-align: right;
+    margin: 0px;
+    color: #545454;
+    text-transform: uppercase;
+}
+
+#CopyrightHolder span {
+    margin-left: 15px;
+}
+
+#CopyrightHolder a {
+    color: #545454;
+    text-decoration: none;
+}
+
+#CopyrightHolder a:hover {
+    text-decoration: underline;
+}
+
+#OfficeLinksHolder {
+    float: left;
+    width: 978px;
+    padding: 0 6px 15px 0;
+}
+
+#OfficeLinksHolder a {
+    font-size: 9px;
+    color: #6c6966;
+    text-decoration: none;
+}
+
+#OfficeLinksHolder li {
+    float: left;
+    display: inline;
+}
+
+#OfficeLinksHolder li img {
+    width: 43px;
+}
+
+#OfficeLinksHolder a:hover {
+    text-decoration: underline;
+}
+
+/* General Classes */
+
+.PrintOnly {
+    display: none;
+}
+
+.DottedBorderBottom {
+    float: left;
+    width: 100%;
+    margin-bottom: 18px;
+    padding-bottom: 5px;
+    background: url(/dsgn/Border_Dotted01.gif) repeat-x bottom;
+}
+
+/** learn more links postioned relatively 2 px from bottom */
+.PositionRelative
+{
+    position:relative;
+}    
+.LearnMorePosition
+{
+   position:absolute;
+   bottom:2px;
+}   
+
+
+
+/* EDITOR PROPERTIES - PLEASE DON'T DELETE THIS LINE TO AVOID DUPLICATE PROPERTIES */
+
