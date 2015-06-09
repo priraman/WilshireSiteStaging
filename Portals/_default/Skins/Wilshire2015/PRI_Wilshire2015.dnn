@@ -60,6 +60,7 @@
           <name>Main.ascx</name>
         </skinFile>
         <skinFile>
+          <path>CSS</path>  
           <name>Main.css</name>
         </skinFile>
         <skinFile>
@@ -69,7 +70,12 @@
           <name>popUpSkin.ascx</name>
         </skinFile>
         <skinFile>
+          <path>CSS</path>
           <name>Skin.css</name>
+        </skinFile>
+        <skinFile>
+          <path>CSS</path>
+          <name>responsive.css</name>
         </skinFile>
       </skinFiles>
     </component>
